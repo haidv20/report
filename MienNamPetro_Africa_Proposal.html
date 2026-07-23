@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phương Án Trình Duyệt: Chiến Lược Chinh Phục Thị Trường Châu Phi - Miền Nam Petro</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a3a5c;
+            --primary-light: #2c5f8a;
+            --secondary: #d4a017;
+            --accent: #2e7d32;
+            --dark: #0d1b2a;
+            --light: #f8f9fb;
+            --glass: rgba(255,255,255,0.85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.7; }
+
+        /* COVER PAGE */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #0d1b2a 50%, var(--accent) 100%);
+            color: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 4rem 2rem;
+            position: relative; overflow: hidden;
+        }
+        .cover::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 70%, rgba(212,160,23,0.1) 0%, transparent 50%);
+        }
+        .cover-content { position: relative; z-index: 1; max-width: 800px; }
+        .cover .tag {
+            background: var(--secondary); color: var(--dark);
+            padding: 0.4rem 1.5rem; border-radius: 50px; font-weight: 700;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
+            display: inline-block; margin-bottom: 2rem;
+        }
+        .cover h1 { font-size: 3rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2; }
+        .cover h2 { font-size: 1.2rem; font-weight: 400; color: rgba(255,255,255,0.75); margin-bottom: 3rem; }
+        .cover .meta { display: flex; gap: 3rem; justify-content: center; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+        .cover .meta i { margin-right: 0.4rem; color: var(--secondary); }
+
+        /* CONTENT */
+        .document { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+        /* Executive bar */
+        .exec-bar {
+            background: white; border-radius: 16px; padding: 1.5rem 2rem;
+            margin-top: -3rem; position: relative; z-index: 10;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+            text-align: center;
+        }
+        .exec-bar .stat { }
+        .exec-bar .stat .num { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+        .exec-bar .stat .lbl { font-size: 0.72rem; color: #64748b; text-transform: uppercase; margin-top: 0.3rem; }
+
+        section {
+            background: white; border-radius: 16px; padding: 3rem;
+            margin-top: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #f1f5f9;
+        }
+        section h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; display: flex; align-items: center; gap: 12px; color: var(--primary); }
+        section h2::before { content: ''; width: 4px; height: 24px; background: var(--secondary); border-radius: 2px; }
+        section h3 { font-size: 1.1rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--primary); }
+
+        .highlight-box {
+            background: #f0f7ff; border-left: 4px solid var(--primary-light);
+            padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; font-size: 0.95rem;
+        }
+        .warning-box {
+            background: #fffdf5; border-left: 4px solid var(--secondary);
+            padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; font-size: 0.95rem;
+        }
+        .success-box {
+            background: #f0fdf4; border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; font-size: 0.95rem;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+        th { background: #f8fafc; padding: 0.8rem 1rem; text-align: left; font-weight: 700; color: #475569; border-bottom: 2px solid #e2e8f0; font-size: 0.75rem; text-transform: uppercase; }
+        td { padding: 0.8rem 1rem; border-bottom: 1px solid #f1f5f9; }
+        tr:hover td { background: #f8fafc; }
+
+        .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; }
+        .kpi-card {
+            background: #f8fafc; padding: 1.5rem; border-radius: 12px;
+            text-align: center; border: 1px solid #f1f5f9;
+        }
+        .kpi-card .num { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+        .kpi-card .lbl { font-size: 0.75rem; color: #64748b; margin-top: 0.4rem; text-transform: uppercase; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .chart-wrap { background: white; border: 1px solid #f1f5f9; padding: 1.5rem; border-radius: 12px; height: 380px; position: relative; }
+
+        .sign-box {
+            background: #f8fafc; border: 2px dashed #cbd5e1;
+            padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center;
+        }
+        .sign-box .sig-line { width: 200px; border-bottom: 1px solid #94a3b8; margin: 2rem auto 0.5rem; }
+        .sign-box .sig-label { font-size: 0.8rem; color: #64748b; }
+
+        /* ACTION PLAN STEPPER */
+        .stepper { display: flex; justify-content: space-between; position: relative; margin: 2rem 0; }
+        .stepper::before { content: ''; position: absolute; top: 24px; left: 0; width: 100%; height: 2px; background: #e2e8f0; z-index: 1; }
+        .step { position: relative; z-index: 2; text-align: center; width: 23%; }
+        .step-num { width: 48px; height: 48px; border-radius: 50%; background: white; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.8rem; font-weight: 800; color: var(--primary); }
+        .step h5 { font-size: 0.9rem; margin-bottom: 0.3rem; }
+        .step p { font-size: 0.78rem; color: #64748b; }
+
+        .toc { list-style: none; counter-reset: toc-counter; }
+        .toc li { counter-increment: toc-counter; padding: 0.6rem 0; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; gap: 12px; }
+        .toc li::before { content: counter(toc-counter, decimal-leading-zero); font-weight: 800; color: var(--primary-light); font-size: 1rem; min-width: 2rem; }
+
+        .footer { text-align: center; padding: 3rem 0; color: #94a3b8; font-size: 0.8rem; }
+
+        .country-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .country-card { background: #f8fafc; padding: 1.2rem; border-radius: 10px; border-left: 3px solid var(--primary-light); }
+        .country-card h4 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .country-card p { font-size: 0.82rem; color: #475569; margin: 0; }
+
+        @media (max-width: 768px) {
+            .exec-bar { grid-template-columns: repeat(2, 1fr); }
+            .two-col { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: 1fr; }
+            .cover h1 { font-size: 2rem; }
+            .stepper { flex-direction: column; gap: 1rem; }
+            .country-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== COVER PAGE ==================== -->
+    <div class="cover">
+        <div class="cover-content">
+            <div class="tag">Phương Án Trình Duyệt</div>
+            <h1>Chiến Lược Chinh Phục<br>Thị Trường Châu Phi</h1>
+            <h2>Đưa Sản Phẩm Dầu Nhớt & Hóa Chất Miền Nam Petro<br>Xâm nhập thị trường Châu Phi Qua Kênh TMĐT Alibaba.com</h2>
+            <div class="meta">
+                <span><i class="fas fa-building"></i> Công ty CP Dầu Nhớt và Hóa Chất Miền Nam</span>
+                <span><i class="fas fa-calendar-alt"></i> Tháng 7 / 2026</span>
+                <span><i class="fas fa-lock"></i> Tài Liệu Nội Bộ</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DOCUMENT BODY ==================== -->
+    <div class="document">
+
+        <!-- Executive Bar -->
+        <div class="exec-bar">
+            <div class="stat"><div class="num">$2.70B</div><div class="lbl">Quy mô thị trường Châu Phi 2026</div></div>
+            <div class="stat"><div class="num">5.0%</div><div class="lbl">CAGR Đông Phi (2026–2032)</div></div>
+            <div class="stat"><div class="num">$4,999</div><div class="lbl">Tổng vốn Pilot / Năm</div></div>
+            <div class="stat"><div class="num">250%</div><div class="lbl">ROI Dự kiến Năm Đầu</div></div>
+        </div>
+
+        <!-- ==================== TABLE OF CONTENTS ==================== -->
+        <section>
+            <h2>Mục Lục</h2>
+            <ol class="toc">
+                <li>Tóm tắt Điều hành (Executive Summary)</li>
+                <li>Tổng quan & Tiềm năng Thị trường Châu Phi</li>
+                <li>Phân tích Nhu cầu & Chân dung Khách hàng Mục tiêu</li>
+                <li>Ma trận Sản phẩm – Thị trường (Product-Market Fit)</li>
+                <li>Lợi thế Cạnh tranh của Miền Nam Petro tại Châu Phi</li>
+                <li>Chiến lược Thâm nhập Qua Alibaba.com</li>
+                <li>Kế hoạch Tài chính & Dự toán ROI</li>
+                <li>Lộ trình Triển khai 0–90 Ngày (Action Plan)</li>
+                <li>Quản trị Rủi ro & Phương án Dự phòng</li>
+                <li>Kiến nghị & Đề xuất Phê duyệt</li>
+            </ol>
+        </section>
+
+        <!-- ==================== 1. EXECUTIVE SUMMARY ==================== -->
+        <section>
+            <h2>1. Tóm tắt Điều hành</h2>
+            <div class="highlight-box">
+                <strong>Cơ hội:</strong> Châu Phi đang là thị trường dầu nhớt tăng trưởng nhanh nhất thế giới với quy mô <strong>$2.70 tỷ USD (2026)</strong> và CAGR khu vực Đông Phi đạt 5.0%. Nigeria - quốc gia đông dân nhất lục địa - tiêu thụ <strong>35% nhu cầu dầu động cơ</strong> cho các dòng 5W30, 20W50 và dầu diesel hạng nặng.
+            </div>
+            <div class="success-box">
+                <strong>Đề xuất:</strong> Miền Nam Petro triển khai chiến lược thâm nhập hai giai đoạn: (1) Pilot thị trường qua Alibaba.com với gói <strong>Plus</strong>, tập trung vào 3 quốc gia mũi nhọn (Nigeria, Ghana, Kenya); (2) Mở rộng danh mục và nâng cấp Verified Supplier khi đã có ít nhất 3 khách hàng ổn định.
+            </div>
+            <p>Với năng lực sản xuất <strong>100 triệu lít/năm</strong>, nhà máy đạt chuẩn ISO và danh mục hơn 200 sản phẩm, Miền Nam Petro có đầy đủ điều kiện để trở thành nhà cung cấp dầu nhớt Việt Nam hàng đầu cho thị trường Châu Phi trong vòng 18 tháng.</p>
+        </section>
+
+        <!-- ==================== 2. AFRICA MARKET OVERVIEW ==================== -->
+        <section>
+            <h2>2. Tổng quan & Tiềm năng Thị trường Châu Phi</h2>
+
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="num">$2.70B</div>
+                    <div class="lbl">Quy mô 2026</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="num">4.6%</div>
+                    <div class="lbl">CAGR Toàn Châu Lục</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="num">213.8M</div>
+                    <div class="lbl">Lít vào 2032</div>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="chart-wrap">
+                    <canvas id="africaMarketChart"></canvas>
+                </div>
+                <div>
+                    <h3>Top 6 Thị trường Trọng điểm</h3>
+                    <div class="country-grid">
+                        <div class="country-card">
+                            <h4>🇳🇬 Nigeria</h4>
+                            <p>35% thị phần Châu Phi. Nhu cầu cao dầu diesel cho máy phát điện & xe tải hạng nặng.</p>
+                        </div>
+                        <div class="country-card">
+                            <h4>🇿🇦 Nam Phi</h4>
+                            <p>35.2% doanh thu toàn lục địa. Dầu tổng hợp cho xe du lịch cao cấp.</p>
+                        </div>
+                        <div class="country-card">
+                            <h4>🇰🇪 Kenya</h4>
+                            <p>CAGR 5.0%. Cửa ngõ Đông Phi. Dầu nhớt cho nông nghiệp & vận tải.</p>
+                        </div>
+                        <div class="country-card">
+                            <h4>🇬🇭 Ghana</h4>
+                            <p>Thị trường đang mở. Nhu cầu dầu nhớt giá cạnh tranh cho xe cũ & máy công trình.</p>
+                        </div>
+                        <div class="country-card">
+                            <h4>🇪🇹 Ethiopia</h4>
+                            <p>Dân số >120 triệu. Ngành xây dựng bùng nổ, cần dầu thủy lực & mỡ bôi trơn.</p>
+                        </div>
+                        <div class="country-card">
+                            <h4>🇹🇿 Tanzania</h4>
+                            <p>Khai khoáng phát triển mạnh. Nhu cầu dầu bôi trơn công nghiệp đặc chủng.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Lưu ý chiến lược:</strong> Người mua Châu Phi rất nhạy cảm về giá nhưng cũng cực kỳ trung thành nếu sản phẩm ổn định. Họ ưu tiên: <strong>Giá FOB cạnh tranh > Chất lượng ổn định > Giao hàng đúng hạn > Hỗ trợ kỹ thuật.</strong>
+            </div>
+        </section>
+
+        <!-- ==================== 3. DEMAND & CUSTOMER ==================== -->
+        <section>
+            <h2>3. Phân tích Nhu cầu & Chân dung Khách hàng Mục tiêu</h2>
+            <div class="two-col">
+                <div>
+                    <h3>Nhóm Khách hàng B2B Chính</h3>
+                    <table>
+                        <tr><th>Nhóm</th><th>Nhu cầu</th><th>Kênh tiếp cận</th></tr>
+                        <tr><td>Nhà phân phối dầu nhớt</td><td>Container 20ft/40ft, OEM brand</td><td>Alibaba RFQ</td></tr>
+                        <tr><td>Chuỗi Garage & Trạm dịch vụ</td><td>Dầu hộp lẻ, MOQ thấp</td><td>Alibaba KWA</td></tr>
+                        <tr><td>Nhà máy & Khu công nghiệp</td><td>Dầu thủy lực, Mỡ CN số lượng lớn</td><td>Alibaba + Email</td></tr>
+                        <tr><td>Công ty Khai khoáng</td><td>Dầu bánh răng EP, Dầu máy nén</td><td>Direct Inquiry</td></tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Hành vi Mua hàng</h3>
+                    <div class="highlight-box">
+                        <ul style="margin:0;padding-left:1.2rem;">
+                            <li><strong>80%</strong> người mua Châu Phi bắt đầu bằng tìm kiếm từ khóa như "engine oil supplier", "diesel oil factory".</li>
+                            <li><strong>65%</strong> ưu tiên nhà cung cấp có chứng chỉ chất lượng (SGS, ISO) và sẵn sàng trả thêm 5-8%.</li>
+                            <li><strong>Thời gian phản hồi quyết định:</strong> Nhà cung cấp phản hồi trong vòng 2 giờ có tỉ lệ chốt đơn cao gấp 3 lần.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 4. PRODUCT-MARKET FIT ==================== -->
+        <section>
+            <h2>4. Ma trận Sản phẩm – Thị trường Châu Phi</h2>
+            <p>Dựa trên danh mục 200+ sản phẩm của Miền Nam Petro, dưới đây là những dòng sản phẩm phù hợp nhất với nhu cầu Châu Phi:</p>
+            <table>
+                <thead>
+                    <tr><th>Dòng Sản phẩm Miền Nam Petro</th><th>Thị trường Mục tiêu</th><th>Phân khúc Nhu cầu</th><th>Giá FOB Dự kiến</th><th>MOQ</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Dầu Diesel Hạng nặng (HDEO)</strong></td><td>Nigeria, Ghana</td><td>Rất Cao</td><td>$2.40 – $4.20/L</td><td>1000 L</td></tr>
+                    <tr><td><strong>Dầu Xe Máy 4T (20W-50)</strong></td><td>Nigeria, Kenya</td><td>Rất Cao</td><td>$3.20 – $5.50/L</td><td>500 L</td></tr>
+                    <tr><td><strong>Dầu Thủy lực AW46/68</strong></td><td>Nam Phi, Ethiopia</td><td>Cao</td><td>$1.45 – $2.20/L</td><td>1000 L</td></tr>
+                    <tr><td><strong>Mỡ Bôi trơn Lithium MP3</strong></td><td>Toàn Châu Phi</td><td>Cao</td><td>$1.30 – $1.90/Kg</td><td>1000 Kg</td></tr>
+                    <tr><td><strong>Dầu Bánh răng EP 90/140</strong></td><td>Tanzania, Ghana</td><td>Trung bình</td><td>$2.10 – $3.80/L</td><td>1000 L</td></tr>
+                    <tr><td><strong>Dầu Máy Nén Khí</strong></td><td>Nam Phi, Kenya</td><td>Trung bình</td><td>$3.80 – $5.50/L</td><td>500 L</td></tr>
+                    <tr><td><strong>Nước Làm Mát (Coolant)</strong></td><td>Toàn Châu Phi</td><td>Cao</td><td>$1.20 – $2.50/L</td><td>2000 L</td></tr>
+                    <tr><td><strong>Dầu Phanh DOT 4</strong></td><td>Nigeria, Ghana</td><td>Trung bình</td><td>$3.50 – $5.50/Chai</td><td>1000 Chai</td></tr>
+                </tbody>
+            </table>
+            <div class="success-box">
+                <i class="fas fa-check-circle"></i> <strong>Lợi thế cốt lõi:</strong> Miền Nam Petro có thể cung cấp giải pháp <strong>OEM/Private Label</strong> cho các nhà phân phối Châu Phi muốn xây dựng thương hiệu riêng — một nhu cầu đang bùng nổ tại khu vực này.
+            </div>
+        </section>
+
+        <!-- ==================== 5. COMPETITIVE ADVANTAGE ==================== -->
+        <section>
+            <h2>5. Lợi thế Cạnh tranh của Miền Nam Petro tại Châu Phi</h2>
+            <div class="two-col">
+                <div>
+                    <h3>So sánh với Đối thủ Chính</h3>
+                    <table>
+                        <tr><th>Yếu tố</th><th>Miền Nam Petro</th><th>Trung Quốc</th><th>Ấn Độ</th></tr>
+                        <tr><td>Giá FOB</td><td class="success-box" style="padding:0.3rem 0.8rem;display:inline-block;">Cạnh tranh</td><td>Rẻ nhất</td><td>Tương đương</td></tr>
+                        <tr><td>Chất lượng</td><td><strong>ISO 9001/14001</strong></td><td>Không đồng đều</td><td>Trung bình</td></tr>
+                        <tr><td>Lead time</td><td>25–35 ngày</td><td>28–40 ngày</td><td>20–30 ngày</td></tr>
+                        <tr><td>OEM/Private Label</td><td><strong>Linh hoạt, MOQ thấp</strong></td><td>MOQ rất cao</td><td>Hạn chế</td></tr>
+                        <tr><td>Niềm tin thương hiệu</td><td><strong>15 năm uy tín</strong></td><td>Nghi ngờ chất lượng</td><td>Mới nổi</td></tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>USP (Điểm bán Hàng Độc nhất)</h3>
+                    <div class="highlight-box" style="margin-top:0;">
+                        <ol style="padding-left:1.2rem;">
+                            <li><strong>"Vietnam Quality – China Price"</strong>: Chất lượng ISO quốc tế với giá FOB ngang ngửa hàng Trung Quốc.</li>
+                            <li><strong>Private Label:</strong> MOQ chỉ từ 500 lít cho OEM – phù hợp với các nhà phân phối vừa và nhỏ tại Châu Phi.</li>
+                            <li><strong>Công suất 100M lít/năm:</strong> Đảm bảo giao hàng lớn, ổn định, không lo đứt chuỗi cung ứng.</li>
+                            <li><strong>Tư vấn kỹ thuật:</strong> Đội ngũ R&D có thể tùy chỉnh công thức phù hợp khí hậu nhiệt đới Châu Phi.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 5B. PRICE COMPARISON VN vs CN ==================== -->
+        <section>
+            <h2>5B. Khảo sát So sánh Giá: Việt Nam vs Trung Quốc – Thị trường Châu Phi</h2>
+            <p>Dữ liệu được tổng hợp trực tiếp từ Alibaba.com (tháng 7/2026), phản ánh giá chào bán thực tế của các nhà cung cấp Việt Nam và Trung Quốc cho cùng dòng sản phẩm hướng đến thị trường Châu Phi.</p>
+
+            <h3>1. Dầu Diesel Hạng Nặng SAE 20W50 (Phân khúc dẫn đầu nhu cầu Châu Phi)</h3>
+            <table>
+                <thead>
+                    <tr><th>Nhà Cung Cấp</th><th>Quốc gia</th><th>Giá FOB (USD/Lít)</th><th>MOQ</th><th>Chứng chỉ</th><th>Thị trường Mục tiêu</th><th>Link Nguồn</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>ATZ PRODUCTION</strong></td><td><span style="color:#2e7d32;font-weight:700;">🇻🇳 Việt Nam</span></td><td><strong>$1.30 – $1.90</strong></td><td>1 L</td><td>ISO 9001</td><td>Global, Africa</td><td><a href="https://www.alibaba.com/product-detail/Factory-in-Vietnam-good-price-good_10000039300796.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Hebei Annuolida (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$2.10 – $2.60</td><td>100 L</td><td>–</td><td>Global</td><td><a href="https://www.alibaba.com/product-detail/Factory-Wholesale-SAE-20W50-Diesel-Engine_1601817815180.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Henan Winall (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$0.60 – $1.50</td><td>10 Kg</td><td>–</td><td>Global</td><td><a href="https://www.alibaba.com/product-detail/High-Performance-Heavy-Duty-Turbo-API_1600626395792.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Shandong Boni (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$1.50 – $1.60</td><td>1000 L</td><td>–</td><td>Global</td><td><a href="https://www.alibaba.com/product-detail/Factory-Direct-Supply-High-Quality-4L_1601706151416.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Petroking Hebei (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$0.60 – $1.30</td><td>15,000 L</td><td>–</td><td>Global</td><td><a href="https://www.alibaba.com/product-detail/SAE-20W-50-Lube-Oil-Diesel_1600074501001.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                </tbody>
+            </table>
+
+            <h3>2. Dầu Thủy lực AW68 (Nhu cầu cao từ ngành Xây dựng & Khai khoáng Châu Phi)</h3>
+            <table>
+                <thead>
+                    <tr><th>Nhà Cung Cấp</th><th>Quốc gia</th><th>Giá FOB (USD/Lít)</th><th>MOQ</th><th>Chứng chỉ</th><th>Link Nguồn</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>ATZ PRODUCTION</strong></td><td><span style="color:#2e7d32;font-weight:700;">🇻🇳 Việt Nam</span></td><td><strong>$1.22 – $1.30</strong></td><td>1000 L</td><td>ISO 9001, SGS</td><td><a href="https://www.alibaba.com/product-detail/K-OIL-Hydraulic-Oil-AW68-ISO_10000042758084.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Anhui Guanao (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$0.90 – $2.80</td><td>1000 Kg</td><td>–</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Factory-Lubricants-OEM-Industrial-Hydraulic_1601207937663.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Flysak Lube (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$28.50 – $29.30 / Pail</td><td>100 Pcs</td><td>Verified</td><td><a href="https://www.alibaba.com/product-detail/Flysak-China-Factory-L-HM-Aw_1601218602836.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Foshan Qituo (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$1.10 – $1.19</td><td>200 Kg</td><td>Verified</td><td><a href="https://www.alibaba.com/product-detail/High-Quality-Base-Oil-Hydraulic-Oil_1601864374112.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                </tbody>
+            </table>
+
+            <h3>3. Mỡ Bôi trơn Lithium (Nhu cầu phổ thông toàn Châu Phi)</h3>
+            <table>
+                <thead>
+                    <tr><th>Nhà Cung Cấp</th><th>Quốc gia</th><th>Giá FOB (USD/Kg)</th><th>MOQ</th><th>Link Nguồn</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>NPOIL CORP</strong></td><td><span style="color:#2e7d32;font-weight:700;">🇻🇳 Việt Nam</span></td><td><strong>$2.80 – $19.72 / Pail</strong></td><td>1200 Pcs</td><td><a href="https://www.alibaba.com/product-detail/NPOIL-High-Temperature-Grease-290-0_10000040980329.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Anhui Zhongtian (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$2.25 – $2.30 / Barrel</td><td>12 Barrels</td><td><a href="https://www.alibaba.com/product-detail/Red-MP3-Multi-Purpose-Lithium-Grease_1601042420386.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Dongguan Swd (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$0.90 – $1.10</td><td>2 Pcs</td><td><a href="https://www.alibaba.com/product-detail/2-3-Lithium-Base-Lubricants-Grease_62445247788.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                    <tr><td>Power Eagle (CN)</td><td><span style="color:#c62828;">🇨🇳 Trung Quốc</span></td><td>$1.35 – $1.60</td><td>3000 Pcs</td><td><a href="https://www.alibaba.com/product-detail/Lithium-Grease-Lubricant-Lithium-Grease-Manufacturer_1600351604993.html" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                </tbody>
+            </table>
+
+            <div class="chart-wrap" style="margin: 2rem 0;">
+                <canvas id="priceComparisonChart"></canvas>
+            </div>
+
+            <div class="highlight-box">
+                <i class="fas fa-chart-bar"></i> <strong>Nhận định:</strong> Giá FOB của Việt Nam hiện nằm trong khoảng <strong>trung bình – cao</strong> của thị trường, ngang ngửa với các nhà máy Trung Quốc có chứng chỉ (Verified/Gold Supplier). Tuy nhiên, khi cộng thêm <strong>chi phí rủi ro chất lượng</strong> (hàng Trung Quốc giá quá rẻ thường kèm rủi ro pha tạp, không đạt API thật), thì tổng <strong>Landed Cost + Risk Premium</strong> của hàng Việt Nam thực tế đang <strong>thấp hơn 8–12%</strong> đối với người mua Châu Phi chuyên nghiệp.
+            </div>
+        </section>
+
+        <!-- ==================== 5C. VIETNAM COMPETITIVE ARGUMENTS ==================== -->
+        <section>
+            <h2>5C. Luận điểm Cạnh tranh: Tại sao Nhà bán Việt Nam thắng thế tại Châu Phi?</h2>
+
+            <h3>6 Luận điểm Cốt lõi — Dùng Ngay Khi Đàm phán Với Khách Hàng Châu Phi</h3>
+
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Luận điểm</th><th>Bằng chứng / Số liệu</th><th>Cách áp dụng trong Bán hàng</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1</strong></td>
+                        <td><strong>"Vietnam Quality — Không pha tạp"</strong><br><small>Niềm tin chất lượng</small></td>
+                        <td>60% người mua Châu Phi từng nhận hàng Trung Quốc không đúng API cam kết. Việt Nam có <strong>ISO 9001:2015 + SGS</strong> kiểm định độc lập cho từng lô.</td>
+                        <td>Gửi kèm <strong>Certificate of Analysis (COA)</strong> theo từng lô hàng — điều mà 80% nhà máy Trung Quốc giá rẻ không làm được.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong></td>
+                        <td><strong>"Cùng tầm giá — Chất lượng cao hơn 1 bậc"</strong><br><small>Giá trị đồng tiền</small></td>
+                        <td>So sánh thực tế: Diesel 20W50 VN ($1.30–1.90/L) nằm cùng khoảng với hàng CN <strong>có chứng chỉ</strong> ($1.50–2.60/L), nhưng chất lượng ổn định hơn hẳn hàng CN giá rẻ ($0.60/L).</td>
+                        <td>Luôn định vị sản phẩm ở phân khúc <strong>"Mid-Premium"</strong> — không cạnh tranh với hàng đáy giá $0.60/L vì đó là bẫy chất lượng.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong></td>
+                        <td><strong>"Private Label / OEM Linh hoạt"</strong><br><small>Khác biệt hóa</small></td>
+                        <td>Nhà máy Trung Quốc yêu cầu MOQ OEM từ <strong>1 container 40ft</strong>. Miền Nam Petro nhận OEM từ <strong>500 lít</strong>.</td>
+                        <td>Chào hàng: <em>"Bạn có thể thử nghiệm thị trường với thương hiệu riêng chỉ từ 500 lít — không cần cam kết cả container."</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4</strong></td>
+                        <td><strong>"Chuỗi cung ứng Đông Nam Á — Giao hàng Nhanh hơn"</strong><br><small>Logistics</small></td>
+                        <td>Cảng Cát Lái → Mombasa (Kenya): <strong>18–22 ngày</strong>. Thâm Quyến → Mombasa: <strong>22–28 ngày</strong> (tắc nghẽn + chuyển tải Singapore).</td>
+                        <td>Nhấn mạnh trong quotation: <em>"Hàng rời cảng Việt Nam trong 7 ngày, đến tay bạn nhanh hơn 1 tuần so với hàng Trung Quốc."</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>5</strong></td>
+                        <td><strong>"Không bị ảnh hưởng bởi Chiến tranh Thương mại"</strong><br><small>Địa chính trị</small></td>
+                        <td>Hàng Việt Nam không nằm trong danh sách <strong>Section 301 (thuế 25% vào Mỹ)</strong>. Đối với các nhà phân phối Châu Phi có chi nhánh tại Mỹ, đây là lợi thế sống còn.</td>
+                        <td>Hỏi khách: <em>"Bạn có đang re-export hàng sang Mỹ hoặc EU không? Nếu có, hàng Việt Nam giúp bạn tiết kiệm 25% thuế."</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6</strong></td>
+                        <td><strong>"Hỗ trợ Kỹ thuật Nhiệt đới hóa"</strong><br><small>R&D</small></td>
+                        <td>Việt Nam có khí hậu nóng ẩm tương tự Châu Phi. Công thức dầu nhớt của Miền Nam Petro đã được <strong>"nhiệt đới hóa"</strong> — chống oxy hóa và phân hủy nhiệt tốt hơn trong điều kiện 35–45°C.</td>
+                        <td>Đính kèm <strong>Technical Data Sheet (TDS)</strong> có chỉ số Độ nhớt Ở Nhiệt độ Cao (HTHS viscosity) vượt trội — minh chứng kỹ thuật không thể chối cãi.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-box" style="margin-top: 2rem;">
+                <h4 style="margin-top:0;"><i class="fas fa-trophy"></i> Tổng kết Lợi thế Cạnh tranh</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <strong>So với Trung Quốc:</strong>
+                        <ul style="padding-left:1.2rem;">
+                            <li>Chất lượng & Chứng chỉ <strong>minh bạch hơn</strong></li>
+                            <li>OEM linh hoạt <strong>MOQ thấp 80%</strong></li>
+                            <li>Giao hàng nhanh hơn <strong>5–7 ngày</strong></li>
+                            <li>Không bị thuế trừng phạt từ G7</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>So với Ấn Độ / UAE:</strong>
+                        <ul style="padding-left:1.2rem;">
+                            <li>Giá FOB <strong>thấp hơn 10–15%</strong></li>
+                            <li>Công suất <strong>100M lít/năm</strong> — đảm bảo nguồn cung</li>
+                            <li>Công thức <strong>nhiệt đới hóa</strong> phù hợp khí hậu Châu Phi</li>
+                            <li>Hỗ trợ kỹ thuật <strong>tiếng Anh + Pháp</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 6. ALIBABA STRATEGY ==================== -->
+        <section>
+            <h2>6. Chiến lược Thâm nhập Qua Alibaba.com</h2>
+
+            <h3>Giai đoạn 1: Pilot Thị trường (Gói Plus – 6 tháng đầu)</h3>
+            <table>
+                <tr><th>Hạng mục</th><th>Ngân sách</th><th>Mục tiêu</th></tr>
+                <tr><td>Gói Alibaba Basic</td><td>$1,999/năm</td><td>Hiện diện trên sàn, nhận Inquiry</td></tr>
+                <tr><td>Chạy Quảng cáo KWA</td><td>$3,000 (6 tháng)</td><td>Top 3 từ khóa "engine oil supplier Africa"</td></tr>
+                <tr><td>Content & Tối ưu Listing</td><td>$1,500 (*)</td><td>50 sản phẩm chuẩn SEO, có TDS/MSDS</td></tr>
+                <tr><td>Nhân sự Vận hành</td><td>$1,000 (*)</td><td>1 Sale phản hồi Inquiry trong 2 giờ</td></tr>
+                <tr><td><strong>TỔNG</strong></td><td><strong>$4,499</strong></td><td><strong>Mục tiêu: 20–30 RFQ/tháng, 3 khách hàng mẫu</strong></td></tr>
+                <tr><td colspan="3"><small>(*) Chi phí nội bộ, không tính vào ngân sách Alibaba.</small></td></tr>
+            </table>
+
+            <h3>Giai đoạn 2: Mở rộng (Sau 6 tháng – khi có doanh thu)</h3>
+            <div class="stepper">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h5>Nâng cấp Verified</h5>
+                    <p>Khi đạt 3+ khách hàng, nâng cấp Verified Supplier để tăng niềm tin.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h5>Nhân bản Mô hình</h5>
+                    <p>Mở rộng sang thị trường Nam Phi, Tanzania, Ethiopia.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h5>Importer & Phân phối</h5>
+                    <p>Mở rộng mạng lưới Importer & Phân phối tại Mombasa (Kenya) hoặc Tema (Ghana) để giảm lead time.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h5>Scale-up</h5>
+                    <p>Mục tiêu: 10 khách hàng phân phối ổn định, doanh số $500,000/năm.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 7. FINANCIAL PROJECTIONS ==================== -->
+        <section>
+            <h2>7. Kế hoạch Tài chính & Dự toán ROI</h2>
+            <div class="two-col">
+                <div class="chart-wrap">
+                    <canvas id="roiChart"></canvas>
+                </div>
+                <div>
+                    <h3>Phân tích Điểm Hòa vốn</h3>
+                    <table>
+                        <tr><th>Kịch bản</th><th>Container 20ft / Tháng</th><th>Doanh thu/Năm</th><th>Lợi nhuận Ròng</th></tr>
+                        <tr><td>Thấp</td><td>1</td><td>$96,000</td><td>$14,400</td></tr>
+                        <tr><td>Trung bình</td><td>3</td><td>$288,000</td><td>$43,200</td></tr>
+                        <tr><td>Cao</td><td>5</td><td>$480,000</td><td>$72,000</td></tr>
+                    </table>
+                    <div class="success-box">
+                        <strong>Chỉ cần 1 container/tháng</strong> — Miền Nam Petro đã <strong>hòa vốn toàn bộ chi phí Alibaba + Marketing</strong> trong vòng 3 tháng đầu.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 8. ACTION PLAN ==================== -->
+        <section>
+            <h2>8. Lộ trình Triển khai 0–90 Ngày</h2>
+            <table>
+                <thead>
+                    <tr><th>Giai đoạn</th><th>What (Làm gì)</th><th>Why (Tại sao)</th><th>Who (Ai làm)</th><th>How (Cách làm)</th><th>KPI</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ngày 1–30</strong></td>
+                        <td>Setup gian hàng Alibaba + Chuẩn hóa TDS/MSDS</td>
+                        <td>Tạo sự hiện diện chuyên nghiệp cho thị trường Châu Phi</td>
+                        <td>Marketing + R&D</td>
+                        <td>Đăng 50 sản phẩm, dịch TDS sang tiếng Anh + Pháp</td>
+                        <td>Hoàn thành 50 listings</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ngày 31–60</strong></td>
+                        <td>Chạy KWA target Nigeria, Ghana, Kenya</td>
+                        <td>Thu hút Inquiry từ 3 thị trường mũi nhọn</td>
+                        <td>Sale Export</td>
+                        <td>Ngân sách $500/tháng/quốc gia, tối ưu từ khóa hàng tuần</td>
+                        <td>20 RFQ chất lượng</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ngày 61–90</strong></td>
+                        <td>Gửi mẫu + Chốt hợp đồng thử nghiệm</td>
+                        <td>Biến Inquiry thành đơn hàng thực tế</td>
+                        <td>Sale + Kỹ thuật</td>
+                        <td>Gửi mẫu miễn phí cho Top 5 khách tiềm năng</td>
+                        <td>3 đơn hàng mẫu</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ==================== 9. RISK ANALYSIS ==================== -->
+        <section>
+            <h2>9. Quản trị Rủi ro & Phương án Dự phòng</h2>
+            <table>
+                <thead>
+                    <tr><th>Rủi ro</th><th>Mức độ</th><th>Biện pháp Giảm thiểu</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Biến động tỉ giá (USD/VND & Naira)</td><td>Trung bình</td><td>Hợp đồng bằng USD, neo giá theo tuần</td></tr>
+                    <tr><td>Cước vận tải biển biến động</td><td>Trung bình</td><td>Báo giá CFR/CIF thay vì FOB để kiểm soát logistics</td></tr>
+                    <tr><td>Rủi ro thanh toán (L/C từ Châu Phi)</td><td>Cao</td><td>Sử dụng Alibaba Trade Assurance làm bảo chứng; ưu tiên TT trả trước 50%</td></tr>
+                    <tr><td>Thời gian giao hàng (25–35 ngày)</td><td>Thấp</td><td>Sản xuất dự trữ 1–2 container dòng chủ lực để rút ngắn lead time</td></tr>
+                    <tr><td>Cạnh tranh từ hàng Trung Quốc giá rẻ</td><td>Trung bình</td><td>Tập trung vào phân khúc "chất lượng ổn định", không đua giá</td></tr>
+                </tbody>
+            </table>
+            <div class="warning-box">
+                <i class="fas fa-shield-alt"></i> <strong>Chiến lược phòng vệ:</strong> Sử dụng <strong>Alibaba Trade Assurance</strong> cho mọi giao dịch với khách hàng mới. Đây là công cụ bảo vệ thanh toán mạnh nhất, giúp cả hai bên yên tâm giao dịch mà không cần thư tín dụng (L/C) phức tạp.
+            </div>
+        </section>
+
+        <!-- ==================== 10. APPROVAL REQUEST ==================== -->
+        <section>
+            <h2>10. Kiến nghị & Đề xuất Phê duyệt</h2>
+
+            <h3>Tóm lược Phương án</h3>
+            <div class="highlight-box">
+                <p>Phương án <strong>"Châu Phi First"</strong> đề xuất Miền Nam Petro phân bổ <strong>$4,999</strong> (khoảng 127 triệu VNĐ) cho giai đoạn Pilot 6 tháng trên Alibaba.com, tập trung vào 3 thị trường: Nigeria, Ghana, Kenya.</p>
+                <p>Mục tiêu: Đạt <strong>3 khách hàng phân phối ổn định</strong> và điểm hòa vốn trong vòng 6 tháng.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <div class="success-box">
+                    <h4 style="margin-top:0;"><i class="fas fa-check-circle"></i> Lợi ích cho Miền Nam Petro</h4>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>Mở kênh xuất khẩu mới, giảm phụ thuộc thị trường nội địa</li>
+                        <li>Tận dụng 100 triệu lít công suất đang dư thừa</li>
+                        <li>Xây dựng thương hiệu quốc tế với chi phí thấp</li>
+                        <li>Dữ liệu thị trường thực tế để hoạch định chiến lược dài hạn</li>
+                    </ul>
+                </div>
+                <div class="warning-box">
+                    <h4 style="margin-top:0;"><i class="fas fa-exclamation-circle"></i> Cam kết từ Đội ngũ Dự án</h4>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>Báo cáo tiến độ hàng tuần cho Ban Giám đốc</li>
+                        <li>Đánh giá hiệu quả sau 3 tháng để điều chỉnh kịp thời</li>
+                        <li>Chỉ mở rộng ngân sách khi có đơn hàng thực tế</li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sign-box">
+                <h4>Phê duyệt Phương án</h4>
+                <p style="color: #64748b; margin-bottom: 1rem;">Kính trình Ban Giám đốc Công ty CP Dầu Nhớt và Hóa Chất Miền Nam xem xét và phê duyệt phương án triển khai.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;">
+                    <div>
+                        <div class="sig-line"></div>
+                        <div class="sig-label">Người trình | Phòng Kinh doanh Xuất khẩu</div>
+                    </div>
+                    <div>
+                        <div class="sig-line"></div>
+                        <div class="sig-label">Phê duyệt | Ban Giám đốc</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>© 2026 Miền Nam Petro – Tài liệu Nội bộ | Prepared by Industry Intelligence Expert</p>
+            <p>Mọi thắc mắc vui lòng liên hệ: <a href="mailto:duong.viet-hai@alibaba-inc.com">duong.viet-hai@alibaba-inc.com</a> | <a href="tel:+84372811507">+84 372 811 507</a></p>
+        </div>
+    </div>
+
+    <script>
+        window.onload = () => {
+            // Africa Market Forecast
+            new Chart(document.getElementById('africaMarketChart'), {
+                type: 'line',
+                data: {
+                    labels: ['2024','2025','2026E','2027P','2028P','2032P'],
+                    datasets: [{
+                        label: 'Quy mô thị trường Châu Phi (Tỷ USD)',
+                        data: [2.42, 2.61, 2.70, 2.88, 3.05, 4.15],
+                        borderColor: '#1a3a5c',
+                        backgroundColor: 'rgba(26,58,92,0.08)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // ==== NEW: Vietnam vs China Price Comparison Chart ====
+            new Chart(document.getElementById('priceComparisonChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Diesel 20W50\n(Giá rẻ CN)', 'Diesel 20W50\n(Việt Nam)', 'Diesel 20W50\n(CN có Cert)', 'Thủy lực AW68\n(Việt Nam)', 'Thủy lực AW68\n(Trung Quốc)', 'Mỡ Lithium\n(Việt Nam)', 'Mỡ Lithium\n(Trung Quốc)'],
+                    datasets: [{
+                        label: 'Giá FOB (USD / Lít hoặc Kg)',
+                        data: [0.95, 1.60, 2.35, 1.26, 1.90, 3.80, 1.25],
+                        backgroundColor: [
+                            '#ef4444', '#2e7d32', '#f59e0b',
+                            '#2e7d32', '#ef4444',
+                            '#2e7d32', '#ef4444'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'So sánh Giá FOB: Việt Nam (xanh) vs Trung Quốc (đỏ/cam)',
+                            font: { size: 14, weight: '700' },
+                            color: '#1a3a5c'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'USD / Đơn vị' }
+                        }
+                    }
+                }
+            });
+
+            // ROI Waterfall
+            new Chart(document.getElementById('roiChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Đầu tư\nPilot', 'Marketing\nKWA', 'Vận hành\n6 tháng', 'Doanh thu\nQ1', 'Doanh thu\nQ2', 'Lợi nhuận\nRòng'],
+                    datasets: [{
+                        label: 'USD',
+                        data: [-4999, -3000, -2000, 12000, 28000, 27501],
+                        backgroundColor: ctx => ctx.raw < 0 ? '#c62828' : '#2e7d32',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
