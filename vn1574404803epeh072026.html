@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Vận Hành T07/2026 - Chung Long Việt Nam</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',-apple-system,'Helvetica Neue',Arial,'Microsoft YaHei','PingFang SC',sans-serif;background:#eef2f7;color:#1e2a3a;line-height:1.55}
+.wrap{max-width:1440px;margin:0 auto;padding:24px}
+
+/* ---------- LANGUAGE SWITCH ---------- */
+.topbar{display:flex;justify-content:flex-end;align-items:center;margin-bottom:14px}
+.lang-switch{display:inline-flex;background:#fff;border:1px solid #dbe3ec;border-radius:22px;padding:4px;gap:2px;box-shadow:0 2px 8px rgba(15,47,95,.07)}
+.lang-btn{border:0;background:transparent;font-family:inherit;font-size:12.5px;font-weight:600;color:#64748b;padding:6px 16px;border-radius:18px;cursor:pointer;transition:.18s;white-space:nowrap}
+.lang-btn:hover{color:#1a5fb4;background:#f1f5f9}
+.lang-btn.active{background:linear-gradient(120deg,#0f2f5f,#1a5fb4);color:#fff;box-shadow:0 2px 7px rgba(26,95,180,.3)}
+.lang-ic{font-size:12px;margin-right:7px;color:#94a3b8;align-self:center}
+
+/* ---------- HEADER ---------- */
+.hero{background:linear-gradient(120deg,#0f2f5f 0%,#1a5fb4 55%,#2a7fd4 100%);border-radius:16px;padding:30px 34px;color:#fff;box-shadow:0 8px 28px rgba(15,47,95,.28);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-70px;top:-70px;width:280px;height:280px;background:rgba(255,255,255,.07);border-radius:50%}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;position:relative;z-index:1}
+.hero h1{font-size:27px;font-weight:700;letter-spacing:-.3px}
+.hero .sub{font-size:14px;opacity:.85;margin-top:6px}
+.badge-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:1}
+.badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);padding:5px 13px;border-radius:20px;font-size:12.5px;backdrop-filter:blur(4px)}
+.period{text-align:right}
+.period .lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.4px;opacity:.75}
+.period .val{font-size:30px;font-weight:700;line-height:1.1}
+.period .st{display:inline-block;margin-top:8px;background:#16a34a;padding:4px 14px;border-radius:14px;font-size:12px;font-weight:600}
+
+/* ---------- SECTION ---------- */
+.sec{margin-top:28px}
+.sec-title{font-size:16px;font-weight:700;color:#0f2f5f;margin-bottom:14px;padding-left:12px;border-left:4px solid #1a5fb4;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.sec-title span.note{font-size:12px;font-weight:400;color:#64748b;border-left:1px solid #cbd5e1;padding-left:9px}
+
+/* ---------- KPI ---------- */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px}
+.kpi{background:#fff;border-radius:13px;padding:19px;box-shadow:0 2px 10px rgba(15,47,95,.08);border-top:4px solid #94a3b8;transition:.22s;position:relative}
+.kpi:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(15,47,95,.16)}
+.kpi.good{border-top-color:#16a34a}
+.kpi.warn{border-top-color:#f59e0b}
+.kpi.bad{border-top-color:#dc2626}
+.kpi .k-lbl{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding-right:62px;min-height:32px}
+.kpi .k-val{font-size:31px;font-weight:700;margin:7px 0 3px;letter-spacing:-.8px}
+.kpi.good .k-val{color:#15803d}
+.kpi.warn .k-val{color:#d97706}
+.kpi.bad .k-val{color:#dc2626}
+.kpi .k-cmp{font-size:12px;color:#64748b}
+.kpi .k-cmp b{color:#334155}
+.trend{position:absolute;top:17px;right:17px;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:11px}
+.up{background:#dcfce7;color:#15803d}
+.down{background:#fee2e2;color:#b91c1c}
+.flat{background:#f1f5f9;color:#475569}
+
+/* ---------- CARD & CHART ---------- */
+.card{background:#fff;border-radius:13px;padding:20px 22px;box-shadow:0 2px 10px rgba(15,47,95,.08)}
+.card h3{font-size:14.5px;font-weight:700;color:#0f2f5f;margin-bottom:4px}
+.card .hint{font-size:11.5px;color:#94a3b8;margin-bottom:14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:1.35fr 1fr;gap:18px}
+.chart-box{position:relative;height:290px}
+.chart-box.tall{height:330px}
+
+/* ---------- TABLE ---------- */
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:#0f2f5f;color:#fff;padding:11px 10px;text-align:left;font-weight:600;font-size:12px;white-space:nowrap}
+thead th:first-child{border-radius:7px 0 0 0}
+thead th:last-child{border-radius:0 7px 0 0}
+tbody td{padding:10px;border-bottom:1px solid #eef2f7}
+tbody tr:hover{background:#f8fafc}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.tag{display:inline-block;padding:3px 9px;border-radius:11px;font-size:11px;font-weight:600;white-space:nowrap}
+.t-good{background:#dcfce7;color:#15803d}
+.t-warn{background:#fef3c7;color:#a16207}
+.t-bad{background:#fee2e2;color:#b91c1c}
+.t-info{background:#dbeafe;color:#1d4ed8}
+
+/* ---------- STAR PROGRESS ---------- */
+.star-item{margin-bottom:17px}
+.star-item:last-child{margin-bottom:0}
+.star-head{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;margin-bottom:6px;gap:10px}
+.star-head .nm{font-weight:600;color:#334155}
+.star-head .vl{font-weight:700;color:#0f2f5f;white-space:nowrap}
+.bar{height:11px;background:#e8edf3;border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px}
+.b-g{background:linear-gradient(90deg,#22c55e,#16a34a)}
+.b-y{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+.b-r{background:linear-gradient(90deg,#f87171,#dc2626)}
+.mile{display:flex;justify-content:space-between;font-size:10.5px;color:#94a3b8;margin-top:4px}
+
+/* ---------- SWOT ---------- */
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.sw-box{background:#fff;border-radius:13px;padding:19px 21px;box-shadow:0 2px 10px rgba(15,47,95,.08)}
+.sw-box.s{border-left:5px solid #16a34a}
+.sw-box.w{border-left:5px solid #dc2626}
+.sw-box h4{font-size:14px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sw-box.s h4{color:#15803d}
+.sw-box.w h4{color:#b91c1c}
+.sw-box ul{list-style:none}
+.sw-box li{font-size:13px;padding:7px 0 7px 22px;position:relative;border-bottom:1px dashed #eef2f7;color:#334155}
+.sw-box li:last-child{border-bottom:none}
+.sw-box.s li::before{content:'✓';position:absolute;left:0;color:#16a34a;font-weight:700}
+.sw-box.w li::before{content:'!';position:absolute;left:3px;color:#dc2626;font-weight:700}
+
+/* ---------- ACTION ---------- */
+.act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.act{background:#fff;border-radius:13px;padding:18px 20px;box-shadow:0 2px 10px rgba(15,47,95,.08);border-left:5px solid #94a3b8}
+.act.p0{border-left-color:#dc2626}
+.act.p1{border-left-color:#f59e0b}
+.act.p2{border-left-color:#2563eb}
+.act.p3{border-left-color:#64748b}
+.act .pr{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:11px;margin-bottom:9px;letter-spacing:.5px}
+.act.p0 .pr{background:#fee2e2;color:#b91c1c}
+.act.p1 .pr{background:#fef3c7;color:#a16207}
+.act.p2 .pr{background:#dbeafe;color:#1d4ed8}
+.act.p3 .pr{background:#f1f5f9;color:#475569}
+.act h5{font-size:14px;color:#0f2f5f;margin-bottom:7px}
+.act p{font-size:12.5px;color:#64748b;margin-bottom:5px}
+.act .meta{font-size:11.5px;color:#94a3b8;margin-top:10px;padding-top:9px;border-top:1px dashed #eef2f7}
+
+/* ---------- CHANNEL ---------- */
+.ch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.ch{background:#fff;border-radius:13px;padding:19px;box-shadow:0 2px 10px rgba(15,47,95,.08);text-align:center}
+.ch .ic{font-size:26px;margin-bottom:8px}
+.ch .nm{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.6px;font-weight:600;min-height:34px}
+.ch .vl{font-size:25px;font-weight:700;color:#0f2f5f;margin:6px 0}
+.ch .ds{font-size:11.5px;color:#94a3b8}
+
+/* ---------- CONCLUSION ---------- */
+.concl{background:linear-gradient(120deg,#0f2f5f,#1a5fb4);color:#fff;border-radius:14px;padding:26px 30px;box-shadow:0 8px 24px rgba(15,47,95,.24)}
+.concl h3{font-size:17px;margin-bottom:13px}
+.concl p{font-size:13.5px;opacity:.93;margin-bottom:11px}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}
+.pillar{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:11px;padding:15px}
+.pillar .n{font-size:23px;font-weight:700;opacity:.5}
+.pillar .t{font-size:13.5px;font-weight:700;margin:4px 0 5px}
+.pillar .d{font-size:12px;opacity:.85}
+
+footer{text-align:center;font-size:11.5px;color:#94a3b8;padding:26px 0 10px}
+
+@media(max-width:960px){.g2,.g3,.swot{grid-template-columns:1fr}.period{text-align:left}.lang-btn{padding:6px 12px;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- LANGUAGE SWITCH -->
+  <div class="topbar">
+    <span class="lang-ic">🌐</span>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="vi">Tiếng Việt</button>
+      <button class="lang-btn" data-lang="zh">中文</button>
+      <button class="lang-btn" data-lang="en">English</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <h1 data-i18n="hero.h1">Báo Cáo Vận Hành Gian Hàng</h1>
+        <div class="sub">CÔNG TY TNHH NHỰA CÔNG NGHIỆP CHUNG LONG VIỆT NAM &nbsp;·&nbsp; vn1574404803epeh</div>
+        <div class="badge-row">
+          <div class="badge" data-i18n="hero.b1">Đồng Nai, Việt Nam</div>
+          <div class="badge" data-i18n="hero.b2">Manufacturer · Từ 2001</div>
+          <div class="badge" data-i18n="hero.b3">Construction &amp; Real Estate</div>
+          <div class="badge" data-i18n="hero.b4">101–200 nhân sự</div>
+          <div class="badge" data-i18n="hero.b5">Sales Rep: Dương Viết Hải</div>
+        </div>
+      </div>
+      <div class="period">
+        <div class="lbl" data-i18n="hero.period">Kỳ báo cáo</div>
+        <div class="val">07 / 2026</div>
+        <div class="st" data-i18n="hero.status">Trạng thái: Healthy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI -->
+  <div class="sec">
+    <div class="sec-title"><span data-i18n="sec.kpi">Chỉ số cốt lõi tháng 07/2026</span> <span class="note" data-i18n="sec.kpi.note">so sánh với trung bình ngành</span></div>
+    <div class="kpi-grid">
+      <div class="kpi bad">
+        <div class="trend down">▼ <span data-num="1.5" data-dec="1" data-suffix="%"></span></div>
+        <div class="k-lbl" data-i18n="k.exp">Search Exposures</div>
+        <div class="k-val"><span data-num="9131"></span></div>
+        <div class="k-cmp"><span data-i18n="cmp.avg">TB ngành</span> <b data-num="26218"></b> · <span data-i18n="cmp.reach">Đạt</span> <b data-num="34.8" data-dec="1" data-suffix="%"></b></div>
+      </div>
+      <div class="kpi bad">
+        <div class="trend up">▲ <span data-num="25.8" data-dec="1" data-suffix="%"></span></div>
+        <div class="k-lbl" data-i18n="k.pv">Page Views</div>
+        <div class="k-val"><span data-num="332"></span></div>
+        <div class="k-cmp"><span data-i18n="cmp.avg">TB ngành</span> <b data-num="2647"></b> · <span data-i18n="cmp.reach">Đạt</span> <b data-num="12.5" data-dec="1" data-suffix="%"></b></div>
+      </div>
+      <div class="kpi bad">
+        <div class="trend up">▲ <span data-num="4" data-dec="1" data-suffix="%"></span></div>
+        <div class="k-lbl" data-i18n="k.uv">Unique Visitors</div>
+        <div class="k-val"><span data-num="156"></span></div>
+        <div class="k-cmp"><span data-i18n="cmp.avg">TB ngành</span> <b data-num="1302"></b> · <span data-i18n="cmp.reach">Đạt</span> <b data-num="12" data-dec="1" data-suffix="%"></b></div>
+      </div>
+      <div class="kpi warn">
+        <div class="trend flat">— <span data-num="0" data-suffix="%"></span></div>
+        <div class="k-lbl" data-i18n="k.inq">Inquiries</div>
+        <div class="k-val"><span data-num="12"></span></div>
+        <div class="k-cmp"><span data-i18n="cmp.avg">TB ngành</span> <b data-num="29"></b> · <span data-i18n="cmp.reach">Đạt</span> <b data-num="41.4" data-dec="1" data-suffix="%"></b></div>
+      </div>
+      <div class="kpi good">
+        <div class="trend up">▲ <span data-num="7.7" data-dec="1" data-suffix="%"></span></div>
+        <div class="k-lbl" data-i18n="k.trr">Timely Response Rate</div>
+        <div class="k-val"><span data-num="100" data-suffix="%"></span></div>
+        <div class="k-cmp"><span data-i18n="cmp.avg">TB ngành</span> <b data-num="92.67" data-dec="2" data-suffix="%"></b> · <span data-i18n="cmp.top">Top</span> <b data-num="99.15" data-dec="2" data-suffix="%"></b></div>
+      </div>
+      <div class="kpi good">
+        <div class="trend up">▲ <span data-num="78" data-suffix="%"></span></div>
+        <div class="k-lbl" data-i18n="k.ard">Avg. Reply Duration</div>
+        <div class="k-val"><span data-num="0.5" data-dec="1"></span><span style="font-size:15px;font-weight:600" data-i18n="u.h">h</span></div>
+        <div class="k-cmp"><span data-i18n="cmp.avg">TB ngành</span> <b><span data-num="3.5" data-dec="1"></span><span data-i18n="u.h">h</span></b> · <span data-i18n="cmp.top">Top</span> <b><span data-num="1.5" data-dec="1"></span><span data-i18n="u.h">h</span></b></div>
+      </div>
+      <div class="kpi bad">
+        <div class="trend flat">— <span data-num="0"></span></div>
+        <div class="k-lbl" data-i18n="k.gmv">GMV 90 ngày</div>
+        <div class="k-val"><span data-num="0"></span><span style="font-size:15px;font-weight:600"> USD</span></div>
+        <div class="k-cmp"><span data-i18n="cmp.mile2">Mốc 2 sao cần</span> <b><span data-num="1500"></span> USD</b></div>
+      </div>
+      <div class="kpi warn">
+        <div class="trend up">▲ <span data-num="19"></span></div>
+        <div class="k-lbl" data-i18n="k.new">Sản phẩm mới</div>
+        <div class="k-val"><span data-num="19"></span></div>
+        <div class="k-cmp"><span data-i18n="cmp.totalsp">Tổng SP</span> <b data-num="880"></b> · <span data-i18n="cmp.upd">Cập nhật</span> <b data-num="222"></b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="sec">
+    <div class="sec-title"><span data-i18n="sec.charts">Diễn biến &amp; so sánh hiệu suất</span></div>
+    <div class="g2">
+      <div class="card">
+        <h3 data-i18n="ch1.t">Xu hướng traffic 3 tháng gần nhất</h3>
+        <div class="hint" data-i18n="ch1.h">Search exposures (trục phải) · Page views &amp; Unique visitors (trục trái)</div>
+        <div class="chart-box"><canvas id="cTrend"></canvas></div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="ch2.t">Khoảng cách so với ngành (thang log)</h3>
+        <div class="hint" data-i18n="ch2.h">Shop hiện tại vs Trung bình ngành vs Top ngành – T07/2026</div>
+        <div class="chart-box"><canvas id="cGap"></canvas></div>
+      </div>
+    </div>
+
+    <div class="g3" style="margin-top:18px">
+      <div class="card">
+        <h3 data-i18n="ch3.t">Phễu chuyển đổi tháng 07/2026</h3>
+        <div class="hint" data-i18n="ch3.h">Từ hiển thị tìm kiếm đến đơn hàng thực tế – điểm nghẽn nằm ở bước cuối</div>
+        <div class="chart-box tall"><canvas id="cFunnel"></canvas></div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="ch4.t">Chất lượng dịch vụ – Lợi thế nổi bật</h3>
+        <div class="hint" data-i18n="ch4.h">Thời gian phản hồi trung bình (giờ) – càng thấp càng tốt</div>
+        <div class="chart-box tall"><canvas id="cService"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAR RATING -->
+  <div class="sec">
+    <div class="sec-title"><span data-i18n="sec.star">Phân tích Star Rating</span> <span class="note" data-i18n="sec.star.note">Trạng thái hiện tại: Healthy</span></div>
+    <div class="g2">
+      <div class="card">
+        <h3 data-i18n="st.t">Tiến độ 4 tiêu chí xếp hạng sao</h3>
+        <div class="hint" data-i18n="st.h">Thanh tiến độ tính theo mốc sao kế tiếp</div>
+        <div style="margin-top:16px">
+          <div class="star-item">
+            <div class="star-head"><span class="nm" data-i18n="st.1">Product · Số SP đạt chuẩn PIS</span><span class="vl"><span data-num="556"></span> <span data-i18n="u.sp">SP</span></span></div>
+            <div class="bar"><i class="b-g" style="width:79.4%"></i></div>
+            <div class="mile"><span>100 (1★)</span><span>200 (2★)</span><span>400 (3★)</span><span style="color:#16a34a;font-weight:700">700 (4★)</span><span><span data-num="1000"></span> (5★)</span></div>
+          </div>
+          <div class="star-item">
+            <div class="star-head"><span class="nm" data-i18n="st.2">Marketing · Unique visitors 30 ngày</span><span class="vl"><span data-num="139"></span> <span data-i18n="u.vs">visitors</span></span></div>
+            <div class="bar"><i class="b-r" style="width:8.7%"></i></div>
+            <div class="mile"><span style="color:#dc2626;font-weight:700">100 (1★)</span><span>200 (2★)</span><span>400 (3★)</span><span>800 (4★)</span><span><span data-num="1600"></span> (5★)</span></div>
+          </div>
+          <div class="star-item">
+            <div class="star-head"><span class="nm" data-i18n="st.3">Service · Buyer được phản hồi 30 ngày</span><span class="vl"><span data-num="8"></span> <span data-i18n="u.by">buyers</span></span></div>
+            <div class="bar"><i class="b-y" style="width:10%"></i></div>
+            <div class="mile"><span>2 (1★)</span><span style="color:#f59e0b;font-weight:700">10 (2★)</span><span>20 (3★)</span><span>50 (4★)</span><span>80 (5★)</span></div>
+          </div>
+          <div class="star-item">
+            <div class="star-head"><span class="nm" data-i18n="st.4">Sales · GMV 90 ngày</span><span class="vl" style="color:#dc2626"><span data-num="0"></span> USD</span></div>
+            <div class="bar"><i class="b-r" style="width:1.5%"></i></div>
+            <div class="mile"><span style="color:#dc2626;font-weight:700">0 (1★)</span><span><span data-num="1500"></span> (2★)</span><span>—</span><span>—</span><span>—</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="ch5.t">Mức độ hoàn thiện theo tiêu chí</h3>
+        <div class="hint" data-i18n="ch5.h">Điểm quy đổi 0–100 theo tiến độ đạt mốc sao kế tiếp</div>
+        <div class="chart-box"><canvas id="cRadar"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHANNELS -->
+  <div class="sec">
+    <div class="sec-title"><span data-i18n="sec.ch">Tình hình các kênh vận hành</span></div>
+    <div class="ch-grid">
+      <div class="ch">
+        <div class="ic">📋</div>
+        <div class="nm" data-i18n="cha.1n">RFQ Monthly Quotes</div>
+        <div class="vl" style="color:#dc2626"><span data-num="0"></span></div>
+        <div class="ds" data-i18n="cha.1d">Chưa khai thác kênh RFQ</div>
+      </div>
+      <div class="ch">
+        <div class="ic">💰</div>
+        <div class="nm" data-i18n="cha.2n">Số dư KWA</div>
+        <div class="vl" style="color:#d97706"><span data-num="35400000"></span></div>
+        <div class="ds" data-i18n="cha.2d">VND · Chưa chi tiêu hiệu quả</div>
+      </div>
+      <div class="ch">
+        <div class="ic">🖼️</div>
+        <div class="nm" data-i18n="cha.3n">Showcase Usage</div>
+        <div class="vl" style="color:#15803d"><span data-num="100" data-suffix="%"></span></div>
+        <div class="ds" data-i18n="cha.3d">20/20 vị trí đang dùng</div>
+      </div>
+      <div class="ch">
+        <div class="ic">🛡️</div>
+        <div class="nm" data-i18n="cha.4n">Đơn Trade Assurance</div>
+        <div class="vl" style="color:#dc2626"><span data-num="0"></span></div>
+        <div class="ds" data-i18n="cha.4d">Mục tiêu tối thiểu 1 đơn/tháng</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="sec">
+    <div class="sec-title"><span data-i18n="sec.tbl">Bảng chi tiết hiệu suất gian hàng</span></div>
+    <div class="card">
+      <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="th.metric">Chỉ số</th>
+            <th style="text-align:right" data-i18n="th.m7">T07/2026</th>
+            <th style="text-align:right" data-i18n="th.m6">T06/2026</th>
+            <th style="text-align:right" data-i18n="th.m5">T05/2026</th>
+            <th style="text-align:right" data-i18n="th.avg">TB ngành</th>
+            <th style="text-align:right" data-i18n="th.top">Top ngành</th>
+            <th style="text-align:right" data-i18n="th.pct">% so TB ngành</th>
+            <th data-i18n="th.eval">Đánh giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-i18n="m.exp">Search exposures</td><td class="num"><span data-num="9131"></span></td><td class="num"><span data-num="9271"></span></td><td class="num"><span data-num="10173"></span></td><td class="num"><span data-num="26218"></span></td><td class="num"><span data-num="213041"></span></td><td class="num" style="color:#dc2626"><span data-num="34.8" data-dec="1" data-suffix="%"></span></td><td><span class="tag t-bad" data-i18n="tg.improve">Cần cải thiện</span></td></tr>
+          <tr><td data-i18n="m.pv">Page views</td><td class="num"><span data-num="332"></span></td><td class="num"><span data-num="264"></span></td><td class="num"><span data-num="395"></span></td><td class="num"><span data-num="2647"></span></td><td class="num"><span data-num="29028"></span></td><td class="num" style="color:#dc2626"><span data-num="12.5" data-dec="1" data-suffix="%"></span></td><td><span class="tag t-bad" data-i18n="tg.verylow">Rất thấp</span></td></tr>
+          <tr><td data-i18n="m.uv">Unique visitors</td><td class="num"><span data-num="156"></span></td><td class="num"><span data-num="150"></span></td><td class="num"><span data-num="179"></span></td><td class="num"><span data-num="1302"></span></td><td class="num"><span data-num="13438"></span></td><td class="num" style="color:#dc2626"><span data-num="12" data-dec="1" data-suffix="%"></span></td><td><span class="tag t-bad" data-i18n="tg.verylow">Rất thấp</span></td></tr>
+          <tr><td data-i18n="m.dc">Direct clicks by search</td><td class="num"><span data-num="77"></span></td><td class="num"><span data-num="95"></span></td><td class="num"><span data-num="86"></span></td><td class="num"><span data-num="596"></span></td><td class="num"><span data-num="5294"></span></td><td class="num" style="color:#dc2626"><span data-num="12.9" data-dec="1" data-suffix="%"></span></td><td><span class="tag t-bad" data-i18n="tg.verylow">Rất thấp</span></td></tr>
+          <tr><td data-i18n="m.iv">Inquiry visitors</td><td class="num"><span data-num="12"></span></td><td class="num"><span data-num="12"></span></td><td class="num"><span data-num="13"></span></td><td class="num"><span data-num="26"></span></td><td class="num"><span data-num="339"></span></td><td class="num" style="color:#d97706"><span data-num="46.2" data-dec="1" data-suffix="%"></span></td><td><span class="tag t-warn" data-i18n="tg.low">Thấp</span></td></tr>
+          <tr><td data-i18n="m.inq">Inquiries</td><td class="num"><span data-num="12"></span></td><td class="num"><span data-num="12"></span></td><td class="num"><span data-num="12"></span></td><td class="num"><span data-num="29"></span></td><td class="num"><span data-num="372"></span></td><td class="num" style="color:#d97706"><span data-num="41.4" data-dec="1" data-suffix="%"></span></td><td><span class="tag t-warn" data-i18n="tg.nogrow">Không tăng trưởng</span></td></tr>
+          <tr><td data-i18n="m.msg">Messages</td><td class="num"><span data-num="14"></span></td><td class="num"><span data-num="15"></span></td><td class="num"><span data-num="13"></span></td><td class="num"><span data-num="157"></span></td><td class="num"><span data-num="1838"></span></td><td class="num" style="color:#dc2626"><span data-num="8.9" data-dec="1" data-suffix="%"></span></td><td><span class="tag t-bad" data-i18n="tg.verylow">Rất thấp</span></td></tr>
+          <tr><td data-i18n="m.trr">Timely response rate</td><td class="num"><span data-num="100" data-suffix="%"></span></td><td class="num"><span data-num="92.86" data-dec="2" data-suffix="%"></span></td><td class="num"><span data-num="100" data-suffix="%"></span></td><td class="num"><span data-num="92.67" data-dec="2" data-suffix="%"></span></td><td class="num"><span data-num="99.15" data-dec="2" data-suffix="%"></span></td><td class="num" style="color:#15803d"><span data-num="107.9" data-dec="1" data-suffix="%"></span></td><td><span class="tag t-good" data-i18n="tg.abovetop">Vượt top ngành</span></td></tr>
+          <tr><td data-i18n="m.ard">Average reply duration (giờ)</td><td class="num"><span data-num="0.5" data-dec="1"></span></td><td class="num"><span data-num="2.3" data-dec="1"></span></td><td class="num"><span data-num="1.2" data-dec="1"></span></td><td class="num"><span data-num="3.5" data-dec="1"></span></td><td class="num"><span data-num="1.5" data-dec="1"></span></td><td class="num" style="color:#15803d"><span data-num="700" data-suffix="%"></span></td><td><span class="tag t-good" data-i18n="tg.excellent">Xuất sắc</span></td></tr>
+          <tr><td data-i18n="m.tp">Total products</td><td class="num"><span data-num="880"></span></td><td class="num"><span data-num="897"></span></td><td class="num"><span data-num="897"></span></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="tag t-info" data-i18n="tg.stable">Ổn định</span></td></tr>
+          <tr><td data-i18n="m.np">Total new products</td><td class="num"><span data-num="19"></span></td><td class="num"><span data-num="0"></span></td><td class="num"><span data-num="0"></span></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="tag t-good" data-i18n="tg.better">Có cải thiện</span></td></tr>
+          <tr><td data-i18n="m.up">Total updated products</td><td class="num"><span data-num="222"></span></td><td class="num"><span data-num="201"></span></td><td class="num"><span data-num="34"></span></td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="tag t-good" data-i18n="tg.positive">Tích cực</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SWOT -->
+  <div class="sec">
+    <div class="sec-title"><span data-i18n="sec.swot">Điểm mạnh &amp; Điểm yếu</span></div>
+    <div class="swot">
+      <div class="sw-box s">
+        <h4><span data-i18n="sw.s">✓ Điểm mạnh</span></h4>
+        <ul>
+          <li data-i18n="sw.s1"></li>
+          <li data-i18n="sw.s2"></li>
+          <li data-i18n="sw.s3"></li>
+          <li data-i18n="sw.s4"></li>
+          <li data-i18n="sw.s5"></li>
+          <li data-i18n="sw.s6"></li>
+        </ul>
+      </div>
+      <div class="sw-box w">
+        <h4><span data-i18n="sw.w">! Điểm yếu</span></h4>
+        <ul>
+          <li data-i18n="sw.w1"></li>
+          <li data-i18n="sw.w2"></li>
+          <li data-i18n="sw.w3"></li>
+          <li data-i18n="sw.w4"></li>
+          <li data-i18n="sw.w5"></li>
+          <li data-i18n="sw.w6"></li>
+          <li data-i18n="sw.w7"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION PLAN -->
+  <div class="sec">
+    <div class="sec-title"><span data-i18n="sec.act">Kế hoạch hành động ưu tiên – Tháng 08/2026</span></div>
+    <div class="act-grid">
+      <div class="act p0">
+        <div class="pr" data-i18n="pr.p0">P0 · KHẨN CẤP</div>
+        <h5 data-i18n="a1.t"></h5>
+        <p data-i18n="a1.d"></p>
+        <div class="meta" data-i18n="a1.m"></div>
+      </div>
+      <div class="act p0">
+        <div class="pr" data-i18n="pr.p0">P0 · KHẨN CẤP</div>
+        <h5 data-i18n="a2.t"></h5>
+        <p data-i18n="a2.d"></p>
+        <div class="meta" data-i18n="a2.m"></div>
+      </div>
+      <div class="act p1">
+        <div class="pr" data-i18n="pr.p1">P1 · CAO</div>
+        <h5 data-i18n="a3.t"></h5>
+        <p data-i18n="a3.d"></p>
+        <div class="meta" data-i18n="a3.m"></div>
+      </div>
+      <div class="act p1">
+        <div class="pr" data-i18n="pr.p1">P1 · CAO</div>
+        <h5 data-i18n="a4.t"></h5>
+        <p data-i18n="a4.d"></p>
+        <div class="meta" data-i18n="a4.m"></div>
+      </div>
+      <div class="act p1">
+        <div class="pr" data-i18n="pr.p1">P1 · CAO</div>
+        <h5 data-i18n="a5.t"></h5>
+        <p data-i18n="a5.d"></p>
+        <div class="meta" data-i18n="a5.m"></div>
+      </div>
+      <div class="act p2">
+        <div class="pr" data-i18n="pr.p2">P2 · TRUNG BÌNH</div>
+        <h5 data-i18n="a6.t"></h5>
+        <p data-i18n="a6.d"></p>
+        <div class="meta" data-i18n="a6.m"></div>
+      </div>
+      <div class="act p2">
+        <div class="pr" data-i18n="pr.p2">P2 · TRUNG BÌNH</div>
+        <h5 data-i18n="a7.t"></h5>
+        <p data-i18n="a7.d"></p>
+        <div class="meta" data-i18n="a7.m"></div>
+      </div>
+      <div class="act p3">
+        <div class="pr" data-i18n="pr.p3">P3 · DUY TRÌ</div>
+        <h5 data-i18n="a8.t"></h5>
+        <p data-i18n="a8.d"></p>
+        <div class="meta" data-i18n="a8.m"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="sec">
+    <div class="concl">
+      <h3 data-i18n="cc.t">Kết luận &amp; Định hướng</h3>
+      <p data-i18n="cc.p1"></p>
+      <p data-i18n="cc.p2"></p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="n">01</div>
+          <div class="t" data-i18n="cc.k1t"></div>
+          <div class="d" data-i18n="cc.k1d"></div>
+        </div>
+        <div class="pillar">
+          <div class="n">02</div>
+          <div class="t" data-i18n="cc.k2t"></div>
+          <div class="d" data-i18n="cc.k2d"></div>
+        </div>
+        <div class="pillar">
+          <div class="n">03</div>
+          <div class="t" data-i18n="cc.k3t"></div>
+          <div class="d" data-i18n="cc.k3d"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer data-i18n="footer"></footer>
+</div>
+
+<script>
+/* ============================================================
+   I18N DICTIONARY – vi / zh / en
+   ============================================================ */
+const I18N = {
+vi:{
+ 'doc.title':'Dashboard Vận Hành T07/2026 – Chung Long Việt Nam',
+ 'hero.h1':'Báo Cáo Vận Hành Gian Hàng',
+ 'hero.b1':'Đồng Nai, Việt Nam','hero.b2':'Manufacturer · Từ 2001','hero.b3':'Construction & Real Estate',
+ 'hero.b4':'101–200 nhân sự','hero.b5':'Sales Rep: Dương Viết Hải',
+ 'hero.period':'Kỳ báo cáo','hero.status':'Trạng thái: Healthy',
+ 'sec.kpi':'Chỉ số cốt lõi tháng 07/2026','sec.kpi.note':'so sánh với trung bình ngành',
+ 'sec.charts':'Diễn biến & so sánh hiệu suất',
+ 'sec.star':'Phân tích Star Rating','sec.star.note':'Trạng thái hiện tại: Healthy',
+ 'sec.ch':'Tình hình các kênh vận hành','sec.tbl':'Bảng chi tiết hiệu suất gian hàng',
+ 'sec.swot':'Điểm mạnh & Điểm yếu','sec.act':'Kế hoạch hành động ưu tiên – Tháng 08/2026',
+ 'k.exp':'Search Exposures','k.pv':'Page Views','k.uv':'Unique Visitors','k.inq':'Inquiries',
+ 'k.trr':'Timely Response Rate','k.ard':'Avg. Reply Duration','k.gmv':'GMV 90 ngày','k.new':'Sản phẩm mới',
+ 'cmp.avg':'TB ngành','cmp.reach':'Đạt','cmp.top':'Top ngành','cmp.mile2':'Mốc 2 sao cần',
+ 'cmp.totalsp':'Tổng SP','cmp.upd':'Cập nhật',
+ 'u.h':'h','u.sp':'SP','u.vs':'visitors','u.by':'buyers',
+ 'ch1.t':'Xu hướng traffic 3 tháng gần nhất','ch1.h':'Search exposures (trục phải) · Page views & Unique visitors (trục trái)',
+ 'ch2.t':'Khoảng cách so với ngành (thang log)','ch2.h':'Shop hiện tại vs Trung bình ngành vs Top ngành – T07/2026',
+ 'ch3.t':'Phễu chuyển đổi tháng 07/2026','ch3.h':'Từ hiển thị tìm kiếm đến đơn hàng thực tế – điểm nghẽn nằm ở bước cuối',
+ 'ch4.t':'Chất lượng dịch vụ – Lợi thế nổi bật','ch4.h':'Thời gian phản hồi trung bình (giờ) – càng thấp càng tốt',
+ 'ch5.t':'Mức độ hoàn thiện theo tiêu chí','ch5.h':'Điểm quy đổi 0–100 theo tiến độ đạt mốc sao kế tiếp',
+ 'st.t':'Tiến độ 4 tiêu chí xếp hạng sao','st.h':'Thanh tiến độ tính theo mốc sao kế tiếp',
+ 'st.1':'Product · Số SP đạt chuẩn PIS','st.2':'Marketing · Unique visitors 30 ngày',
+ 'st.3':'Service · Buyer được phản hồi 30 ngày','st.4':'Sales · GMV 90 ngày',
+ 'cha.1n':'RFQ Monthly Quotes','cha.1d':'Chưa khai thác kênh RFQ',
+ 'cha.2n':'Số dư KWA','cha.2d':'VND · Chưa chi tiêu hiệu quả',
+ 'cha.3n':'Showcase Usage','cha.3d':'20/20 vị trí đang dùng',
+ 'cha.4n':'Đơn Trade Assurance','cha.4d':'Mục tiêu tối thiểu 1 đơn/tháng',
+ 'th.metric':'Chỉ số','th.m7':'T07/2026','th.m6':'T06/2026','th.m5':'T05/2026',
+ 'th.avg':'TB ngành','th.top':'Top ngành','th.pct':'% so TB ngành','th.eval':'Đánh giá',
+ 'm.exp':'Search exposures','m.pv':'Page views','m.uv':'Unique visitors','m.dc':'Direct clicks by search',
+ 'm.iv':'Inquiry visitors','m.inq':'Inquiries','m.msg':'Messages','m.trr':'Timely response rate',
+ 'm.ard':'Average reply duration (giờ)','m.tp':'Total products','m.np':'Total new products','m.up':'Total updated products',
+ 'tg.improve':'Cần cải thiện','tg.verylow':'Rất thấp','tg.low':'Thấp','tg.nogrow':'Không tăng trưởng',
+ 'tg.abovetop':'Vượt top ngành','tg.excellent':'Xuất sắc','tg.stable':'Ổn định','tg.better':'Có cải thiện','tg.positive':'Tích cực',
+ 'sw.s':'✓ Điểm mạnh','sw.w':'! Điểm yếu',
+ 'sw.s1':'Thời gian phản hồi 0,5 giờ – nhanh hơn cả Top ngành (1,5h) và TB ngành (3,5h)',
+ 'sw.s2':'Tỷ lệ phản hồi đúng hạn đạt 100%, vượt TB ngành 92,67%',
+ 'sw.s3':'Kho sản phẩm lớn với 880 SP, trong đó 556 SP có PIS đạt chuẩn',
+ 'sw.s4':'Tích cực cập nhật 222 SP và đăng mới 19 SP trong tháng',
+ 'sw.s5':'Showcase sử dụng 100% (20/20), tận dụng tối đa vị trí ưu tiên',
+ 'sw.s6':'Nhà sản xuất lâu năm từ 2001, nhà xưởng 5.000–10.000 m²',
+ 'sw.w1':'GMV 90 ngày = 0 USD – điểm nghẽn nghiêm trọng nhất, kéo Star Rating xuống',
+ 'sw.w2':'Search exposure chỉ đạt 34,8% TB ngành và đang giảm 3 tháng liên tiếp',
+ 'sw.w3':'Unique visitors và page views chỉ ~12% TB ngành',
+ 'sw.w4':'Inquiries đứng yên ở mức 12 suốt 3 tháng, không tăng trưởng',
+ 'sw.w5':'RFQ monthly quotes = 0, bỏ ngỏ kênh tiếp cận buyer chủ động',
+ 'sw.w6':'Ngân sách KWA 35,4 triệu VND còn tồn, chưa chi tiêu hiệu quả',
+ 'sw.w7':'Chưa ký Self-Declaration EU (Cosmetics / Food / Animal Feed)',
+ 'pr.p0':'P0 · KHẨN CẤP','pr.p1':'P1 · CAO','pr.p2':'P2 · TRUNG BÌNH','pr.p3':'P3 · DUY TRÌ',
+ 'a1.t':'Hoàn thành 1 đơn hàng Trade Assurance','a1.d':'Kể cả đơn nhỏ, nhằm đưa GMV 90 ngày vượt mốc 0 USD và cải thiện Star Rating Sales.','a1.m':'Mục tiêu: GMV > 0 · Phụ trách: Seller + Sales Rep · Hạn: trong tháng 8',
+ 'a2.t':'Chạy KWA tối thiểu 2.500.000 VND','a2.d':'Ưu tiên từ khóa có tỷ lệ chuyển đổi cao nhưng exposure thấp, tận dụng số dư 35,4 triệu VND.','a2.m':'Mục tiêu: tăng exposure & visitors · Phụ trách: Seller · Hạn: trong tháng 8',
+ 'a3.t':'Tối ưu 80 sản phẩm cạnh tranh','a3.d':'Theo 3 tiêu chí Trendiness, Price strength và Service strength để đẩy thứ hạng tìm kiếm.','a3.m':'Mục tiêu: tăng search exposure · Phụ trách: Seller · Hạn: trong tháng 8',
+ 'a4.t':'Chủ động quote RFQ','a4.d':'Tập trung nhóm toilet seat, bidet, shower head – các ngành hàng phù hợp năng lực sản xuất.','a4.m':'Mục tiêu: ≥ 5 quotes/tháng · Phụ trách: Seller · Hạn: hàng tuần',
+ 'a5.t':'Ký Self-Declaration cho thị trường EU','a5.d':'Hoàn tất khai báo Cosmetics, Food và Animal Feed để mở thêm nguồn traffic từ EU.','a5.m':'Mục tiêu: mở traffic EU · Phụ trách: Seller · Hạn: trong tháng 8',
+ 'a6.t':'Tạo 30 active listings với PIS ≥ 4,5','a6.d':'Nâng chất lượng thông tin sản phẩm: ảnh HD, video ngắn, thông số kỹ thuật, chứng nhận đầy đủ.','a6.m':'Mục tiêu: cải thiện Star Rating Product · Phụ trách: Seller · Hạn: trong tháng 8',
+ 'a7.t':'Đăng sản phẩm theo xu hướng','a7.d':'Bật Smart Showcase cho các sản phẩm hot / best-seller để có vị trí hiển thị ưu tiên.','a7.m':'Mục tiêu: tăng cơ hội hiển thị · Phụ trách: Seller · Hạn: hàng tuần',
+ 'a8.t':'Giữ vững chất lượng dịch vụ','a8.d':'Response time < 1 giờ, timely response rate > 90%, penalty points < 24 và không có vi phạm.','a8.m':'Mục tiêu: duy trì lợi thế · Phụ trách: Seller · Hạn: liên tục',
+ 'cc.t':'Kết luận & Định hướng',
+ 'cc.p1':'Tháng 07/2026, gian hàng duy trì được chất lượng dịch vụ xuất sắc với thời gian phản hồi 0,5 giờ và tỷ lệ phản hồi đúng hạn 100% – vượt cả nhóm Top ngành. Tuy nhiên các chỉ số traffic, inquiry và đặc biệt là doanh số vẫn còn cách rất xa so với tiềm năng và mức trung bình ngành.',
+ 'cc.p2':'Nghịch lý cần lưu ý: gian hàng phản hồi rất nhanh nhưng lại không có đủ inquiry để phản hồi. Điều này cho thấy điểm nghẽn nằm ở đầu phễu (traffic và exposure), không phải ở năng lực phục vụ. Vì vậy chiến lược tháng 08 cần dồn lực vào việc kéo traffic và tạo đơn hàng đầu tiên.',
+ 'cc.k1t':'Tăng traffic','cc.k1d':'Chạy KWA đúng ngân sách và tối ưu 80 sản phẩm cạnh tranh để mở rộng exposure.',
+ 'cc.k2t':'Tăng inquiry chất lượng','cc.k2d':'Chủ động quote RFQ, tối ưu minisite và mở thêm traffic từ thị trường EU.',
+ 'cc.k3t':'Chuyển đổi đơn hàng','cc.k3d':'Hoàn thành đơn Trade Assurance đầu tiên để phá vỡ mốc GMV bằng 0.',
+ 'footer':'Báo cáo được lập dựa trên dữ liệu CRM và Minisite của seller · Kỳ dữ liệu: T05–T07/2026 · Member ID: vn1574404803epeh',
+ // chart internals
+ 'g.months':['T05/2026','T06/2026','T07/2026'],
+ 'g.pv':'Page views','g.uv':'Unique visitors','g.exp':'Search exposures',
+ 'g.axViews':'Views / Visitors','g.axExp':'Search exposures',
+ 'g.gapLabels':[['Search','exposures'],['Page','views'],['Unique','visitors'],['Direct','clicks'],'Inquiries','Messages'],
+ 'g.shop':'Shop hiện tại','g.avg':'TB ngành','g.top':'Top ngành','g.axLog':'Giá trị (thang logarit)',
+ 'g.funnelLabels':['Search exposures','Page views','Unique visitors','Inquiry visitors','Inquiries','Đơn hàng (TA)'],
+ 'g.qty':'Số lượng','g.axQtyLog':'Số lượng (thang logarit)','g.stepRate':'Tỷ lệ so bước trước',
+ 'g.svcLabels':['Shop T07','Shop T06','Shop T05','Top ngành','TB ngành'],
+ 'g.svcSet':'Thời gian phản hồi (giờ)','g.axHour':'Giờ (càng thấp càng tốt)','g.hourUnit':' giờ',
+ 'g.compLabels':['Product (556 SP)','Marketing (139 visitors)','Service (8 buyers)','Sales (0 USD)'],
+ 'g.cur':'Điểm hiện tại','g.goal':'Mốc mục tiêu (100 điểm)','g.axScore':'Điểm hoàn thiện (0–100)'
+},
+zh:{
+ 'doc.title':'2026年7月店铺运营看板 – Chung Long Vietnam',
+ 'hero.h1':'店铺运营报告',
+ 'hero.b1':'越南 同奈省','hero.b2':'制造商 · 成立于 2001 年','hero.b3':'建筑与房地产',
+ 'hero.b4':'101–200 名员工','hero.b5':'客户经理：Dương Viết Hải',
+ 'hero.period':'报告周期','hero.status':'状态：Healthy',
+ 'sec.kpi':'2026 年 7 月核心指标','sec.kpi.note':'与行业均值对比',
+ 'sec.charts':'表现趋势与对标分析',
+ 'sec.star':'星级评分分析','sec.star.note':'当前状态：Healthy',
+ 'sec.ch':'各运营渠道情况','sec.tbl':'店铺表现明细表',
+ 'sec.swot':'优势与劣势','sec.act':'优先行动计划 – 2026 年 8 月',
+ 'k.exp':'搜索曝光量','k.pv':'页面浏览量','k.uv':'独立访客数','k.inq':'询盘数',
+ 'k.trr':'及时回复率','k.ard':'平均回复时长','k.gmv':'90 天 GMV','k.new':'新增产品',
+ 'cmp.avg':'行业均值','cmp.reach':'达成','cmp.top':'行业头部','cmp.mile2':'2 星门槛需',
+ 'cmp.totalsp':'产品总数','cmp.upd':'已更新',
+ 'u.h':' 小时','u.sp':'个产品','u.vs':'访客','u.by':'买家',
+ 'ch1.t':'近三个月流量趋势','ch1.h':'搜索曝光量（右轴）· 页面浏览量与独立访客（左轴）',
+ 'ch2.t':'与行业的差距（对数刻度）','ch2.h':'本店 vs 行业均值 vs 行业头部 – 2026 年 7 月',
+ 'ch3.t':'2026 年 7 月转化漏斗','ch3.h':'从搜索曝光到实际成交 – 瓶颈出现在最后一步',
+ 'ch4.t':'服务质量 – 突出优势','ch4.h':'平均回复时长（小时）– 越低越好',
+ 'ch5.t':'各维度完成度','ch5.h':'按下一星级门槛折算为 0–100 分',
+ 'st.t':'四项星级维度进度','st.h':'进度条按下一个星级门槛计算',
+ 'st.1':'Product · PIS 达标产品数','st.2':'Marketing · 30 天独立访客',
+ 'st.3':'Service · 30 天已回复买家数','st.4':'Sales · 90 天 GMV',
+ 'cha.1n':'RFQ 月报价数','cha.1d':'尚未开发 RFQ 渠道',
+ 'cha.2n':'KWA 账户余额','cha.2d':'VND · 尚未有效投放',
+ 'cha.3n':'Showcase 使用率','cha.3d':'20/20 个橱窗位已使用',
+ 'cha.4n':'Trade Assurance 订单','cha.4d':'目标：每月至少 1 单',
+ 'th.metric':'指标','th.m7':'2026-07','th.m6':'2026-06','th.m5':'2026-05',
+ 'th.avg':'行业均值','th.top':'行业头部','th.pct':'占行业均值','th.eval':'评估',
+ 'm.exp':'搜索曝光量','m.pv':'页面浏览量','m.uv':'独立访客数','m.dc':'搜索直接点击',
+ 'm.iv':'询盘访客数','m.inq':'询盘数','m.msg':'消息数','m.trr':'及时回复率',
+ 'm.ard':'平均回复时长（小时）','m.tp':'产品总数','m.np':'新增产品数','m.up':'更新产品数',
+ 'tg.improve':'需改进','tg.verylow':'很低','tg.low':'偏低','tg.nogrow':'无增长',
+ 'tg.abovetop':'超越行业头部','tg.excellent':'优秀','tg.stable':'稳定','tg.better':'有改善','tg.positive':'积极',
+ 'sw.s':'✓ 优势','sw.w':'! 劣势',
+ 'sw.s1':'回复时长 0.5 小时 – 快于行业头部（1.5 小时）和行业均值（3.5 小时）',
+ 'sw.s2':'及时回复率达 100%，高于行业均值 92.67%',
+ 'sw.s3':'产品库充足，共 880 个产品，其中 556 个 PIS 达标',
+ 'sw.s4':'本月积极运营：更新 222 个产品、新发布 19 个产品',
+ 'sw.s5':'Showcase 使用率 100%（20/20），充分利用优先展示位',
+ 'sw.s6':'2001 年成立的老牌制造商，厂房面积 5,000–10,000 平方米',
+ 'sw.w1':'90 天 GMV = 0 USD – 最严重的瓶颈，直接拉低星级评分',
+ 'sw.w2':'搜索曝光仅为行业均值的 34.8%，且连续三个月下滑',
+ 'sw.w3':'独立访客与页面浏览量仅约为行业均值的 12%',
+ 'sw.w4':'询盘数连续三个月停留在 12，毫无增长',
+ 'sw.w5':'RFQ 月报价数 = 0，主动触达买家的渠道完全空缺',
+ 'sw.w6':'KWA 余额 3,540 万 VND 积压，未有效投放',
+ 'sw.w7':'尚未签署欧盟 Self-Declaration（化妆品 / 食品 / 动物饲料）',
+ 'pr.p0':'P0 · 紧急','pr.p1':'P1 · 高','pr.p2':'P2 · 中','pr.p3':'P3 · 维持',
+ 'a1.t':'完成 1 笔 Trade Assurance 订单','a1.d':'即使是小额订单，也要让 90 天 GMV 突破 0 USD，从而改善 Sales 星级。','a1.m':'目标：GMV > 0 · 负责人：卖家 + 客户经理 · 期限：8 月内',
+ 'a2.t':'KWA 投放至少 2,500,000 VND','a2.d':'优先投放转化率高但曝光低的关键词，用好 3,540 万 VND 余额。','a2.m':'目标：提升曝光与访客 · 负责人：卖家 · 期限：8 月内',
+ 'a3.t':'优化 80 个竞争性产品','a3.d':'围绕 Trendiness、Price strength、Service strength 三项标准提升搜索排名。','a3.m':'目标：提升搜索曝光 · 负责人：卖家 · 期限：8 月内',
+ 'a4.t':'主动进行 RFQ 报价','a4.d':'聚焦马桶盖、智能洁身器、花洒等与产能匹配的品类。','a4.m':'目标：≥ 5 条报价/月 · 负责人：卖家 · 期限：每周',
+ 'a5.t':'签署欧盟市场 Self-Declaration','a5.d':'完成化妆品、食品、动物饲料类目申报，打开欧盟流量入口。','a5.m':'目标：开通欧盟流量 · 负责人：卖家 · 期限：8 月内',
+ 'a6.t':'新建 30 个 PIS ≥ 4.5 的在线产品','a6.d':'提升产品信息质量：高清主图、短视频、完整参数与认证材料。','a6.m':'目标：改善 Product 星级 · 负责人：卖家 · 期限：8 月内',
+ 'a7.t':'按趋势发布新品','a7.d':'为热销 / 潜力款开启 Smart Showcase，获取优先展示位。','a7.m':'目标：增加曝光机会 · 负责人：卖家 · 期限：每周',
+ 'a8.t':'保持服务质量水准','a8.d':'回复时长 < 1 小时、及时回复率 > 90%、违规分 < 24 且无违规记录。','a8.m':'目标：维持既有优势 · 负责人：卖家 · 期限：持续',
+ 'cc.t':'结论与方向',
+ 'cc.p1':'2026 年 7 月，店铺保持了出色的服务质量：平均回复时长 0.5 小时、及时回复率 100%，均优于行业头部水平。但流量、询盘，尤其是成交额，仍远低于自身潜力与行业均值。',
+ 'cc.p2':'需要重视的矛盾点：店铺回复极快，却没有足够的询盘可回。这说明瓶颈在漏斗前端（流量与曝光），而非服务能力。因此 8 月策略应集中在拉动流量并促成首单成交。',
+ 'cc.k1t':'提升流量','cc.k1d':'按预算投放 KWA，并优化 80 个竞争性产品以扩大曝光。',
+ 'cc.k2t':'提升优质询盘','cc.k2d':'主动报价 RFQ、优化 Minisite，并开通欧盟市场流量。',
+ 'cc.k3t':'促成订单转化','cc.k3d':'完成首笔 Trade Assurance 订单，打破 GMV 为 0 的局面。',
+ 'footer':'本报告基于卖家 CRM 与 Minisite 数据编制 · 数据周期：2026 年 5–7 月 · Member ID: vn1574404803epeh',
+ 'g.months':['2026-05','2026-06','2026-07'],
+ 'g.pv':'页面浏览量','g.uv':'独立访客数','g.exp':'搜索曝光量',
+ 'g.axViews':'浏览量 / 访客数','g.axExp':'搜索曝光量',
+ 'g.gapLabels':['搜索曝光','页面浏览','独立访客','直接点击','询盘数','消息数'],
+ 'g.shop':'本店当前','g.avg':'行业均值','g.top':'行业头部','g.axLog':'数值（对数刻度）',
+ 'g.funnelLabels':['搜索曝光','页面浏览','独立访客','询盘访客','询盘数','成交订单 (TA)'],
+ 'g.qty':'数量','g.axQtyLog':'数量（对数刻度）','g.stepRate':'相较上一步转化率',
+ 'g.svcLabels':['本店 7 月','本店 6 月','本店 5 月','行业头部','行业均值'],
+ 'g.svcSet':'回复时长（小时）','g.axHour':'小时（越低越好）','g.hourUnit':' 小时',
+ 'g.compLabels':['Product（556 个产品）','Marketing（139 访客）','Service（8 买家）','Sales（0 USD）'],
+ 'g.cur':'当前得分','g.goal':'目标门槛（100 分）','g.axScore':'完成度得分（0–100）'
+},
+en:{
+ 'doc.title':'Store Operations Dashboard – Jul 2026 · Chung Long Vietnam',
+ 'hero.h1':'Store Operations Report',
+ 'hero.b1':'Dong Nai, Vietnam','hero.b2':'Manufacturer · Since 2001','hero.b3':'Construction & Real Estate',
+ 'hero.b4':'101–200 employees','hero.b5':'Sales Rep: Duong Viet Hai',
+ 'hero.period':'Reporting period','hero.status':'Status: Healthy',
+ 'sec.kpi':'Core metrics – July 2026','sec.kpi.note':'benchmarked against industry average',
+ 'sec.charts':'Performance trends & benchmarking',
+ 'sec.star':'Star Rating analysis','sec.star.note':'Current status: Healthy',
+ 'sec.ch':'Operating channels status','sec.tbl':'Detailed store performance',
+ 'sec.swot':'Strengths & Weaknesses','sec.act':'Priority action plan – August 2026',
+ 'k.exp':'Search Exposures','k.pv':'Page Views','k.uv':'Unique Visitors','k.inq':'Inquiries',
+ 'k.trr':'Timely Response Rate','k.ard':'Avg. Reply Duration','k.gmv':'GMV (90 days)','k.new':'New Products',
+ 'cmp.avg':'Industry avg','cmp.reach':'Reached','cmp.top':'Industry top','cmp.mile2':'2-star milestone needs',
+ 'cmp.totalsp':'Total products','cmp.upd':'Updated',
+ 'u.h':'h','u.sp':'items','u.vs':'visitors','u.by':'buyers',
+ 'ch1.t':'Traffic trend over the last 3 months','ch1.h':'Search exposures (right axis) · Page views & Unique visitors (left axis)',
+ 'ch2.t':'Gap versus industry (log scale)','ch2.h':'This shop vs industry average vs industry top – Jul 2026',
+ 'ch3.t':'Conversion funnel – July 2026','ch3.h':'From search exposure to actual orders – the bottleneck is at the last step',
+ 'ch4.t':'Service quality – a standout advantage','ch4.h':'Average reply duration (hours) – lower is better',
+ 'ch5.t':'Completion level by criterion','ch5.h':'Converted to a 0–100 score based on progress toward the next star milestone',
+ 'st.t':'Progress across the 4 star-rating criteria','st.h':'Progress bars measured against the next star milestone',
+ 'st.1':'Product · Products meeting PIS standard','st.2':'Marketing · Unique visitors (30 days)',
+ 'st.3':'Service · Buyers replied to (30 days)','st.4':'Sales · GMV (90 days)',
+ 'cha.1n':'RFQ Monthly Quotes','cha.1d':'RFQ channel not yet used',
+ 'cha.2n':'KWA Balance','cha.2d':'VND · not yet spent effectively',
+ 'cha.3n':'Showcase Usage','cha.3d':'20/20 slots in use',
+ 'cha.4n':'Trade Assurance Orders','cha.4d':'Target: at least 1 order per month',
+ 'th.metric':'Metric','th.m7':'Jul 2026','th.m6':'Jun 2026','th.m5':'May 2026',
+ 'th.avg':'Industry avg','th.top':'Industry top','th.pct':'% of industry avg','th.eval':'Assessment',
+ 'm.exp':'Search exposures','m.pv':'Page views','m.uv':'Unique visitors','m.dc':'Direct clicks by search',
+ 'm.iv':'Inquiry visitors','m.inq':'Inquiries','m.msg':'Messages','m.trr':'Timely response rate',
+ 'm.ard':'Average reply duration (hours)','m.tp':'Total products','m.np':'Total new products','m.up':'Total updated products',
+ 'tg.improve':'Needs improvement','tg.verylow':'Very low','tg.low':'Low','tg.nogrow':'No growth',
+ 'tg.abovetop':'Above industry top','tg.excellent':'Excellent','tg.stable':'Stable','tg.better':'Improving','tg.positive':'Positive',
+ 'sw.s':'✓ Strengths','sw.w':'! Weaknesses',
+ 'sw.s1':'Reply time of 0.5 hours – faster than the industry top (1.5h) and average (3.5h)',
+ 'sw.s2':'Timely response rate at 100%, above the industry average of 92.67%',
+ 'sw.s3':'Large catalogue of 880 products, of which 556 meet the PIS standard',
+ 'sw.s4':'Active operation this month: 222 products updated and 19 newly listed',
+ 'sw.s5':'Showcase usage at 100% (20/20), fully leveraging priority placements',
+ 'sw.s6':'Established manufacturer since 2001 with a 5,000–10,000 m² factory',
+ 'sw.w1':'GMV over 90 days = 0 USD – the most critical bottleneck, dragging the Star Rating down',
+ 'sw.w2':'Search exposure reaches only 34.8% of the industry average and has declined for 3 straight months',
+ 'sw.w3':'Unique visitors and page views sit at only ~12% of the industry average',
+ 'sw.w4':'Inquiries flat at 12 for three consecutive months, with no growth',
+ 'sw.w5':'RFQ monthly quotes = 0, leaving the proactive buyer-outreach channel untouched',
+ 'sw.w6':'KWA budget of VND 35.4 million still unspent and not deployed effectively',
+ 'sw.w7':'EU Self-Declaration not yet signed (Cosmetics / Food / Animal Feed)',
+ 'pr.p0':'P0 · URGENT','pr.p1':'P1 · HIGH','pr.p2':'P2 · MEDIUM','pr.p3':'P3 · MAINTAIN',
+ 'a1.t':'Close one Trade Assurance order','a1.d':'Even a small order will push 90-day GMV above 0 USD and lift the Sales Star Rating.','a1.m':'Goal: GMV > 0 · Owner: Seller + Sales Rep · Due: within August',
+ 'a2.t':'Spend at least VND 2,500,000 on KWA','a2.d':'Prioritise keywords with high conversion but low exposure, using the VND 35.4 million balance.','a2.m':'Goal: lift exposure & visitors · Owner: Seller · Due: within August',
+ 'a3.t':'Optimise 80 competitive products','a3.d':'Work through Trendiness, Price strength and Service strength to push search ranking.','a3.m':'Goal: raise search exposure · Owner: Seller · Due: within August',
+ 'a4.t':'Quote RFQs proactively','a4.d':'Focus on toilet seats, bidets and shower heads – categories matching production capability.','a4.m':'Goal: ≥ 5 quotes per month · Owner: Seller · Due: weekly',
+ 'a5.t':'Sign the Self-Declaration for the EU market','a5.d':'Complete the Cosmetics, Food and Animal Feed declarations to unlock additional EU traffic.','a5.m':'Goal: unlock EU traffic · Owner: Seller · Due: within August',
+ 'a6.t':'Create 30 active listings with PIS ≥ 4.5','a6.d':'Raise product information quality: HD images, short videos, full specifications and certificates.','a6.m':'Goal: improve Product Star Rating · Owner: Seller · Due: within August',
+ 'a7.t':'List products in line with trends','a7.d':'Enable Smart Showcase for hot and best-selling items to secure priority placement.','a7.m':'Goal: increase exposure opportunities · Owner: Seller · Due: weekly',
+ 'a8.t':'Sustain service quality','a8.d':'Response time < 1 hour, timely response rate > 90%, penalty points < 24 and no violations.','a8.m':'Goal: preserve the existing advantage · Owner: Seller · Due: ongoing',
+ 'cc.t':'Conclusion & Direction',
+ 'cc.p1':'In July 2026 the store sustained excellent service quality, with a 0.5-hour reply time and a 100% timely response rate — ahead of even the industry top tier. Traffic, inquiries and above all sales, however, remain far below both the store\u2019s potential and the industry average.',
+ 'cc.p2':'The paradox worth noting: the store replies extremely fast, yet does not receive enough inquiries to reply to. This points to a bottleneck at the top of the funnel (traffic and exposure) rather than in service capacity. The August strategy should therefore concentrate on pulling in traffic and landing the first order.',
+ 'cc.k1t':'Grow traffic','cc.k1d':'Deploy the KWA budget properly and optimise 80 competitive products to widen exposure.',
+ 'cc.k2t':'Grow quality inquiries','cc.k2d':'Quote RFQs proactively, optimise the minisite and open up EU market traffic.',
+ 'cc.k3t':'Convert orders','cc.k3d':'Close the first Trade Assurance order to break out of zero GMV.',
+ 'footer':'Compiled from the seller\u2019s CRM and Minisite data · Data period: May–Jul 2026 · Member ID: vn1574404803epeh',
+ 'g.months':['May 2026','Jun 2026','Jul 2026'],
+ 'g.pv':'Page views','g.uv':'Unique visitors','g.exp':'Search exposures',
+ 'g.axViews':'Views / Visitors','g.axExp':'Search exposures',
+ 'g.gapLabels':[['Search','exposures'],['Page','views'],['Unique','visitors'],['Direct','clicks'],'Inquiries','Messages'],
+ 'g.shop':'This shop','g.avg':'Industry avg','g.top':'Industry top','g.axLog':'Value (logarithmic scale)',
+ 'g.funnelLabels':['Search exposures','Page views','Unique visitors','Inquiry visitors','Inquiries','Orders (TA)'],
+ 'g.qty':'Quantity','g.axQtyLog':'Quantity (logarithmic scale)','g.stepRate':'Rate vs previous step',
+ 'g.svcLabels':['Shop Jul','Shop Jun','Shop May','Industry top','Industry avg'],
+ 'g.svcSet':'Reply duration (hours)','g.axHour':'Hours (lower is better)','g.hourUnit':' hours',
+ 'g.compLabels':['Product (556 items)','Marketing (139 visitors)','Service (8 buyers)','Sales (0 USD)'],
+ 'g.cur':'Current score','g.goal':'Target milestone (100 pts)','g.axScore':'Completion score (0–100)'
+}
+};
+
+const LOCALE = {vi:'vi-VN', zh:'zh-CN', en:'en-US'};
+let LANG = 'zh';
+const t = k => (I18N[LANG] && k in I18N[LANG]) ? I18N[LANG][k] : (I18N.vi[k] ?? k);
+const nf = (v, d = 0) => new Intl.NumberFormat(LOCALE[LANG], {minimumFractionDigits:d, maximumFractionDigits:d}).format(v);
+
+function applyText(){
+  document.documentElement.lang = LANG;
+  document.title = t('doc.title');
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-num]').forEach(el => {
+    el.textContent = nf(parseFloat(el.dataset.num), parseInt(el.dataset.dec || 0, 10)) + (el.dataset.suffix || '');
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === LANG));
+}
+
+/* ============================================================
+   CHARTS
+   ============================================================ */
+const FONT = "'Segoe UI',-apple-system,Helvetica Neue,Arial,'Microsoft YaHei','PingFang SC',sans-serif";
+Chart.defaults.font.family = FONT;
+Chart.defaults.font.size = 11.5;
+Chart.defaults.color = '#64748b';
+
+const LEG = {position:'bottom', labels:{usePointStyle:true, pointStyle:'circle', boxWidth:8, padding:14}};
+let charts = [];
+
+function renderCharts(){
+  charts.forEach(c => c.destroy());
+  charts = [];
+
+  // 1. TREND
+  charts.push(new Chart(document.getElementById('cTrend'), {
+    data:{
+      labels: t('g.months'),
+      datasets:[
+        { type:'bar', label:t('g.pv'), data:[395,264,332], backgroundColor:'rgba(26,95,180,.75)', borderRadius:5, yAxisID:'y', order:3 },
+        { type:'bar', label:t('g.uv'), data:[179,150,156], backgroundColor:'rgba(42,127,212,.5)', borderRadius:5, yAxisID:'y', order:3 },
+        { type:'line', label:t('g.exp'), data:[10173,9271,9131], borderColor:'#dc2626', backgroundColor:'#dc2626',
+          borderWidth:3, tension:.3, pointRadius:5, pointBackgroundColor:'#fff', pointBorderWidth:2.5, yAxisID:'y1', order:1 }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index', intersect:false},
+      plugins:{ legend:LEG, tooltip:{callbacks:{label:c => c.dataset.label + ': ' + nf(c.parsed.y)}} },
+      scales:{
+        y:{ position:'left', beginAtZero:true, title:{display:true, text:t('g.axViews'), font:{size:11}}, grid:{color:'#eef2f7'} },
+        y1:{ position:'right', beginAtZero:true, suggestedMax:12000, title:{display:true, text:t('g.axExp'), font:{size:11}}, grid:{drawOnChartArea:false} },
+        x:{ grid:{display:false} }
+      }
+    }
+  }));
+
+  // 2. GAP (log scale)
+  charts.push(new Chart(document.getElementById('cGap'), {
+    type:'bar',
+    data:{
+      labels: t('g.gapLabels'),
+      datasets:[
+        { label:t('g.shop'), data:[9131,332,156,77,12,14], backgroundColor:'#dc2626', borderRadius:4 },
+        { label:t('g.avg'), data:[26218,2647,1302,596,29,157], backgroundColor:'#f59e0b', borderRadius:4 },
+        { label:t('g.top'), data:[213041,29028,13438,5294,372,1838], backgroundColor:'#16a34a', borderRadius:4 }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:LEG, tooltip:{callbacks:{label:c => c.dataset.label + ': ' + nf(c.parsed.y)}} },
+      scales:{
+        y:{ type:'logarithmic', title:{display:true, text:t('g.axLog'), font:{size:11}}, grid:{color:'#eef2f7'} },
+        x:{ grid:{display:false}, ticks:{font:{size:10.5}} }
+      }
+    }
+  }));
+
+  // 3. FUNNEL
+  const FD = [9131,332,156,12,12,0];
+  charts.push(new Chart(document.getElementById('cFunnel'), {
+    type:'bar',
+    data:{
+      labels: t('g.funnelLabels'),
+      datasets:[{ label:t('g.qty'), data:FD,
+        backgroundColor:['#0f2f5f','#1a5fb4','#2a7fd4','#f59e0b','#f97316','#dc2626'],
+        borderRadius:5, barPercentage:.72 }]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false},
+        tooltip:{callbacks:{
+          label:c => t('g.qty') + ': ' + nf(c.parsed.x),
+          afterLabel:c => {
+            if(c.dataIndex === 0) return t('g.stepRate') + ': —';
+            const prev = FD[c.dataIndex - 1];
+            return t('g.stepRate') + ': ' + (prev ? nf(FD[c.dataIndex] / prev * 100, 2) : '0') + '%';
+          }}} },
+      scales:{
+        x:{ type:'logarithmic', title:{display:true, text:t('g.axQtyLog'), font:{size:11}}, grid:{color:'#eef2f7'} },
+        y:{ grid:{display:false} }
+      }
+    }
+  }));
+
+  // 4. SERVICE
+  charts.push(new Chart(document.getElementById('cService'), {
+    type:'bar',
+    data:{
+      labels: t('g.svcLabels'),
+      datasets:[{ label:t('g.svcSet'), data:[0.5,2.3,1.2,1.5,3.5],
+        backgroundColor:['#16a34a','#f59e0b','#facc15','#2563eb','#94a3b8'],
+        borderRadius:5, barPercentage:.65 }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c => nf(c.parsed.y, 1) + t('g.hourUnit')}} },
+      scales:{
+        y:{ beginAtZero:true, title:{display:true, text:t('g.axHour'), font:{size:11}}, grid:{color:'#eef2f7'} },
+        x:{ grid:{display:false} }
+      }
+    }
+  }));
+
+  // 5. COMPLETION SCORE
+  charts.push(new Chart(document.getElementById('cRadar'), {
+    type:'bar',
+    data:{
+      labels: t('g.compLabels'),
+      datasets:[
+        { label:t('g.cur'), data:[79,9,10,2],
+          backgroundColor:['#16a34a','#dc2626','#f59e0b','#dc2626'], borderRadius:5, barPercentage:.6 },
+        { label:t('g.goal'), data:[100,100,100,100],
+          backgroundColor:'rgba(148,163,184,.18)', borderColor:'#94a3b8', borderWidth:1.5,
+          borderRadius:5, barPercentage:.6, grouped:false, order:2 }
+      ]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:LEG, tooltip:{callbacks:{label:c => c.dataset.label + ': ' + c.parsed.x + '/100'}} },
+      scales:{
+        x:{ beginAtZero:true, max:100, title:{display:true, text:t('g.axScore'), font:{size:11}}, grid:{color:'#eef2f7'} },
+        y:{ grid:{display:false}, ticks:{font:{size:11.5}} }
+      }
+    }
+  }));
+}
+
+function setLang(lang){
+  if(!I18N[lang] || lang === LANG) { if(lang === LANG) return; }
+  LANG = lang;
+  applyText();
+  renderCharts();
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLang(btn.dataset.lang));
+});
+
+applyText();
+renderCharts();
+</script>
+</body>
+</html>
