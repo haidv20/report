@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZHONG LONG WOOD - Báo cáo Hiệu suất Gian hàng</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI','Microsoft YaHei',Arial,sans-serif;background:#f4f6f9;color:#333;line-height:1.7;overflow-x:hidden}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1a237e 0%,#0d47a1 50%,#01579b 100%);color:#fff;padding:35px 30px;border-radius:12px;margin-bottom:25px;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:rgba(255,255,255,0.05);border-radius:50%}
+.header h1{font-size:24px;margin-bottom:6px;position:relative;z-index:1}
+.header .sub{font-size:14px;opacity:0.9;margin-bottom:4px;position:relative;z-index:1}
+.header .meta{font-size:12px;opacity:0.7;position:relative;z-index:1}
+.badge{display:inline-block;background:#ff6f00;color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-top:10px;position:relative;z-index:1}
+
+/* Language tabs */
+.lang-tabs{display:flex;gap:0;margin-bottom:0;border-bottom:3px solid #1a237e}
+.lang-tab{padding:12px 30px;background:#e8eaf6;color:#1a237e;cursor:pointer;font-weight:700;font-size:15px;border:2px solid #c5cae9;border-bottom:none;border-radius:10px 10px 0 0;transition:all 0.3s;margin-right:4px}
+.lang-tab.active{background:#1a237e;color:#fff;border-color:#1a237e}
+.lang-tab:hover:not(.active){background:#c5cae9}
+.lang-panel{display:none;padding-top:20px}
+.lang-panel.active{display:block}
+
+/* Cards */
+.card{background:#fff;border-radius:12px;padding:25px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);overflow-wrap:break-word;word-break:break-word}
+.card h2{font-size:19px;color:#1a237e;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #e8eaf6}
+.card h3{font-size:15px;color:#333;margin:18px 0 10px}
+.card p{margin-bottom:10px}
+
+/* Alert boxes */
+.alert-danger{background:#ffebee;border-left:4px solid #e53935;padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0}
+.alert-warning{background:#fff3e0;border-left:4px solid #fb8c00;padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0}
+.alert-success{background:#e8f5e9;border-left:4px solid #43a047;padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0}
+.alert-info{background:#e3f2fd;border-left:4px solid #1e88e5;padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0}
+
+/* Metrics grid */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
+.metric-card{background:linear-gradient(135deg,#f5f5f5,#fff);border:1px solid #e0e0e0;border-radius:10px;padding:16px;text-align:center}
+.metric-card.decline{border-color:#e53935;background:linear-gradient(135deg,#ffebee,#fff)}
+.metric-card .label{font-size:11px;color:#666;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
+.metric-card .value{font-size:26px;font-weight:700;color:#1a237e}
+.metric-card .change{font-size:12px;margin-top:4px;font-weight:600}
+.metric-card .change.negative{color:#e53935}
+.metric-card .change.positive{color:#43a047}
+
+/* Tables */
+.table-wrap{overflow-x:auto;margin:14px 0;border-radius:8px;border:1px solid #e0e0e0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:#1a237e;color:#fff;padding:9px 7px;text-align:center;font-weight:600;white-space:nowrap}
+td{padding:7px;text-align:center;border-bottom:1px solid #eee}
+tr:nth-child(even){background:#f8f9fa}
+tr:hover{background:#e8eaf6}
+td.red{background:#ffebee;color:#c62828;font-weight:700}
+td.green{background:#e8f5e9;color:#2e7d32;font-weight:700}
+td.p1{background:#e8f5e9}
+td.p2{background:#ffebee}
+th.g1{background:#2e7d32}
+th.g2{background:#c62828}
+
+/* Phase tags */
+.ptag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700}
+.ptag.v{background:#43a047;color:#fff}
+.ptag.b{background:#e53935;color:#fff}
+
+/* Comparison bars */
+.cbar{display:flex;align-items:center;margin:8px 0;gap:10px}
+.cbar .blbl{width:130px;font-size:12px;font-weight:600;text-align:right}
+.cbar .btrack{flex:1;background:#e0e0e0;border-radius:6px;height:26px;position:relative;overflow:hidden}
+.cbar .bfill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:8px;color:#fff;font-size:12px;font-weight:600}
+.cbar .bfill.g{background:linear-gradient(90deg,#43a047,#66bb6a)}
+.cbar .bfill.r{background:linear-gradient(90deg,#e53935,#ef5350)}
+
+/* Chart containers */
+.chart-box{position:relative;width:100%;max-width:100%;margin:14px 0}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:14px 0}
+@media(max-width:768px){.chart-row{grid-template-columns:1fr}.lang-tab{padding:10px 16px;font-size:13px}}
+
+ul.plain{margin-left:18px;margin-top:8px}
+ul.plain li{margin-bottom:6px}
+
+.footer{text-align:center;padding:25px;color:#999;font-size:11px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>ZHONG LONG WOOD VIETNAM</h1>
+  <div class="sub">Báo cáo Hiệu suất Gian hàng Alibaba.com | 阿里巴巴国际站绩效报告 | Store Performance Report</div>
+  <div class="meta">Member ID: vn1568013461xifm &nbsp;|&nbsp; Minisite: zhonglongwood.trustpass.alibaba.com &nbsp;|&nbsp; Industry: Construction & Real Estate</div>
+  <div class="meta">Ngày báo cáo / 报告日期 / Report Date: 17/08/2026</div>
+  <span class="badge">⚠ HIỆU SUẤT GIẢM NGHIÊM TRỌNG | 绩效严重下滑 | SEVERE PERFORMANCE DECLINE</span>
+</div>
+
+<!-- LANGUAGE TABS -->
+<div class="lang-tabs">
+  <div class="lang-tab" onclick="switchLang('vi',this)">🇻🇳 Tiếng Việt</div>
+  <div class="lang-tab active" onclick="switchLang('zh',this)">🇨🇳 中文</div>
+  <div class="lang-tab" onclick="switchLang('en',this)">🇬🇧 English</div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODULE 1: TIẾNG VIỆT -->
+<!-- ============================================ -->
+<div id="lang-vi" class="lang-panel">
+
+<div class="card">
+  <h2>Tóm tắt Điều hành</h2>
+  <div class="alert-danger">
+    <strong>Kết luận:</strong> Sau khi giảm từ gói <strong>Verified</strong> xuống gói <strong>Cơ bản</strong> (từ ngày 23/06/2026) và ngừng quảng cáo KWA, gian hàng ZHONG LONG WOOD đã giảm nghiêm trọng trên mọi chỉ số. Search Exposures giảm <strong>85.6%</strong>, Unique Visitors giảm <strong>71.4%</strong>, Cơ hội kinh doanh (BO) giảm <strong>78.6%</strong> so với trung bình giai đoạn Verified.
+  </div>
+</div>
+
+<div class="card">
+  <h2>So sánh 2 Giai đoạn</h2>
+  <p><span class="ptag v">GĐ1: VERIFIED</span> Tháng 06/2025 – 05/2026 (12 tháng) &nbsp;&nbsp; <span class="ptag b">GĐ2: CƠ BẢN</span> Tháng 06/2026 – 07/2026 (2 tháng)</p>
+  
+  <div class="metrics-grid">
+    <div class="metric-card decline">
+      <div class="label">Search Exposures TB/tháng</div>
+      <div class="value">1,972</div>
+      <div class="change negative">▼ 85.6% so với GĐ1 (13,677)</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">Unique Visitors TB/tháng</div>
+      <div class="value">134</div>
+      <div class="change negative">▼ 71.4% so với GĐ1 (469)</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">Cơ hội KD (BO) TB/tháng</div>
+      <div class="value">18</div>
+      <div class="change negative">▼ 78.6% so với GĐ1 (84)</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">Inquiry Visitors TB/tháng</div>
+      <div class="value">3</div>
+      <div class="change negative">▼ 84.2% so với GĐ1 (19)</div>
+    </div>
+  </div>
+
+  <h3>Phạm vi dao động — Search Exposures (Hiển thị tìm kiếm)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Trung bình/tháng</th><th>Tháng cao nhất</th><th>Tháng thấp nhất</th></tr>
+      <tr><td><strong>GĐ1: Verified</strong></td><td>13,677</td><td>48,847 (T08/2025)</td><td>3,324 (T06/2025)</td></tr>
+      <tr><td><strong>GĐ2: Cơ bản</strong></td><td class="red">1,972</td><td class="red">2,716 (T07/2026)</td><td class="red">1,227 (T06/2026)</td></tr>
+    </table>
+  </div>
+
+  <h3>Phạm vi dao động — Unique Visitors (Khách truy cập duy nhất)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Trung bình/tháng</th><th>Tháng cao nhất</th><th>Tháng thấp nhất</th></tr>
+      <tr><td><strong>GĐ1: Verified</strong></td><td>469</td><td>1,075 (T10/2025)</td><td>129 (T06/2025)</td></tr>
+      <tr><td><strong>GĐ2: Cơ bản</strong></td><td class="red">134</td><td class="red">186 (T07/2026)</td><td class="red">82 (T06/2026)</td></tr>
+    </table>
+  </div>
+
+  <h3>Phạm vi dao động — BO = Inquiries + Messages (Cơ hội kinh doanh)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Trung bình/tháng</th><th>Tháng cao nhất</th><th>Tháng thấp nhất</th></tr>
+      <tr><td><strong>GĐ1: Verified</strong></td><td>84</td><td>185 (T11/2025)</td><td>21 (T06/2025)</td></tr>
+      <tr><td><strong>GĐ2: Cơ bản</strong></td><td class="red">18</td><td class="red">36 (T07/2026)</td><td class="red">5 (T06/2026)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Bảng số liệu chi tiết — Nguồn: Google Sheets</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Chỉ số</th>
+          <th colspan="12" class="g1">GĐ1: VERIFIED (06/2025 – 05/2026)</th>
+          <th colspan="2" class="g2">GĐ2: CƠ BẢN</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>06/25</th><th>07/25</th><th>08/25</th><th>09/25</th><th>10/25</th><th>11/25</th>
+          <th>12/25</th><th>01/26</th><th>02/26</th><th>03/26</th><th>04/26</th><th>05/26</th>
+          <th class="g2">06/26</th><th class="g2">07/26</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Search Exposures</strong></td>
+          <td class="p1">3,324</td><td class="p1">9,086</td><td class="p1">15,601</td><td class="p1">48,847</td>
+          <td class="p1">33,383</td><td class="p1">14,321</td><td class="p1">11,283</td><td class="p1">11,696</td>
+          <td class="p1">7,114</td><td class="p1">6,758</td><td class="p1">6,668</td><td class="p1">7,571</td>
+          <td class="p2"><strong>1,227</strong></td><td class="p2"><strong>2,716</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Page Views</strong></td>
+          <td class="p1">348</td><td class="p1">652</td><td class="p1">1,166</td><td class="p1">2,346</td>
+          <td class="p1">1,765</td><td class="p1">1,547</td><td class="p1">1,298</td><td class="p1">949</td>
+          <td class="p1">463</td><td class="p1">610</td><td class="p1">505</td><td class="p1">488</td>
+          <td class="p2"><strong>222</strong></td><td class="p2"><strong>530</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Unique Visitors</strong></td>
+          <td class="p1">129</td><td class="p1">331</td><td class="p1">496</td><td class="p1">1,075</td>
+          <td class="p1">856</td><td class="p1">636</td><td class="p1">590</td><td class="p1">473</td>
+          <td class="p1">220</td><td class="p1">295</td><td class="p1">256</td><td class="p1">246</td>
+          <td class="p2"><strong>82</strong></td><td class="p2"><strong>186</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Direct Clicks</strong></td>
+          <td class="p1">43</td><td class="p1">153</td><td class="p1">258</td><td class="p1">701</td>
+          <td class="p1">529</td><td class="p1">351</td><td class="p1">322</td><td class="p1">315</td>
+          <td class="p1">162</td><td class="p1">181</td><td class="p1">166</td><td class="p1">157</td>
+          <td class="p2"><strong>23</strong></td><td class="p2"><strong>91</strong></td>
+        </tr>
+        <tr>
+          <td><strong>CTR %</strong></td>
+          <td class="p1">1.29%</td><td class="p1">1.68%</td><td class="p1">1.65%</td><td class="p1">1.44%</td>
+          <td class="p1">1.58%</td><td class="p1">2.45%</td><td class="p1">2.85%</td><td class="p1">2.69%</td>
+          <td class="p1">2.28%</td><td class="p1">2.68%</td><td class="p1">2.49%</td><td class="p1">2.07%</td>
+          <td class="p2"><strong>1.87%</strong></td><td class="p2"><strong>3.35%</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Inquiry Visitors</strong></td>
+          <td class="p1">1</td><td class="p1">11</td><td class="p1">21</td><td class="p1">21</td>
+          <td class="p1">21</td><td class="p1">32</td><td class="p1">24</td><td class="p1">9</td>
+          <td class="p1">5</td><td class="p1">5</td><td class="p1">7</td><td class="p1">4</td>
+          <td class="p2"><strong>2</strong></td><td class="p2"><strong>3</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Inquiries</strong></td>
+          <td class="p1">1</td><td class="p1">13</td><td class="p1">23</td><td class="p1">22</td>
+          <td class="p1">26</td><td class="p1">37</td><td class="p1">24</td><td class="p1">9</td>
+          <td class="p1">6</td><td class="p1">5</td><td class="p1">8</td><td class="p1">6</td>
+          <td class="p2"><strong>2</strong></td><td class="p2"><strong>4</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Messages</strong></td>
+          <td class="p1">20</td><td class="p1">41</td><td class="p1">68</td><td class="p1">160</td>
+          <td class="p1">120</td><td class="p1">148</td><td class="p1">90</td><td class="p1">58</td>
+          <td class="p1">19</td><td class="p1">39</td><td class="p1">32</td><td class="p1">34</td>
+          <td class="p2"><strong>3</strong></td><td class="p2"><strong>32</strong></td>
+        </tr>
+        <tr style="background:#fff9c4">
+          <td><strong>BO (Inq+Msg)</strong></td>
+          <td class="p1"><strong>21</strong></td><td class="p1"><strong>54</strong></td><td class="p1"><strong>91</strong></td><td class="p1"><strong>182</strong></td>
+          <td class="p1"><strong>146</strong></td><td class="p1"><strong>185</strong></td><td class="p1"><strong>114</strong></td><td class="p1"><strong>67</strong></td>
+          <td class="p1"><strong>25</strong></td><td class="p1"><strong>44</strong></td><td class="p1"><strong>40</strong></td><td class="p1"><strong>40</strong></td>
+          <td class="p2"><strong>5</strong></td><td class="p2"><strong>36</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Phản hồi kịp thời</strong></td>
+          <td class="p1">100%</td><td class="p1">86.1%</td><td class="p1">87.5%</td><td class="p1">92.6%</td>
+          <td class="p1">82.3%</td><td class="p1">75.3%</td><td class="p1">79.4%</td><td class="p1">75.9%</td>
+          <td class="p1">46.2%</td><td class="p1">85.7%</td><td class="p1">81.8%</td><td class="p1">78.1%</td>
+          <td class="p2"><strong>100%</strong></td><td class="p2"><strong>83.9%</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Thời gian TB phản hồi (h)</strong></td>
+          <td class="p1">4.4</td><td class="p1">6.6</td><td class="p1">8.6</td><td class="p1">7.7</td>
+          <td class="p1">9.7</td><td class="p1">11.1</td><td class="p1">9.7</td><td class="p1">12.6</td>
+          <td class="p1">15.8</td><td class="p1">9.2</td><td class="p1">10.1</td><td class="p1">11.7</td>
+          <td class="p2"><strong>5.0</strong></td><td class="p2"><strong>7.7</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Tổng SP</strong></td>
+          <td class="p1">-</td><td class="p1">-</td><td class="p1">-</td><td class="p1">-</td>
+          <td class="p1">-</td><td class="p1">-</td><td class="p1">-</td><td class="p1">-</td>
+          <td class="p1">-</td><td class="p1">-</td><td class="p1">-</td><td class="p1">242</td>
+          <td class="p2"><strong>207</strong></td><td class="p2"><strong>205</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>So sánh trực quan</h2>
+  <h3>Search Exposures (Hiển thị tìm kiếm)</h3>
+  <div class="cbar"><div class="blbl">GĐ1 Verified TB</div><div class="btrack"><div class="bfill g" style="width:100%">13,677</div></div></div>
+  <div class="cbar"><div class="blbl">GĐ2 T06/2026</div><div class="btrack"><div class="bfill r" style="width:9%">1,227</div></div></div>
+  <div class="cbar"><div class="blbl">GĐ2 T07/2026</div><div class="btrack"><div class="bfill r" style="width:19.9%">2,716</div></div></div>
+
+  <h3>Unique Visitors (Khách truy cập duy nhất)</h3>
+  <div class="cbar"><div class="blbl">GĐ1 Verified TB</div><div class="btrack"><div class="bfill g" style="width:100%">469</div></div></div>
+  <div class="cbar"><div class="blbl">GĐ2 T06/2026</div><div class="btrack"><div class="bfill r" style="width:17.5%">82</div></div></div>
+  <div class="cbar"><div class="blbl">GĐ2 T07/2026</div><div class="btrack"><div class="bfill r" style="width:39.7%">186</div></div></div>
+
+  <h3>BO — Cơ hội kinh doanh (Inquiries + Messages)</h3>
+  <div class="cbar"><div class="blbl">GĐ1 Verified TB</div><div class="btrack"><div class="bfill g" style="width:100%">84</div></div></div>
+  <div class="cbar"><div class="blbl">GĐ2 T06/2026</div><div class="btrack"><div class="bfill r" style="width:6%">5</div></div></div>
+  <div class="cbar"><div class="blbl">GĐ2 T07/2026</div><div class="btrack"><div class="bfill r" style="width:42.9%">36</div></div></div>
+
+  <h3>Inquiry Visitors (Khách hỏi hàng)</h3>
+  <div class="cbar"><div class="blbl">GĐ1 Verified TB</div><div class="btrack"><div class="bfill g" style="width:100%">19</div></div></div>
+  <div class="cbar"><div class="blbl">GĐ2 T06/2026</div><div class="btrack"><div class="bfill r" style="width:10.5%">2</div></div></div>
+  <div class="cbar"><div class="blbl">GĐ2 T07/2026</div><div class="btrack"><div class="bfill r" style="width:15.8%">3</div></div></div>
+</div>
+
+<div class="card">
+  <h2>Biểu đồ xu hướng</h2>
+  <div class="chart-box" style="height:320px"><canvas id="c_exp_vi"></canvas></div>
+</div>
+<div class="chart-row">
+  <div class="card"><h2>Khách truy cập duy nhất</h2><div class="chart-box" style="height:280px"><canvas id="c_uv_vi"></canvas></div></div>
+  <div class="card"><h2>Cơ hội KD (BO)</h2><div class="chart-box" style="height:280px"><canvas id="c_bo_vi"></canvas></div></div>
+</div>
+<div class="chart-row">
+  <div class="card"><h2>Inquiry Visitors</h2><div class="chart-box" style="height:280px"><canvas id="c_inq_vi"></canvas></div></div>
+  <div class="card"><h2>So sánh TB 2 giai đoạn</h2><div class="chart-box" style="height:280px"><canvas id="c_cmp_vi"></canvas></div></div>
+</div>
+
+<div class="card">
+  <h2>Phân tích & Kết luận</h2>
+  <h3>1. Bối cảnh</h3>
+  <p>Gian hàng ZHONG LONG WOOD (vn1568013461xifm) hoạt động trong ngành Construction & Real Estate trên Alibaba.com. Gian hàng duy trì gói Verified đến hết tháng 05/2026. Từ ngày 23/06/2026, chuyển sang gói cơ bản và đồng thời ngừng quảng cáo KWA.</p>
+
+  <h3>2. Traffic giảm nghiêm trọng</h3>
+  <ul class="plain">
+    <li><strong>Search Exposures giảm 85.6%</strong>: Từ TB 13,677/tháng xuống chỉ 1,972. Tháng 06/2026 giảm sâu nhất (1,227), tháng 07 phục hồi nhẹ (2,716) nhưng vẫn thấp hơn 80% so với GĐ1.</li>
+    <li><strong>Unique Visitors giảm 71.4%</strong>: Từ 469 xuống 134 khách/tháng. Mất gần 3/4 lượng khách.</li>
+    <li>Tháng cao nhất GĐ1 đạt <strong>48,847</strong> exposures (08/2025) — gấp <strong>40 lần</strong> so với tháng thấp nhất GĐ2 (1,227).</li>
+  </ul>
+
+  <h3>3. Cơ hội kinh doanh giảm nặng</h3>
+  <ul class="plain">
+    <li><strong>BO giảm 78.6%</strong>: Từ TB 84/tháng xuống 18. Tháng 06/2026 chỉ nhận <strong>5 BO</strong> — thấp nhất trong 14 tháng.</li>
+    <li><strong>Inquiry Visitors giảm 84.2%</strong>: Chỉ còn TB 3 khách hỏi hàng/tháng so với 19 trong GĐ1.</li>
+  </ul>
+
+  <h3>4. Điểm sáng</h3>
+  <div class="alert-success">
+    <ul class="plain">
+      <li><strong>CTR tháng 07/2026 đạt 3.35%</strong> — cao nhất 14 tháng. Sản phẩm còn lại vẫn chất lượng.</li>
+      <li><strong>Phản hồi khách hàng tốt</strong>: Tỷ lệ phản hồi kịp thời TB 92%, thời gian TB 6.4h — cải thiện đáng kể so với GĐ1.</li>
+      <li><strong>Số dư KWA: 5,900,000 VND</strong> — Gian hàng có ngân sách nhưng không chạy quảng cáo.</li>
+    </ul>
+  </div>
+
+  <div class="alert-danger">
+    <strong>Kết luận:</strong> Giảm gói Verified → Cơ bản đã gây thiệt hại rõ ràng. Nếu tiếp tục duy trì gói Basic + không quảng cáo, gian hàng sẽ tiếp tục mất traffic, mất BO, và nguy cơ tụt Star Rating. <strong>Khuyến nghị: Nâng cấp lại gói Verified và tái kích hoạt quảng cáo KWA.</strong>
+  </div>
+</div>
+</div><!-- end lang-vi -->
+
+
+<!-- ============================================ -->
+<!-- MODULE 2: 中文 -->
+<!-- ============================================ -->
+<div id="lang-zh" class="lang-panel active">
+
+<div class="card">
+  <h2>执行摘要</h2>
+  <div class="alert-danger">
+    <strong>核心结论：</strong>自2026年6月23日从 <strong>Verified</strong> 套餐降级为<strong>基础</strong>套餐并停止KWA广告投放后，ZHONG LONG WOOD店铺在所有关键指标上均出现严重下滑。搜索曝光下降<strong>85.6%</strong>，独立访客下降<strong>71.4%</strong>，商机量下降<strong>78.6%</strong>（与Verified期间月均值相比）。
+  </div>
+</div>
+
+<div class="card">
+  <h2>两阶段对比</h2>
+  <p><span class="ptag v">阶段1: VERIFIED</span> 2025年6月 – 2026年5月（12个月） &nbsp;&nbsp; <span class="ptag b">阶段2: 基础套餐</span> 2026年6月 – 7月（2个月）</p>
+  
+  <div class="metrics-grid">
+    <div class="metric-card decline">
+      <div class="label">月均搜索曝光</div>
+      <div class="value">1,972</div>
+      <div class="change negative">▼ 85.6%（阶段1均值 13,677）</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">月均独立访客</div>
+      <div class="value">134</div>
+      <div class="change negative">▼ 71.4%（阶段1均值 469）</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">月均商机量</div>
+      <div class="value">18</div>
+      <div class="change negative">▼ 78.6%（阶段1均值 84）</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">月均询盘访客</div>
+      <div class="value">3</div>
+      <div class="change negative">▼ 84.2%（阶段1均值 19）</div>
+    </div>
+  </div>
+
+  <h3>搜索曝光量波动范围</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>月均</th><th>最高月份</th><th>最低月份</th></tr>
+      <tr><td><strong>阶段1: Verified</strong></td><td>13,677</td><td>48,847（2025年8月）</td><td>3,324（2025年6月）</td></tr>
+      <tr><td><strong>阶段2: 基础</strong></td><td class="red">1,972</td><td class="red">2,716（2026年7月）</td><td class="red">1,227（2026年6月）</td></tr>
+    </table>
+  </div>
+
+  <h3>独立访客波动范围</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>月均</th><th>最高月份</th><th>最低月份</th></tr>
+      <tr><td><strong>阶段1: Verified</strong></td><td>469</td><td>1,075（2025年10月）</td><td>129（2025年6月）</td></tr>
+      <tr><td><strong>阶段2: 基础</strong></td><td class="red">134</td><td class="red">186（2026年7月）</td><td class="red">82（2026年6月）</td></tr>
+    </table>
+  </div>
+
+  <h3>商机量波动范围（询盘 + 消息）</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>月均</th><th>最高月份</th><th>最低月份</th></tr>
+      <tr><td><strong>阶段1: Verified</strong></td><td>84</td><td>185（2025年11月）</td><td>21（2025年6月）</td></tr>
+      <tr><td><strong>阶段2: 基础</strong></td><td class="red">18</td><td class="red">36（2026年7月）</td><td class="red">5（2026年6月）</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>详细数据表 — 来源: Google Sheets</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>指标</th>
+          <th colspan="12" class="g1">阶段1: VERIFIED（2025.06 – 2026.05）</th>
+          <th colspan="2" class="g2">阶段2: 基础套餐</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>06/25</th><th>07/25</th><th>08/25</th><th>09/25</th><th>10/25</th><th>11/25</th>
+          <th>12/25</th><th>01/26</th><th>02/26</th><th>03/26</th><th>04/26</th><th>05/26</th>
+          <th class="g2">06/26</th><th class="g2">07/26</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>搜索曝光</strong></td>
+          <td class="p1">3,324</td><td class="p1">9,086</td><td class="p1">15,601</td><td class="p1">48,847</td>
+          <td class="p1">33,383</td><td class="p1">14,321</td><td class="p1">11,283</td><td class="p1">11,696</td>
+          <td class="p1">7,114</td><td class="p1">6,758</td><td class="p1">6,668</td><td class="p1">7,571</td>
+          <td class="p2"><strong>1,227</strong></td><td class="p2"><strong>2,716</strong></td>
+        </tr>
+        <tr>
+          <td><strong>页面浏览量</strong></td>
+          <td class="p1">348</td><td class="p1">652</td><td class="p1">1,166</td><td class="p1">2,346</td>
+          <td class="p1">1,765</td><td class="p1">1,547</td><td class="p1">1,298</td><td class="p1">949</td>
+          <td class="p1">463</td><td class="p1">610</td><td class="p1">505</td><td class="p1">488</td>
+          <td class="p2"><strong>222</strong></td><td class="p2"><strong>530</strong></td>
+        </tr>
+        <tr>
+          <td><strong>独立访客</strong></td>
+          <td class="p1">129</td><td class="p1">331</td><td class="p1">496</td><td class="p1">1,075</td>
+          <td class="p1">856</td><td class="p1">636</td><td class="p1">590</td><td class="p1">473</td>
+          <td class="p1">220</td><td class="p1">295</td><td class="p1">256</td><td class="p1">246</td>
+          <td class="p2"><strong>82</strong></td><td class="p2"><strong>186</strong></td>
+        </tr>
+        <tr>
+          <td><strong>搜索直接点击</strong></td>
+          <td class="p1">43</td><td class="p1">153</td><td class="p1">258</td><td class="p1">701</td>
+          <td class="p1">529</td><td class="p1">351</td><td class="p1">322</td><td class="p1">315</td>
+          <td class="p1">162</td><td class="p1">181</td><td class="p1">166</td><td class="p1">157</td>
+          <td class="p2"><strong>23</strong></td><td class="p2"><strong>91</strong></td>
+        </tr>
+        <tr>
+          <td><strong>点击率 CTR</strong></td>
+          <td class="p1">1.29%</td><td class="p1">1.68%</td><td class="p1">1.65%</td><td class="p1">1.44%</td>
+          <td class="p1">1.58%</td><td class="p1">2.45%</td><td class="p1">2.85%</td><td class="p1">2.69%</td>
+          <td class="p1">2.28%</td><td class="p1">2.68%</td><td class="p1">2.49%</td><td class="p1">2.07%</td>
+          <td class="p2"><strong>1.87%</strong></td><td class="p2"><strong>3.35%</strong></td>
+        </tr>
+        <tr>
+          <td><strong>询盘访客</strong></td>
+          <td class="p1">1</td><td class="p1">11</td><td class="p1">21</td><td class="p1">21</td>
+          <td class="p1">21</td><td class="p1">32</td><td class="p1">24</td><td class="p1">9</td>
+          <td class="p1">5</td><td class="p1">5</td><td class="p1">7</td><td class="p1">4</td>
+          <td class="p2"><strong>2</strong></td><td class="p2"><strong>3</strong></td>
+        </tr>
+        <tr>
+          <td><strong>询盘量</strong></td>
+          <td class="p1">1</td><td class="p1">13</td><td class="p1">23</td><td class="p1">22</td>
+          <td class="p1">26</td><td class="p1">37</td><td class="p1">24</td><td class="p1">9</td>
+          <td class="p1">6</td><td class="p1">5</td><td class="p1">8</td><td class="p1">6</td>
+          <td class="p2"><strong>2</strong></td><td class="p2"><strong>4</strong></td>
+        </tr>
+        <tr>
+          <td><strong>消息量</strong></td>
+          <td class="p1">20</td><td class="p1">41</td><td class="p1">68</td><td class="p1">160</td>
+          <td class="p1">120</td><td class="p1">148</td><td class="p1">90</td><td class="p1">58</td>
+          <td class="p1">19</td><td class="p1">39</td><td class="p1">32</td><td class="p1">34</td>
+          <td class="p2"><strong>3</strong></td><td class="p2"><strong>32</strong></td>
+        </tr>
+        <tr style="background:#fff9c4">
+          <td><strong>商机 BO</strong></td>
+          <td class="p1"><strong>21</strong></td><td class="p1"><strong>54</strong></td><td class="p1"><strong>91</strong></td><td class="p1"><strong>182</strong></td>
+          <td class="p1"><strong>146</strong></td><td class="p1"><strong>185</strong></td><td class="p1"><strong>114</strong></td><td class="p1"><strong>67</strong></td>
+          <td class="p1"><strong>25</strong></td><td class="p1"><strong>44</strong></td><td class="p1"><strong>40</strong></td><td class="p1"><strong>40</strong></td>
+          <td class="p2"><strong>5</strong></td><td class="p2"><strong>36</strong></td>
+        </tr>
+        <tr>
+          <td><strong>及时响应率</strong></td>
+          <td class="p1">100%</td><td class="p1">86.1%</td><td class="p1">87.5%</td><td class="p1">92.6%</td>
+          <td class="p1">82.3%</td><td class="p1">75.3%</td><td class="p1">79.4%</td><td class="p1">75.9%</td>
+          <td class="p1">46.2%</td><td class="p1">85.7%</td><td class="p1">81.8%</td><td class="p1">78.1%</td>
+          <td class="p2"><strong>100%</strong></td><td class="p2"><strong>83.9%</strong></td>
+        </tr>
+        <tr>
+          <td><strong>平均回复时长 (h)</strong></td>
+          <td class="p1">4.4</td><td class="p1">6.6</td><td class="p1">8.6</td><td class="p1">7.7</td>
+          <td class="p1">9.7</td><td class="p1">11.1</td><td class="p1">9.7</td><td class="p1">12.6</td>
+          <td class="p1">15.8</td><td class="p1">9.2</td><td class="p1">10.1</td><td class="p1">11.7</td>
+          <td class="p2"><strong>5.0</strong></td><td class="p2"><strong>7.7</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>可视化对比</h2>
+  <h3>搜索曝光</h3>
+  <div class="cbar"><div class="blbl">阶段1 月均</div><div class="btrack"><div class="bfill g" style="width:100%">13,677</div></div></div>
+  <div class="cbar"><div class="blbl">阶段2 06/26</div><div class="btrack"><div class="bfill r" style="width:9%">1,227</div></div></div>
+  <div class="cbar"><div class="blbl">阶段2 07/26</div><div class="btrack"><div class="bfill r" style="width:19.9%">2,716</div></div></div>
+
+  <h3>独立访客</h3>
+  <div class="cbar"><div class="blbl">阶段1 月均</div><div class="btrack"><div class="bfill g" style="width:100%">469</div></div></div>
+  <div class="cbar"><div class="blbl">阶段2 06/26</div><div class="btrack"><div class="bfill r" style="width:17.5%">82</div></div></div>
+  <div class="cbar"><div class="blbl">阶段2 07/26</div><div class="btrack"><div class="bfill r" style="width:39.7%">186</div></div></div>
+
+  <h3>商机量</h3>
+  <div class="cbar"><div class="blbl">阶段1 月均</div><div class="btrack"><div class="bfill g" style="width:100%">84</div></div></div>
+  <div class="cbar"><div class="blbl">阶段2 06/26</div><div class="btrack"><div class="bfill r" style="width:6%">5</div></div></div>
+  <div class="cbar"><div class="blbl">阶段2 07/26</div><div class="btrack"><div class="bfill r" style="width:42.9%">36</div></div></div>
+</div>
+
+<div class="card">
+  <h2>趋势图表</h2>
+  <div class="chart-box" style="height:320px"><canvas id="c_exp_zh"></canvas></div>
+</div>
+<div class="chart-row">
+  <div class="card"><h2>独立访客趋势</h2><div class="chart-box" style="height:280px"><canvas id="c_uv_zh"></canvas></div></div>
+  <div class="card"><h2>商机趋势</h2><div class="chart-box" style="height:280px"><canvas id="c_bo_zh"></canvas></div></div>
+</div>
+
+<div class="card">
+  <h2>分析与结论</h2>
+  <h3>1. 背景</h3>
+  <p>ZHONG LONG WOOD 店铺（vn1568013461xifm）属于阿里巴巴国际站建筑与房地产行业。店铺此前使用Verified套餐至2026年5月底，自2026年6月23日起降级为基础套餐，同时停止KWA广告投放。</p>
+
+  <h3>2. 流量严重下滑</h3>
+  <ul class="plain">
+    <li><strong>搜索曝光下降85.6%</strong>：从月均13,677降至1,972。2026年6月降幅最大（仅1,227），7月略有回升（2,716），但仍比阶段1低80%。</li>
+    <li><strong>独立访客下降71.4%</strong>：从469降至134/月，损失近四分之三的客户访问量。</li>
+    <li>阶段1最高月达<strong>48,847</strong>次曝光（2025年8月），是阶段2最低月（1,227）的<strong>40倍</strong>。</li>
+  </ul>
+
+  <h3>3. 商机大幅减少</h3>
+  <ul class="plain">
+    <li><strong>商机量下降78.6%</strong>：从月均84降至18。2026年6月仅收到<strong>5个商机</strong>，为14个月最低。</li>
+    <li><strong>询盘访客下降84.2%</strong>：月均仅3位，而阶段1为19位。</li>
+  </ul>
+
+  <h3>4. 亮点</h3>
+  <div class="alert-success">
+    <ul class="plain">
+      <li><strong>2026年7月CTR达3.35%</strong>——14个月最高，说明剩余产品质量仍然优秀。</li>
+      <li><strong>客户服务改善</strong>：及时响应率均值92%，平均回复时长6.4小时，显著优于阶段1。</li>
+      <li><strong>KWA余额5,900,000 VND</strong>——店铺有预算但未投放，导致付费流量完全丧失。</li>
+    </ul>
+  </div>
+
+  <div class="alert-danger">
+    <strong>结论：</strong>从Verified降级为基础套餐已对店铺造成明显且可量化的损害。若继续维持基础套餐+不投放广告，店铺将持续失去流量和商机，并面临星级下降风险。<strong>建议尽快恢复Verified套餐并重启KWA广告投放。</strong>
+  </div>
+</div>
+</div><!-- end lang-zh -->
+
+
+<!-- ============================================ -->
+<!-- MODULE 3: ENGLISH -->
+<!-- ============================================ -->
+<div id="lang-en" class="lang-panel">
+
+<div class="card">
+  <h2>Executive Summary</h2>
+  <div class="alert-danger">
+    <strong>Key Finding:</strong> After downgrading from the <strong>Verified</strong> package to the <strong>Basic</strong> package (effective June 23, 2026) and ceasing KWA advertising, the ZHONG LONG WOOD store experienced a severe decline across all key metrics. Search exposures dropped <strong>85.6%</strong>, unique visitors fell <strong>71.4%</strong>, and business opportunities declined <strong>78.6%</strong> compared to the Verified-period monthly averages.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Phase Comparison</h2>
+  <p><span class="ptag v">PHASE 1: VERIFIED</span> June 2025 – May 2026 (12 months) &nbsp;&nbsp; <span class="ptag b">PHASE 2: BASIC</span> June 2026 – July 2026 (2 months)</p>
+  
+  <div class="metrics-grid">
+    <div class="metric-card decline">
+      <div class="label">Avg Monthly Search Exposures</div>
+      <div class="value">1,972</div>
+      <div class="change negative">▼ 85.6% vs Phase 1 avg (13,677)</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">Avg Monthly Unique Visitors</div>
+      <div class="value">134</div>
+      <div class="change negative">▼ 71.4% vs Phase 1 avg (469)</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">Avg Monthly BO</div>
+      <div class="value">18</div>
+      <div class="change negative">▼ 78.6% vs Phase 1 avg (84)</div>
+    </div>
+    <div class="metric-card decline">
+      <div class="label">Avg Monthly Inquiry Visitors</div>
+      <div class="value">3</div>
+      <div class="change negative">▼ 84.2% vs Phase 1 avg (19)</div>
+    </div>
+  </div>
+
+  <h3>Search Exposures Range</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Monthly Average</th><th>Highest Month</th><th>Lowest Month</th></tr>
+      <tr><td><strong>Phase 1: Verified</strong></td><td>13,677</td><td>48,847 (Aug 2025)</td><td>3,324 (Jun 2025)</td></tr>
+      <tr><td><strong>Phase 2: Basic</strong></td><td class="red">1,972</td><td class="red">2,716 (Jul 2026)</td><td class="red">1,227 (Jun 2026)</td></tr>
+    </table>
+  </div>
+
+  <h3>Unique Visitors Range</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Monthly Average</th><th>Highest Month</th><th>Lowest Month</th></tr>
+      <tr><td><strong>Phase 1: Verified</strong></td><td>469</td><td>1,075 (Oct 2025)</td><td>129 (Jun 2025)</td></tr>
+      <tr><td><strong>Phase 2: Basic</strong></td><td class="red">134</td><td class="red">186 (Jul 2026)</td><td class="red">82 (Jun 2026)</td></tr>
+    </table>
+  </div>
+
+  <h3>Business Opportunities Range (Inquiries + Messages)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Monthly Average</th><th>Highest Month</th><th>Lowest Month</th></tr>
+      <tr><td><strong>Phase 1: Verified</strong></td><td>84</td><td>185 (Nov 2025)</td><td>21 (Jun 2025)</td></tr>
+      <tr><td><strong>Phase 2: Basic</strong></td><td class="red">18</td><td class="red">36 (Jul 2026)</td><td class="red">5 (Jun 2026)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Detailed Data Table — Source: Google Sheets</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th colspan="12" class="g1">PHASE 1: VERIFIED (Jun 2025 – May 2026)</th>
+          <th colspan="2" class="g2">PHASE 2: BASIC</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>06/25</th><th>07/25</th><th>08/25</th><th>09/25</th><th>10/25</th><th>11/25</th>
+          <th>12/25</th><th>01/26</th><th>02/26</th><th>03/26</th><th>04/26</th><th>05/26</th>
+          <th class="g2">06/26</th><th class="g2">07/26</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Search Exposures</strong></td>
+          <td class="p1">3,324</td><td class="p1">9,086</td><td class="p1">15,601</td><td class="p1">48,847</td>
+          <td class="p1">33,383</td><td class="p1">14,321</td><td class="p1">11,283</td><td class="p1">11,696</td>
+          <td class="p1">7,114</td><td class="p1">6,758</td><td class="p1">6,668</td><td class="p1">7,571</td>
+          <td class="p2"><strong>1,227</strong></td><td class="p2"><strong>2,716</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Page Views</strong></td>
+          <td class="p1">348</td><td class="p1">652</td><td class="p1">1,166</td><td class="p1">2,346</td>
+          <td class="p1">1,765</td><td class="p1">1,547</td><td class="p1">1,298</td><td class="p1">949</td>
+          <td class="p1">463</td><td class="p1">610</td><td class="p1">505</td><td class="p1">488</td>
+          <td class="p2"><strong>222</strong></td><td class="p2"><strong>530</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Unique Visitors</strong></td>
+          <td class="p1">129</td><td class="p1">331</td><td class="p1">496</td><td class="p1">1,075</td>
+          <td class="p1">856</td><td class="p1">636</td><td class="p1">590</td><td class="p1">473</td>
+          <td class="p1">220</td><td class="p1">295</td><td class="p1">256</td><td class="p1">246</td>
+          <td class="p2"><strong>82</strong></td><td class="p2"><strong>186</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Direct Clicks</strong></td>
+          <td class="p1">43</td><td class="p1">153</td><td class="p1">258</td><td class="p1">701</td>
+          <td class="p1">529</td><td class="p1">351</td><td class="p1">322</td><td class="p1">315</td>
+          <td class="p1">162</td><td class="p1">181</td><td class="p1">166</td><td class="p1">157</td>
+          <td class="p2"><strong>23</strong></td><td class="p2"><strong>91</strong></td>
+        </tr>
+        <tr>
+          <td><strong>CTR %</strong></td>
+          <td class="p1">1.29%</td><td class="p1">1.68%</td><td class="p1">1.65%</td><td class="p1">1.44%</td>
+          <td class="p1">1.58%</td><td class="p1">2.45%</td><td class="p1">2.85%</td><td class="p1">2.69%</td>
+          <td class="p1">2.28%</td><td class="p1">2.68%</td><td class="p1">2.49%</td><td class="p1">2.07%</td>
+          <td class="p2"><strong>1.87%</strong></td><td class="p2"><strong>3.35%</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Inquiry Visitors</strong></td>
+          <td class="p1">1</td><td class="p1">11</td><td class="p1">21</td><td class="p1">21</td>
+          <td class="p1">21</td><td class="p1">32</td><td class="p1">24</td><td class="p1">9</td>
+          <td class="p1">5</td><td class="p1">5</td><td class="p1">7</td><td class="p1">4</td>
+          <td class="p2"><strong>2</strong></td><td class="p2"><strong>3</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Inquiries</strong></td>
+          <td class="p1">1</td><td class="p1">13</td><td class="p1">23</td><td class="p1">22</td>
+          <td class="p1">26</td><td class="p1">37</td><td class="p1">24</td><td class="p1">9</td>
+          <td class="p1">6</td><td class="p1">5</td><td class="p1">8</td><td class="p1">6</td>
+          <td class="p2"><strong>2</strong></td><td class="p2"><strong>4</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Messages</strong></td>
+          <td class="p1">20</td><td class="p1">41</td><td class="p1">68</td><td class="p1">160</td>
+          <td class="p1">120</td><td class="p1">148</td><td class="p1">90</td><td class="p1">58</td>
+          <td class="p1">19</td><td class="p1">39</td><td class="p1">32</td><td class="p1">34</td>
+          <td class="p2"><strong>3</strong></td><td class="p2"><strong>32</strong></td>
+        </tr>
+        <tr style="background:#fff9c4">
+          <td><strong>BO (Inq+Msg)</strong></td>
+          <td class="p1"><strong>21</strong></td><td class="p1"><strong>54</strong></td><td class="p1"><strong>91</strong></td><td class="p1"><strong>182</strong></td>
+          <td class="p1"><strong>146</strong></td><td class="p1"><strong>185</strong></td><td class="p1"><strong>114</strong></td><td class="p1"><strong>67</strong></td>
+          <td class="p1"><strong>25</strong></td><td class="p1"><strong>44</strong></td><td class="p1"><strong>40</strong></td><td class="p1"><strong>40</strong></td>
+          <td class="p2"><strong>5</strong></td><td class="p2"><strong>36</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Timely Response</strong></td>
+          <td class="p1">100%</td><td class="p1">86.1%</td><td class="p1">87.5%</td><td class="p1">92.6%</td>
+          <td class="p1">82.3%</td><td class="p1">75.3%</td><td class="p1">79.4%</td><td class="p1">75.9%</td>
+          <td class="p1">46.2%</td><td class="p1">85.7%</td><td class="p1">81.8%</td><td class="p1">78.1%</td>
+          <td class="p2"><strong>100%</strong></td><td class="p2"><strong>83.9%</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Avg Reply Duration (h)</strong></td>
+          <td class="p1">4.4</td><td class="p1">6.6</td><td class="p1">8.6</td><td class="p1">7.7</td>
+          <td class="p1">9.7</td><td class="p1">11.1</td><td class="p1">9.7</td><td class="p1">12.6</td>
+          <td class="p1">15.8</td><td class="p1">9.2</td><td class="p1">10.1</td><td class="p1">11.7</td>
+          <td class="p2"><strong>5.0</strong></td><td class="p2"><strong>7.7</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Visual Comparison</h2>
+  <h3>Search Exposures</h3>
+  <div class="cbar"><div class="blbl">Phase 1 Avg</div><div class="btrack"><div class="bfill g" style="width:100%">13,677</div></div></div>
+  <div class="cbar"><div class="blbl">Phase 2 Jun/26</div><div class="btrack"><div class="bfill r" style="width:9%">1,227</div></div></div>
+  <div class="cbar"><div class="blbl">Phase 2 Jul/26</div><div class="btrack"><div class="bfill r" style="width:19.9%">2,716</div></div></div>
+
+  <h3>Unique Visitors</h3>
+  <div class="cbar"><div class="blbl">Phase 1 Avg</div><div class="btrack"><div class="bfill g" style="width:100%">469</div></div></div>
+  <div class="cbar"><div class="blbl">Phase 2 Jun/26</div><div class="btrack"><div class="bfill r" style="width:17.5%">82</div></div></div>
+  <div class="cbar"><div class="blbl">Phase 2 Jul/26</div><div class="btrack"><div class="bfill r" style="width:39.7%">186</div></div></div>
+
+  <h3>Business Opportunities (Inquiries + Messages)</h3>
+  <div class="cbar"><div class="blbl">Phase 1 Avg</div><div class="btrack"><div class="bfill g" style="width:100%">84</div></div></div>
+  <div class="cbar"><div class="blbl">Phase 2 Jun/26</div><div class="btrack"><div class="bfill r" style="width:6%">5</div></div></div>
+  <div class="cbar"><div class="blbl">Phase 2 Jul/26</div><div class="btrack"><div class="bfill r" style="width:42.9%">36</div></div></div>
+</div>
+
+<div class="card">
+  <h2>Trend Charts</h2>
+  <div class="chart-box" style="height:320px"><canvas id="c_exp_en"></canvas></div>
+</div>
+<div class="chart-row">
+  <div class="card"><h2>Unique Visitors Trend</h2><div class="chart-box" style="height:280px"><canvas id="c_uv_en"></canvas></div></div>
+  <div class="card"><h2>BO Trend</h2><div class="chart-box" style="height:280px"><canvas id="c_bo_en"></canvas></div></div>
+</div>
+
+<div class="card">
+  <h2>Analysis & Conclusion</h2>
+  <h3>1. Background</h3>
+  <p>The ZHONG LONG WOOD store (vn1568013461xifm) operates in the Construction & Real Estate industry on Alibaba.com. The store maintained a Verified package through May 2026. Starting June 23, 2026, it was downgraded to the Basic package while KWA advertising was simultaneously halted.</p>
+
+  <h3>2. Severe Traffic Decline</h3>
+  <ul class="plain">
+    <li><strong>Search exposures dropped 85.6%</strong>: From avg 13,677/month to just 1,972. June 2026 saw the steepest drop (1,227), with July showing slight recovery (2,716) but still 80% below Phase 1.</li>
+    <li><strong>Unique visitors fell 71.4%</strong>: From 469 to 134/month. The store lost nearly three-quarters of its visitor traffic.</li>
+    <li>The highest Verified month reached <strong>48,847 exposures</strong> (Aug 2025) — <strong>40 times</strong> the lowest Phase 2 month (1,227).</li>
+  </ul>
+
+  <h3>3. Business Opportunity Impact</h3>
+  <ul class="plain">
+    <li><strong>BO declined 78.6%</strong>: From avg 84/month to 18. June 2026 recorded only <strong>5 BO</strong> — the lowest in 14 months.</li>
+    <li><strong>Inquiry visitors dropped 84.2%</strong>: Avg just 3/month vs. 19 in Phase 1.</li>
+  </ul>
+
+  <h3>4. Bright Spots</h3>
+  <div class="alert-success">
+    <ul class="plain">
+      <li><strong>July 2026 CTR hit 3.35%</strong> — the 14-month high, proving remaining products are well-optimized.</li>
+      <li><strong>Customer service improved</strong>: Avg timely response rate 92%, avg reply time 6.4h — significantly better than Phase 1.</li>
+      <li><strong>KWA balance: VND 5,900,000</strong> — budget is available but unused, resulting in complete loss of paid traffic.</li>
+    </ul>
+  </div>
+
+  <div class="alert-danger">
+    <strong>Conclusion:</strong> The downgrade from Verified to Basic has caused clear, measurable damage. Continuing with Basic + no ads will further erode traffic, business opportunities, and star rating. <strong>Recommendation: Upgrade back to Verified and reactivate KWA advertising to restore store performance.</strong>
+  </div>
+</div>
+</div><!-- end lang-en -->
+
+
+<div class="footer">
+  ZHONG LONG WOOD VIETNAM — Store Performance Report | 17/08/2026 | Account Manager: Duong Viet Hai
+</div>
+</div><!-- end container -->
+
+<script>
+// Tab switching
+function switchLang(id, el) {
+  document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('lang-'+id).classList.add('active');
+  el.classList.add('active');
+  // Render charts for this language
+  setTimeout(function(){ renderCharts(id); }, 100);
+}
+
+// Shared data
+var labels = ['06/25','07/25','08/25','09/25','10/25','11/25','12/25','01/26','02/26','03/26','04/26','05/26','06/26','07/26'];
+var exposure = [3324,9086,15601,48847,33383,14321,11283,11696,7114,6758,6668,7571,1227,2716];
+var uv = [129,331,496,1075,856,636,590,473,220,295,256,246,82,186];
+var bo = [21,54,91,182,146,185,114,67,25,44,40,40,5,36];
+var inq = [1,11,21,21,21,32,24,9,5,5,7,4,2,3];
+
+var bgColors = labels.map(function(m,i){ return i<12?'rgba(67,160,71,0.7)':'rgba(229,57,53,0.85)'; });
+var borderColors = labels.map(function(m,i){ return i<12?'#43a047':'#e53935'; });
+
+var chartInstances = {};
+
+function renderCharts(lang) {
+  // Destroy previous charts for this language
+  ['exp','uv','bo','inq','cmp'].forEach(function(k){
+    var key = k+'_'+lang;
+    if(chartInstances[key]){ chartInstances[key].destroy(); delete chartInstances[key]; }
+  });
+
+  var canvasId = function(k){ return 'c_'+k+'_'+lang; };
+  var canvas = document.getElementById(canvasId('exp'));
+  if(!canvas) return; // Charts not visible yet
+
+  try {
+    // Exposure bar chart
+    chartInstances['exp_'+lang] = new Chart(document.getElementById(canvasId('exp')), {
+      type:'bar',
+      data:{labels:labels,datasets:[{label:'Search Exposures',data:exposure,backgroundColor:bgColors,borderColor:borderColors,borderWidth:1}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y.toLocaleString()}}}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v>=1000?(v/1000)+'K':v}}}}}
+    });
+
+    // UV line chart
+    chartInstances['uv_'+lang] = new Chart(document.getElementById(canvasId('uv')), {
+      type:'line',
+      data:{labels:labels,datasets:[{label:'Unique Visitors',data:uv,borderColor:'#1a237e',backgroundColor:'rgba(26,35,126,0.08)',fill:true,tension:0.3,pointBackgroundColor:borderColors,pointRadius:5,pointBorderColor:borderColors}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+    });
+
+    // BO bar chart
+    chartInstances['bo_'+lang] = new Chart(document.getElementById(canvasId('bo')), {
+      type:'bar',
+      data:{labels:labels,datasets:[{label:'BO',data:bo,backgroundColor:bgColors,borderColor:borderColors,borderWidth:1}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+    });
+
+    // Inquiry line chart (only for VI and EN that have it)
+    var inqCanvas = document.getElementById(canvasId('inq'));
+    if(inqCanvas){
+      chartInstances['inq_'+lang] = new Chart(inqCanvas, {
+        type:'line',
+        data:{labels:labels,datasets:[{label:'Inquiry Visitors',data:inq,borderColor:'#e65100',backgroundColor:'rgba(230,81,0,0.08)',fill:true,tension:0.3,pointBackgroundColor:borderColors,pointRadius:5,pointBorderColor:borderColors}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+      });
+    }
+
+    // Comparison bar chart (only for VI)
+    var cmpCanvas = document.getElementById(canvasId('cmp'));
+    if(cmpCanvas){
+      chartInstances['cmp_'+lang] = new Chart(cmpCanvas, {
+        type:'bar',
+        data:{
+          labels:['Search Exposures\n(x1000)','Unique Visitors','BO','Inquiry Visitors'],
+          datasets:[
+            {label:'Phase 1 Avg (Verified)',data:[13.677,469,84,19],backgroundColor:'rgba(67,160,71,0.8)',borderColor:'#43a047',borderWidth:1},
+            {label:'Phase 2 Avg (Basic)',data:[1.972,134,18,3],backgroundColor:'rgba(229,57,53,0.8)',borderColor:'#e53935',borderWidth:1}
+          ]
+        },
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}
+      });
+    }
+  } catch(e){ console.error('Chart error:',e); }
+}
+
+// Render initial charts for Chinese tab
+setTimeout(function(){ renderCharts('zh'); }, 200);
+</script>
+</body>
+</html>
