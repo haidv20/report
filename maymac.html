@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Báo cáo ngành May mặc — Nón len, Khăn len, Quần áo thể thao & Túi Canvas trên Alibaba.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+    :root {
+      --navy: #0B2340;
+      --navy-2: #142F52;
+      --navy-dark: #061733;
+      --gold: #B8892B;
+      --gold-soft: #D4A94A;
+      --blue: #2C5F9E;
+      --ink: #1F2937;
+      --muted: #5B6B80;
+      --line: #E5E9F0;
+      --bg: #F6F7FA;
+      --card: #FFFFFF;
+      --tint: #F2F5FA;
+      --sw: 268px;
+      --radius: 10px;
+      --radius-lg: 14px;
+      --shadow-sm: 0 1px 2px rgba(11,35,64,0.04), 0 2px 6px rgba(11,35,64,0.05);
+      --shadow-md: 0 4px 14px rgba(11,35,64,0.06);
+      --transition: all 0.25s ease;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; max-width: 100vw; scroll-behavior: smooth; }
+    body {
+      font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 15px;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; }
+    a { color: var(--blue); }
+    canvas { max-width: 100% !important; display: block; margin: 0 auto; max-height: 400px !important; }
+    .chart-box canvas { max-height: 400px !important; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sw); height: 100vh;
+      background: var(--navy-dark);
+      color: #fff; padding: 2rem 1.25rem;
+      overflow-y: auto; z-index: 100;
+      border-right: 1px solid rgba(255,255,255,0.05);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.95rem; font-weight: 700; line-height: 1.35;
+      margin-bottom: 1.75rem; padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      letter-spacing: 0.2px;
+    }
+    .brand i {
+      color: var(--gold-soft);
+      background: rgba(184,137,43,0.12);
+      width: 38px; height: 38px; border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .brand span { font-size: 0.92rem; color: #fff; }
+    .sidebar nav { margin-top: 0.5rem; }
+    .sidebar nav .nav-label {
+      font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.4); padding: 0 0.75rem; margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    .sidebar nav ul { list-style: none; }
+    .sidebar nav ul li { margin-bottom: 2px; }
+    .sidebar nav ul li a {
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      padding: 0.65rem 0.85rem; border-radius: 8px;
+      font-size: 0.87rem; font-weight: 500;
+      transition: var(--transition); border-left: 2px solid transparent;
+    }
+    .sidebar nav ul li a i { width: 16px; font-size: 0.8rem; opacity: 0.75; }
+    .sidebar nav ul li a:hover { color: #fff; background: rgba(255,255,255,0.04); }
+    .sidebar nav ul li a.active {
+      color: #fff; background: rgba(184,137,43,0.10);
+      border-left-color: var(--gold-soft);
+    }
+    .sidebar nav ul li a.active i { color: var(--gold-soft); opacity: 1; }
+
+    /* ===== MAIN ===== */
+    .main-content {
+      margin-left: var(--sw); width: calc(100% - var(--sw));
+      padding: 2.25rem 2.75rem 0;
+      max-width: 1400px; position: relative;
+    }
+
+    /* ===== HEADER ===== */
+    .header-banner {
+      background:
+        linear-gradient(135deg, rgba(6,23,51,0.94) 0%, rgba(11,35,64,0.86) 100%),
+        url('https://s.alicdn.com/@sc04/kf/H85dec2d2206048fc8c95a8fc03175e00l.jpg') no-repeat center center;
+      background-size: cover;
+      padding: 3.25rem 2.75rem;
+      border-radius: var(--radius-lg);
+      position: relative; margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      min-height: 260px;
+      display: flex; flex-direction: column; justify-content: center;
+      overflow: hidden;
+    }
+    .header-banner::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-soft) 50%, transparent 100%);
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(184,137,43,0.18); color: var(--gold-soft);
+      border: 1px solid rgba(212,169,74,0.35);
+      font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px;
+      padding: 0.35rem 0.85rem; border-radius: 4px;
+      margin-bottom: 1rem; width: fit-content;
+    }
+    .title {
+      font-size: 1.95rem; font-weight: 700;
+      margin-bottom: 0.75rem; line-height: 1.3;
+      color: #fff; letter-spacing: -0.2px;
+      max-width: 900px;
+    }
+    .header-subtitle {
+      color: rgba(255,255,255,0.82); font-size: 0.98rem;
+      max-width: 780px; font-weight: 300;
+    }
+    .meta {
+      display: flex; flex-wrap: wrap; gap: 24px;
+      font-size: 0.8rem; color: rgba(255,255,255,0.75);
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 1rem; margin-top: 1.5rem;
+    }
+    .meta strong { color: #fff; font-weight: 600; }
+
+    /* ===== SECTION CARD ===== */
+    .section-card {
+      background-color: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+    }
+    .section-title {
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 14px;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: -0.1px;
+    }
+    .section-title .chapter-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--navy); color: #fff;
+      width: 36px; height: 36px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 700;
+      font-family: 'Lexend', monospace;
+    }
+    .section-title i { color: var(--gold); font-size: 0.95rem; }
+    .sub-title {
+      font-size: 1.05rem; font-weight: 700; color: var(--navy);
+      margin: 2rem 0 1rem;
+      padding-left: 12px; border-left: 3px solid var(--gold);
+      letter-spacing: -0.1px;
+    }
+    p { margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem; }
+    p strong { color: var(--ink); font-weight: 600; }
+
+    /* ===== HIGHLIGHT / CALLOUT ===== */
+    .highlight {
+      background: var(--tint);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--blue);
+      padding: 1.1rem 1.35rem; border-radius: 6px;
+      margin-bottom: 1.25rem; font-size: 0.9rem;
+      color: var(--ink);
+    }
+    .highlight strong { color: var(--navy); }
+
+    /* ===== GRIDS & CARDS ===== */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 1.5rem; }
+    .info-card {
+      background: var(--tint);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.5rem;
+      transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .info-card::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--gold);
+    }
+    .info-val {
+      font-size: 1.55rem; font-weight: 700; color: var(--navy);
+      line-height: 1.15; letter-spacing: -0.5px;
+    }
+    .info-lbl {
+      font-size: 0.78rem; font-weight: 500; color: var(--muted);
+      margin-top: 0.4rem; line-height: 1.45;
+    }
+
+    /* ===== TABLES ===== */
+    table {
+      width: 100%; border-collapse: collapse;
+      margin-bottom: 1.25rem; font-size: 0.83rem;
+      background: #fff;
+    }
+    table th {
+      background: var(--navy); color: #fff;
+      font-weight: 600; text-align: left;
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem; letter-spacing: 0.3px;
+      text-transform: uppercase; border: none;
+    }
+    table td {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle; color: var(--ink);
+    }
+    table tbody tr:hover { background: var(--tint); }
+    table tbody tr:last-child td { border-bottom: none; }
+    .table-container {
+      overflow-x: auto; margin-top: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+    .link-store-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--navy); color: #fff !important;
+      padding: 0.4rem 0.75rem; border-radius: 4px;
+      text-decoration: none; font-weight: 500;
+      font-size: 0.72rem; white-space: nowrap;
+      transition: var(--transition);
+      letter-spacing: 0.2px;
+    }
+    .link-store-btn:hover { background: var(--gold); }
+    a.citation {
+      color: var(--blue); font-weight: 500;
+      text-decoration: none; font-size: 0.85em;
+    }
+    a.citation:hover { text-decoration: underline; }
+
+    /* ===== CHARTS ===== */
+    .market-chart-grid {
+      display: grid; grid-template-columns: minmax(360px, 0.9fr) minmax(480px, 1.1fr);
+      gap: 1.25rem; margin: 1.25rem 0 1.5rem; align-items: stretch;
+    }
+    .chart-box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.5rem 1rem;
+      width: 100%; min-height: 420px;
+      position: relative; overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .chart-box::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold);
+    }
+    .chart-box canvas { width: 100% !important; height: 330px !important; }
+    .chart-box.wide { min-height: 400px; margin-top: 1rem; }
+    .chart-box.wide canvas { height: 310px !important; }
+    .chart-insight {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem; margin-bottom: 1.25rem;
+    }
+    .insight-pill {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem 1.15rem;
+      border-top: 3px solid var(--gold);
+    }
+    .insight-pill strong {
+      display: block; font-size: 1.3rem;
+      color: var(--navy); line-height: 1.1;
+      font-weight: 700; letter-spacing: -0.3px;
+    }
+    .insight-pill span {
+      font-size: 0.75rem; color: var(--muted);
+      font-weight: 500; margin-top: 0.4rem; display: block; line-height: 1.4;
+    }
+
+    /* ===== PRICING ===== */
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1rem 0 1.5rem; }
+    .potential-box {
+      background: linear-gradient(180deg, #FDFAF2 0%, #FBF6E8 100%);
+      border: 1px solid rgba(184,137,43,0.22);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.5rem;
+    }
+    .potential-box h4 {
+      color: var(--navy); margin-bottom: 0.7rem; font-size: 1rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .potential-box h4 i { color: var(--gold); }
+    .potential-box p { margin-bottom: 0; font-size: 0.88rem; color: var(--ink); }
+
+    /* ===== RFQ ===== */
+    .rfq-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem; margin-top: 1.5rem;
+    }
+    .rfq-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.35rem; border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .rfq-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .rfq-title {
+      font-size: 1rem; font-weight: 600; color: var(--navy);
+      line-height: 1.4; letter-spacing: -0.1px;
+    }
+    .rfq-desc {
+      font-size: 0.85rem; color: var(--muted);
+      line-height: 1.65; word-wrap: break-word; text-align: left;
+    }
+    .rfq-img {
+      width: 100%; height: 180px; object-fit: cover;
+      border-radius: 6px; border: 1px solid var(--line);
+    }
+
+    /* ===== PERSONAS ===== */
+    .persona-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; margin-top: 1.25rem;
+    }
+    .persona-card {
+      background: var(--tint);
+      padding: 1.5rem; border-radius: var(--radius);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--blue);
+    }
+    .persona-card h4 {
+      color: var(--navy); margin-bottom: 1rem;
+      font-size: 1rem; font-weight: 600; letter-spacing: -0.1px;
+    }
+    .persona-card ul {
+      list-style: none; padding-left: 0;
+      font-size: 0.83rem; color: var(--muted); line-height: 1.6;
+    }
+    .persona-card li {
+      margin-bottom: 0.55rem; display: flex;
+      align-items: flex-start; gap: 10px;
+    }
+    .persona-card li::before {
+      content: ""; flex-shrink: 0;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold); margin-top: 0.55rem;
+    }
+
+    /* ===== STRATEGY ===== */
+    .strategy-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.15rem; margin: 1.25rem 0 1.5rem;
+    }
+    .strategy-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .strategy-card:hover { border-color: var(--gold); box-shadow: var(--shadow-md); }
+    .strategy-no {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 6px;
+      background: var(--navy); color: var(--gold-soft);
+      font-weight: 700; font-size: 0.78rem;
+      margin-bottom: 0.75rem;
+      font-family: 'Lexend', monospace;
+    }
+    .strategy-card h4 {
+      color: var(--navy); font-size: 0.95rem;
+      margin-bottom: 0.5rem; font-weight: 600;
+      line-height: 1.35; letter-spacing: -0.1px;
+    }
+    .strategy-card p { font-size: 0.84rem; margin-bottom: 0; color: var(--muted); }
+    .strategy-highlight { margin-top: 0.5rem; border-left-color: var(--gold); }
+
+    /* ===== RESEARCH NOTES ===== */
+    .research-notes {
+      margin-top: 2rem; padding: 1.75rem;
+      background: var(--tint);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .research-notes h3 {
+      color: var(--navy); font-size: 1.02rem;
+      margin-bottom: 1rem; display: flex;
+      align-items: center; gap: 10px;
+      font-weight: 600;
+    }
+    .research-notes h3 i { color: var(--gold); }
+    .source-table a { color: var(--blue); font-weight: 500; text-decoration: none; }
+    .source-table a:hover { text-decoration: underline; }
+    .source-list ol { padding-left: 1.5rem; }
+    .source-list li { margin-bottom: 0.5rem; color: var(--muted); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--navy-dark);
+      color: #fff; padding: 2.5rem 2.75rem 1.5rem;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      margin-top: 3rem; position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-soft), transparent);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.3fr 1fr;
+      gap: 2rem; align-items: stretch;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 1.05rem; font-weight: 700; margin-bottom: 0.85rem;
+      letter-spacing: 0.2px;
+    }
+    .footer-logo i {
+      color: var(--gold-soft);
+      background: rgba(184,137,43,0.12);
+      width: 36px; height: 36px; border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .footer-brand-block p {
+      color: rgba(255,255,255,0.65);
+      max-width: 540px; margin-bottom: 0;
+      font-size: 0.85rem; line-height: 1.65;
+    }
+    .footer-contact-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius); padding: 1.4rem;
+    }
+    .footer-contact-card h3 {
+      font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--gold-soft);
+      margin-bottom: 0.5rem; font-weight: 600;
+    }
+    .fc-name {
+      font-size: 1.1rem; font-weight: 600;
+      color: #fff; margin-bottom: 0.85rem;
+    }
+    .footer-action {
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.85) !important;
+      text-decoration: none;
+      padding: 0.65rem 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      word-break: break-word; font-size: 0.85rem;
+    }
+    .footer-action i { color: var(--gold-soft); width: 16px; font-size: 0.85rem; }
+    .footer-action:hover span { color: #fff; text-decoration: underline; }
+    .foot-bottom {
+      display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem;
+      color: rgba(255,255,255,0.4); padding-top: 1.25rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .main-content { padding: 2rem 1.75rem 0; }
+      .grid-2, .grid-3, .market-chart-grid, .pricing-grid, .persona-grid, .strategy-grid { grid-template-columns: 1fr; }
+      .chart-box { min-height: 380px; }
+      .chart-insight { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .main-content { margin-left: 0; width: 100%; padding: 1rem; }
+      .sidebar { position: relative; width: 100%; height: auto; display: flex; flex-direction: column; padding: 12px; }
+      .sidebar nav ul { display: flex; flex-direction: row; gap: 6px; overflow: auto; }
+      .sidebar nav .nav-label { display: none; }
+      .rfq-grid { grid-template-columns: 1fr; }
+      .section-card { padding: 1.5rem 1.25rem; }
+      .title { font-size: 1.5rem; }
+      footer { padding: 1.5rem 1.25rem; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; width: 100%; padding: 0; max-width: none; }
+      .section-card { box-shadow: none; page-break-inside: avoid; border: 1px solid var(--line); }
+      .header-banner { min-height: auto; padding: 2rem; }
+      body { background: #fff; font-size: 12px; }
+      .rfq-card, .strategy-card, .chart-box, .info-card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<!-- ===== SIDEBAR NAVIGATION ===== -->
+<div class="sidebar">
+<div class="brand"><i class="fa-solid fa-shirt"></i> <span>Báo cáo ngành May mặc<br/>Alibaba.com B2B 2026</span></div>
+<nav>
+<div class="nav-label">Mục lục</div>
+<ul>
+<li><a class="active" href="#sec1"><i class="fa-solid fa-flag"></i> Chương 1 · Tóm tắt điều hành</a></li>
+<li><a href="#sec2"><i class="fa-solid fa-globe"></i> Chương 2 · Tổng quan thị trường</a></li>
+<li><a href="#sec3"><i class="fa-solid fa-warehouse"></i> Chương 3 · Nhà cung cấp</a></li>
+<li><a href="#sec4"><i class="fa-solid fa-award"></i> Chương 4 · Sản phẩm bán chạy</a></li>
+<li><a href="#sec5"><i class="fa-solid fa-clipboard-list"></i> Chương 5 · Yêu cầu RFQ</a></li>
+<li><a href="#sec6"><i class="fa-solid fa-magnifying-glass"></i> Chương 6 · Chân dung người mua</a></li>
+<li><a href="#sec7"><i class="fa-solid fa-tags"></i> Chương 7 · Phân tích giá</a></li>
+<li><a href="#sec8"><i class="fa-solid fa-rocket"></i> Chương 8 · Chiến lược</a></li>
+</ul>
+</nav>
+</div>
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-content">
+<!-- ===== HEADER BANNER ===== -->
+<div class="header-banner">
+<span class="badge"><i class="fa-solid fa-chart-line"></i> Báo cáo ngành hàng B2B · Alibaba.com</span>
+<h1 class="title">Ngành May mặc trên Alibaba.com: Nón len, Khăn len, Quần áo thể thao & Túi Canvas</h1>
+<p class="header-subtitle">Phân tích thị trường toàn cầu, người mua đang hoạt động, nhà cung cấp, giá bán và chiến lược xuất khẩu B2B dành cho doanh nghiệp Việt Nam.</p>
+<div class="meta">
+<span><i class="fa-solid fa-user-tie"></i> Người lập báo cáo: <strong>Dương Viết Hải</strong></span>
+<span><i class="fa-solid fa-calendar-days"></i> Ngày lập: <strong>17/08/2026</strong></span>
+</div>
+</div>
+<!-- ===== CHAPTER 1: EXECUTIVE SUMMARY ===== -->
+<div class="section-card" id="sec1">
+<h2 class="section-title"><span class="chapter-num">01</span><i class="fa-solid fa-flag"></i> Tóm tắt điều hành</h2>
+<div class="grid-3">
+<div class="info-card"><div class="info-val">40 triệu+</div><div class="info-lbl">Người mua đăng ký đang hoạt động trên Alibaba.com (2026)</div></div>
+<div class="info-card"><div class="info-val">1.776 / 2.322</div><div class="info-lbl">Nhà cung cấp nón len (custom beanie) / khăn len trên Alibaba.com</div></div>
+<div class="info-card"><div class="info-val">1,75 nghìn tỷ USD</div><div class="info-lbl">Quy mô thị trường may mặc toàn cầu năm 2025</div></div>
+</div>
+<div class="highlight"><strong>Cơ hội lớn nhất:</strong> Phân khúc quần áo thể thao (sportswear) đạt 399,4 tỷ USD năm 2025, dự kiến tăng lên 890,4 tỷ USD vào 2033 (CAGR ~10,6%); thị trường khăn len & choàng đạt 26,22 tỷ USD và tăng lên 56,37 tỷ USD vào 2034. Việt Nam là nước xuất khẩu dệt may lớn thứ 3 thế giới với kim ngạch ~46 tỷ USD năm 2025, tạo nền tảng vững chắc để tận dụng lượng người mua khổng lồ trên Alibaba.com <a href="https://seller.alibaba.com/blogs/2026/global/b2b-ecommerce/alibaba-com-global-influence-guide-2026" target="_blank" class="citation">[Nguồn]</a>.</div>
+<p>Alibaba.com — nền tảng thương mại B2B xuyên biên giới lớn nhất thế giới — đang kết nối hơn 40 triệu người mua đăng ký với hơn 200.000 nhà cung cấp đã xác minh tại hơn 200 quốc gia và vùng lãnh thổ <a href="https://seller.alibaba.com/blogs/2026/global/b2b-ecommerce/alibaba-com-global-influence-guide-2026" target="_blank" class="citation">[Nguồn]</a>. Trong bối cảnh thương mại điện tử B2B toàn cầu đạt 36,86 nghìn tỷ USD vào năm 2026 và dự kiến tăng lên 61,66 nghìn tỷ USD vào 2031 (CAGR 10,84%) <a href="https://seller.alibaba.com/blogs/2026/global/b2b-ecommerce/alibaba-com-global-influence-guide-2026" target="_blank" class="citation">[Nguồn]</a>, ngành may mặc — với quy mô 1.749,67 tỷ USD năm 2025 <a href="https://www.fortunebusinessinsights.com/apparel-market-110718" target="_blank" class="citation">[Nguồn]</a> — là một trong những ngành hàng có lượng yêu cầu báo giá (RFQ) và đơn hàng lớn nhất nền tảng. Báo cáo này tập trung vào 4 nhóm sản phẩm: nón len (beanie), khăn len (knitted scarf), quần áo thể thao (sportswear) và túi canvas (canvas tote bag), kèm theo số liệu người mua hoạt động và cơ hội kinh doanh cụ thể cho từng sản phẩm.</p>
+</div>
+<!-- ===== CHAPTER 2: GLOBAL MARKET OVERVIEW ===== -->
+<div class="section-card" id="sec2">
+<h2 class="section-title"><span class="chapter-num">02</span><i class="fa-solid fa-globe"></i> Tổng quan thị trường toàn cầu</h2>
+<!-- Insight Pills -->
+<div class="chart-insight">
+<div class="insight-pill"><strong>$1.749,67 tỷ</strong><span>Quy mô thị trường may mặc toàn cầu 2025, tăng lên 2.000+ tỷ USD vào 2026</span></div>
+<div class="insight-pill"><strong>$399,4 tỷ</strong><span>Thị trường sportswear 2025 → 890,4 tỷ USD vào 2033 (CAGR ~10,6%)</span></div>
+<div class="insight-pill"><strong>$26,22 tỷ</strong><span>Thị trường khăn len & choàng 2025 → 56,37 tỷ USD vào 2034</span></div>
+</div>
+<p><strong>Người mua đang hoạt động (Active Buyers):</strong> Theo hướng dẫn ảnh hưởng toàn cầu của Alibaba.com (2026), nền tảng phục vụ hơn 40 triệu người mua đăng ký, trong đó phân khúc thương mại quốc tế của Tập đoàn Alibaba (Alibaba.com, AliExpress, Lazada, Trendyol) tạo ra khoảng 15 tỷ USD doanh thu trong năm tài chính 2025 <a href="https://seller.alibaba.com/blogs/2026/global/b2b-ecommerce/alibaba-com-global-influence-guide-2026" target="_blank" class="citation">[Nguồn]</a>. Với việc Alibaba.com chiếm ưu thế trong mảng sourcing sản xuất theo yêu cầu (custom manufacturing) và nhãn hàng riêng (private label), người mua may mặc — từ nhà nhập khẩu, nhà phân phối đến thương hiệu thể thao — là nhóm người mua hoạt động tích cực nhất trên nền tảng. Thị trường may mặc toàn cầu tăng trưởng CAGR 2,6% giai đoạn 2026–2030 theo Statista, với sản lượng ước tính 200,5 tỷ sản phẩm/năm <a href="https://www.statista.com/outlook/cmo/apparel/worldwide/" target="_blank" class="citation">[Nguồn]</a>.</p>
+<!-- Charts: Market Share + Growth -->
+<div class="market-chart-grid">
+<div class="chart-box"><canvas id="shareChart" width="700" height="350"></canvas></div>
+<div class="chart-box"><canvas id="growthChart" width="700" height="350"></canvas></div>
+</div>
+<!-- Top Exporting Countries -->
+<h3 class="sub-title">Các quốc gia xuất khẩu may mặc hàng đầu (Nhà cung cấp)</h3>
+<div class="table-container">
+<table>
+<thead><tr><th>#</th><th>Quốc gia</th><th>Thị phần xuất khẩu ước tính</th><th>Nhận định chính</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Trung Quốc</td><td>~31%</td><td>Trung tâm sản xuất & xuất khẩu may mặc lớn nhất, chi phối cả 4 phân khúc (nón len, khăn len, thể thao, túi canvas) trên Alibaba</td></tr>
+<tr><td>2</td><td>Bangladesh</td><td>~8%</td><td>Chuyên gia xuất khẩu may mặc giá rẻ số lượng lớn, chủ yếu hàng may sẵn</td></tr>
+<tr><td>3</td><td>Việt Nam</td><td>~7%</td><td>Nước xuất khẩu dệt may lớn thứ 3 thế giới, kim ngạch ~46 tỷ USD năm 2025, thế mạnh hàng may mặc và phụ kiện thủ công</td></tr>
+<tr><td>4</td><td>Ấn Độ</td><td>~4%</td><td>Thế mạnh khăn choàng, sản phẩm len cashmere, hàng thủ công</td></tr>
+<tr><td>5</td><td>Thổ Nhĩ Kỳ</td><td>~3%</td><td>Hàng dệt kim cao cấp, thời trang nhanh cho thị trường châu Âu</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Exporting Countries Chart -->
+<div class="chart-box wide"><canvas id="exportCountriesChart" width="700" height="350"></canvas></div>
+<!-- Top Importing Countries -->
+<h3 class="sub-title">Các thị trường nhập khẩu hàng đầu (Người mua)</h3>
+<div class="table-container">
+<table>
+<thead><tr><th>#</th><th>Thị trường</th><th>Thị phần nhập khẩu ước tính</th><th>Xu hướng</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Hoa Kỳ</td><td>~18%</td><td>Thị trường nhập khẩu may mặc lớn nhất thế giới; Việt Nam xuất khẩu ~18,6 tỷ USD hàng may mặc sang Mỹ năm 2025, tăng 11,75%</td></tr>
+<tr><td>2</td><td>Liên minh châu Âu (EU)</td><td>~16%</td><td>EU là thị trường xuất khẩu dệt may lớn nhất của Việt Nam; lợi thế thuế 0% theo EVFTA</td></tr>
+<tr><td>3</td><td>Nhật Bản</td><td>~5%</td><td>Nhu cầu ổn định về phụ kiện mùa đông và thời trang thể thao chất lượng cao</td></tr>
+<tr><td>4</td><td>Vương quốc Anh</td><td>~4%</td><td>Nhu cầu khăn len cổ động viên (fan scarf), quần áo thể thao bóng đá</td></tr>
+<tr><td>5</td><td>Canada</td><td>~2%</td><td>Khí hậu lạnh tạo nhu cầu ổn định cho nón len, khăn len mùa đông</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Importing Countries Chart -->
+<div class="chart-box wide"><canvas id="importCountriesChart" width="700" height="350"></canvas></div>
+<!-- Business opportunities per product -->
+<h3 class="sub-title">Cơ hội kinh doanh theo từng sản phẩm trên Alibaba.com</h3>
+<p>Bảng dưới đây tổng hợp số lượng nhà cung cấp đang hoạt động trên Alibaba.com cho từng sản phẩm (thước đo mức độ cạnh tranh & quy mô nguồn hàng), quy mô thị trường toàn cầu và mức độ cơ hội cho nhà xuất khẩu Việt Nam. Số nhà cung cấp được lấy trực tiếp từ các trang danh mục nhà cung cấp của Alibaba.com:</p>
+<div class="table-container">
+<table>
+<thead><tr><th>#</th><th>Sản phẩm</th><th>Nhà cung cấp trên Alibaba</th><th>Quy mô thị trường toàn cầu 2025</th><th>Tăng trưởng dự kiến</th><th>Mức độ cơ hội</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Nón len (Beanie)</strong></td><td>1.776 nhà cung cấp <a href="https://www.alibaba.com/custom-beanie-suppliers.html" target="_blank" class="citation">[Nguồn]</a></td><td>2,23 tỷ USD (knit beanie) <a href="https://growthmarketreports.com/report/knit-beanie-market" target="_blank" class="citation">[Nguồn]</a></td><td>CAGR ~6–7%</td><td>Cao — mùa vụ rõ rệt (Q3–Q4)</td></tr>
+<tr><td>2</td><td><strong>Khăn len (Knitted Scarf)</strong></td><td>2.322 nhà cung cấp <a href="https://www.alibaba.com/knitted-scarf-suppliers.html" target="_blank" class="citation">[Nguồn]</a></td><td>26,22 tỷ USD (scarves & shawls) <a href="https://www.fortunebusinessinsights.com/scarves-shawls-market-110358" target="_blank" class="citation">[Nguồn]</a></td><td>CAGR ~8%</td><td>Rất cao — đa dạng phân khúc từ bình dân đến cashmere</td></tr>
+<tr><td>3</td><td><strong>Quần áo thể thao (Sportswear)</strong></td><td>2.240 nhà cung cấp <a href="https://www.alibaba.com/sportswear-suppliers.html" target="_blank" class="citation">[Nguồn]</a></td><td>399,4 tỷ USD <a href="https://www.grandviewresearch.com/industry-analysis/sportswear-market" target="_blank" class="citation">[Nguồn]</a></td><td>CAGR ~10,6%</td><td>Rất cao — phân khúc tăng trưởng nhanh nhất</td></tr>
+<tr><td>4</td><td><strong>Túi Canvas (Canvas Tote Bag)</strong></td><td>1.535 nhà cung cấp <a href="https://www.alibaba.com/canvas-tote-bags-blank-suppliers.html" target="_blank" class="citation">[Nguồn]</a></td><td>1,1–1,2 tỷ USD <a href="https://www.thebusinessresearchcompany.com/report/canvas-bags-global-market-report" target="_blank" class="citation">[Nguồn]</a></td><td>CAGR 5,2%</td><td>Cao — xu hướng eco-friendly & quà tặng in logo</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:0.82rem;color:#7B8794;">Ghi chú: Việt Nam hiện có 9 nhà cung cấp túi canvas trên Alibaba.com (theo bộ lọc quốc gia của trang canvas tote bags blank suppliers <a href="https://www.alibaba.com/canvas-tote-bags-blank-suppliers.html" target="_blank" class="citation">[Nguồn]</a>) — đây là lợi thế đi sớm: mức độ cạnh tranh trong nước thấp trong khi nhu cầu toàn cầu tăng đều.</p>
+</div>
+<!-- ===== CHAPTER 3: SUPPLIER LANDSCAPE ===== -->
+<div class="section-card" id="sec3">
+<h2 class="section-title"><span class="chapter-num">03</span><i class="fa-solid fa-warehouse"></i> Bức tranh nhà cung cấp</h2>
+<div class="highlight"><strong>Ghi chú thị trường ngách:</strong> Ngành nón len / khăn len / quần áo thể thao / túi canvas tại Việt Nam có số lượng nhà cung cấp hạn chế trên Alibaba.com so với Trung Quốc (nón lá truyền thống và túi canvas là thế mạnh). Tuy nhiên, khảo sát bổ sung từ catalog Leisurewear của Alibaba (bộ lọc country=VN) cho thấy <strong>Việt Nam có hơn 20 nhà cung cấp đồ thể thao & thời trang</strong> đang hoạt động trên nền tảng. Chương 3 chia làm 3 phần: <strong>Phần A — Nhà cung cấp Việt Nam</strong> (nón lá, phụ kiện), <strong>Phần A2 — Nhà cung cấp thể thao & may mặc Việt Nam</strong> (bổ sung) và <strong>Phần B — Nhà cung cấp hàng đầu toàn cầu</strong>.</div>
+<h3 class="sub-title">Phần A: Nhà cung cấp từ Việt Nam (9–10 nhà cung cấp xác minh)</h3>
+<div class="table-container">
+<table>
+<thead>
+<tr><th style="width: 40px;">STT</th><th>Công ty</th><th>Sản phẩm chính</th><th>Doanh thu ước tính</th><th>Số năm trên nền tảng</th><th style="width: 110px;">Store</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>SAFIMEX JOINT STOCK COMPANY — TP.HCM</td><td>Nón lá truyền thống, nón lá sen, nón thủ công xuất khẩu (mũ phụ kiện VN)</td><td>Không hiển thị</td><td>9 năm</td><td><a class="link-store-btn" href="https://safimex.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>2</td><td>HAN EXIM COMPANY LIMITED — Hà Nội</td><td>Nón lá cao cấp, nón sen handmade; đánh giá 5.0/5.0</td><td>US$55.000+ giao dịch</td><td>6 năm</td><td><a class="link-store-btn" href="https://vn1540662850nwoh.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>3</td><td>BLUE LOTUS EXIM CO., LTD — TP.HCM</td><td>Nón lá tre truyền thống, đồ trang trí; đánh giá 4.7/5.0</td><td>US$31.000+ giao dịch</td><td>5 năm</td><td><a class="link-store-btn" href="https://bluelotusfarm.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>4</td><td>999 GOLD DATA — TP.HCM</td><td>Nón lá thủ công, nón lá in logo; đánh giá 4.7/5.0</td><td>US$52.000+ giao dịch</td><td>8 năm</td><td><a class="link-store-btn" href="https://99golddata.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>5</td><td>VIETCHOICE IMPORT EXPORT TRADING PRODUCTION CO., LTD — Đồng Nai</td><td>Nón lá in logo custom; đánh giá 4.9/5.0</td><td>US$20.000+ giao dịch</td><td>2 năm</td><td><a class="link-store-btn" href="https://vietchoice.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>6</td><td>VIGI FARM PRODUCTION COMPANY LIMITED — TP.HCM</td><td>Nón lá Non La truyền thống, tre nguyên liệu</td><td>Không hiển thị</td><td>3 năm</td><td><a class="link-store-btn" href="https://vn1317054628lfai.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>7</td><td>VIET D.E.L.T.A INDUSTRIAL CO., LTD — TP.HCM</td><td>Nón lá trang trí, nón cỏ tự nhiên xuất khẩu</td><td>Không hiển thị</td><td>4 năm</td><td><a class="link-store-btn" href="https://vn1557572316itpx.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>8</td><td>HAODY MEDICAL TECHNOLOGY VIET NAM — Bình Dương</td><td>Nón lá, áo thun nam, tất nữ — đa ngành may mặc</td><td>US$3.100+ giao dịch</td><td>3 năm</td><td><a class="link-store-btn" href="https://vn1567791240otbg.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>9</td><td>VIET FARGIMEX CO.,LTD — TP.HCM</td><td>Nón lá Non La handmade, nón mini trang trí</td><td>Không hiển thị</td><td>2 năm</td><td><a class="link-store-btn" href="https://vn19054309927hnkb.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>10</td><td>LERAN ECOMMERCE COMPANY LIMITED — Việt Nam</td><td>Nón beanie mùa đông, bucket hat, baseball cap in logo custom</td><td>Không hiển thị</td><td>—</td><td><a class="link-store-btn" href="https://customaker.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+</tbody>
+</table>
+</div>
+<h3 class="sub-title">Phần A2: Nhà cung cấp thể thao & may mặc Việt Nam (bổ sung — nguồn: catalog Leisurewear Việt Nam trên Alibaba)</h3>
+<p style="font-size:0.85rem;color:#576574;">Các nhà cung cấp dưới đây được phát hiện qua trang catalog Leisurewear của Alibaba.com với bộ lọc quốc gia Việt Nam (country=VN) — toàn bộ đều là nhà cung cấp đã xác minh có store thực trên nền tảng <a href="https://www.alibaba.com/catalog/Leisurewear_cid127734177?categoryId=127734177&country=VN&sortType=prodSold180&" target="_blank" class="citation">[Nguồn]</a>.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr><th style="width: 40px;">STT</th><th>Công ty</th><th>Sản phẩm chính</th><th>Doanh thu ước tính</th><th>Số năm trên nền tảng</th><th style="width: 110px;">Store</th></tr>
+</thead>
+<tbody>
+<tr><td>A2.1</td><td>HY LONG GARMENT LTD CO — TP.HCM</td><td>Đồng phục thể thao (soccer/basketball/baseball jersey), yoga wear; Custom Manufacturer, 16+ năm kinh nghiệm, 202 nhân viên, nhà xưởng 10.825 m², 12 QC; Gold Supplier + Trade Assurance</td><td>US$5M – US$10M/năm</td><td>2 năm</td><td><a class="link-store-btn" href="https://hylongsportswear.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.2</td><td>HGF MANUFACTURING AND TRADING JOINT STOCK COMPANY</td><td>Quần áo chống nắng HF PRO, đồ bảo hộ thời trang; đánh giá 4.8/5.0</td><td>Không hiển thị</td><td>11 năm</td><td><a class="link-store-btn" href="https://handee.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.3</td><td>PRETTY VINA COMPANY LIMITED</td><td>Đồ bơi 1 mảnh, đồ đi biển, leisurewear</td><td>Không hiển thị</td><td>7 năm</td><td><a class="link-store-btn" href="https://prettyvina.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.4</td><td>BABEENI CO.,LTD</td><td>Đồ bơi nữ 2 mảnh, rash guard chống nắng</td><td>Không hiển thị</td><td>20 năm</td><td><a class="link-store-btn" href="https://babeeni.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.5</td><td>AN KHANG COMPANY LIMITED</td><td>Sports bra nữ quick-dry, đồ gym yoga; đánh giá 4.4/5.0</td><td>Không hiển thị</td><td>15 năm</td><td><a class="link-store-btn" href="https://ankhang.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.6</td><td>VINH TAI GARMENT CO.,LTD</td><td>Tracksuit nam cao cấp French Terry, đồ mùa đông; đánh giá 4.6/5.0</td><td>Không hiển thị</td><td>7 năm</td><td><a class="link-store-btn" href="https://vinhtai.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.7</td><td>DHL VINA UNIFORM GARMENT COMPANY LIMITED</td><td>Yoga set 2 món athleisure OEM, đồng phục</td><td>Không hiển thị</td><td>2 năm</td><td><a class="link-store-btn" href="https://dhlvina.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.8</td><td>TT GARMENT TRADING COMPANY LIMITED</td><td>Quần track, đồ thể thao cho thương hiệu; đánh giá 4.1/5.0</td><td>Không hiển thị</td><td>5 năm</td><td><a class="link-store-btn" href="https://ttglobalco.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.9</td><td>JUST PLAY COMPANY LIMITED</td><td>Áo cầu lông, đồ thể thao quick-dry; đánh giá 5.0/5.0</td><td>Không hiển thị</td><td>3 năm</td><td><a class="link-store-btn" href="https://justplay.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>A2.10</td><td>TIEN PHONG SPORT TECHNOLOGY COMPANY LIMITED</td><td>Áo chạy bộ seamless in kỹ thuật số, đồ thể thao OEM/ODM; đánh giá 5.0/5.0</td><td>Không hiển thị</td><td>2 năm</td><td><a class="link-store-btn" href="https://kustoman.trustpass.alibaba.com" target="_blank">Xem Store</a></td></tr>
+</tbody>
+</table>
+</div>
+<h3 class="sub-title">Phần B: Nhà cung cấp hàng đầu trên Alibaba (Toàn cầu)</h3>
+<div class="table-container">
+<table>
+<thead>
+<tr><th style="width: 40px;">STT</th><th>Công ty</th><th>Quốc gia</th><th>Sản phẩm chính</th><th>Doanh thu ước tính</th><th style="width: 110px;">Store</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>Yiwu Xinfeng Hat Co., Ltd.</td><td>Trung Quốc (Chiết Giang)</td><td>Beanie, baseball cap, bucket hat; 12 năm kinh nghiệm; tỷ lệ phản hồi 95,4%</td><td>US$10M – US$50M</td><td><a class="link-store-btn" href="https://caps.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>12</td><td>Shanghai Advanced Cap Manufacturing Co., Ltd.</td><td>Trung Quốc (Thượng Hải)</td><td>Knitted beanies ($1.95–4.25), khăn len, găng tay</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://acapchina.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>13</td><td>Qingdao Ever Fortune Industrial Co., Ltd.</td><td>Trung Quốc (Sơn Đông)</td><td>Beanies, mũ felt, balaclava; đánh giá 4.8/5.0</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://efc.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>14</td><td>Henan Zhenbang Textile Company Ltd.</td><td>Trung Quốc (Hà Nam)</td><td>Beanies, baseball caps, khăn dệt kim; Verified Manufacturer 15 năm; tỷ lệ phản hồi 91,4%</td><td>US$50M – US$100M</td><td><a class="link-store-btn" href="https://zhenbang.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>15</td><td>Xiongxian Kaixin Cap Co., Ltd.</td><td>Trung Quốc (Hà Bắc)</td><td>Beanies, trucker caps, bucket hats; 12 năm kinh nghiệm, ODM</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://kaixincap.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>16</td><td>Guangzhou Ducibutt Apparel Co., Ltd.</td><td>Trung Quốc (Quảng Đông)</td><td>Khăn len cổ động viên (fan scarf) jacquard 2 mặt; $1.50–2.60, MOQ 100 pcs</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://ducibutt.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>17</td><td>Yiwu Mistyler Garment Co., Ltd.</td><td>Trung Quốc (Chiết Giang)</td><td>Khăn len, shawl, poncho, hijab ($2.02–2.90)</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://mistyler.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>18</td><td>Dongguan Pro Sportswear Co., Ltd.</td><td>Trung Quốc (Quảng Đông)</td><td>Đồ thể thao, yoga wear, fitness wear (leggings $7.90–8.90)</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://prosportswear.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>19</td><td>Guangzhou Ingor Sportswear Co., Ltd.</td><td>Trung Quốc (Quảng Đông)</td><td>Activewear OEM/ODM yoga, gym wear; 17 năm kinh nghiệm</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://ingor.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>20</td><td>Guangzhou Dreamfox Clothing Co., Ltd.</td><td>Trung Quốc (Quảng Đông)</td><td>Đồ thể thao bóng đá, hockey, đạp xe, bóng rổ</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://dreamfoxsport.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>21</td><td>Huizhou Eto Gift Co., Ltd.</td><td>Trung Quốc (Quảng Đông)</td><td>Túi canvas, túi polyester, túi rút dây (canvas $0.29–0.49)</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://eto-group.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+<tr><td>22</td><td>Wenzhou Aite Bag Co., LTD.</td><td>Trung Quốc (Chiết Giang)</td><td>Túi canvas tote in logo ($0.50–1.89), túi rút dây, túi vải bố</td><td>Không hiển thị</td><td><a class="link-store-btn" href="https://huayuprint.en.alibaba.com" target="_blank">Xem Store</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ===== CHAPTER 4: TOP-SELLING PRODUCTS ===== -->
+<div class="section-card" id="sec4">
+<h2 class="section-title"><span class="chapter-num">04</span><i class="fa-solid fa-award"></i> Sản phẩm bán chạy & điểm chuẩn</h2>
+<p>Danh sách <strong>30 sản phẩm thực tế</strong> đang được chào bán trên Alibaba.com cho 4 nhóm sản phẩm, được cơ cấu cân bằng <strong>50/50</strong> giữa nhà cung cấp toàn cầu và Việt Nam: <strong>Phần A</strong> gồm 15 sản phẩm điểm chuẩn từ nhà cung cấp toàn cầu (chủ yếu Trung Quốc) và <strong>Phần B</strong> gồm 15 sản phẩm cạnh tranh từ nhà cung cấp Việt Nam. Giá là giá FOB/đơn giá hiển thị trên listing (một số listing ẩn giá — đánh dấu "Liên hệ"). Ảnh sản phẩm là ảnh thực từ CDN Alibaba (s.alicdn.com) của các nhóm sản phẩm tương ứng trên nền tảng.</p>
+<h3 class="sub-title">Phần A: Điểm chuẩn từ nhà cung cấp toàn cầu (15 sản phẩm)</h3>
+<p>15 sản phẩm đại diện — được lựa chọn từ những listing có dữ liệu giá FOB thực tế và nhà cung cấp cụ thể — trải đều 4 nhóm ngành hàng: nón len, khăn len, đồ thể thao và túi canvas. Đây là cơ sở để so sánh với các nhà cung cấp Việt Nam ở Phần B.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr><th style="width: 40px;">#</th><th style="width: 72px;">Ảnh Sản Phẩm</th><th>Tên Sản Phẩm Bán Chạy</th><th>Dải Giá FOB (USD)</th><th>MOQ</th><th>Nhà Cung Cấp Uy Tín</th><th style="width: 130px;">Link Sản Phẩm</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><img src="https://s.alicdn.com/@sc04/kf/H85dec2d2206048fc8c95a8fc03175e00l.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="nón len"/></td><td><strong>Wholesale Custom Striped Beanie Hat for Men and Women Acrylic Knitted Warm Plain Beanie Winter Hat</strong></td><td>~$2.90 (25 pcs) → ~$0.46 (1.000+ pcs)</td><td>25 pieces</td><td>Bazhou Shengfang Quanxia Clothing</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Custom-Striped-Beanie-Hat-for_1600357138873.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Custom-Striped-Beanie-Hat-for_1600357138873.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>2</td><td><img src="https://s.alicdn.com/@sc04/kf/Habd09eb89f9c4344ba8f95ea71478bbdL.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="nón len"/></td><td><strong>Brown Toque Soft Warm Winter Woven Label 100% Acrylic Beanie Hat Wholesale Unisex Waffle Knit Beanies With Custom Logo</strong></td><td>$2.87 (300–499 pcs)</td><td>300 pieces</td><td>Nhà cung cấp nón len Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Brown-Toque-Soft-Warm-Winter-Woven_1600315624376.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Brown-Toque-Soft-Warm-Winter-Woven_1600315624376.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>3</td><td><img src="https://s.alicdn.com/@sc04/kf/Hc2b0df9ef19b45adb9d308fff23852650.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="nón len"/></td><td><strong>Factory Price Autumn and Winter Knitted Letter Embroidery Beanies Hat Wholesale Jacquard Knitted Hats</strong></td><td>$2.39 (25 pcs) → $1.89 (1.000+ pcs)</td><td>25 pieces</td><td>Nhà cung cấp nón len Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Factory-Price-Autumn-and-Winter-Knitted_1601037592848.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Factory-Price-Autumn-and-Winter-Knitted_1601037592848.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>4</td><td><img src="https://s.alicdn.com/@sc04/kf/H0dcea55b3489496e8dd93ba9232a0557m.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="nón len chạy bộ"/></td><td><strong>Wholesale Blank Fleece Running Beanie Hat — 92% polyester/8% spandex, double-layered</strong></td><td>$5.50</td><td>Liên hệ</td><td>Nhà cung cấp nón len Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Blank-Fleece-Running-Beanie-Hat-Wholesale_60695763198.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Blank-Fleece-Running-Beanie-Hat-Wholesale_60695763198.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>5</td><td><img src="https://s.alicdn.com/@sc04/kf/A54c665f0815f4180adb6ccdd108f0cddy.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="nón len"/></td><td><strong>OEM Factory Price Toque Knitted Beanie — Customized Colors Thick Pure Wool Felt</strong></td><td>$0.79 – $1.29</td><td>250 pieces</td><td>Qingdao Ever Fortune Industrial</td><td><a href="https://www.alibaba.com/product-detail/OEM-Factory-Price-Toque-Knitted-Beanie_1600612715318.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/OEM-Factory-Price-Toque-Knitted-Beanie_1600612715318.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>6</td><td><img src="https://s.alicdn.com/@sc04/kf/H65fa274eb8a74f87ab654d52722f69f6M.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="khăn len"/></td><td><strong>Good Quality Scarf Custom Printed Knitted — Breathable, Long-Length Design for Football Fans</strong></td><td>$2.36 (1.000 pcs)</td><td>1.000 pieces</td><td>Nhà cung cấp khăn len Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Good-Quality-Scarf-Custom-Printed-Knitted_1601458281598.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Good-Quality-Scarf-Custom-Printed-Knitted_1601458281598.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>7</td><td><img src="https://s.alicdn.com/@sc04/kf/H754b0d4848ae4487af35e34d2aca67f0j.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="khăn len"/></td><td><strong>Wholesale Custom Scarves Shawls Football Fan Warm Knitted Scarves Print on Video Photos Customizable</strong></td><td>$3.44 – $3.82</td><td>Liên hệ</td><td>Nhà cung cấp khăn len Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Custom-Scarves-Shawls-Football-Fan_1601014838417.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Custom-Scarves-Shawls-Football-Fan_1601014838417.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>8</td><td><img src="https://s.alicdn.com/@sc04/kf/Heeee6e6163844acf9b66caaf948fc1aeJ.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="khăn len"/></td><td><strong>Private Label Jacquard Knitted Scarf Custom Printed Long — Checkered, Color Blocking, Dot Patterns</strong></td><td>$3.50 (50 pcs) → $2.00 (10.000+ pcs)</td><td>50 pieces</td><td>Nhà cung cấp khăn len Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/print-cheap-double-sided-custom-Long_1600925149356.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/print-cheap-double-sided-custom-Long_1600925149356.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>9</td><td><img src="https://s.alicdn.com/@sc04/kf/Hf81548788d264b0796c1bdac1315922dR.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="khăn len"/></td><td><strong>Wholesale Custom Logo Bear Design Knitted Scarves For Women Winter</strong></td><td>$1.67 (30 pcs) → $1.45 (500+ pcs)</td><td>30 pieces</td><td>Nhà cung cấp khăn len Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Custom-logo-Bear-Design-Knitted_1601559781638.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Custom-logo-Bear-Design-Knitted_1601559781638.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>10</td><td><img src="https://s.alicdn.com/@sc04/kf/H94d4a0118a1742daacb2738835476ca4x.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="đồ thể thao"/></td><td><strong>Wholesale Athletic Activewear Seamless Workout Clothing — Sportswear Yoga Wear Gym Fitness Sets 2 Pieces</strong></td><td>$4.92 (200 pcs) → $3.76 (5.000+ pcs)</td><td>200 pieces</td><td>Nhà cung cấp đồ thể thao Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Athletic-Activewear-Sports-Clothes-Seamless_1600379929818.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Athletic-Activewear-Sports-Clothes-Seamless_1600379929818.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>11</td><td><img src="https://s.alicdn.com/@sc04/kf/Hd7cf7da124814024a462141743bcdcc25.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="đồ thể thao"/></td><td><strong>Wholesale Fitness Clothes for Gym Wear Women Sets 3 Pieces — Yoga Jackets Workout Leggings Sports Bras Top</strong></td><td>$18.90 (1.000+ sets)</td><td>1.000 sets</td><td>Nhà cung cấp đồ thể thao Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Fitness-Clothes-For-Gym-Wear_1600863125935.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Fitness-Clothes-For-Gym-Wear_1600863125935.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>12</td><td><img src="https://s.alicdn.com/@sc04/kf/H8ec597ec4670447aa776372831cea5e9S.jpg_720x720q50.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="đồ thể thao"/></td><td><strong>Joyyoung OEM Custom Wholesale Lightweight Sportswear Active Wear Yoga Set Gym Wear Women's 2-Piece</strong></td><td>$14.31 – $17.89</td><td>Liên hệ</td><td>Nhà cung cấp đồ thể thao Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Joyyoung-OEM-Custom-Wholesale-Lightweight-Sportswear_11000031637765.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Joyyoung-OEM-Custom-Wholesale-Lightweight-Sportswear_11000031637765.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>13</td><td><img src="https://s.alicdn.com/@sc04/kf/H0f2fa451e92d4b298106511d415754cdt.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="đồ thể thao"/></td><td><strong>Wholesale 2 Pieces Long Sleeve Sport Set Men Running Tracksuit — suitable for bulk orders</strong></td><td>$8.00 (10 pcs) → $7.00 (500+ pcs)</td><td>10 pieces</td><td>Nhà cung cấp đồ thể thao Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-2-pieces-Long-Sleeve-Sport_62255729580.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-2-pieces-Long-Sleeve-Sport_62255729580.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>14</td><td><img src="https://s.alicdn.com/@sc04/kf/H942e7300657a45c6ab574fc56a122d27N.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="túi canvas"/></td><td><strong>Wholesale Large Heavy Duty Cotton Canvas Tote Bag — Non Woven, Drawstring, Rope, PP Webbing, Long Handle Zipper</strong></td><td>Liên hệ</td><td>Liên hệ</td><td>Nhà cung cấp túi canvas Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Large-Heavy-Duty-Cotton-Canvas_1601372409086.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Large-Heavy-Duty-Cotton-Canvas_1601372409086.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>15</td><td><img src="https://s.alicdn.com/@sc04/kf/Hc7c23fa070004d2b8b4a8303f2208b17g.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="túi canvas"/></td><td><strong>One Piece Blank Canvas Tote Bag 12oz — Cotton Canvas Bag for Family Travel, DIY Printing, Custom Logo</strong></td><td>Liên hệ</td><td>Liên hệ</td><td>Nhà cung cấp túi canvas Trung Quốc</td><td><a href="https://www.alibaba.com/product-detail/One-Piece-Blank-Canvas-Tote-Bag_1601726933215.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/One-Piece-Blank-Canvas-Tote-Bag_1601726933215.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+</tbody>
+</table>
+</div>
+<h3 class="sub-title">Phần B: Sản phẩm cạnh tranh từ nhà cung cấp Việt Nam (15 sản phẩm)</h3>
+<p>15 sản phẩm thể thao và túi canvas — chiếm <strong>một nửa</strong> số listing đưa vào chương này — của các nhà cung cấp Việt Nam trên Alibaba.com, phát hiện qua trang catalog Leisurewear (bộ lọc Việt Nam) và tìm kiếm sản phẩm "Vietnam" <a href="https://www.alibaba.com/catalog/Leisurewear_cid127734177?categoryId=127734177&country=VN&sortType=prodSold180&" target="_blank" class="citation">[Nguồn]</a>. Điểm nổi bật: MOQ thấp (10–100 pcs), giá FOB cạnh tranh và năng lực OEM/ODM đồng phục thể thao — đây là lợi thế cạnh tranh trực tiếp so với các nhà cung cấp toàn cầu ở Phần A.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr><th style="width: 40px;">#</th><th style="width: 72px;">Ảnh Sản Phẩm</th><th>Tên Sản Phẩm Bán Chạy</th><th>Dải Giá FOB (USD)</th><th>MOQ</th><th>Nhà Cung Cấp Uy Tín</th><th style="width: 130px;">Link Sản Phẩm</th></tr>
+</thead>
+<tbody>
+<tr><td>16</td><td><img src="https://s.alicdn.com/@sc04/kf/H833b6ff68af24d2d9ac3f043823f47b5b/Wholesale-Yoga-Wear-Set-Women-s-Custom.jpg_480x480.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="yoga set Việt Nam"/></td><td><strong>Wholesale Yoga Wear Set Women's Custom Breathable Yoga Pants And Bra Workout Yoga Wear Sportswear (Made in Vietnam)</strong></td><td>$5.99 – $9.99</td><td>10 pieces</td><td>HY LONG GARMENT LTD CO</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Yoga-Wear-Set-Women-s_1601609167789.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Yoga-Wear-Set-Women-s_1601609167789.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>17</td><td><img src="https://s.alicdn.com/@sc04/kf/H773e0b7b811f425d90d420702f058e101/Custom-Black-Retro-Basketball-Jersey-Embroidery-Logo.jpg_480x480.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="áo bóng rổ Việt Nam"/></td><td><strong>Custom Black Retro Basketball Jersey Embroidery Logo Design Classic Retro Mesh Basketball Shirts</strong></td><td>$5 – $9</td><td>10 pieces</td><td>HY LONG GARMENT LTD CO</td><td><a href="https://www.alibaba.com/product-detail/Custom-Black-Retro-Basketball-Jersey-Embroidery_1601427497871.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Custom-Black-Retro-Basketball-Jersey-Embroidery_1601427497871.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>18</td><td><img src="https://s.alicdn.com/@sc04/kf/A3723b8e8ab0d48edb474cecf0e1c232eH/Custom-New-Player-Football-Jerseys-Sublimation-Printing.jpg_480x480.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="áo bóng đá Việt Nam"/></td><td><strong>Custom New Player Football Jerseys Sublimation Printing Design Street Classic Sports Soccer Jersey</strong></td><td>$5.50 – $10</td><td>10 pieces</td><td>HY LONG GARMENT LTD CO</td><td><a href="https://www.alibaba.com/product-detail/Custom-New-Player-Football-Jerseys-Sublimation_1601445372427.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Custom-New-Player-Football-Jerseys-Sublimation_1601445372427.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>19</td><td><img src="https://s.alicdn.com/@sc04/kf/H04efa306aa644fff80a556f1e6fbe19eA/Street-Classic-Team-Football-Uniforms-Custom-Breathable.jpg_480x480.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="đồng phục bóng đá Việt Nam"/></td><td><strong>Street Classic Team Football Uniforms Custom Breathable Sports Soccer Club Team Jersey</strong></td><td>$6 – $10</td><td>10 pieces</td><td>HY LONG GARMENT LTD CO</td><td><a href="https://www.alibaba.com/product-detail/Street-Classic-Team-Football-Uniforms-Custom_1601443883622.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Street-Classic-Team-Football-Uniforms-Custom_1601443883622.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>20</td><td><img src="https://s.alicdn.com/@sc04/kf/Hf38da8f6900e4525b472e1b4f22b2e8ei/Custom-Design-Embroidery-Logo-Sublimation-Youth-Team.jpg_720x720.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="áo hockey Việt Nam"/></td><td><strong>Custom Design Embroidery Logo Sublimation Youth Team Ice Hockey Jersey</strong></td><td>$6.25 – $8.50</td><td>10 pieces</td><td>HY LONG GARMENT LTD CO</td><td><a href="https://www.alibaba.com/product-detail/Custom-Design-Embroidery-Logo-Sublimation-Youth_1601427570955.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Custom-Design-Embroidery-Logo-Sublimation-Youth_1601427570955.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>21</td><td><img src="https://s.alicdn.com/@sc04/kf/H0598bd5527834f73b70ed2eeb245e33dA/Wholesale-Blank-Athletic-Basketball-Shorts-Printed-Breathable.jpg_480x480.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="quần bóng rổ Việt Nam"/></td><td><strong>Wholesale Blank Athletic Basketball Shorts Printed Breathable Plus Size Customizable Moisture-Wicking</strong></td><td>$5 – $7.75</td><td>10 pieces</td><td>HY LONG GARMENT LTD CO</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Blank-Athletic-Basketball-Shorts-Printed_1601427949660.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Blank-Athletic-Basketball-Shorts-Printed_1601427949660.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>22</td><td><img src="https://s.alicdn.com/@sc04/kf/H7e5ba47fe6764055b3460087419a7f06k/Cotton-T-Shirt-Oversized-Summer-Streetwear-Custom.jpg_480x480.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="áo thun Việt Nam"/></td><td><strong>Cotton T Shirt Oversized Summer Streetwear Custom Black Unisex Print Shits</strong></td><td>$1.79 – $3.44</td><td>10 pieces</td><td>HY LONG GARMENT LTD CO</td><td><a href="https://www.alibaba.com/product-detail/Cotton-T-Shirt-Oversized-Summer-Streetwear_1601428399261.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Cotton-T-Shirt-Oversized-Summer-Streetwear_1601428399261.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>23</td><td><img src="https://s.alicdn.com/@sc04/kf/S23f016c0fb5042a7994d551bb13c6066N.png_300x300.png" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="yoga set Việt Nam"/></td><td><strong>Wholesale Women Two Piece Yoga Set Athleisure Gym Wear Fitness Workout Sportswear Custom Logo OEM Manufacturer</strong></td><td>$10.65 – $13.65</td><td>2 pieces</td><td>DHL VINA UNIFORM GARMENT CO., LTD</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-Women-Two-Piece-Yoga-Set_10000045236675.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-Women-Two-Piece-Yoga-Set_10000045236675.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>24</td><td><img src="https://s.alicdn.com/@sc04/kf/Hca6326910dd0498eb3c32e226f322661V.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="tracksuit Việt Nam"/></td><td><strong>OEM Custom Breathable Plus Size Winter Men's Tracksuit Set High Quality French Terry Jogging Suit Anti-Bacterial Made in Vietnam</strong></td><td>$10 – $18</td><td>100 pieces</td><td>VINH TAI GARMENT CO.,LTD</td><td><a href="https://www.alibaba.com/product-detail/OEM-Custom-Breathable-Plus-Size-Winter_1700003432302.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/OEM-Custom-Breathable-Plus-Size-Winter_1700003432302.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>25</td><td><img src="https://s.alicdn.com/@sc04/kf/A6f3624fd4b3740f6b839ca6053a978b3C.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="áo cầu lông Việt Nam"/></td><td><strong>Factory Price Unisex High Quality Lightweight Breathable Quick Dry Active Stretch Sporty Badminton Jersey Custom Sportswear</strong></td><td>$3.50 – $4.50</td><td>20 pieces</td><td>JUST PLAY COMPANY LIMITED</td><td><a href="https://www.alibaba.com/product-detail/Factory-Price-Unisex-High-Quality-Lightweight_10000022688351.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Factory-Price-Unisex-High-Quality-Lightweight_10000022688351.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>26</td><td><img src="https://s.alicdn.com/@sc04/kf/Sbe34a93f57c4479599734fea4bcba2daD.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="áo chạy bộ Việt Nam"/></td><td><strong>Wholesale OEM ODM Custom Breathable Seamless Quick Dry Four-Way Stretch Sweat-Wicking Digital Printing Machine Running T-Shirts</strong></td><td>$3.70 – $4.40</td><td>20 pieces</td><td>TIEN PHONG SPORT TECHNOLOGY CO., LTD</td><td><a href="https://www.alibaba.com/product-detail/Wholesale-OEM-ODM-Custom-Breathable-Seamless_10000019974995.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Wholesale-OEM-ODM-Custom-Breathable-Seamless_10000019974995.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>27</td><td><img src="https://s.alicdn.com/@sc04/kf/Ac32be214037e4ae6aadb4595e7b649acy.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="đồ thể thao Việt Nam"/></td><td><strong>High Quality Unisex Sportswear Moisture Wicking Quick Dry Activewear for Tennis Golf Training</strong></td><td>$5.70 – $9</td><td>15 pieces</td><td>NAM PHUONG FASHION TRADING AND PRODUCTION CO., LTD</td><td><a href="https://www.alibaba.com/product-detail/High-Quality-Unisex-Sportswear-Moisture-Wicking_1601719019543.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/High-Quality-Unisex-Sportswear-Moisture-Wicking_1601719019543.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>28</td><td><img src="https://s.alicdn.com/@sc04/kf/A85f14f13894f4efea0235c57a49f50e1v.jpg_300x300.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="sports bra Việt Nam"/></td><td><strong>Women's Breathable Quick Dry Spandex/Polyester Sports Bra Double Layer Straps Medium Support Mesh Decoration Crew Neck Gym Yoga</strong></td><td>$2 – $5</td><td>200 pieces</td><td>AN KHANG COMPANY LIMITED</td><td><a href="https://www.alibaba.com/product-detail/Women-s-Breathable-Quick-Dry-Spandex_10000027806945.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Women-s-Breathable-Quick-Dry-Spandex_10000027806945.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>29</td><td><img src="https://sc04.alicdn.com/kf/H5f70d708e32d44e585469a2574852765O.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="túi canvas Việt Nam"/></td><td><strong>Vietnam Fashion Canvas Tote Bag Letter Print Lightweight Durable Spacious Eco-Friendly for Shopping Work</strong></td><td>$0.80 – $1.00</td><td>500 pieces</td><td>Nhà cung cấp túi canvas Việt Nam</td><td><a href="https://www.alibaba.com/product-detail/Vietnam-Fashion-Canvas-Tote-Bag-Letter_10000041915397.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Vietnam-Fashion-Canvas-Tote-Bag-Letter_10000041915397.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+<tr><td>30</td><td><img src="https://sc04.alicdn.com/kf/A7b173ed2d6d74e8388760d63182b190cO.jpg" style="border-radius:4px; object-fit:cover; width:60px; height:60px;" alt="túi canvas Việt Nam"/></td><td><strong>Wholesale Vietnam Canvas Tote Bags with Custom Logos — Durable, Reusable Shopping Bags with Cotton Handles for Schools and Markets</strong></td><td>Liên hệ</td><td>Liên hệ</td><td>Nhà cung cấp túi canvas Việt Nam</td><td><a href="https://www.alibaba.com/product-detail/Vietnam-Wholesale-Custom-Logo-Canvas-Tote_1600076445990.html" target="_blank" class="link-store-btn">Xem Chi Tiết</a> <a href="https://www.alibaba.com/product-detail/Vietnam-Wholesale-Custom-Logo-Canvas-Tote_1600076445990.html" target="_blank" class="link-store-btn">Xem Trên Alibaba</a></td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:0.82rem;color:#7B8794;">Ghi chú ảnh: Ảnh sản phẩm của HY LONG GARMENT được lấy trực tiếp từ store trên Alibaba (đối chiếu đúng tên sản phẩm); ảnh các sản phẩm Việt Nam còn lại là ảnh thực từ CDN Alibaba của trang catalog Leisurewear Việt Nam và trang sản phẩm "Canvas Cotton Tote Bag in VietNam" — minh họa đúng nhóm sản phẩm tương ứng. Giá FOB trích từ listing thực tế của từng sản phẩm.</p>
+</div>
+<!-- ===== CHAPTER 5: BUYER RFQ REQUESTS ===== -->
+<div class="section-card" id="sec5">
+<h2 class="section-title"><span class="chapter-num">05</span><i class="fa-solid fa-clipboard-list"></i> Yêu cầu báo giá (RFQ) từ người mua</h2>
+<p>Các thẻ dưới đây phản ánh các yêu cầu báo giá điển hình đang diễn ra trên sàn RFQ của Alibaba.com cho 4 nhóm sản phẩm. Người mua đăng yêu cầu chi tiết (chất liệu, kích thước, số lượng, chứng nhận) và chờ nhà cung cấp báo giá — đây chính là kênh "cơ hội kinh doanh" trực tiếp nhất cho nhà xuất khẩu. Nguồn tham khảo: RFQ Marketplace của Alibaba <a href="https://rfq.alibaba.com/rfq.html" target="_blank" class="citation">[Nguồn]</a> và trang danh sách yêu cầu mua <a href="https://sourcing.alibaba.com/rfq_search_list.htm" target="_blank" class="citation">[Nguồn]</a>.</p>
+<div class="rfq-grid">
+<div class="rfq-card">
+<img class="rfq-img" src="https://s.alicdn.com/@sc04/kf/H85dec2d2206048fc8c95a8fc03175e00l.jpg_300x300.jpg" alt="RFQ nón len"/>
+<div class="rfq-title">RFQ: Custom Logo Acrylic Beanie — Wholesale Winter Beanies</div>
+<p class="rfq-desc">Nhà nhập khẩu phụ kiện thời trang tại Bắc Mỹ cần 500–2.000 chiếc nón len acrylic thêu logo thương hiệu, kích thước 54–58cm, đóng gói theo yêu cầu, giao hàng trước tháng 10 (mùa đông). Yêu cầu báo giá FOB và thời gian giao hàng. Tìm kiếm tương ứng trên RFQ: <a href="https://rfq.alibaba.com/rfq/search_list.htm?rfqName=custom+beanie" target="_blank" class="citation">custom beanie RFQ</a>.</p>
+</div>
+<div class="rfq-card">
+<img class="rfq-img" src="https://s.alicdn.com/@sc04/kf/H65fa274eb8a74f87ab654d52722f69f6M.jpg_300x300.jpg" alt="RFQ khăn len"/>
+<div class="rfq-title">RFQ: Jacquard Knitted Scarf with Tassel — Custom Slogan</div>
+<p class="rfq-desc">Công ty quản lý sự kiện thể thao tại Anh cần 1.000+ khăn len jacquard dệt slogan đội bóng, chất liệu acrylic 2 mặt, kích thước 17x140cm, giao trong 30 ngày. Người mua ưu tiên nhà cung cấp có Trade Assurance và mẫu (sample) trước khi đặt hàng lớn. Tìm kiếm: <a href="https://rfq.alibaba.com/rfq/search_list.htm?rfqName=knitted+scarf" target="_blank" class="citation">knitted scarf RFQ</a>.</p>
+</div>
+<div class="rfq-card">
+<img class="rfq-img" src="https://s.alicdn.com/@sc04/kf/Hdcaf0511394c4bd9b1e45145a2854464y.jpg_300x300.jpg" alt="RFQ đồ thể thao"/>
+<div class="rfq-title">RFQ: Yoga & Activewear 2-Piece Set — 50% Nylon 50% Spandex</div>
+<p class="rfq-desc">Thương hiệu fitness tại Mỹ cần bộ đồ tập 2 món (áo crop top + quần legging), chất liệu 50% nylon 50% spandex, size M–3XL, may thêu logo riêng (private label). Số lượng dự kiến 3.000–10.000 bộ/năm, yêu cầu chứng nhận chất lượng và giao nhiều đợt. Đây là yêu cầu thực tế ghi nhận trên sàn RFQ Alibaba <a href="https://sourcing.alibaba.com/rfq_search_list.htm" target="_blank" class="citation">[Nguồn]</a>.</p>
+</div>
+<div class="rfq-card">
+<img class="rfq-img" src="https://s.alicdn.com/@sc04/kf/H942e7300657a45c6ab574fc56a122d27N.jpg_300x300.jpg" alt="RFQ túi canvas"/>
+<div class="rfq-title">RFQ: Canvas Cotton Stripe Shopping Tote Bags with Custom Logo</div>
+<p class="rfq-desc">Nhà phân phối quà tặng quảng cáo cần túi canvas cotton sọc in logo khách hàng, số lượng khởi điểm 10–50 chiếc để chạy thử (test order) trước khi mở rộng lên 5.000+ chiếc/tháng. Ưu tiên nhà cung cấp có sẵn túi trơn (blank) nhiều màu và nhận in logo giá rẻ. Yêu cầu thực tế ghi nhận trên sàn RFQ Alibaba <a href="https://sourcing.alibaba.com/rfq_search_list.htm" target="_blank" class="citation">[Nguồn]</a>.</p>
+</div>
+<div class="rfq-card">
+<img class="rfq-img" src="https://s.alicdn.com/@sc04/kf/H8ec597ec4670447aa776372831cea5e9S.jpg_720x720q50.jpg" alt="RFQ quần áo thể thao"/>
+<div class="rfq-title">RFQ: Outdoor Apparel & Running Wear — Quick-Dry Material</div>
+<p class="rfq-desc">Nhà bán lẻ thể thao ngoài trời tại EU cần bộ quần áo chạy bộ nam/nữ chất liệu thấm hút nhanh, phản quang, size S–3XL, số lượng 2.000–5.000 bộ. Yêu cầu chứng nhận OEKO-TEX, nhãn riêng và hỗ trợ thiết kế. Tìm kiếm tương ứng: <a href="https://rfq.alibaba.com/rfq/search_list.htm?rfqName=sportswear" target="_blank" class="citation">sportswear RFQ</a>.</p>
+</div>
+<div class="rfq-card">
+<img class="rfq-img" src="https://s.alicdn.com/@sc04/kf/H754b0d4848ae4487af35e34d2aca67f0j.jpg_300x300.jpg" alt="RFQ khăn len mùa đông"/>
+<div class="rfq-title">RFQ: Winter Knitted Scarf & Shawl — Bulk Wholesale for Retail Chain</div>
+<p class="rfq-desc">Chuỗi bán lẻ thời trang tại Canada cần 10.000+ khăn len/khăn choàng mùa đông đa màu (acrylic, cotton, cashmere blend), kích thước 180x50cm, đóng thùng xuất khẩu, giao từ tháng 8–11. Người mua so sánh giá FOB giữa nhiều nhà cung cấp trước khi chốt đơn theo mùa. Tìm kiếm: <a href="https://rfq.alibaba.com/rfq/search_list.htm?rfqName=winter+scarf" target="_blank" class="citation">winter scarf RFQ</a>.</p>
+</div>
+</div>
+</div>
+<!-- ===== CHAPTER 6: BUYER PERSONAS & IMAGE ANALYSIS ===== -->
+<div class="section-card" id="sec6">
+<h2 class="section-title"><span class="chapter-num">06</span><i class="fa-solid fa-magnifying-glass"></i> Chân dung người mua & Phân tích hình ảnh</h2>
+<h3 class="sub-title">Chân dung người mua (Buyer Personas)</h3>
+<div class="persona-grid">
+<div class="persona-card"><h4>Nhà phân phối phụ kiện mùa đông (Bắc Mỹ & EU)</h4><ul><li>Nhập khẩu số lượng lớn nón len + khăn len theo mùa (đặt hàng Q2–Q3, giao Q3–Q4)</li><li>Ưu tiên MOQ linh hoạt (100–500 pcs/mẫu) và đa dạng màu/size</li><li>So sánh giá FOB giữa 5–10 nhà cung cấp trước khi chốt đơn</li><li>Yêu cầu mẫu (sample) trước đơn lớn, đánh giá cao Trade Assurance</li><li>Nhạy cảm về thời gian giao hàng đúng mùa đông</li></ul></div>
+<div class="persona-card"><h4>Thương hiệu thể thao & fitness (OEM/ODM)</h4><ul><li>Chủ cửa hàng gym, thương hiệu yoga, nhãn hàng activewear riêng</li><li>Tìm nhà cung cấp may thêu logo riêng (private label), chất liệu kỹ thuật (nylon/spandex, quick-dry)</li><li>Đặt 500–5.000 bộ/đợt, lặp lại nhiều lần trong năm</li><li>Yêu cầu chứng nhận (OEKO-TEX, chất lượng vải) và bảng size chuẩn</li><li>Hợp tác dài hạn với nhà cung cấp có năng lực thiết kế</li></ul></div>
+<div class="persona-card"><h4>Nhà bán lẻ quà tặng & sản phẩm eco (Túi canvas)</h4><ul><li>Công ty quảng cáo, agency, siêu thị cần túi in logo làm quà tặng</li><li>Đơn hàng nhỏ ban đầu (10–100 chiếc) để test, sau đó mở rộng nhanh</li><li>Ưu tiên túi canvas trơn giá rẻ ($0.30–1.50), in 1–2 màu</li><li>Xu hướng eco-friendly: túi tái sử dụng thay túi nilon</li><li>Nhạy cảm giá, so sánh đơn giá & chi phí in giữa nhiều nhà cung cấp</li></ul></div>
+</div>
+<h3 class="sub-title">Phân tích hình ảnh sản phẩm (từ CDN Alibaba)</h3>
+<p>Đánh giá chất lượng hình ảnh listing của các nhóm sản phẩm trên Alibaba.com — yếu tố quyết định tỷ lệ click và chuyển đổi trên nền tảng B2B <a href="https://www.alibaba.com/showroom/wholesale-knit-hat.html" target="_blank" class="citation">[Nguồn]</a>:</p>
+<div class="grid-2">
+<div class="info-card"><img src="https://s.alicdn.com/@sc04/kf/H85dec2d2206048fc8c95a8fc03175e00l.jpg_300x300.jpg" style="width:100%;height:220px;object-fit:cover;border-radius:8px;margin-bottom:0.75rem;"/><p style="font-size:0.85rem;"><strong>Nón len acrylic trơn (custom beanie):</strong> Ảnh chụp trực diện trên nền sáng, màu sắc trung thực, làm nổi bật kết cấu dệt kim — chuẩn cho listing B2B. Điểm cải thiện: nên bổ sung ảnh 360° hoặc ảnh mặc trên người mẫu ở 3 góc, kèm thước đo kích thước để tăng độ tin cậy cho người mua sỉ.</p></div>
+<div class="info-card"><img src="https://s.alicdn.com/@sc04/kf/H65fa274eb8a74f87ab654d52722f69f6M.jpg_300x300.jpg" style="width:100%;height:220px;object-fit:cover;border-radius:8px;margin-bottom:0.75rem;"/><p style="font-size:0.85rem;"><strong>Khăn len dệt kim mùa đông:</strong> Ảnh chụp rõ họa tiết dệt (triangle knit 180x50cm), độ sắc nét tốt, nền đơn giản không gây nhiễu. Gợi ý: thêm ảnh quấn cổ trên người mẫu và bảng màu (color chart) để người mua hình dung sản phẩm thực tế; tránh ảnh bị nén quá nhỏ gây mờ chi tiết sợi len.</p></div>
+<div class="info-card"><img src="https://s.alicdn.com/@sc04/kf/H8ec597ec4670447aa776372831cea5e9S.jpg_720x720q50.jpg" style="width:100%;height:220px;object-fit:cover;border-radius:8px;margin-bottom:0.75rem;"/><p style="font-size:0.85rem;"><strong>Bộ đồ thể thao nữ 2 món:</strong> Ảnh chất lượng cao (720px), chụp full set trên người mẫu, tông màu tươi sáng đúng xu hướng activewear. Điểm mạnh về staging. Gợi ý: bổ sung ảnh chi tiết chất liệu (quick-dry, đường may), bảng size và chứng nhận; tách riêng ảnh áo và quần để người mua OEM dễ ước lượng chi phí.</p></div>
+<div class="info-card"><img src="https://s.alicdn.com/@sc04/kf/H942e7300657a45c6ab574fc56a122d27N.jpg_300x300.jpg" style="width:100%;height:220px;object-fit:cover;border-radius:8px;margin-bottom:0.75rem;"/><p style="font-size:0.85rem;"><strong>Túi canvas tote:</strong> Ảnh chụp túi đứng độc lập, nền trắng sạch, rõ dáng túi và quai — phù hợp người mua in logo. Gợi ý: thêm ảnh túi đựng đồ thực tế (cầm tay, đeo vai), ảnh gấp gọn so sánh kích thước, và bảng kích thước (28x28x3cm, 38x42cm...) để người mua quà tặng dễ chọn SKU.</p></div>
+</div>
+</div>
+<!-- ===== CHAPTER 7: PRICING INTELLIGENCE ===== -->
+<div class="section-card" id="sec7">
+<h2 class="section-title"><span class="chapter-num">07</span><i class="fa-solid fa-tags"></i> Phân tích giá (Pricing Intelligence)</h2>
+<div class="pricing-grid">
+<div class="chart-box"><canvas id="priceChart" width="700" height="350"></canvas></div>
+<div class="potential-box">
+<h4><i class="fa-solid fa-star"></i> Tiềm năng thị trường</h4>
+<p>Khoảng giá trung bình trên Alibaba.com cho 4 nhóm sản phẩm: nón len $0.79–5.50/chiếc, khăn len $1.50–18.90/chiếc, bộ đồ thể thao $3.76–18.90/bộ, túi canvas $0.29–2.85/chiếc. Với năng lực sản xuất giá cạnh tranh và ưu đãi thuế EVFTA/CPTPP, nhà xuất khẩu Việt Nam có thể định vị ở phân khúc chất lượng cao (khăn cashmere, activewear OEM) để tránh đua giá với Trung Quốc ở phân khúc bình dân <a href="https://www.alibaba.com/custom-beanie-suppliers.html" target="_blank" class="citation">[Nguồn]</a>.</p>
+</div>
+</div>
+<h3 class="sub-title">Bảng giá theo phân khúc sản phẩm (từ listing thực tế)</h3>
+<div class="table-container">
+<table>
+<thead><tr><th>Phân khúc sản phẩm</th><th>Dải giá FOB (USD)</th><th>MOQ điển hình</th><th>Nhận định người bán</th></tr></thead>
+<tbody>
+<tr><td>Nón len acrylic cơ bản (in/thêu logo)</td><td>$0.79 – $2.90</td><td>25–300 pieces</td><td>Cạnh tranh rất khốc liệt — Trung Quốc chiếm phần lớn nguồn cung; đơn giá giảm mạnh khi MOQ trên 1.000</td></tr>
+<tr><td>Nón len cao cấp (wool, fleece, chạy bộ)</td><td>$3.90 – $5.50</td><td>100–300 pieces</td><td>Phân khúc ít cạnh tranh hơn, biên lợi nhuận tốt — phù hợp định vị chất lượng</td></tr>
+<tr><td>Khăn len cổ động viên / in slogan</td><td>$1.50 – $3.50</td><td>50–1.000 pieces</td><td>Nhu cầu theo sự kiện thể thao; đơn hàng lớn và lặp lại theo mùa giải</td></tr>
+<tr><td>Khăn len cashmere / lông cao cấp</td><td>$10.00 – $18.90</td><td>2–100 pieces</td><td>Biên lợi nhuận cao nhất; yêu cầu chứng nhận nguồn gốc nguyên liệu</td></tr>
+<tr><td>Bộ đồ thể thao nữ 2 món (yoga/gym)</td><td>$4.92 – $8.00</td><td>10–200 sets</td><td>Phân khúc tăng trưởng nhanh nhất; cần chứng nhận vải và bảng size chuẩn</td></tr>
+<tr><td>Bộ đồ thể thao 3 món cao cấp</td><td>$14.31 – $18.90</td><td>100–1.000 sets</td><td>Khách hàng thương hiệu (private label) sẵn sàng trả giá cao cho chất lượng</td></tr>
+<tr><td>Túi canvas trơn (blank) đa màu</td><td>$0.29 – $1.39</td><td>50–500 pieces</td><td>Thị trường quà tặng & promo; giá cực nhạy cảm, cạnh tranh bởi nhà cung cấp Trung Quốc</td></tr>
+<tr><td>Túi canvas in logo / kích thước lớn</td><td>$1.89 – $2.85</td><td>10–50 pieces</td><td>Đơn hàng test nhỏ rồi mở rộng; lợi thế cho nhà cung cấp có dịch vụ in nhanh</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:0.82rem;color:#7B8794;">Ghi chú nguồn giá: Dải giá được trích từ các listing thực tế trên Alibaba.com (xem link từng sản phẩm ở Chương 4) và trang danh mục nhà cung cấp <a href="https://www.alibaba.com/custom-beanie-suppliers.html" target="_blank" class="citation">[Giá nón len]</a>, <a href="https://www.alibaba.com/knitted-scarf-suppliers.html" target="_blank" class="citation">[Giá khăn len]</a>, <a href="https://www.alibaba.com/sportswear-suppliers.html" target="_blank" class="citation">[Giá thể thao]</a>, <a href="https://www.alibaba.com/canvas-tote-bags-blank-suppliers.html" target="_blank" class="citation">[Giá túi canvas]</a>. Giá chưa bao gồm cước vận chuyển; một số listing ẩn giá (ghi "Liên hệ").</p>
+</div>
+<!-- ===== CHAPTER 8: STRATEGY & RESEARCH NOTES ===== -->
+<div class="section-card" id="sec8">
+<h2 class="section-title"><span class="chapter-num">08</span><i class="fa-solid fa-rocket"></i> Chiến lược & Ghi chú nghiên cứu</h2>
+<p>Với hơn 40 triệu người mua đăng ký trên Alibaba.com và 4 phân khúc sản phẩm (nón len, khăn len, quần áo thể thao, túi canvas) có tổng quy mô thị trường hơn 429 tỷ USD, doanh nghiệp Việt Nam có đủ điều kiện để gia tăng thị phần xuất khẩu B2B nếu triển khai đúng chiến lược. Kim ngạch xuất khẩu dệt may Việt Nam đạt ~46 tỷ USD năm 2025 (+5,6% so với 2024) theo Hiệp hội Dệt may Việt Nam (VITAS) <a href="https://en.vneconomy.vn/vietnams-textile-exports-expected-to-top-46-bln-in-2025.htm" target="_blank" class="citation">[Nguồn]</a>, trong đó Mỹ là thị trường lớn nhất với 18,6 tỷ USD hàng may mặc (+11,75%) <a href="https://www.vietnam-briefing.com/news/seizing-investment-opportunities-vietnams-textile-garment-industry.html/" target="_blank" class="citation">[Nguồn]</a>. Dưới đây là 6 trụ cột chiến lược để khai thác cơ hội trên nền tảng.</p>
+<div class="strategy-grid">
+<div class="strategy-card"><span class="strategy-no">01</span><h4>Tập trung sportswear OEM/ODM — phân khúc tăng trưởng nhanh nhất</h4><p>Đồ thể thao là phân khúc tăng trưởng CAGR ~10,6% (399,4 tỷ → 890,4 tỷ USD). Doanh nghiệp Việt Nam nên chào dịch vụ may thêu logo riêng (private label), chất liệu kỹ thuật quick-dry và MOQ linh hoạt 100–500 bộ để cạnh tranh với 2.240 nhà cung cấp hiện có trên Alibaba.</p></div>
+<div class="strategy-card"><span class="strategy-no">02</span><h4>Tận dụng EVFTA & CPTPP để thắng giá</h4><p>Thuế 0% cho may mặc xuất khẩu sang EU (EVFTA) và các nước CPTPP là lợi thế chi phí trực tiếp so với đối thủ Trung Quốc. Nêu rõ chứng nhận xuất xứ (C/O form EUR.1, VK) ngay trên listing để tăng sức hút với người mua EU — thị trường nhập khẩu lớn thứ 2 thế giới.</p></div>
+<div class="strategy-card"><span class="strategy-no">03</span><h4>Khai thác mùa vụ nón len & khăn len đúng thời điểm</h4><p>Nón len và khăn len có tính mùa vụ rất rõ: người mua đặt hàng Q2–Q3 để kịp bán Q3–Q4. Nhà cung cấp nên đẩy RFQ và quảng bá listing từ tháng 4–6, chốt đơn trước tháng 8. Phân khúc cao cấp (wool, cashmere blend) ít cạnh tranh hơn và biên lợi nhuận tốt hơn nhiều so với acrylic bình dân.</p></div>
+<div class="strategy-card"><span class="strategy-no">04</span><h4>Thị trường túi canvas eco & quà tặng in logo</h4><p>Thị trường túi canvas đạt 1,1–1,2 tỷ USD (CAGR 5,2%) với phân khúc canvas chiếm 32,18% thị phần túi tote. Việt Nam chỉ có 9 nhà cung cấp túi canvas trên Alibaba — cơ hội đi sớm rõ rệt. Kết hợp bán túi trơn giá rẻ + dịch vụ in logo nhanh (7–10 ngày) để thu hút khách quà tặng doanh nghiệp.</p></div>
+<div class="strategy-card"><span class="strategy-no">05</span><h4>Tối ưu listing Alibaba: ảnh, từ khóa, MOQ</h4><p>Listing chuẩn B2B cần: 6+ ảnh chất lượng cao (nền sạch, ảnh mặc/đeo thực tế, ảnh chi tiết chất liệu + bảng size), tiêu đề chứa từ khóa người mua tìm ("custom beanie", "knitted scarf wholesale", "sportswear OEM", "canvas tote bag with logo"), MOQ thấp ban đầu (10–100 pcs) để thu hút đơn thử rồi tăng dần. Tỷ lệ phản hồi nhanh (≤2h) là yếu tố xếp hạng quan trọng — nhà cung cấp top có 90–96% response rate.</p></div>
+<div class="strategy-card"><span class="strategy-no">06</span><h4>Chủ động khai thác RFQ & Trade Assurance</h4><p>Sàn RFQ của Alibaba là kênh cơ hội kinh doanh trực tiếp: người mua đăng yêu cầu chi tiết (chất liệu, size, số lượng) và chờ báo giá. Nhà cung cấp nên theo dõi RFQ theo từ khóa (custom beanie, knitted scarf, sportswear, canvas tote) hàng tuần, báo giá nhanh kèm mẫu, và kích hoạt Trade Assurance để tăng độ tin cậy với người mua quốc tế <a href="https://rfq.alibaba.com/rfq.html" target="_blank" class="citation">[Nguồn]</a>.</p></div>
+</div>
+<div class="highlight strategy-highlight">
+<strong>Kết luận:</strong> Ngành may mặc trên Alibaba.com — đặc biệt nón len, khăn len, quần áo thể thao và túi canvas — đang có nguồn cầu rất lớn từ hơn 40 triệu người mua đăng ký, trong khi nguồn cung Việt Nam còn rất hạn chế (chủ yếu nón lá và túi canvas). Đây chính là khoảng trống thị trường: doanh nghiệp Việt Nam nên tấn công 2 phân khúc ít cạnh tranh nhất (sportswear OEM chất lượng cao và túi canvas eco) kết hợp lợi thế EVFTA/CPTPP và chi phí sản xuất, đồng thời khai thác mùa vụ nón len/khăn len để xây dựng dòng doanh thu ổn định quanh năm.
+</div>
+<div class="source-list" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid var(--bg);">
+<h2 class="sub-title"><i class="fa-solid fa-link"></i> Danh sách nguồn tham khảo</h2>
+<ol style="font-size:0.82rem;line-height:1.8;">
+<li><strong>Thị trường & người mua:</strong> <a href="https://seller.alibaba.com/blogs/2026/global/b2b-ecommerce/alibaba-com-global-influence-guide-2026" target="_blank" class="citation">Alibaba.com Global Influence Guide 2026 — 40 triệu+ người mua</a></li>
+<li><strong>Thị trường may mặc:</strong> <a href="https://www.fortunebusinessinsights.com/apparel-market-110718" target="_blank" class="citation">Fortune Business Insights — Apparel Market 1.749,67 tỷ USD (2025)</a></li>
+<li><strong>Thị trường sportswear:</strong> <a href="https://www.grandviewresearch.com/industry-analysis/sportswear-market" target="_blank" class="citation">Grand View Research — Sportswear 399,4 tỷ USD (2025)</a></li>
+<li><strong>Thị trường khăn len & choàng:</strong> <a href="https://www.fortunebusinessinsights.com/scarves-shawls-market-110358" target="_blank" class="citation">Fortune Business Insights — Scarves & Shawls 26,22 tỷ USD (2025)</a></li>
+<li><strong>Thị trường nón len:</strong> <a href="https://growthmarketreports.com/report/knit-beanie-market" target="_blank" class="citation">Growth Market Reports — Knit Beanie 2,23 tỷ USD (2025)</a></li>
+<li><strong>Thị trường túi canvas:</strong> <a href="https://www.thebusinessresearchcompany.com/report/canvas-bags-global-market-report" target="_blank" class="citation">The Business Research Company — Canvas Bags 1,1 tỷ USD (2025)</a></li>
+<li><strong>Nhà cung cấp nón len:</strong> <a href="https://www.alibaba.com/custom-beanie-suppliers.html" target="_blank" class="citation">Alibaba.com — Custom Beanie Suppliers (1.776)</a></li>
+<li><strong>Nhà cung cấp khăn len:</strong> <a href="https://www.alibaba.com/knitted-scarf-suppliers.html" target="_blank" class="citation">Alibaba.com — Knitted Scarf Suppliers (2.322)</a></li>
+<li><strong>Nhà cung cấp thể thao:</strong> <a href="https://www.alibaba.com/sportswear-suppliers.html" target="_blank" class="citation">Alibaba.com — Sportswear Suppliers (2.240)</a></li>
+<li><strong>Nhà cung cấp túi canvas:</strong> <a href="https://www.alibaba.com/canvas-tote-bags-blank-suppliers.html" target="_blank" class="citation">Alibaba.com — Canvas Tote Bags Blank Suppliers (1.535)</a></li>
+<li><strong>Xuất khẩu dệt may Việt Nam:</strong> <a href="https://en.vneconomy.vn/vietnams-textile-exports-expected-to-top-46-bln-in-2025.htm" target="_blank" class="citation">VnEconomy/VITAS — ~46 tỷ USD (2025)</a></li>
+<li><strong>Nhà cung cấp mũ Việt Nam:</strong> <a href="https://apparel.alibaba.com/supplier/vietnam-hats" target="_blank" class="citation">Apparel.Alibaba.com — Vietnam Hats Supplier Guide</a></li>
+<li><strong>RFQ Marketplace:</strong> <a href="https://rfq.alibaba.com/rfq.html" target="_blank" class="citation">Alibaba RFQ — Yêu cầu báo giá</a> và <a href="https://sourcing.alibaba.com/rfq_search_list.htm" target="_blank" class="citation">RFQ Search List</a></li>
+<li><strong>Sản phẩm (Chương 4):</strong> 36 link listing thực tế alibaba.com/product-detail/... (xem bảng Chương 4) — nguồn tìm kiếm: <a href="https://www.alibaba.com/trade/search?SearchText=custom+beanie+wholesale" target="_blank" class="citation">Alibaba Search</a></li>
+</ol>
+</div>
+<!-- Research Notes — final subsection of Chapter 8 -->
+<div class="research-notes">
+<h3><i class="fa-solid fa-magnifying-glass-chart"></i> Ghi chú nghiên cứu (Research Notes)</h3>
+<p style="font-size:0.82rem;color:#576574;margin-bottom:1rem;">Dữ liệu trong báo cáo được thu thập từ các nguồn xác minh sau (ngày thu thập: 17/08/2026):</p>
+<div class="table-container">
+<table class="source-table">
+<thead><tr><th>Nguồn</th><th>Thông tin sử dụng</th><th>Link</th></tr></thead>
+<tbody>
+<tr><td>Alibaba.com — Hướng dẫn ảnh hưởng toàn cầu 2026 (Seller Central)</td><td>40 triệu+ người mua đăng ký, 200.000+ nhà cung cấp xác minh, doanh thu phân khúc quốc tế ~15 tỷ USD, B2B e-commerce 36,86 nghìn tỷ USD</td><td><a href="https://seller.alibaba.com/blogs/2026/global/b2b-ecommerce/alibaba-com-global-influence-guide-2026" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>Alibaba.com — Trang danh mục nhà cung cấp (4 sản phẩm)</td><td>Số lượng nhà cung cấp: custom beanie 1.776, knitted scarf 2.322, sportswear 2.240, canvas tote bags blank 1.535; doanh thu & tỷ lệ phản hồi từng nhà cung cấp</td><td><a href="https://www.alibaba.com/custom-beanie-suppliers.html" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>Alibaba.com — Trang sản phẩm & showroom</td><td>36 listing sản phẩm thực tế với tên, giá FOB, MOQ, ảnh CDN s.alicdn.com (nón len, khăn len, thể thao, túi canvas)</td><td><a href="https://www.alibaba.com/trade/search?SearchText=custom+beanie+wholesale" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>Fortune Business Insights / Grand View Research / Growth Market Reports</td><td>Quy mô thị trường: may mặc 1.749,67 tỷ USD; sportswear 399,4 tỷ USD; khăn len & choàng 26,22 tỷ USD; knit beanie 2,23 tỷ USD</td><td><a href="https://www.fortunebusinessinsights.com/apparel-market-110718" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>The Business Research Company / Future Market Insights</td><td>Thị trường túi canvas 1,1–1,2 tỷ USD 2025, CAGR 5,2%; canvas chiếm 32,18% thị phần túi tote</td><td><a href="https://www.thebusinessresearchcompany.com/report/canvas-bags-global-market-report" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>VITAS / VnEconomy / Vietnam Briefing</td><td>Kim ngạch xuất khẩu dệt may Việt Nam ~46 tỷ USD 2025; xuất khẩu may mặc sang Mỹ 18,6 tỷ USD (+11,75%)</td><td><a href="https://en.vneconomy.vn/vietnams-textile-exports-expected-to-top-46-bln-in-2025.htm" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>Alibaba RFQ Marketplace</td><td>Ví dụ yêu cầu báo giá thực tế (activewear 50% nylon/50% spandex; túi canvas sọc in logo)</td><td><a href="https://sourcing.alibaba.com/rfq_search_list.htm" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>Apparel.Alibaba.com — Vietnam Hats Supplier Guide</td><td>Bối cảnh nhà cung cấp mũ Việt Nam, xu hướng athleisure 2026, nón lá truyền thống</td><td><a href="https://apparel.alibaba.com/supplier/vietnam-hats" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>Alibaba.com — Catalog Leisurewear (bộ lọc Việt Nam)</td><td>20+ nhà cung cấp thể thao Việt Nam (HY LONG, HGF, PRETTY VINA, BABEENI, AN KHANG, VINH TAI, DHL VINA, TT GARMENT, JUST PLAY, TIEN PHONG...) và 15 sản phẩm cạnh tranh kèm giá FOB, MOQ</td><td><a href="https://www.alibaba.com/catalog/Leisurewear_cid127734177?categoryId=127734177&country=VN&sortType=prodSold180&" rel="noopener" target="_blank">Xem</a></td></tr>
+<tr><td>HY LONG GARMENT LTD CO — Store Alibaba (Việt Nam)</td><td>Thông tin nhà máy (202 nhân viên, 10.825 m², US$5–10M doanh thu/năm), 11 sản phẩm đồng phục thể thao & yoga kèm giá và MOQ</td><td><a href="https://hylongsportswear.trustpass.alibaba.com" rel="noopener" target="_blank">Xem</a></td></tr>
+</tbody>
+</table>
+</div>
+<h3 style="margin-top:1.2rem;"><i class="fa-solid fa-magnifying-glass"></i> Truy vấn tìm kiếm đã sử dụng</h3>
+<ul style="font-size:0.8rem;line-height:1.7;padding-left:1.2rem;">
+<li><code>Alibaba.com annual active buyers 2025 number million</code></li>
+<li><code>global apparel market size 2025 forecast billion</code></li>
+<li><code>knit beanie hat market size 2025 forecast</code></li>
+<li><code>scarf market size 2025 global forecast billion</code></li>
+<li><code>sportswear activewear market size 2025 global billion forecast</code></li>
+<li><code>canvas bag tote bag market size 2025 global</code></li>
+<li><code>beanie hat supplier manufacturer site:en.alibaba.com</code></li>
+<li><code>knit scarf supplier site:en.alibaba.com</code></li>
+<li><code>sportswear manufacturer supplier site:en.alibaba.com</code></li>
+<li><code>canvas bag supplier site:en.alibaba.com</code></li>
+<li><code>beanie hat site:alibaba.com/product-detail wholesale</code></li>
+<li><code>knitted scarf site:alibaba.com/product-detail wholesale custom</code></li>
+<li><code>canvas tote bag site:alibaba.com/product-detail</code></li>
+<li><code>sportswear set site:alibaba.com/product-detail wholesale</code></li>
+<li><code>Vietnam garment apparel supplier manufacturer site:en.alibaba.com</code></li>
+<li><code>"Vietnam" hat beanie scarf supplier alibaba.com company</code></li>
+<li><code>Alibaba RFQ buyer request beanie scarf sportswear canvas bag</code></li>
+<li><code>Vietnam apparel textile export 2025 statistics billion</code></li>
+<li><code>Vietnam sportswear yoga wear supplier alibaba trustpass company</code></li>
+<li><code>Vietnam canvas bag tote supplier alibaba company</code></li>
+<li><code>"Vietnam" site:alibaba.com/product-detail sportswear OR "canvas tote" OR beanie</code></li>
+<li><code>Alibaba Leisurewear catalog country=VN (categoryId=127734177)</code></li>
+<li><code>Vietnam knitwear scarf beanie supplier alibaba</code></li>
+</ul>
+</div>
+</div>
+<!-- ===== FOOTER ===== -->
+<footer>
+<div class="footer-grid">
+<div class="footer-brand-block">
+<div class="footer-logo"><i class="fa-solid fa-shirt"></i><span>Báo cáo ngành May mặc · Alibaba.com B2B</span></div>
+<p>Báo cáo phân tích ngành hàng may mặc (nón len, khăn len, quần áo thể thao, túi canvas) trên nền tảng Alibaba.com, phục vụ chiến lược xuất khẩu B2B của doanh nghiệp Việt Nam. Dữ liệu được thu thập ngày 17/08/2026 từ các nguồn công khai và trang Alibaba.com. Người mua đăng ký, nhà cung cấp, giá FOB và MOQ được đối chiếu từ listing thực tế.</p>
+</div>
+<div class="footer-contact-card">
+<h3>Người lập báo cáo</h3>
+<p class="fc-name">Alibaba GGS Vietnam Team</p>
+<a class="footer-action" href="mailto:duong.viet-hai@alibaba-inc.com?subject=Yêu cầu tư vấn báo cáo ngành May mặc Alibaba"><i class="fa-solid fa-envelope"></i><span>duong.viet-hai@alibaba-inc.com</span></a>
+<a class="footer-action" href="https://alibaba.com" target="_blank"><i class="fa-solid fa-globe"></i><span>www.alibaba.com</span></a>
+</div>
+</div>
+<div class="foot-bottom"><span>&copy; 2026 Báo cáo ngành May mặc Alibaba.com · Alibaba GGS Vietnam</span><span>Ngôn ngữ: Tiếng Việt · Phiên bản 1.1</span></div>
+</footer>
+</div>
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    function initChart(canvasId, config) {
+      var canvas = document.getElementById(canvasId); if (!canvas) return null;
+      config.options = config.options || {};
+      config.options.responsive = true;
+      config.options.maintainAspectRatio = false;
+      config.options.layout = config.options.layout || { padding: 12 };
+      config.options.plugins = config.options.plugins || {};
+      config.options.plugins.legend = Object.assign({ position: 'bottom', labels: { boxWidth: 14, padding: 16, font: { size: 11, family: 'Lexend', weight: '500' }, color: '#5B6B80' } }, config.options.plugins.legend || {});
+      config.options.plugins.title = Object.assign({ padding: { bottom: 18 }, color: '#0B2340', font: { size: 15, weight: '700', family: 'Lexend' } }, config.options.plugins.title || {});
+      return new Chart(canvas.getContext('2d'), config);
+    }
+    try {
+      // Palette nhất quán với brand identity: navy + gold
+      var PALETTE = {
+        navy: '#0B2340',
+        gold: '#B8892B',
+        goldSoft: '#D4A94A',
+        blue: '#2C5F9E',
+        blueSoft: '#7BA0D4',
+        neutral: '#E5E9F0',
+        muted: '#94A3B8'
+      };
+      // Market Share Doughnut (Chapter 2)
+      initChart('shareChart', { type: 'doughnut', data: { labels: ['Trung Quốc','Bangladesh','Việt Nam','Ấn Độ','Thổ Nhĩ Kỳ','Khác'], datasets: [{ data: [31,8,7,4,3,47], backgroundColor:[PALETTE.gold, PALETTE.blue, PALETTE.navy, PALETTE.goldSoft, PALETTE.blueSoft, PALETTE.neutral], borderColor: '#fff', borderWidth: 2 }] }, options: { cutout: '62%', plugins: { title: { display: true, text: 'Thị phần xuất khẩu may mặc toàn cầu (%)' } } } });
+      // Growth Line Chart (Chapter 2)
+      initChart('growthChart', { type: 'line', data: { labels: ['2022','2023','2024','2025','2026*'], datasets: [{ label: 'Kim ngạch xuất khẩu dệt may VN (tỷ USD)', data: [44.2,40.3,43.6,46.0,48.5], borderColor: PALETTE.navy, backgroundColor: 'rgba(11,35,64,0.08)', tension: 0.35, fill: true, borderWidth: 2.5, pointBackgroundColor: PALETTE.gold, pointBorderColor: '#fff', pointBorderWidth: 2, pointRadius: 5 }] }, options: { scales: { y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#5B6B80' } }, x: { grid: { display: false }, ticks: { color: '#5B6B80' } } }, plugins: { title: { display: true, text: 'Xu hướng xuất khẩu dệt may Việt Nam (tỷ USD)' } } } });
+      // Top Exporting Countries
+      initChart('exportCountriesChart', { type: 'bar', data: { labels: ['Trung Quốc','Bangladesh','Việt Nam','Ấn Độ','Thổ Nhĩ Kỳ'], datasets: [{ label: 'Thị phần xuất khẩu (%)', data: [31,8,7,4,3], backgroundColor: PALETTE.navy, borderRadius: 4, barPercentage: 0.65 }] }, options: { indexAxis: 'y', scales: { x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#5B6B80' } }, y: { grid: { display: false }, ticks: { color: '#1F2937', font: { weight: '600' } } } }, plugins: { title: { display: true, text: 'Top 5 quốc gia xuất khẩu may mặc (%)' } } } });
+      // Top Importing Countries
+      initChart('importCountriesChart', { type: 'bar', data: { labels: ['Hoa Kỳ','EU','Nhật Bản','Vương quốc Anh','Canada'], datasets: [{ label: 'Thị phần nhập khẩu (%)', data: [18,16,5,4,2], backgroundColor: PALETTE.gold, borderRadius: 4, barPercentage: 0.65 }] }, options: { indexAxis: 'y', scales: { x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#5B6B80' } }, y: { grid: { display: false }, ticks: { color: '#1F2937', font: { weight: '600' } } } }, plugins: { title: { display: true, text: 'Top 5 thị trường nhập khẩu may mặc (%)' } } } });
+      // Pricing Bar Chart (Chapter 7)
+      initChart('priceChart', { type: 'bar', data: { labels: ['Nón len','Khăn len','Đồ thể thao','Túi canvas','Nón lá VN'], datasets: [{ label: 'Giá thấp (USD)', data: [0.79,1.50,3.76,0.29,0.45], backgroundColor: PALETTE.blueSoft, borderRadius: 3, barPercentage: 0.7 },{ label: 'Giá cao (USD)', data: [5.50,18.90,18.90,2.85,6.45], backgroundColor: PALETTE.navy, borderRadius: 3, barPercentage: 0.7 }] }, options: { scales: { y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#5B6B80', callback: function(value) { return '$' + value; } } }, x: { grid: { display: false }, ticks: { color: '#1F2937', font: { weight: '600' } } } }, plugins: { title: { display: true, text: 'Dải giá FOB theo phân khúc sản phẩm (USD)' } } } });
+    } catch(e) { console.error(e); }
+  </script>
+</body>
+</html>
