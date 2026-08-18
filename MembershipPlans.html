@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phương Án Gói Thành Viên</title>
+<title>Phương Án Gói Thành Viên | Báo Giá 12-06</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
@@ -136,6 +136,16 @@
   }
   .card.verified .price{color:#F1E4C0;}
   .price-sub{text-align:center;font-size:11px;color:var(--ink-500);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+  .price-vnd{
+    text-align:center;
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    font-weight:700;
+    color:#9A3412;
+    letter-spacing:.3px;
+    margin-top:4px;
+  }
+  .card.verified .price-vnd{color:#E4C877;}
 
   /* TABLE */
   .table-wrap{padding:24px 48px 8px;}
@@ -353,12 +363,137 @@
     a{color:inherit;text-decoration:none;}
   }
   @media (max-width:900px){
-    .cards{grid-template-columns:1fr;padding:24px;}
-    .hero,header,.table-wrap,footer{padding-left:24px;padding-right:24px;}
-    .promo-body{grid-template-columns:1fr;}
-    h1{font-size:30px;}
-    thead th,tbody td{padding:10px;}
-    .feat,.cat{width:auto;}
+    body{padding:24px 12px 40px;}
+    .page{border-radius:14px;}
+    header{
+      flex-direction:column;
+      align-items:flex-start;
+      padding:24px 24px 20px;
+      gap:12px;
+    }
+    .doc-meta{text-align:left;}
+    .hero{padding:32px 24px 22px;}
+    h1{font-size:28px;}
+    .hero p{font-size:13px;}
+    .cards{
+      grid-template-columns:1fr;
+      padding:24px;
+      gap:16px;
+    }
+    .card{padding:22px 20px 18px;}
+    .card .badge{top:-10px;font-size:10px;padding:4px 12px;}
+    .pkg-name{font-size:22px;}
+    .price{font-size:28px;}
+    .price-vnd{font-size:14px;}
+
+    .table-wrap{padding:16px 12px 8px;}
+    table{
+      display:block;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      border-radius:10px;
+      font-size:12.5px;
+    }
+    thead th{
+      padding:10px 12px;
+      font-size:11px;
+      letter-spacing:.8px;
+      white-space:nowrap;
+    }
+    tbody td{padding:10px 12px;}
+    .cat{
+      width:140px;
+      min-width:140px;
+      font-size:10px;
+      letter-spacing:.8px;
+      padding:10px 10px;
+      position:sticky;
+      left:0;
+      z-index:1;
+      background:#F1F5F9;
+    }
+    .cat-icon{width:18px;height:18px;font-size:9px;margin-right:6px;}
+    .feat{
+      width:auto;
+      min-width:180px;
+      padding-left:12px;
+      font-size:12.5px;
+    }
+    .cell{font-size:12.5px;min-width:110px;white-space:nowrap;}
+
+    .promo{margin:20px 0 8px;border-radius:12px;}
+    .promo-head{padding:16px 18px;flex-direction:column;align-items:flex-start;gap:10px;}
+    .promo-title{font-size:14px;gap:10px;}
+    .promo-title .gift{width:28px;height:28px;font-size:15px;}
+    .deadline{font-size:11px;padding:7px 12px;}
+    .promo-body{grid-template-columns:1fr;padding:16px;gap:12px;}
+    .promo-item{padding:14px 16px;font-size:13px;}
+    .promo-ribbon{font-size:10px;padding:5px 44px;top:10px;right:-46px;}
+
+    .notes{padding:16px 18px;border-radius:10px;}
+    .notes li{font-size:12px;}
+
+    footer{
+      flex-direction:column;
+      align-items:flex-start;
+      padding:20px 24px 28px;
+      gap:10px;
+    }
+    .sig{text-align:left;}
+  }
+
+  @media (max-width:480px){
+    body{padding:12px 6px 32px;}
+    .page{border-radius:10px;}
+    header{padding:18px 16px 16px;}
+    .brand{gap:10px;flex-wrap:wrap;}
+    .brand-logo{height:30px;}
+    .brand-divider{height:26px;}
+    .brand-name{font-size:12px;}
+    .brand-sub{font-size:10px;}
+    .doc-meta{font-size:11px;}
+    .doc-meta .ref{font-size:11px;}
+
+    .hero{padding:24px 16px 18px;}
+    h1{font-size:23px;letter-spacing:0;}
+    .eyebrow{font-size:10px;letter-spacing:2px;padding:5px 10px;}
+    .hero p{font-size:12px;}
+
+    .cards{padding:16px;gap:14px;}
+    .card{padding:20px 16px 16px;}
+    .pkg-name{font-size:20px;margin-top:6px;}
+    .pkg-desc{font-size:11px;}
+    .price{font-size:24px;}
+    .price-vnd{font-size:13px;}
+    .price-sub{font-size:10px;}
+
+    .table-wrap{padding:12px 8px 8px;}
+    .cat{
+      width:110px;
+      min-width:110px;
+      font-size:9.5px;
+      padding:8px;
+    }
+    .cat-icon{display:none;}
+    .feat{min-width:160px;font-size:12px;padding-left:10px;}
+    .cell{min-width:95px;font-size:11.5px;}
+    thead th{font-size:10px;padding:9px 8px;}
+    tbody td{padding:8px 10px;}
+
+    .promo-head{padding:14px 14px;}
+    .promo-title{font-size:12px;flex-wrap:wrap;}
+    .promo-title small{font-size:10px;}
+    .promo-body{padding:12px;gap:10px;}
+    .promo-item{padding:12px 14px;font-size:12px;}
+    .promo-item::before{width:22px;height:22px;font-size:12px;}
+
+    .notes{margin-top:16px;padding:14px 14px;}
+    .notes h3{font-size:10px;}
+    .notes li{font-size:11px;padding-left:14px;}
+    .notes li::before{width:5px;height:5px;top:8px;}
+
+    footer{padding:16px;font-size:11px;}
+    .sig strong{font-size:12px;}
   }
 </style>
 </head>
@@ -389,6 +524,7 @@
         <div class="pkg-name">Gold</div>
         <div class="pkg-desc">Khởi đầu vững chắc cho doanh nghiệp mới</div>
         <div class="price">$2,999</div>
+        <div class="price-vnd">70,400,400 đ</div>
         <div class="price-sub">USD / năm · chưa VAT</div>
       </div>
       <div class="card plus">
@@ -396,6 +532,7 @@
         <div class="pkg-name">Plus</div>
         <div class="pkg-desc">Tăng tốc doanh số &amp; hiện diện toàn cầu</div>
         <div class="price">$4,999</div>
+        <div class="price-vnd">117,600,000 đ</div>
         <div class="price-sub">USD / năm · chưa VAT</div>
       </div>
       <div class="card verified">
@@ -403,6 +540,7 @@
         <div class="pkg-name">Verified</div>
         <div class="pkg-desc">Uy tín tối đa · dịch vụ chuyên gia 1-1</div>
         <div class="price">$8,999</div>
+        <div class="price-vnd">212,400,000 đ</div>
         <div class="price-sub">USD / năm · chưa VAT</div>
       </div>
     </section>
@@ -630,7 +768,7 @@
         </div>
         <div class="promo-body">
           <div class="promo-item">Thiết lập gian hàng mini-site &amp; đăng tải 100 sản phẩm (chuẩn PC và APP)</div>
-          <div class="promo-item">Tặng chứng chỉ GPSR - $380 (Chứng chỉ người đại diện tại Châu Âu)</div>
+          <div class="promo-item">Không giới hạn danh mục đăng tải</div>
         </div>
       </div>
 
@@ -641,6 +779,7 @@
           <li>Hợp đồng thành viên trọn gói có thời hạn 12 tháng, tính từ ngày BV (Business Verification).</li>
           <li>Giá niêm yết chưa bao gồm thuế VAT.</li>
           <li>Phương thức thanh toán: Chuyển khoản ngân hàng.</li>
+          <li>Báo giá có hiệu lực đến hết ngày 30/04/2026.</li>
         </ul>
       </div>
     </section>
