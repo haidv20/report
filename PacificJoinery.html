@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngành Nội Thất &amp; Đồ Mộc - Cơ Hội Mở Rộng Xuất Khẩu Trên Alibaba.com 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF6A00;
+            --secondary-orange: #FF8C42;
+            --dark-blue: #1A1F36;
+            --light-gray: #F5F7FA;
+            --success-green: #10B981;
+            --warning-yellow: #F59E0B;
+            --error-red: #EF4444;
+            --gradient-primary: linear-gradient(135deg, #FF6A00 0%, #FF8C42 100%);
+            --gradient-dark: linear-gradient(135deg, #1A1F36 0%, #2D3561 100%);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--light-gray); color: var(--dark-blue); line-height: 1.6; overflow-x: hidden; }
+
+        .hero { background: var(--gradient-dark); color: white; padding: 80px 20px 70px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,106,0,0.12) 0%, transparent 70%); animation: pulse 8s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.8; } }
+        .hero .badge-top { display: inline-block; background: rgba(255,106,0,0.2); border: 1px solid rgba(255,106,0,0.5); color: var(--secondary-orange); padding: 6px 18px; border-radius: 30px; font-size: 0.85rem; letter-spacing: 1px; position: relative; z-index: 1; margin-bottom: 24px; }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 18px; position: relative; z-index: 1; animation: fadeInDown 1s ease; line-height: 1.25; }
+        .hero .subtitle { font-size: 1.2rem; opacity: 0.92; position: relative; z-index: 1; animation: fadeInUp 1s ease 0.3s both; max-width: 950px; margin: 0 auto; }
+        .hero .meta { font-size: 0.85rem; opacity: 0.65; margin-top: 22px; position: relative; z-index: 1; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 46px; position: relative; z-index: 1; }
+        .stat-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.18); border-radius: 16px; padding: 26px 18px; animation: fadeInUp 1s ease both; }
+        .stat-card:nth-child(1) { animation-delay: 0.5s; } .stat-card:nth-child(2) { animation-delay: 0.7s; } .stat-card:nth-child(3) { animation-delay: 0.9s; } .stat-card:nth-child(4) { animation-delay: 1.1s; }
+        .stat-value { font-size: 2.1rem; font-weight: 800; color: var(--primary-orange); margin-bottom: 8px; }
+        .stat-label { font-size: 0.88rem; opacity: 0.88; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 50px 20px; }
+        .section { background: white; border-radius: 20px; padding: 46px; margin-bottom: 36px; box-shadow: var(--shadow-md); opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .section.visible { opacity: 1; transform: translateY(0); }
+        .section-title { font-size: 1.85rem; font-weight: 700; margin-bottom: 10px; color: var(--dark-blue); display: flex; align-items: center; gap: 14px; }
+        .section-title i { color: var(--primary-orange); font-size: 2rem; }
+        .section-desc { color: #667; font-size: 0.98rem; margin-bottom: 26px; max-width: 1050px; }
+        .chart-container { position: relative; height: 380px; margin: 26px 0; }
+        .chart-note { font-size: 0.8rem; color: #888; text-align: center; margin-top: -12px; }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 26px; }
+        .info-card { background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 16px; padding: 24px; border-left: 4px solid var(--primary-orange); transition: all 0.3s ease; }
+        .info-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .info-card h3 { font-size: 1.08rem; margin-bottom: 10px; color: var(--dark-blue); }
+        .info-card p, .info-card li { color: #555; font-size: 0.9rem; }
+        .info-card ul { padding-left: 18px; }
+        .info-card li { margin-bottom: 5px; }
+
+        .company-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 26px; }
+        .company-card { background: linear-gradient(160deg, #FFF8F2 0%, #ffffff 100%); border: 1px solid #FFE3D0; border-radius: 16px; padding: 24px; }
+        .company-card h3 { font-size: 1.05rem; color: #C94F00; margin-bottom: 10px; }
+        .company-card p, .company-card li { color: #555; font-size: 0.92rem; }
+        .company-card ul { padding-left: 18px; }
+        .company-card li { margin-bottom: 6px; }
+
+        .swot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 26px; }
+        .swot-card { padding: 24px; border-radius: 16px; color: white; }
+        .swot-card h3 { font-size: 1.1rem; margin-bottom: 12px; }
+        .swot-card ul { padding-left: 18px; }
+        .swot-card li { font-size: 0.88rem; margin-bottom: 8px; line-height: 1.5; }
+        .swot-strengths { background: linear-gradient(135deg, #10B981 0%, #059669 100%); }
+        .swot-weaknesses { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); }
+        .swot-opportunities { background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); }
+        .swot-threats { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+
+        .benefit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 26px; }
+        .benefit-card { background: white; border: 1px solid #EEE; border-radius: 16px; padding: 22px; text-align: center; transition: all 0.3s ease; }
+        .benefit-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--primary-orange); }
+        .benefit-icon { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem; }
+        .benefit-card h3 { font-size: 0.98rem; margin-bottom: 8px; }
+        .benefit-card p { font-size: 0.85rem; color: #666; }
+
+        .platform-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px; margin: 26px 0; }
+        .platform-stat { background: var(--gradient-dark); color: white; border-radius: 14px; padding: 22px 14px; text-align: center; }
+        .platform-stat .num { font-size: 1.7rem; font-weight: 800; color: var(--secondary-orange); }
+        .platform-stat .lbl { font-size: 0.78rem; opacity: 0.85; margin-top: 4px; }
+
+        .trend-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin: 26px 0; }
+        .trend-stat { background: linear-gradient(160deg, #FFF6EF 0%, #ffffff 100%); border: 1px solid #FFE0C4; border-radius: 14px; padding: 20px; text-align: center; }
+        .trend-stat .num { font-size: 1.9rem; font-weight: 800; color: var(--primary-orange); }
+        .trend-stat .lbl { font-size: 0.82rem; color: #555; margin-top: 6px; }
+
+        .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.88rem; }
+        .data-table th { background: var(--gradient-dark); color: white; padding: 12px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 11px 14px; border-bottom: 1px solid #EEE; vertical-align: top; }
+        .data-table tr:nth-child(even) { background: #FAFBFC; }
+
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: var(--gradient-primary); transform: translateX(-50%); }
+        .timeline-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 34px; position: relative; }
+        .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+        .timeline-content { width: 45%; background: white; padding: 22px; border-radius: 16px; box-shadow: var(--shadow-md); }
+        .timeline-content h3 { font-size: 1rem; margin-bottom: 6px; }
+        .timeline-content p { font-size: 0.88rem; color: #666; }
+        .timeline-dot { width: 20px; height: 20px; background: var(--primary-orange); border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); border: 4px solid white; box-shadow: var(--shadow-sm); }
+
+        .data-missing-warning { background: #FEF3C7; border-left: 4px solid var(--warning-yellow); padding: 16px 20px; border-radius: 8px; margin: 18px 0; font-size: 0.9rem; }
+        .sources-list { background: #f8f9fa; border-radius: 12px; padding: 24px; max-height: 520px; overflow-y: auto; }
+        .source-item { padding: 10px 0; border-bottom: 1px solid #E4E4E4; font-size: 0.85rem; }
+        .source-item:last-child { border-bottom: none; }
+        .source-item a { color: var(--primary-orange); text-decoration: none; word-break: break-all; }
+        .source-item a:hover { text-decoration: underline; }
+        .source-item .src-tag { display: inline-block; background: #FFEAD9; color: #C94F00; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-right: 8px; }
+
+        .case-card { border: 1px solid #EEE; border-radius: 16px; overflow: hidden; }
+        .case-head { padding: 18px 22px; color: white; }
+        .case-head h3 { font-size: 1.05rem; }
+        .case-head .tag { font-size: 0.72rem; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 12px; display: inline-block; margin-top: 6px; }
+        .case-body { padding: 18px 22px; }
+        .case-body .metric { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed #E5E7EB; font-size: 0.87rem; }
+        .case-body .metric:last-child { border-bottom: none; }
+        .case-body .metric b { color: var(--primary-orange); text-align: right; }
+
+        .divider { height: 3px; background: var(--gradient-primary); border-radius: 3px; margin: 40px 0; }
+        .footer { background: var(--gradient-dark); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; }
+        .footer p { opacity: 0.8; font-size: 0.88rem; margin-bottom: 4px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.9rem; }
+            .section { padding: 28px 18px; }
+            .swot-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 20px; }
+            .timeline-item { flex-direction: column !important; }
+            .timeline-content { width: 100%; margin-left: 40px; }
+            .timeline-dot { left: 20px; }
+            .chart-container { height: 300px; }
+        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @media print { .hero { page-break-after: always; } .section { page-break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+        <div class="badge-top">BÁO CÁO NGÀNH</div>
+        <h1><i class="fas fa-chair"></i> Ngành Nội Thất &amp; Đồ Mộc (Joinery)</h1>
+        <p class="subtitle">Thị trường toàn cầu &middot; Vị thế Việt Nam &middot; Cơ hội mở rộng tệp khách hàng xuất khẩu trên Alibaba.com 2026</p>
+        <p class="subtitle" style="margin-top:10px;font-size:1rem;opacity:0.75;">Trường hợp tham chiếu: <b>Pacific Joinery</b> &mdash; nhà sản xuất đồ mộc chính xác (kitchen &amp; wardrobe joinery) tại Việt Nam, xuất khẩu sang Úc, New Zealand, Mỹ &amp; Canada</p>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-value" data-target="598">$598B+</div><div class="stat-label">Thị trường nội thất toàn cầu 2025 (USD)</div></div>
+            <div class="stat-card"><div class="stat-value" data-target="17">$17,2 tỷ</div><div class="stat-label">Xuất khẩu gỗ &amp; sản phẩm gỗ VN 2025</div></div>
+            <div class="stat-card"><div class="stat-value" data-target="2">#2 Thế giới</div><div class="stat-label">Xuất khẩu đồ gỗ nội thất (sau TQ)</div></div>
+            <div class="stat-card"><div class="stat-value" data-target="50">50 triệu+</div><div class="stat-label">Nhà mua B2B hoạt động trên Alibaba.com</div></div>
+        </div>
+        <p class="meta">Người tạo: Dương Viết Hải | Email: <a style="color: white;" href="mailto:duong.viethai@alibaba-inc.com">duong.viethai@alibaba-inc.com</a></p>
+        <p class="meta">Ngày tạo: 19/08/2026 &nbsp;|&nbsp; Nguồn: Alibaba.com Vietnam dữ liệu thị trường 2024&ndash;2025 &nbsp;|&nbsp; Chi tiết nguồn tại Phụ lục</p>
+        
+    </section>
+
+    <div class="container">
+
+        <!-- ============ MỤC LỤC ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-list-ul"></i> Nội Dung Trình Bày</h2>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-industry"></i> Phần 1 &mdash; Hồ sơ doanh nghiệp</h3><p>Năng lực sản xuất, thị trường xuất khẩu, vật liệu &amp; chứng nhận hiện tại của quý công ty.</p></div>
+                <div class="info-card"><h3><i class="fas fa-globe"></i> Phần 2 &mdash; Phân tích ngành hàng</h3><p>Quy mô thị trường toàn cầu, cung &ndash; cầu, vị thế Việt Nam và làn sóng mua hàng B2B online.</p></div>
+                <div class="info-card"><h3><i class="fas fa-handshake"></i> Phần 3 &mdash; Giới thiệu Alibaba.com</h3><p>Nền tảng là gì, lợi ích cho nhà xuất khẩu, công cụ AI, bảo vệ giao dịch &amp; câu chuyện thành công.</p></div>
+                <div class="info-card"><h3><i class="fas fa-road"></i> Phần 4 &mdash; Lộ trình triển khai</h3><p>Hành trình 90 ngày đầu, mô hình thành viên &amp; cam kết cơ hội kinh doanh.</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 1: HỒ SƠ DOANH NGHIỆP ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-industry"></i> Phần 1 &mdash; Hồ Sơ Doanh Nghiệp</h2>
+            <p class="section-desc">Tổng hợp từ website quý công ty (pacificjoinery.vn, truy cập 19/08/2026) &mdash; nền tảng năng lực để khai thác kênh xuất khẩu trực tuyến.</p>
+            <div class="company-grid">
+                <div class="company-card">
+                    <h3><i class="fas fa-cubes"></i> Lĩnh vực &amp; Sản phẩm</h3>
+                    <ul>
+                        <li>Sản xuất <b>đồ mộc chính xác (precision joinery)</b> trung &ndash; cao cấp: tủ bếp (kitchens), tủ quần áo (wardrobes), đồ mộc kiến trúc theo dự án.</li>
+                        <li>Giải pháp <b>bespoke (thiết kế riêng)</b> lẫn <b>hệ module tiêu chuẩn hóa</b> cho dự án lớn.</li>
+                        <li>Công suất: <b>300+ tủ bếp &amp; 500+ tủ quần áo/tháng</b>; phục vụ <b>200 căn hộ/tháng</b>; <b>5 container/tuần</b>.</li>
+                    </ul>
+                </div>
+                <div class="company-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Thị trường &amp; Vị thế</h3>
+                    <ul>
+                        <li>Nhà máy tại <b>Hóc Môn, TP.HCM</b>, diện tích <b>5.000+ m&sup2;</b>, máy CNC châu Âu/Nhật Bản.</li>
+                        <li>Xuất khẩu: <b>Úc, New Zealand, Bờ Đông Hoa Kỳ, Bờ Đông Canada</b> (nhà ở mật độ trung-cao, giáo dục, y tế, công trình công cộng).</li>
+                        <li>Hình thức: <b>FOB &amp; cung cấp trực tiếp cho builder</b>; lead time 4&ndash;6 tuần từ khi duyệt bản vẽ.</li>
+                        <li>Xuất thân: đội ngũ sáng lập từ <b>Creador</b> (thương hiệu joinery cao cấp Úc) &mdash; hơn 20 năm kinh nghiệm.</li>
+                    </ul>
+                </div>
+                <div class="company-card">
+                    <h3><i class="fas fa-certificate"></i> Vật liệu &amp; Chứng nhận</h3>
+                    <ul>
+                        <li>Phụ kiện: <b>Blum (Áo), Hettich (Đức), H&auml;fele (Đức)</b>.</li>
+                        <li>Tấm panel: <b>Panel Plus (Thái Lan)</b> hoặc tấm <b>FSC-certified</b>, tiêu chuẩn <b>E1/E0</b>.</li>
+                        <li>Bề mặt cao cấp: <b>Corian&reg;, Forbo, HI-MACS&reg;</b>.</li>
+                        <li>Kiểm soát chất lượng nhiều bước; CNC đảm bảo độ chính xác &amp; lặp lại cho đơn hàng lớn.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="data-missing-warning" style="margin-top:20px;">
+                <i class="fas fa-lightbulb"></i> <b>Nhận định:</b> Quý công ty hội tụ đủ yếu tố người mua B2B toàn cầu tìm kiếm &mdash; năng lực sản xuất lớn, chứng nhận FSC/E1-E0, phụ kiện châu Âu, kinh nghiệm xuất khẩu &mdash; nhưng hiện mới tiếp cận 4 thị trường qua quan hệ truyền thống. Kênh thương mại điện tử xuyên biên giới có thể mở rộng tệp khách hàng đến <b>200+ quốc gia</b> với chi phí tìm khách thấp hơn đáng kể.
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 2.1: THỊ TRƯỜNG TOÀN CẦU ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-globe"></i> Phần 2.1 &mdash; Thị Trường Nội Thất Toàn Cầu</h2>
+            <p class="section-desc">Thị trường nội thất toàn cầu duy trì đà tăng trưởng ổn định. Các hãng nghiên cứu độc lập ước tính quy mô năm 2025 trong khoảng <b>$598&ndash;$786 tỷ USD</b> (tùy phạm vi thống kê), với CAGR dự báo <b>3,1%&ndash;7%/năm</b> đến 2030+.</p>
+            <div class="chart-container"><canvas id="marketSizeChart"></canvas></div>
+            <p class="chart-note">Nguồn: Mordor Intelligence (2026) &mdash; $691,78 tỷ (2025) &rarr; $729,61 tỷ (2026) &rarr; dự báo $952,10 tỷ (2031).</p>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-bath"></i> Phân khúc tủ bếp (kitchen cabinets)</h3><p>Thị trường tủ bếp toàn cầu đạt <b>$107,86 tỷ (2025)</b>, dự kiến lên <b>$218,23 tỷ</b> nhờ nhu cầu cải tạo nhà ở &amp; đô thị hóa (Fortune Business Insights). Phân khúc tủ (cabinet) tổng thể đạt <b>$141 tỷ (2025)</b> (Mordor Intelligence).</p></div>
+                <div class="info-card"><h3><i class="fas fa-chart-line"></i> Động lực tăng trưởng</h3><ul>
+                    <li>Bùng nổ xây dựng &amp; cải tạo nhà ở tại Mỹ, Canada, Úc.</li>
+                    <li>Xu hướng <b>RTA (ready-to-assemble)</b> &amp; module hóa tiết kiệm chi phí.</li>
+                    <li>Yêu cầu <b>vật liệu bền vững</b> (FSC/PEFC).</li>
+                    <li>Dịch chuyển chuỗi cung ứng khỏi Trung Quốc sang Đông Nam Á.</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-flag-usa"></i> Thị trường Mỹ &ndash; khách hàng lớn nhất</h3><p>Mỹ chiếm <b>~55%</b> kim ngạch xuất khẩu gỗ VN (2025). Việt Nam + Trung Quốc cung cấp <b>~61%</b> nhập khẩu nội thất Mỹ (VN ~35%, TQ ~26%). Thị phần đồ nội thất gỗ VN tại Mỹ tăng từ <b>40,5% (8T/2024) lên 45,3% (8T/2025)</b>.</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 2.2: CUNG - CẦU ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-balance-scale"></i> Phần 2.2 &mdash; Cung &ndash; Cầu Xuất Khẩu</h2>
+            <div class="chart-container"><canvas id="supplyDemandChart"></canvas></div>
+            <p class="chart-note">Thị phần đồ nội thất bằng gỗ tại Mỹ: 8 tháng 2024 so với 8 tháng 2025 (Nguồn: VnEconomy, 12/01/2026).</p>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-truck-loading"></i> Nguồn cung toàn cầu</h3><ul>
+                    <li><b>Trung Quốc #1</b> &mdash; đang mất dần thị phần do thuế quan &amp; chi phí tăng.</li>
+                    <li><b>Việt Nam #2 thế giới</b> xuất khẩu đồ gỗ nội thất, sản phẩm có mặt tại <b>166 quốc gia</b> (Lao Động, 10/11/2025).</li>
+                    <li>VN + Malaysia + Indonesia chiếm <b>&gt;80%</b> xuất khẩu nội thất ASEAN (Alibaba Seller Blog / Source of Asia).</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-shopping-cart"></i> Nhu cầu nhập khẩu</h3><ul>
+                    <li><b>Mỹ</b>: thị trường đơn lẻ lớn nhất (nhập khẩu tủ bếp gỗ ~$1,63 tỷ trong 7T/2025).</li>
+                    <li><b>EU</b>: nhập khẩu đồ nội thất gỗ ngoài khối ~<b>$4,98 tỷ</b> (8T/2025); EVFTA tạo ưu thế thuế.</li>
+                    <li><b>Nhật, Hàn, Úc, Canada, Trung Đông</b>: người mua B2B chủ động tìm nguồn cung online.</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-chart-bar"></i> Xuất khẩu gỗ Việt Nam</h3><ul>
+                    <li><b>2024:</b> ~$16,28 tỷ, tăng <b>+20,9%</b> YoY.</li>
+                    <li><b>2025:</b> lần đầu vượt <b>$17,2 tỷ</b>; nội thất gỗ chiếm <b>~61%</b> tổng kim ngạch.</li>
+                    <li>VN nằm trong <b>Top 5</b> xuất khẩu gỗ lớn nhất thế giới, <b>#2 châu Á</b>.</li>
+                    <li>Mỹ là thị trường số 1 (~55% tổng kim ngạch gỗ VN 2025) &mdash; lý do để đa dạng hóa thị trường mới.</li>
+                </ul></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 2.3: VỊ THẾ VIỆT NAM (SWOT) ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-flag"></i> Phần 2.3 &mdash; Vị Thế Ngành Nội Thất Việt Nam</h2>
+            <p class="section-desc">Đánh giá tổng hợp từ dữ liệu thị trường 2025&ndash;2026 (nguồn tại Phụ lục) &mdash; phản ánh trạng thái chung ngành, làm cơ sở xác định hướng mở rộng thị trường.</p>
+            <div class="swot-grid">
+                <div class="swot-card swot-strengths">
+                    <h3><i class="fas fa-check-circle"></i> Điểm Mạnh</h3>
+                    <ul>
+                        <li>Hạ tầng sản xuất hiện đại (CNC châu Âu/Nhật), tay nghề thợ mộc lâu đời, chi phí nhân công cạnh tranh.</li>
+                        <li>Chuỗi cung ứng gỗ công nghiệp &amp; phụ kiện (Blum, Hettich, H&auml;fele); nguồn gỗ FSC/E1-E0 sẵn có.</li>
+                        <li>#2 thế giới xuất khẩu đồ gỗ nội thất; thị phần tại Mỹ tăng liên tục (40,5% &rarr; 45,3%).</li>
+                        <li>Kinh nghiệm FOB/direct-to-builder cho thị trường khó tính (Úc, Mỹ, Canada).</li>
+                    </ul>
+                </div>
+                <div class="swot-card swot-weaknesses">
+                    <h3><i class="fas fa-times-circle"></i> Điểm Yếu</h3>
+                    <ul>
+                        <li>Phụ thuộc lớn vào một thị trường (Mỹ ~55% kim ngạch gỗ) &mdash; rủi ro tập trung cao.</li>
+                        <li>Phần lớn doanh nghiệp chưa có năng lực TMĐT xuyên biên giới, thương hiệu quốc tế còn mờ nhạt.</li>
+                        <li>Tỷ lệ gia công (OEM) cao, giá trị thương hiệu riêng thấp.</li>
+                        <li>Thiếu đội ngũ sales online &amp; dữ liệu thị trường để chủ động mở rộng tệp khách.</li>
+                    </ul>
+                </div>
+                <div class="swot-card swot-opportunities">
+                    <h3><i class="fas fa-lightbulb"></i> Cơ Hội</h3>
+                    <ul>
+                        <li>Dịch chuyển đơn hàng khỏi Trung Quốc: người mua Mỹ/EU chủ động tìm nhà cung cấp ASEAN trên nền tảng số.</li>
+                        <li><b>83% người mua B2B ưa chuộng đặt hàng &amp; thanh toán qua thương mại điện tử</b> (Khảo sát Alibaba.com 2024).</li>
+                        <li>Tìm kiếm hàng made-in-Vietnam tăng <b>trên 70%/năm</b> tại Pháp, Đức, Ý, Tây Ban Nha, Anh...</li>
+                        <li>Ngành <b>Đồ nội thất VN tăng +82,3%</b> trên Alibaba.com (Top 10 ngành tăng trưởng mạnh 2024).</li>
+                        <li>Chứng nhận FSC/BSCI tạo lợi thế định giá cao hơn 15&ndash;25%.</li>
+                    </ul>
+                </div>
+                <div class="swot-card swot-threats">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Thách Thức</h3>
+                    <ul>
+                        <li>Thuế quan Mỹ: 25% với tủ bếp/tủ chậu/nội thất gỗ (10/2025); kế hoạch nâng 30&ndash;50% hoãn đến 2027 nhưng vẫn là rủi ro.</li>
+                        <li>Cạnh tranh gay gắt từ Trung Quốc, Ấn Độ, Malaysia, Indonesia.</li>
+                        <li>Quy định nhập khẩu chặt hơn: truy xuất nguồn gốc gỗ (EUTR/Lacey Act), hóa chất (REACH), lao động (BSCI).</li>
+                        <li>Chi phí logistics biến động; chuỗi cung ứng nguyên liệu gỗ nhập khẩu chưa chủ động.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 2.4: CƠ HỘI TRÊN ALIBABA NGÀNH NỘI THẤT ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Phần 2.4 &mdash; Cơ Hội Ngành Nội Thất Ngay Trên Alibaba.com</h2>
+            <p class="section-desc">Dữ liệu phân tích cung-cầu của chính nền tảng Alibaba.com (chu kỳ 90 ngày; nguồn: Alibaba.com Seller Blog, 2026) cho thấy nhu cầu người mua quốc tế đang vượt nguồn cung tại nhiều phân khúc &mdash; cơ hội "đại dương xanh" cho nhà sản xuất Việt Nam. Chỉ số &gt;1,0 = nhu cầu mua vượt nguồn cung niêm yết.</p>
+            <div class="chart-container"><canvas id="opportunityChart"></canvas></div>
+            <p class="chart-note">Chỉ số supply-demand ratio theo phân khúc tủ bếp trên Alibaba.com (Alibaba.com platform intelligence, 90 ngày).</p>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-gem"></i> "Đại dương xanh" cho nhà sản xuất VN</h3><p>Tủ bếp <b>thép không gỉ (5,11)</b>, <b>tủ bếp tiêu chuẩn (2,01)</b>, <b>đảo bếp di động (1,56)</b> đều có nhu cầu vượt cung. Với năng lực CNC + phụ kiện châu Âu + E1/E0, doanh nghiệp joinery VN có thể chiếm lĩnh trước khi cạnh tranh nóng lên.</p></div>
+                <div class="info-card"><h3><i class="fas fa-certificate"></i> Chứng nhận = lợi thế định giá</h3><p>FSC/PEFC/BSCI gần như bắt buộc với người mua phương Tây, nhưng <b>&lt;30%</b> nhà cung cấp khu vực có đủ chứng nhận. Nhà cung cấp được chứng nhận đạt <b>2,8x</b> lượt hỏi hàng và định giá cao hơn <b>15&ndash;25%</b>.</p></div>
+                <div class="info-card"><h3><i class="fas fa-camera"></i> Hiệu quả niêm yết</h3><p>Listing ảnh độ phân giải cao nhận <b>3,2x</b> lượt hỏi hàng; ảnh lifestyle thực tế vượt ảnh studio <b>47%</b> về tương tác. Nhà cung cấp Verified nhận trung bình <b>27 lượt hỏi hàng đủ điều kiện/tháng</b> cho ngành nội thất bếp.</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 2.5: LÀN SÓNG B2B ONLINE ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wave-square"></i> Phần 2.5 &mdash; Làn Sóng Thương Mại Điện Tử B2B Toàn Cầu</h2>
+            <p class="section-desc">Thương mại điện tử B2B toàn cầu tăng trưởng hai chữ số trong 5 năm liên tiếp, dự kiến đạt <b>3,6 nghìn tỷ USD GMV năm 2026</b> với tỷ lệ tăng trưởng kép <b>14,5%</b> (Nguồn: Bộ Thương mại Hoa Kỳ, trích trong Alibaba.com Vietnam Alibaba.com Việt Nam).</p>
+            <div class="chart-container"><canvas id="b2bEcomChart"></canvas></div>
+            <p class="chart-note">Tổng giá trị giao dịch TMĐT B2B toàn cầu (GMV, tỷ USD): 2022&ndash;2024 thực tế, 2025&ndash;2026 dự báo (Nguồn: Bộ Thương mại Hoa Kỳ, qua Alibaba.com Việt Nam).</p>
+            <div class="trend-stats">
+                <div class="trend-stat"><div class="num">83%</div><div class="lbl">người mua B2B ưa chuộng đặt hàng &amp; thanh toán qua TMĐT</div></div>
+                <div class="trend-stat"><div class="num">74%</div><div class="lbl">người mua B2B thế hệ Millennials đã chuyển nhà cung cấp để có trải nghiệm như người tiêu dùng</div></div>
+                <div class="trend-stat"><div class="num">250%</div><div class="lbl">tăng trưởng đặt hàng B2B qua di động</div></div>
+                <div class="trend-stat"><div class="num">72%</div><div class="lbl">người mua B2B muốn trải nghiệm mua sắm đa kênh</div></div>
+            </div>
+            <p class="section-desc" style="margin-top:14px;">Khảo sát Người Mua Tại Mỹ của Alibaba.com 2024 (Co-Create edition).</p>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-search-location"></i> "Made in Vietnam" đang được săn tìm</h3><p>Năm 2024, tìm kiếm hàng made-in-Vietnam trên Alibaba.com tăng <b>trên 70% YoY</b> tại Pháp, Đức, Ý, Tây Ban Nha, Philippines, Anh, Nam Phi... &mdash; cơ hội vàng cho nhà sản xuất Việt Nam đi đầu trên nền tảng.</p></div>
+                <div class="info-card"><h3><i class="fas fa-chart-bar"></i> Đồ nội thất: top ngành tăng trưởng của VN</h3><p>Top 10 ngành hàng VN tăng trưởng mạnh trên Alibaba.com năm 2024: May mặc +188%, Túi xách/vali +118%, In ấn bao bì +109%, Xây dựng +106%, <b>Đồ nội thất +82,3%</b>, Làm đẹp +74,7%, Nhà &amp; vườn +72,1%, Nông nghiệp +40,5%, F&amp;B +19,1% (Nguồn: Dữ liệu Alibaba.com, 04/2025).</p></div>
+                <div class="info-card"><h3><i class="fas fa-sync-alt"></i> Sự chuyển dịch tìm nguồn cung</h3><p>Bất ổn thương mại toàn cầu đang thay đổi chiến lược tìm nguồn cung: người mua ưu tiên <b>hiệu quả chi phí, nguồn cung gần (near-sourcing), chính sách thương mại thân thiện</b> &mdash; Việt Nam nằm trọn trong nhóm lợi ích này (Nguồn: Alibaba.com Việt Nam).</p></div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ============ PHẦN 3.1: ALIBABA.COM LÀ GÌ ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-handshake"></i> Phần 3.1 &mdash; Alibaba.com Là Gì?</h2>
+            <p class="section-desc"><b>Alibaba.com</b> là nền tảng <b>Thương mại điện tử B2B (doanh nghiệp với doanh nghiệp) hàng đầu thế giới</b>, ra đời năm 1999, chuyên về thương mại quốc tế &mdash; nơi nhà sản xuất/nhà xuất khẩu kết nối trực tiếp với người mua là doanh nghiệp nhập khẩu, nhà phân phối, builder, chuỗi bán lẻ toàn cầu. Khác với sàn B2C (bán cho người tiêu dùng), Alibaba.com phục vụ <b>giao dịch số lượng lớn, giá bán buôn, đơn hàng xuất khẩu</b>. (Nguồn: Alibaba.com Vietnam )</p>
+            <div class="platform-stats">
+                <div class="platform-stat"><div class="num">200+</div><div class="lbl">Quốc gia &amp; vùng lãnh thổ</div></div>
+                <div class="platform-stat"><div class="num">50 triệu+</div><div class="lbl">Nhà mua hàng B2B hoạt động</div></div>
+                <div class="platform-stat"><div class="num">200 triệu+</div><div class="lbl">Danh sách sản phẩm</div></div>
+                <div class="platform-stat"><div class="num">7.600+</div><div class="lbl">Danh mục sản phẩm &middot; 40+ ngành</div></div>
+                <div class="platform-stat"><div class="num">16</div><div class="lbl">Ngôn ngữ chính thức</div></div>
+                <div class="platform-stat"><div class="num">25+ năm</div><div class="lbl">Kinh nghiệm TMĐT B2B từ 1999</div></div>
+            </div>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-globe-asia"></i> Người mua đến từ đâu?</h3><p><b>Top 10 quốc gia/khu vực người mua</b> trên Alibaba.com (Dữ liệu Alibaba.com 2024): <b>Hoa Kỳ &middot; Canada &middot; Anh Quốc &middot; Châu Âu &middot; Trung Nam Mỹ &middot; Trung Đông &middot; Châu Phi &middot; Trung Quốc &middot; ASEAN &middot; Úc</b>. Phân bố tham khảo: Mỹ ~17%, ASEAN ~17%, Ấn Độ ~12%, EU ~10%, Trung Đông ~10% (tài liệu Alibaba 2023) &mdash; đúng 4 thị trường hiện tại + các khu vực mới của quý công ty.</p></div>
+                <div class="info-card"><h3><i class="fas fa-language"></i> Phá bỏ rào cản ngôn ngữ</h3><p>Vĩnh viễn sở hữu <b>website 1+17 ngôn ngữ</b> (tự động dịch thông tin sản phẩm), phủ sóng <b>95% dân số thế giới</b>. Hỗ trợ dịch hội thoại theo thời gian thực &mdash; ngôn ngữ không còn là trở ngại khi tiếp cận khách hàng mới ở bất kỳ quốc gia nào.</p></div>
+                <div class="info-card"><h3><i class="fas fa-medal"></i> Việt Nam được ưu tiên hiển thị</h3><p>Alibaba triển khai <b>Country Site &amp; "Source by Region"</b> &mdash; ngành hàng Việt Nam được ưu tiên hiển thị với người mua quốc tế (Nông nghiệp, Sắc đẹp, Thực phẩm &amp; Nước giải khát, <b>Nội thất</b>, Nhà &amp; Vườn, Bao bì &amp; In ấn). Ngành <b>Nội thất</b> của quý công ty nằm trong danh sách ưu tiên này, nhận thêm lưu lượng tự nhiên từ người mua tìm nguồn cung theo khu vực.</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 3.2: VIỆT NAM TRÊN ALIBABA ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-flag"></i> Phần 3.2 &mdash; Việt Nam Trên Alibaba.com</h2>
+            <p class="section-desc">Alibaba.com đặt chân tại Việt Nam từ năm 2009, đồng hành cùng hàng nghìn doanh nghiệp vừa và nhỏ xuất khẩu trực tuyến đến 200+ quốc gia, 40+ ngành công nghiệp (Nguồn: Alibaba.com Việt Nam).</p>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-building"></i> Vietnam Pavilion &mdash; Gian hàng Quốc gia Việt Nam</h3><p>Hợp tác với <b>Vietrade (Bộ Công Thương)</b> trong dự án <b>Top 100 Doanh nghiệp Tiêu biểu</b> trên Vietnam Pavilion giai đoạn 2024&ndash;2025, đang tuyển chọn <b>Top 200 DNTB 2025&ndash;2026</b> &mdash; cơ hội được chính phủ bảo trợ quảng bá thương hiệu ra thế giới.</p></div>
+                <div class="info-card"><h3><i class="fas fa-trophy"></i> Chương trình Đại sứ Việt Nam &amp; KEL</h3><p>Chương trình <b>Đại sứ Việt Nam</b> (Top 200 Doanh nghiệp nổi bật), giải thưởng <b>Key Ecommerce Leader (KEL) 2024 APAC-South</b>, cùng chuỗi sự kiện: Hội nghị Xuất khẩu Việt Nam thường niên, Elite Camp (VN), Co-Create (Mỹ), Ngày MSME (EU).</p></div>
+                <div class="info-card"><h3><i class="fas fa-chart-bar"></i> Các thương hiệu VN tin dùng</h3><p>Các doanh nghiệp Việt gắn bó lâu năm trên nền tảng: <b>Nghĩa Sơn (gỗ, 18 năm)</b>, Duy Minh Nông sản (16 năm), VNSteel Vingal (14 năm), Hương Quế (13 năm), Lioa (16 năm), Vinamilk (9 năm)... (Nguồn: Alibaba.com Việt Nam).</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 3.3: LỢI ÍCH THAM GIA ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-gift"></i> Phần 3.3 &mdash; Tham Gia Alibaba.com, Doanh Nghiệp Nhận Được Gì?</h2>
+            <p class="section-desc">Hệ sinh thái dịch vụ toàn diện của Alibaba.com giúp nhà xuất khẩu Việt Nam đi từ "mở gian hàng" đến "tăng trưởng bền vững" (Nguồn: Alibaba.com Việt Nam):</p>
+            <div class="benefit-grid">
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-store"></i></div><h3>Triển lãm thương mại online 24/7</h3><p>Gian hàng hoạt động quanh năm, thay cho chi phí hội chợ truyền thống hàng chục nghìn USD mỗi lần.</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-language"></i></div><h3>Website 1+17 ngôn ngữ</h3><p>Tự động dịch sản phẩm &amp; hội thoại, phủ 95% dân số thế giới &mdash; tiếp cận khách không biết tiếng Anh.</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-globe"></i></div><h3>Mở rộng đơn hàng nước ngoài</h3><p>50 triệu+ nhà mua B2B tại 200+ quốc gia &mdash; đa dạng hóa tệp khách, giảm phụ thuộc một thị trường.</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-robot"></i></div><h3>Công cụ AI thông minh</h3><p>AI Smart Assistant tự động trả lời RFQ, dịch đa ngôn ngữ, tối ưu sản phẩm &mdash; giảm tải công việc thủ công.</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-graduation-cap"></i></div><h3>Đào tạo miễn phí, không giới hạn</h3><p>Khóa vận hành hằng tháng từ chuyên gia (offline + online), báo cáo ngành, webinar chuyên sâu, tư vấn 1-1.</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-ship"></i></div><h3>Logistics &amp; thanh toán thuận tiện</h3><p>Chuyển phát nhanh quốc tế <b>3&ndash;7 ngày</b> đến 200+ khu vực (kho TP.HCM/Hà Nội); thanh toán bằng VND qua đối tác địa phương.</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-shield-alt"></i></div><h3>Trade Assurance bảo vệ giao dịch</h3><p>Bảo vệ từ thanh toán đến giao hàng: tiền ký quỹ an toàn, cam kết hoàn tiền, hạn mức tín dụng cho nhà cung cấp VN.</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-chart-pie"></i></div><h3>Dữ liệu &amp; báo cáo thị trường</h3><p>Insight thị trường hằng tháng, xu hướng sản phẩm/từ khóa, phân tích hành vi người mua để ra quyết định đúng đắn.</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-bullseye"></i></div><h3>Guaranteed Package &mdash; cam kết cơ hội</h3><p>Gói giải pháp dành riêng cho nhà bán Việt Nam: <b>50+ cơ hội kinh doanh trong 90 ngày</b>, nếu không đạt sẽ được hoàn $40/khách hàng không được cung cấp.</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 3.4: CÔNG CỤ AI & VẬN HÀNH ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cogs"></i> Phần 3.4 &mdash; Công Cụ AI &amp; Hỗ Trợ Vận Hành</h2>
+            <p class="section-desc">Quy trình gia nhập liền mạch + bộ công cụ AI giúp doanh nghiệp khởi đầu thuận lợi và vận hành hiệu quả ngay từ đầu (Nguồn: Alibaba.com Việt Nam).</p>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-rocket"></i> Dịch vụ khởi tạo (OBS) dành riêng cho VN</h3><ul>
+                    <li>Hoàn thiện Profile &amp; <b>50+ sản phẩm trong 30 ngày</b> (Verified: 150 sản phẩm; Plus: 100; Basic: 50, chất lượng PIS &ge; 4,5).</li>
+                    <li>Thiết kế mini-site theo mẫu, banner toàn màn hình, đa ngôn ngữ &mdash; hoàn thành trong <b>60 ngày</b> với đội ngũ chuyên gia.</li>
+                    <li>Tải &amp; di chuyển hàng loạt sản phẩm, tối ưu hóa hàng loạt bằng AI.</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-robot"></i> Bộ công cụ AI vận hành</h3><ul>
+                    <li><b>AI Smart Assistant:</b> tự động tiếp nhận &amp; trả lời yêu cầu người mua, dịch đa ngôn ngữ, xử lý múi giờ toàn cầu.</li>
+                    <li><b>Auto RFQ/auto-quote:</b> tự động báo giá, tăng <b>+36% tỷ lệ phản hồi RFQ</b>, <b>+95% hiển thị sản phẩm</b>.</li>
+                    <li><b>Chiến dịch Smart AI:</b> ghép nối sản phẩm với người mua có ý định mua rõ ràng; đấu thầu thông minh tối ưu ROI; chế độ 1-click cho người mới.</li>
+                    <li><b>Data Insight:</b> hiểu hành vi người mua, phân tích đối thủ, xu hướng sản phẩm.</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-bolt"></i> Kết quả khi áp dụng công cụ</h3><ul>
+                    <li>Nhà cung cấp dùng AI xử lý <b>100+ inquiry/ngày</b> chỉ với đội ngũ 4 nhân viên (case Kim Chi, ngành thời trang).</li>
+                    <li>Trả lời nhanh trong <b>4 giờ</b> để nhận tăng lưu lượng; duy trì tỷ lệ phản hồi <b>90%+</b>.</li>
+                    <li>Lộ trình tăng trưởng có cấp bậc sao (1&ndash;5 sao) &mdash; cải thiện hiệu suất gian hàng để tăng vị trí tìm kiếm.</li>
+                </ul></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 3.5: TRADE ASSURANCE ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> Phần 3.5 &mdash; Trade Assurance: Bảo Vệ Giao Dịch Từ Thanh Toán Đến Giao Hàng</h2>
+            <p class="section-desc">Trade Assurance là chuẩn mực bảo vệ toàn diện của Alibaba.com &mdash; xây dựng niềm tin giúp khách hàng quốc tế <b>mới</b> yên tâm đặt hàng lần đầu với nhà cung cấp chưa quen biết (Nguồn: Alibaba.com Việt Nam).</p>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-lock"></i> Thanh toán an toàn</h3><ul>
+                    <li>Tiền được giữ an toàn trong <b>tài khoản ký quỹ</b> đến khi đơn hàng hoàn tất.</li>
+                    <li>Hỗ trợ <b>20+ phương thức thanh toán</b> tại <b>12+ quốc gia/vùng lãnh thổ</b>; tăng trưởng CAGR <b>150% trong 3 năm</b>.</li>
+                    <li>Nhà cung cấp VN có thể thanh toán/đối soát bằng <b>VND</b> qua Alipay &amp; đối tác địa phương.</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-undo"></i> Cam kết hoàn tiền &amp; hạn mức tín dụng</h3><ul>
+                    <li><b>Cam kết hoàn tiền miễn phí</b> cho nhà cung cấp khi người mua yêu cầu hoàn tiền (sau khi xem xét phê duyệt).</li>
+                    <li><b>Hạn mức tín dụng:</b> dựa trên tài sản tín dụng của nhà cung cấp, có thể rút tiền khi đơn hàng đã được thanh toán &mdash; <b>nhà cung cấp Việt Nam đã đăng ký dịch vụ này</b>.</li>
+                    <li>Trọng tài trực tuyến &amp; hòa giải giữa người mua và nhà cung cấp khi phát sinh tranh chấp.</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-shipping-fast"></i> Logistics online (ra mắt 09/2024)</h3><ul>
+                    <li>Chuyển phát nhanh quốc tế <b>3&ndash;7 ngày</b> đến <b>200+ khu vực</b>; kho hàng tại TP.HCM &amp; Hà Nội.</li>
+                    <li>Báo giá gồm phí hậu cần &amp; thời gian vận chuyển; bảo hiểm mất mát/hư hại hàng hóa.</li>
+                    <li>Hỗ trợ 7*24, phản hồi online trong <b>20 giây</b>, nhận hàng trong <b>2 ngày làm việc</b>.</li>
+                </ul></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 3.6: CASE STUDIES ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-star"></i> Phần 3.6 &mdash; Câu Chuyện Thành Công Của Nhà Xuất Khẩu Việt Nam</h2>
+            <p class="section-desc">Ba doanh nghiệp Việt Nam &mdash; trong đó có <b>SUKAVINA, cùng ngành nội thất</b>, và <b>Nghĩa Sơn, ngành gỗ 18 năm</b> (Nguồn: Alibaba.com Việt Nam).</p>
+            <div class="cards-grid">
+                <div class="case-card">
+                    <div class="case-head" style="background: linear-gradient(135deg, #FF6A00 0%, #FF8C42 100%);">
+                        <h3><i class="fas fa-chair"></i> SUKAVINA &mdash; Nội thất trong/ngoài trời, gia công kim loại</h3>
+                        <span class="tag">1 năm trên Alibaba.com &middot; Công cụ: KWA, AI Smart Assistant, Data Insight</span>
+                    </div>
+                    <div class="case-body">
+                        <div class="metric"><span>Doanh thu từ Alibaba (7 tháng đầu)</span><b>$200.000 &mdash; tăng +115% YoY</b></div>
+                        <div class="metric"><span>Đơn hàng năm 2025</span><b>1 đơn giá trị $2,5 triệu USD</b></div>
+                        <div class="metric"><span>Nhân sự / diện tích nhà máy</span><b>80 &rarr; 300 người &middot; 2.000 &rarr; 8.000 m&sup2;</b></div>
+                        <div class="metric"><span>Công suất sản xuất/năm</span><b>80.000 &rarr; 400.000 sản phẩm</b></div>
+                        <div class="metric"><span>Thị trường mới mở (từ Zero)</span><b>Ấn Độ, Canada, Nhật Bản &amp; USA</b></div>
+                        <div class="metric"><span>Hỏi hàng / đơn hàng</span><b>3&ndash;5 inquiry/ngày &middot; 4&ndash;5 đơn/tháng</b></div>
+                        <p style="font-size:0.82rem;color:#888;margin-top:10px;">Trước Alibaba: chỉ nhận đơn B2C nhỏ, giá trị thấp, nhà máy 2.000 m&sup2;. Sau 1 năm: chuyển sang hợp đồng B2B lớn, 4 thị trường xuất khẩu trọng điểm.</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-head" style="background: linear-gradient(135deg, #1A1F36 0%, #2D3561 100%);">
+                        <h3><i class="fas fa-tree"></i> Nghĩa Sơn &mdash; Ngành gỗ &amp; nội thất</h3>
+                        <span class="tag">18 năm trên Alibaba.com &middot; Đồng Nai</span>
+                    </div>
+                    <div class="case-body">
+                        <div class="metric"><span>Doanh thu trên Alibaba năm 2023</span><b>$15 triệu USD</b></div>
+                        <div class="metric"><span>Tăng trưởng số đơn trung bình/năm</span><b>+30%</b></div>
+                        <div class="metric"><span>Vai trò nền tảng</span><b>Xây dựng lòng tin với khách hàng tiềm năng</b></div>
+                        <div class="metric"><span>Kết quả 2023 dù thị trường biến động</span><b>Doanh thu vẫn tăng 50%</b></div>
+                        <p style="font-size:0.82rem;color:#888;margin-top:10px;">Chia sẻ từ đại diện Nghĩa Sơn: "Việc Nghĩa Sơn trở thành nhà cung cấp được xác minh trên Alibaba.com đã giúp chúng tôi nâng cao độ tin cậy với khách hàng tiềm năng, mang lại tăng trưởng 30% số đơn trung bình mỗi năm."</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-head" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
+                        <h3><i class="fas fa-industry"></i> PIMA &mdash; Tấm nhựa công nghiệp</h3>
+                        <span class="tag">8 năm trên Alibaba.com &middot; Công cụ: KWA, Verified Supplier</span>
+                    </div>
+                    <div class="case-body">
+                        <div class="metric"><span>Doanh thu trung bình/tháng hiện tại</span><b>&gt;$600.000 (từ $11K&ndash;19K trước đây)</b></div>
+                        <div class="metric"><span>Xuất khẩu sau 10 tháng đầu</span><b>Tăng gấp đôi</b></div>
+                        <div class="metric"><span>Quy mô hiện tại</span><b>20 nhà máy &middot; 20.000 m&sup2; &middot; 1.500 tấn/tháng</b></div>
+                        <div class="metric"><span>Khách hàng trung thành</span><b>Pháp, Nhật Bản, Mỹ, Panama</b></div>
+                        <p style="font-size:0.82rem;color:#888;margin-top:10px;">Trước Alibaba: doanh thu dao động $11K&ndash;$19K/tháng, chịu áp lực cạnh tranh giá. Sau khi dùng KWA + Verified: 12 yêu cầu/tháng, 2+ đơn hàng mới/tháng.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="data-missing-warning" style="margin-top:24px;">
+                <i class="fas fa-info-circle"></i> <b>Ghi chú:</b> Số liệu case study do Alibaba.com công bố trong Vietnam Alibaba.com Việt Nam (được Alibaba.com Data Disclosure Platform chấp thuận ngày 07/05/2025), chưa kiểm chứng độc lập. Kết quả từng doanh nghiệp khác nhau, phụ thuộc sản phẩm, đội ngũ vận hành và thời gian đầu tư.
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 4: LỘ TRÌNH TRIỂN KHAI ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-road"></i> Phần 4 &mdash; Lộ Trình Triển Khai &amp; Mô Hình Thành Viên</h2>
+            <p class="section-desc">Lộ trình tăng trưởng nhà bán hàng năm nhất trên Alibaba.com, từ kích hoạt tài khoản đến trở thành KOL ngành hàng (Nguồn: Alibaba.com Việt Nam):</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3><i class="fas fa-rocket" style="color:#FF6A00;"></i> 0&ndash;3 tháng: Kích hoạt &amp; Khởi tạo</h3><p>Dịch vụ OBS miễn phí hoàn thiện profile &amp; 50+ sản phẩm trong 30 ngày; đăng 150 sản phẩm tiềm năng (Verified); đạt tối thiểu 1 sao; trả lời trong 4 giờ để nhận tăng lưu lượng; duy trì tỷ lệ phản hồi 90%+.</p></div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3><i class="fas fa-chart-line" style="color:#FF6A00;"></i> 3&ndash;6 tháng: Tăng tốc tài khoản</h3><p>Đạt &amp; duy trì 2 sao; đăng tối thiểu 50 sản phẩm/tháng; học &amp; áp dụng KWA (từ khóa quảng cáo); tận dụng tối đa RFQ và sản phẩm nổi bật hằng tháng.</p></div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3><i class="fas fa-star" style="color:#FF6A00;"></i> 6&ndash;12 tháng: Nhà cung cấp trưởng thành</h3><p>Duy trì 4&ndash;5 sao; sử dụng KWA &amp; Premium Sponsor; tham gia đào tạo Trade Assurance &amp; sự kiện offline; hoàn thiện hồ sơ công ty và mini-site; xây dựng đội ngũ vận hành.</p></div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3><i class="fas fa-crown" style="color:#FF6A00;"></i> 13 tháng+: Mở rộng kinh doanh</h3><p>Đánh giá &amp; lập kế hoạch kinh doanh, thống nhất mục tiêu tăng trưởng năm thứ hai &mdash; hướng đến trở thành KOL ngành hàng và ứng viên Top 200 Doanh nghiệp nổi bật (Vietnam Pavilion).</p></div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+            <div class="cards-grid" style="margin-top:10px;">
+                <div class="info-card"><h3><i class="fas fa-medal"></i> Mô hình thành viên cấp bậc</h3><ul>
+                    <li><b>Nhà cung cấp Vàng (Gold Supplier):</b> gói thành viên trả phí, gia tăng hiện diện &amp; tối đa hóa ROI.</li>
+                    <li><b>Verified Supplier:</b> xác minh tại chỗ bởi bên thứ ba (SGS/TUV), video xác minh, tham quan nhà máy trực tuyến &mdash; tạo niềm tin vững chắc cho người mua.</li>
+                    <li><b>Xếp hạng sao (1&ndash;5):</b> cải thiện hiệu suất cửa hàng để tăng vị trí tìm kiếm &amp; hiển thị.</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-bullseye"></i> Guaranteed Package &mdash; cam kết cơ hội kinh doanh</h3><ul>
+                    <li><b>50+ cơ hội kinh doanh trong 90 ngày</b>, nếu không đạt sẽ <b>hoàn $40/khách hàng</b> không được cung cấp.</li>
+                    <li>Miễn phí setup cửa hàng (PC &amp; Mobile); tối thiểu 50 sản phẩm PIS &ge; 4,5 đăng tải trong 60 ngày.</li>
+                    <li>40 trả lời RFQ/tháng + 6 tháng tăng xếp hạng sao; 12 tháng miễn phí AI Smart Assistant.</li>
+                    <li>Chiến dịch AI thông minh + Gold membership: tự động chạy quảng cáo với tối thiểu 30 sản phẩm đạt chuẩn.</li>
+                </ul></div>
+                <div class="info-card"><h3><i class="fas fa-hand-holding-usd"></i> Đầu tư &amp; kiểm soát chi phí</h3><ul>
+                    <li>Chi phí nền tảng thấp hơn đáng kể so với một lần tham gia hội chợ quốc tế ($15.000+ cho vài ngày trưng bày).</li>
+                    <li>Công cụ quảng cáo linh hoạt: tự động phân bổ ngân sách (chế độ người mới) hoặc tùy chỉnh đấu thầu hằng ngày (Advanced).</li>
+                    <li>Chi tiết gói dịch vụ &amp; chi phí theo quy mô doanh nghiệp sẽ được tư vấn riêng phù hợp nhu cầu.</li>
+                </ul></div>
+            </div>
+        </section>
+
+        <!-- ============ PHẦN 5: MINH HỌA TĂNG TRƯỞNG ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calculator"></i> Phần 5 &mdash; Minh Họa Kịch Bản Tăng Trưởng Doanh Thu Online</h2>
+            <div class="data-missing-warning">
+                <i class="fas fa-exclamation-triangle"></i> <b>Lưu ý:</b> Biểu đồ dưới đây là <b>minh họa kịch bản giả định</b> dựa trên mức tăng trưởng quan sát được từ case study ngành nội thất (Nghĩa Sơn: đơn hàng +30%/năm, doanh thu +50% năm 2023; SUKAVINA: +115% YoY) &mdash; <b>không phải cam kết</b>. Kết quả thực tế phụ thuộc sản phẩm, đội ngũ vận hành, ngân sách quảng cáo và thời gian đầu tư của từng doanh nghiệp.
+            </div>
+            <div class="chart-container"><canvas id="roiChart"></canvas></div>
+            <p class="chart-note">Chỉ số minh họa: tăng trưởng doanh thu online tương đối sau khi tham gia nền tảng (mốc 100 = thời điểm bắt đầu), 3 kịch bản bảo thủ / trung bình / lạc quan.</p>
+            <div class="cards-grid">
+                <div class="info-card"><h3><i class="fas fa-rocket"></i> Kế hoạch 90 ngày đầu đề xuất</h3><p><b>Tháng 1:</b> khai trương gian hàng qua dịch vụ OBS, đăng 50+ sản phẩm chủ lực (tủ bếp, tủ quần áo), tải chứng nhận FSC/E1-E0 &middot; <b>Tháng 2:</b> kích hoạt Verified, tối ưu từ khóa KWA, chạy thử chiến dịch AI &middot; <b>Tháng 3:</b> phân tích Data Insight, điều chỉnh danh mục theo sản phẩm xu hướng, chuẩn hóa trả lời trong 4 giờ.</p></div>
+                <div class="info-card"><h3><i class="fas fa-chart-line"></i> KPI theo dõi hằng tháng</h3><ul>
+                    <li>Lượt xem gian hàng &amp; sản phẩm; xếp hạng sao.</li>
+                    <li>Số thư hỏi hàng (inquiries) &amp; tỷ lệ chuyển đổi &rarr; báo giá.</li>
+                    <li>Thị trường mới phát sinh (quốc gia, loại khách hàng).</li>
+                    <li>Doanh thu/đơn hàng đến từ nền tảng (đối chiếu nguồn khách khi báo giá).</li>
+                </ul></div>
+            </div>
+        </section>
+
+        <!-- ============ PHỤ LỤC: NGUỒN ============ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-book"></i> Phụ Lục &mdash; Nguồn Dữ Liệu</h2>
+            <p class="section-desc">Mọi số liệu trong tài liệu đều có nguồn trích dẫn. Số liệu chưa kiểm chứng độc lập được ghi chú rõ. Ngày truy cập nguồn online: 19/08/2026.</p>
+            <div class="sources-list">
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://www.pacificjoinery.vn/" target="_blank">pacificjoinery.vn</a> &mdash; hồ sơ doanh nghiệp (sản phẩm, năng lực, thị trường, vật liệu).</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://www.fortunebusinessinsights.com/furniture-market-106357" target="_blank">Fortune Business Insights &mdash; Furniture Market</a> &mdash; quy mô thị trường nội thất toàn cầu.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://www.mordorintelligence.com/industry-reports/furniture-market" target="_blank">Mordor Intelligence &mdash; Furniture Market (10/06/2026)</a> &mdash; $691,78 tỷ (2025) &rarr; $952,10 tỷ (2031).</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://www.fortunebusinessinsights.com/kitchen-cabinets-market-109890" target="_blank">Fortune Business Insights &mdash; Kitchen Cabinets Market</a> &mdash; $107,86 tỷ (2025) &rarr; $218,23 tỷ.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://vneconomy.vn/nganh-go-vung-vang-truoc-song-lon-lan-dau-xuat-khau-vuot-moc-17-ty-usd.htm" target="_blank">VnEconomy (12/01/2026)</a> &mdash; xuất khẩu gỗ VN 2025 vượt $17 tỷ; thị phần nội thất gỗ VN tại Mỹ 40,5% &rarr; 45,3%.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://vietnamnet.vn/xuat-khau-go-viet-nam-vuot-17-ty-usd-my-van-chiem-hon-mot-nua-thi-phan-2483998.html" target="_blank">VietnamNet (21/01/2026)</a> &mdash; xuất khẩu gỗ 2025 đạt $17,2 tỷ; Mỹ chiếm hơn nửa thị phần.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://laodong.vn/kinh-doanh/dau-an-moi-cua-nganh-go-viet-1606436.ldo" target="_blank">Lao Động (10/11/2025)</a> &mdash; VN #2 thế giới xuất khẩu đồ gỗ nội thất; 166 quốc gia.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://cafef.vn/xuat-khau-hon-17-ty-usd-nam-2025-nhung-chu-yeu-chi-gia-cong-lam-sao-the-khai-thac-het-du-dia-nganh-go-viet-nam-188260304195552094.chn" target="_blank">Cafef (04/03/2026)</a> &mdash; nội thất gỗ ~61% tổng kim ngạch xuất khẩu gỗ VN.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://tuoitre.vn/saigontimes/buc-tranh-xuat-khau-go-viet-nam-nam-2025-1061185418.htm" target="_blank">Tuổi Trẻ/Saigon Times (22/01/2026)</a> &mdash; Mỹ ~55% kim ngạch xuất khẩu gỗ VN 2025.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://myhfa.org/blog/furniture-import-duties-and-tariffs-a-guide-for-retailers/" target="_blank">Home Furnishings Association (21/04/2026)</a> &mdash; VN ~35% + TQ ~26% nhập khẩu nội thất Mỹ.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://apnews.com/article/kitchen-cabinets-vanities-tariffs-home-remodeling-0ca5252b061cf4f20c8958160c3953fa" target="_blank">AP News (14/10/2025)</a> &mdash; thuế 25% tủ bếp/tủ chậu từ 14/10/2025.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://tocco.earth/article/us-delays-tariff-increases-on-finished-wood-products-until-2027" target="_blank">Tocco Earth (05/01/2026)</a> &mdash; Mỹ hoãn tăng thuế nội thất đến 2027, giữ mức 25%.</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://moit.gov.vn/tin-tuc/thi-truong-nuoc-ngoai/tan-dung-evfta-nganh-go-viet-nam-chiem-uu-the-tai-thi-truong-eu.html" target="_blank">Bộ Công Thương (15/11/2025)</a> &mdash; EU nhập khẩu đồ nội thất gỗ ngoài khối ~$4,98 tỷ (8T/2025).</div>
+                <div class="source-item"><span class="src-tag">WEB</span><a href="https://seller.alibaba.com/blogs/2026/southeast-asia/furniture/kitchen-furniture-export-strategy-alibaba-stainless-steel-cabinets" target="_blank">Alibaba.com Seller Blog (2026)</a> &mdash; chỉ số cung-cầu phân khúc tủ bếp; chứng nhận FSC/BSCI; 27 inquiry/tháng; case study MULYA RATTAN.</div>
+            </div>
+            <div class="data-missing-warning" style="margin-top:18px;">
+                <i class="fas fa-exclamation-triangle"></i> <b>Tuyên bố:</b> Quy mô thị trường có sự khác biệt giữa các hãng nghiên cứu do khác phạm vi thống kê &mdash; báo cáo dẫn nguồn đầy đủ để đối chiếu. Số liệu case study &amp; số liệu nền tảng từ tài liệu Alibaba công bố, chưa kiểm chứng độc lập. Biểu đồ tăng trưởng là minh họa kịch bản, không phải cam kết. Thông tin gói dịch vụ/chi phí cụ thể cần xác nhận theo chương trình chính thức hiện hành.
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <p><i class="fas fa-chair"></i> Ngành Nội Thất &amp; Đồ Mộc &mdash; Cơ Hội Mở Rộng Xuất Khẩu Trên Alibaba.com 2026</p>
+        <p>Ngày tạo: 19/08/2026 &middot; "Make it easy to do business everywhere."</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+        window.addEventListener('load', () => {
+            // 1. Global furniture market (Mordor Intelligence)
+            new Chart(document.getElementById('marketSizeChart'), {
+                type: 'line',
+                data: {
+                    labels: ['2025', '2026', '2031 (dự báo)'],
+                    datasets: [{
+                        label: 'Quy mô thị trường nội thất toàn cầu (tỷ USD)',
+                        data: [691.78, 729.61, 952.10],
+                        borderColor: '#FF6A00',
+                        backgroundColor: 'rgba(255,106,0,0.12)',
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#1A1F36',
+                        pointRadius: 5
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { ticks: { callback: v => '$' + v + ' tỷ' } } } }
+            });
+
+            // 2. Vietnam's share of US wood furniture market
+            new Chart(document.getElementById('supplyDemandChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Thị phần đồ nội thất gỗ VN tại Mỹ'],
+                    datasets: [
+                        { label: '8 tháng 2024 (%)', data: [40.5], backgroundColor: 'rgba(26,31,54,0.35)' },
+                        { label: '8 tháng 2025 (%)', data: [45.3], backgroundColor: '#FF6A00' }
+                    ]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } }, scales: { y: { beginAtZero: true, max: 60, ticks: { callback: v => v + '%' } } } }
+            });
+
+            // 3. Alibaba supply-demand ratio by kitchen furniture category
+            new Chart(document.getElementById('opportunityChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Tủ bếp thép không gỉ', 'Tủ bếp tiêu chuẩn', 'Đảo bếp di động', 'Ngăn kéo giỏ', 'Tủ gỗ Mango/Oak/Teak'],
+                    datasets: [{
+                        label: 'Chỉ số cung-cầu (nhu cầu mua / nguồn cung)',
+                        data: [5.11, 2.01, 1.56, 1.17, 0.8],
+                        backgroundColor: ['#FF6A00', '#FF8C42', '#F5A623', '#F5C36E', '#9CA3AF'],
+                        borderRadius: 6
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => 'Supply-demand ratio: ' + ctx.parsed.y } } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Chỉ số > 1,0 = nhu cầu vượt nguồn cung' } } } }
+            });
+
+            // 4. Global B2B e-commerce GMV (US Dept of Commerce via Alibaba.com Việt Nam)
+            new Chart(document.getElementById('b2bEcomChart'), {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025', '2026 (dự báo)'],
+                    datasets: [{
+                        label: 'GMV TMĐT B2B toàn cầu (tỷ USD)',
+                        data: [21019, 24453, 28082, 32118, 36163],
+                        borderColor: '#1A1F36',
+                        backgroundColor: 'rgba(26,31,54,0.08)',
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#FF6A00',
+                        pointRadius: 4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { ticks: { callback: v => (v/1000).toFixed(1) + 'K' } } } }
+            });
+
+            // 5. ROI illustration (3 scenarios, index = 100 at start)
+            new Chart(document.getElementById('roiChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Tháng 0', 'Tháng 3', 'Tháng 6', 'Tháng 12', 'Tháng 18', 'Tháng 24'],
+                    datasets: [
+                        { label: 'Kịch bản bảo thủ', data: [100, 105, 112, 125, 138, 150], borderColor: '#EF4444', tension: 0.4, backgroundColor: 'transparent' },
+                        { label: 'Kịch bản trung bình', data: [100, 112, 128, 155, 182, 210], borderColor: '#F59E0B', tension: 0.4, backgroundColor: 'transparent' },
+                        { label: 'Kịch bản lạc quan', data: [100, 120, 145, 185, 230, 280], borderColor: '#10B981', tension: 0.4, backgroundColor: 'transparent' }
+                    ]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: false } } }
+            });
+
+            document.querySelectorAll('.stat-value').forEach(stat => {
+                const target = stat.getAttribute('data-target');
+                if (target && /^\d+$/.test(target)) {
+                    const end = parseInt(target);
+                    const dur = 1600, t0 = Date.now();
+                    const timer = setInterval(() => {
+                        const p = Math.min((Date.now() - t0) / dur, 1);
+                        stat.textContent = Math.floor(end * p).toLocaleString('vi-VN');
+                        if (p >= 1) clearInterval(timer);
+                    }, 16);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
