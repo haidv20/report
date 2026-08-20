@@ -732,7 +732,7 @@
                     const timer = setInterval(() => {
                         const p = Math.min((Date.now() - t0) / dur, 1);
                         stat.textContent = Math.floor(end * p).toLocaleString('vi-VN');
-                        if (p >= 1) clearInterval(timer);
+                        if (p >= 1) clearInterval(timer); 
                     }, 16);
                 }
             });
