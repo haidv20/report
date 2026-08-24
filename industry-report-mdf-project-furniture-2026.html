@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="vi" class="lang-vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industry Report: MDF Project Furniture 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #1B365D;
+            --secondary: #E8740C;
+            --accent: #2E8B57;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #6c757d;
+            --border: #e2e8f0;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html.lang-vi body { font-family: 'Be Vietnam Pro', sans-serif; }
+        html.lang-en body { font-family: 'Inter', sans-serif; }
+        html.lang-cn body { font-family: 'Noto Sans SC', sans-serif; }
+        body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+        /* Language switching */
+        html.lang-vi .cn, html.lang-vi .en, html.lang-vi .blk-cn, html.lang-vi .blk-en { display: none !important; }
+        html.lang-cn .vi, html.lang-cn .en, html.lang-cn .blk-vi, html.lang-cn .blk-en { display: none !important; }
+        html.lang-en .vi, html.lang-en .cn, html.lang-en .blk-vi, html.lang-en .blk-cn { display: none !important; }
+        html.lang-vi .vi { display: inline !important; }
+        html.lang-cn .cn { display: inline !important; }
+        html.lang-en .en { display: inline !important; }
+        html.lang-vi .blk-vi { display: block !important; }
+        html.lang-cn .blk-cn { display: block !important; }
+        html.lang-en .blk-en { display: block !important; }
+
+        /* Lang switcher */
+        .lang-switcher { position: fixed; top: 12px; right: 20px; z-index: 9999; display: flex; gap: 4px; background: rgba(255,255,255,0.95); border-radius: 8px; padding: 4px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); backdrop-filter: blur(8px); }
+        .lang-switcher button { border: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--text-light); }
+        .lang-switcher button.active { background: var(--primary); color: #fff; }
+        .lang-switcher button:hover:not(.active) { background: #e2e8f0; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--primary) 0%, #0d2240 100%); color: #fff; }
+        .header-classification { background: var(--secondary); padding: 6px 0; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .header-main { max-width: 1200px; margin: 0 auto; padding: 48px 24px 36px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+        .header-logo img { height: 36px; filter: brightness(0) invert(1); opacity: 0.9; }
+        .header-content { flex: 1; min-width: 300px; }
+        .header-content h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+        .header-content p { opacity: 0.85; font-size: 15px; }
+        .header-tags { background: rgba(255,255,255,0.08); padding: 12px 0; }
+        .header-tags-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.12); border-radius: 20px; font-size: 12px; color: rgba(255,255,255,0.85); }
+
+        /* Main content */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+        .section { margin-bottom: 48px; }
+        .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section-number { background: var(--primary); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+        .section-title { font-size: 22px; font-weight: 700; color: var(--primary); }
+
+        /* Cards */
+        .card { background: var(--card-bg); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid var(--border); }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .stat-card { text-align: center; padding: 28px 20px; }
+        .stat-value { font-size: 32px; font-weight: 700; color: var(--secondary); margin-bottom: 4px; }
+        .stat-label { font-size: 13px; color: var(--text-light); }
+
+        /* Tables */
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--primary); color: #fff; padding: 12px 14px; text-align: left; font-weight: 600; white-space: nowrap; }
+        td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        tr:hover td { background: #f1f5f9; }
+        a { color: var(--secondary); text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+
+        /* Charts */
+        .chart-container { position: relative; max-width: 600px; margin: 0 auto; }
+        .chart-container.wide { max-width: 100%; }
+        canvas { max-width: 100%; }
+
+        /* SWOT */
+        .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .swot-card { padding: 20px; border-radius: var(--radius); }
+        .swot-card h4 { margin-bottom: 10px; font-size: 16px; }
+        .swot-card ul { list-style: none; padding: 0; }
+        .swot-card li { padding: 4px 0; font-size: 14px; }
+        .swot-card li::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 8px; }
+        .swot-s { background: #e8f5e9; } .swot-s h4 { color: #2e7d32; } .swot-s li::before { background: #2e7d32; }
+        .swot-w { background: #fff3e0; } .swot-w h4 { color: #e65100; } .swot-w li::before { background: #e65100; }
+        .swot-o { background: #e3f2fd; } .swot-o h4 { color: #1565c0; } .swot-o li::before { background: #1565c0; }
+        .swot-t { background: #fce4ec; } .swot-t h4 { color: #c62828; } .swot-t li::before { background: #c62828; }
+
+        /* Investment tiers */
+        .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .tier-card { border: 2px solid var(--border); border-radius: var(--radius); padding: 28px; text-align: center; transition: transform 0.2s; }
+        .tier-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .tier-card.recommended { border-color: var(--secondary); position: relative; }
+        .tier-card.recommended::before { content: "RECOMMENDED"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--secondary); color: #fff; padding: 2px 16px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+        .tier-name { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+        .tier-price { font-size: 28px; font-weight: 700; color: var(--secondary); margin-bottom: 4px; }
+        .tier-period { font-size: 13px; color: var(--text-light); margin-bottom: 16px; }
+        .tier-features { list-style: none; text-align: left; padding: 0; }
+        .tier-features li { padding: 6px 0; font-size: 14px; border-bottom: 1px solid var(--border); }
+
+        /* Footer */
+        .footer { background: var(--primary); color: rgba(255,255,255,0.85); }
+        .footer-top { background: var(--secondary); padding: 3px 0; }
+        .footer-main { max-width: 1200px; margin: 0 auto; padding: 48px 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        .footer-col h4 { color: #fff; margin-bottom: 12px; font-size: 15px; }
+        .footer-col p, .footer-col a { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+        .footer-col a:hover { color: #fff; }
+        .footer-copyright { text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 12px; color: rgba(255,255,255,0.5); }
+
+        /* Footnote */
+        .footnote { font-size: 12px; color: var(--text-light); font-style: italic; margin-top: 12px; padding-top: 8px; border-top: 1px dashed var(--border); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-main { padding: 32px 16px 24px; }
+            .header-content h1 { font-size: 22px; }
+            .footer-main { grid-template-columns: 1fr 1fr; }
+            .swot-grid { grid-template-columns: 1fr; }
+            .tier-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .footer-main { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Language Switcher -->
+<div class="lang-switcher">
+    <button id="btn-vi" class="active" onclick="switchLang('vi')">VI</button>
+    <button id="btn-cn" onclick="switchLang('cn')">CN</button>
+    <button id="btn-en" onclick="switchLang('en')">EN</button>
+</div>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-classification">
+        <span class="vi">BÁO CÁO PHÂN TÍCH NGÀNH</span>
+        <span class="cn">行业分析报告</span>
+        <span class="en">INDUSTRY ANALYSIS REPORT</span>
+    </div>
+    <div class="header-main">
+        <div class="header-logo">
+            <img src="https://s.alicdn.com/@logo/logo_en_light_horizontal_default_full.png" alt="Alibaba.com">
+        </div>
+        <div class="header-content">
+            <h1>
+                <span class="vi">Nội Thất Dự Án MDF &mdash; Phân Tích Thị Trường 2025</span>
+                <span class="cn">MDF项目家具 &mdash; 2025年市场分析</span>
+                <span class="en">MDF Project Furniture &mdash; Market Analysis 2025</span>
+            </h1>
+            <p>
+                <span class="vi">Báo cáo toàn diện về xu hướng, nhà cung cấp và cơ hội đầu tư trên Alibaba.com</span>
+                <span class="cn">关于Alibaba.com趋势、供应商及投资机会的综合报告</span>
+                <span class="en">Comprehensive report on trends, suppliers &amp; investment opportunities on Alibaba.com</span>
+                <br/>
+                <span> Dương Viết Hải </span>
+                <span> | </span>
+                <span><a href="mailto:duong.viet-hai@alibaba-inc.com">duong.viet-hai@alibaba-inc.com</a></span>
+            </p>
+        </div>
+    </div>
+    <div class="header-tags">
+        <div class="header-tags-inner">
+            <span class="tag">MDF Furniture</span>
+            <span class="tag">Project Supply</span>
+            <span class="tag">Hotel & Hospitality</span>
+            <span class="tag">Contract Furniture</span>
+            <span class="tag">B2B Export</span>
+            <span class="tag">Vietnam Manufacturing</span>
+            <span class="tag">2025 Outlook</span>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+<!-- Section 01: Tổng Quan Thị Trường -->
+<section class="section" id="s01">
+    <div class="section-header">
+        <div class="section-number">01</div>
+        <h2 class="section-title">
+            <span class="vi">Tổng Quan Thị Trường</span>
+            <span class="cn">市场概览</span>
+            <span class="en">Market Overview</span>
+        </h2>
+    </div>
+    <div class="card-grid">
+        <div class="card stat-card">
+            <div class="stat-value">$55.2B</div>
+            <div class="stat-label">
+                <span class="vi">Quy mô thị trường MDF toàn cầu 2025</span>
+                <span class="cn">2025年全球MDF市场规模</span>
+                <span class="en">Global MDF Market Size 2025</span>
+            </div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-value">$95-101B</div>
+            <div class="stat-label">
+                <span class="vi">Dự báo MDF toàn cầu 2034</span>
+                <span class="cn">2034年全球MDF预测</span>
+                <span class="en">Global MDF Forecast 2034</span>
+            </div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-value">$151.9B</div>
+            <div class="stat-label">
+                <span class="vi">Nội thất hợp đồng 2024</span>
+                <span class="cn">2024年合同家具</span>
+                <span class="en">Contract Furniture 2024</span>
+            </div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-value">$259.5B</div>
+            <div class="stat-label">
+                <span class="vi">Dự báo nội thất hợp đồng 2034</span>
+                <span class="cn">2034年合同家具预测</span>
+                <span class="en">Contract Furniture Forecast 2034</span>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Thị trường nội thất dự án MDF đang trải qua giai đoạn tăng trưởng mạnh mẽ, được thúc đẩy bởi xu hướng đô thị hóa, phát triển khách sạn (đặc biệt Saudi Vision 2030 với 300.000 phòng mới), và nhu cầu nội thất giá cạnh tranh cho các dự án quy mô lớn. Việt Nam đã vươn lên vị trí xuất khẩu gỗ #2 thế giới với kim ngạch $17.2 tỷ (2025), trong đó MDF furniture chiếm tỷ trọng ngày càng tăng.</span>
+            <span class="cn">MDF项目家具市场正经历强劲增长期,受城市化趋势、酒店业发展(特别是沙特2030愿景新增30万间客房)以及大型项目对性价比家具需求的推动。越南已跃居全球第二大木材出口国,2025年出口额达172亿美元,其中MDF家具占比持续增长。</span>
+            <span class="en">The MDF project furniture market is experiencing robust growth driven by urbanization trends, hospitality development (especially Saudi Vision 2030 with 300,000 new rooms), and demand for cost-competitive furniture in large-scale projects. Vietnam has risen to the #2 global wood exporter with $17.2B exports (2025), with MDF furniture claiming an increasing share.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart01"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 02: Xu Hướng Mua Hàng -->
+<section class="section" id="s02">
+    <div class="section-header">
+        <div class="section-number">02</div>
+        <h2 class="section-title">
+            <span class="vi">Xu Hướng Mua Hàng</span>
+            <span class="cn">采购趋势</span>
+            <span class="en">Buying Trends</span>
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Xu hướng mua hàng nội thất MDF dự án trên Alibaba.com cho thấy sự gia tăng mạnh mẽ về nhu cầu từ khu vực Trung Đông, Đông Nam Á và châu Phi. Người mua ngày càng ưu tiên giải pháp trọn gói (turnkey), đặt hàng số lượng lớn cho dự án khách sạn, căn hộ và văn phòng. Thời gian cao điểm mua hàng tập trung vào Q1 và Q3 hàng năm.</span>
+            <span class="cn">Alibaba.com上MDF项目家具的采购趋势显示,来自中东、东南亚和非洲地区的需求强劲增长。买家越来越倾向于一站式(交钥匙)解决方案,为酒店、公寓和办公室项目进行大批量采购。每年Q1和Q3是采购旺季。</span>
+            <span class="en">Buying trends for MDF project furniture on Alibaba.com reveal a strong surge in demand from the Middle East, Southeast Asia, and Africa. Buyers increasingly prefer turnkey solutions, placing large-volume orders for hotel, apartment, and office projects. Peak buying seasons concentrate in Q1 and Q3 annually.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart02"></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h3 style="margin-bottom:12px;">
+            <span class="vi">Từ Khóa Sản Phẩm Tìm Kiếm Nhiều Nhất</span>
+            <span class="cn">热门搜索产品关键词</span>
+            <span class="en">Top Product Search Keywords</span>
+        </h3>
+        <div class="table-wrapper">
+            <table>
+                <tr><th>#</th><th><span class="vi">Từ khóa</span><span class="cn">关键词</span><span class="en">Keyword</span></th><th><span class="vi">Liên kết tìm kiếm</span><span class="cn">搜索链接</span><span class="en">Search Link</span></th></tr>
+                <tr><td>1</td><td>Hotel Bedroom Furniture Set MDF Melamine</td><td><a href="https://www.alibaba.com/trade/search?SearchText=hotel+bedroom+furniture+set+MDF+melamine" target="_blank">Search</a></td></tr>
+                <tr><td>2</td><td>Hotel Bathroom Vanity Cabinet MDF Waterproof</td><td><a href="https://www.alibaba.com/trade/search?SearchText=hotel+bathroom+vanity+cabinet+MDF+waterproof" target="_blank">Search</a></td></tr>
+                <tr><td>3</td><td>MDF Kitchen Cabinet Project Apartment Melamine</td><td><a href="https://www.alibaba.com/trade/search?SearchText=MDF+kitchen+cabinet+project+apartment+melamine" target="_blank">Search</a></td></tr>
+                <tr><td>4</td><td>Office Workstation MDF Partition Desk Modern</td><td><a href="https://www.alibaba.com/trade/search?SearchText=office+workstation+MDF+partition+desk+modern" target="_blank">Search</a></td></tr>
+                <tr><td>5</td><td>MDF Wardrobe Closet Hotel Apartment Project</td><td><a href="https://www.alibaba.com/trade/search?SearchText=MDF+wardrobe+closet+hotel+apartment+project" target="_blank">Search</a></td></tr>
+                <tr><td>6</td><td>Hospital Medical Cabinet MDF Laminate Furniture</td><td><a href="https://www.alibaba.com/trade/search?SearchText=hospital+medical+cabinet+MDF+laminate+furniture" target="_blank">Search</a></td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Section 03: Quốc Gia Cung Cấp -->
+<section class="section" id="s03">
+    <div class="section-header">
+        <div class="section-number">03</div>
+        <h2 class="section-title">
+            <span class="vi">Quốc Gia Cung Cấp</span>
+            <span class="cn">供应国家</span>
+            <span class="en">Supplier Countries</span>
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Việt Nam và Trung Quốc là hai quốc gia cung cấp nội thất MDF dự án lớn nhất trên Alibaba.com, tiếp theo là Thổ Nhĩ Kỳ, Indonesia và Malaysia. Việt Nam nổi bật với chi phí sản xuất thấp, nguồn nguyên liệu MDF dồi dào, và khả năng đáp ứng đơn hàng lớn cho thị trường Mỹ (chiếm 45.3% kim ngạch xuất khẩu).</span>
+            <span class="cn">越南和中国是Alibaba.com上最大的两个MDF项目家具供应国,其次是土耳其、印度尼西亚和马来西亚。越南以低生产成本、丰富的MDF原材料以及满足美国市场大订单的能力而脱颖而出(占出口额的45.3%)。</span>
+            <span class="en">Vietnam and China are the two largest MDF project furniture supplier countries on Alibaba.com, followed by Turkey, Indonesia, and Malaysia. Vietnam stands out with low production costs, abundant MDF raw materials, and the ability to fulfill large orders for the US market (45.3% of export share).</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="chart03"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 04: Quốc Gia Nhập Khẩu -->
+<section class="section" id="s04">
+    <div class="section-header">
+        <div class="section-number">04</div>
+        <h2 class="section-title">
+            <span class="vi">Quốc Gia Nhập Khẩu</span>
+            <span class="cn">进口国家</span>
+            <span class="en">Importing Countries</span>
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Hoa Kỳ tiếp tục dẫn đầu về nhập khẩu nội thất MDF với 45.3% thị phần từ Việt Nam. Khu vực Trung Đông (đặc biệt Saudi Arabia, UAE) đang tăng trưởng nhanh nhất nhờ các dự án mega-hospitality thuộc Vision 2030. Châu Âu, Nhật Bản và Hàn Quốc duy trì nhu cầu ổn định với yêu cầu chất lượng cao.</span>
+            <span class="cn">美国继续领跑MDF家具进口(越南产品占45.3%市场份额)。中东地区(尤其是沙特阿拉伯、阿联酋)因2030愿景大型酒店项目增长最快。欧洲、日本和韩国保持稳定需求,对质量要求较高。</span>
+            <span class="en">The United States continues to lead MDF furniture imports with 45.3% market share from Vietnam. The Middle East (especially Saudi Arabia, UAE) is the fastest-growing region due to Vision 2030 mega-hospitality projects. Europe, Japan, and South Korea maintain stable demand with high quality requirements.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart04"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 05: Lợi Thế Việt Nam -->
+<section class="section" id="s05">
+    <div class="section-header">
+        <div class="section-number">05</div>
+        <h2 class="section-title">
+            <span class="vi">Lợi Thế Việt Nam</span>
+            <span class="cn">越南优势</span>
+            <span class="en">Vietnam Advantages</span>
+        </h2>
+    </div>
+    <div class="card-grid">
+        <div class="card stat-card">
+            <div class="stat-value">$17.2B</div>
+            <div class="stat-label">
+                <span class="vi">Kim ngạch xuất khẩu gỗ 2025</span>
+                <span class="cn">2025年木材出口额</span>
+                <span class="en">Wood Export Value 2025</span>
+            </div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-value">#2</div>
+            <div class="stat-label">
+                <span class="vi">Xếp hạng xuất khẩu gỗ toàn cầu</span>
+                <span class="cn">全球木材出口排名</span>
+                <span class="en">Global Wood Export Ranking</span>
+            </div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-value">45.3%</div>
+            <div class="stat-label">
+                <span class="vi">Thị phần nhập khẩu Hoa Kỳ</span>
+                <span class="cn">美国进口市场份额</span>
+                <span class="en">US Import Market Share</span>
+            </div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-value">15-25%</div>
+            <div class="stat-label">
+                <span class="vi">Chi phí thấp hơn so với Trung Quốc</span>
+                <span class="cn">比中国成本低</span>
+                <span class="en">Lower Cost vs China</span>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Việt Nam sở hữu lợi thế cạnh tranh vượt trội trong sản xuất nội thất MDF dự án: chi phí nhân công thấp (trung bình $350-450/tháng), nguồn cung MDF nội địa dồi dào từ các nhà máy lớn, thuế suất ưu đãi theo FTA (EVFTA, CPTPP, RCEP), và vị trí địa lý thuận lợi cho xuất khẩu. Đặc biệt, hàng rào thuế quan của Mỹ đối với Trung Quốc (25%+) đã tạo cơ hội lớn cho nhà sản xuất Việt Nam.</span>
+            <span class="cn">越南在MDF项目家具制造方面拥有显著竞争优势:低劳动力成本(平均350-450美元/月)、国内大型工厂充足的MDF供应、FTA优惠关税(EVFTA、CPTPP、RCEP),以及有利的地理出口位置。尤其是美国对中国加征关税(25%+)为越南制造商创造了巨大机遇。</span>
+            <span class="en">Vietnam possesses outstanding competitive advantages in MDF project furniture manufacturing: low labor costs (avg. $350-450/month), abundant domestic MDF supply from large factories, preferential FTA tariffs (EVFTA, CPTPP, RCEP), and favorable geographic position for exports. Notably, US tariffs on China (25%+) have created major opportunities for Vietnamese manufacturers.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart05"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 06: Phân Tích Cạnh Tranh -->
+<section class="section" id="s06">
+    <div class="section-header">
+        <div class="section-number">06</div>
+        <h2 class="section-title">
+            <span class="vi">Phân Tích Cạnh Tranh</span>
+            <span class="cn">竞争分析</span>
+            <span class="en">Competitive Analysis</span>
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Trên Alibaba.com, cạnh tranh trong phân khúc nội thất MDF dự án tập trung vào giá cả, năng lực sản xuất quy mô lớn, chứng nhận quốc tế và thời gian giao hàng. Nhà cung cấp Việt Nam có lợi thế về giá và thuế quan so với Trung Quốc, trong khi Thổ Nhĩ Kỳ cạnh tranh bằng thiết kế và gần gũi địa lý với thị trường Trung Đông.</span>
+            <span class="cn">在Alibaba.com上,MDF项目家具领域的竞争集中在价格、大规模生产能力、国际认证和交货时间方面。越南供应商在价格和关税方面相对中国有优势,而土耳其则凭借设计能力和地理上接近中东市场来竞争。</span>
+            <span class="en">Competition in the MDF project furniture segment on Alibaba.com centers on pricing, large-scale production capacity, international certifications, and delivery time. Vietnamese suppliers have advantages in price and tariffs vs. China, while Turkey competes through design and geographic proximity to the Middle East market.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart06"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 07: Nhà Cung Cấp Tiêu Biểu -->
+<section class="section" id="s07">
+    <div class="section-header">
+        <div class="section-number">07</div>
+        <h2 class="section-title">
+            <span class="vi">Nhà Cung Cấp Tiêu Biểu</span>
+            <span class="cn">代表性供应商</span>
+            <span class="en">Featured Suppliers</span>
+        </h2>
+    </div>
+    <div class="card">
+        <h3 style="margin-bottom:12px; color:var(--accent);">
+            <span class="vi">Việt Nam (12 nhà cung cấp)</span>
+            <span class="cn">越南 (12家供应商)</span>
+            <span class="en">Vietnam (12 Suppliers)</span>
+        </h3>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th><span class="vi">Tên Công Ty</span><span class="cn">公司名称</span><span class="en">Company</span></th>
+                    <th><span class="vi">Doanh Thu*</span><span class="cn">营收*</span><span class="en">Revenue*</span></th>
+                    <th><span class="vi">Liên Kết</span><span class="cn">链接</span><span class="en">Link</span></th>
+                </tr>
+                <tr><td>1</td><td>Hong Sheng</td><td>$29M</td><td><a href="https://hscabinetry.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>2</td><td>SSR Vina</td><td>$5-10M</td><td><a href="https://ssrvina.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>3</td><td>Sanyang</td><td>$1-2.5M</td><td><a href="https://sangyangfuniture.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>4</td><td>JY Furniture</td><td>$2.5-5M</td><td><a href="https://vn19008640962qmtw.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>5</td><td>Hao Hung</td><td>$1-2.5M</td><td><a href="https://haohungplywood.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>6</td><td>Toan Phong</td><td>$1-2.5M</td><td><a href="https://vn1576130417lgcz.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>7</td><td>Thy Global</td><td>$2.5-5M</td><td><a href="https://thyglobal.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>8</td><td>Viet Delta</td><td>$5-10M</td><td><a href="https://vdeltadept4.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>9</td><td>Jinxing</td><td>$1-2.5M</td><td><a href="https://jinxingfactory.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>10</td><td>Kingtec</td><td>$1-2.5M</td><td><a href="https://lumetal.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>11</td><td>Dispu</td><td>$1-2.5M</td><td><a href="https://pointofsaledisplay.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>12</td><td>Huang Ding</td><td>$2.5-5M</td><td><a href="https://huangdingindustrial.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <h3 style="margin-bottom:12px; color:var(--secondary);">
+            <span class="vi">Trung Quốc (6 nhà cung cấp)</span>
+            <span class="cn">中国 (6家供应商)</span>
+            <span class="en">China (6 Suppliers)</span>
+        </h3>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th><span class="vi">Tên Công Ty</span><span class="cn">公司名称</span><span class="en">Company</span></th>
+                    <th><span class="vi">Doanh Thu*</span><span class="cn">营收*</span><span class="en">Revenue*</span></th>
+                    <th><span class="vi">Liên Kết</span><span class="cn">链接</span><span class="en">Link</span></th>
+                </tr>
+                <tr><td>1</td><td>Kimjin</td><td>$1M+</td><td><a href="https://kimjin.en.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>2</td><td>Yexuan</td><td>$1.1M</td><td><a href="https://yexuan.en.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>3</td><td>Xinshiyi</td><td>$5-10M</td><td><a href="https://xinshiyi.en.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>4</td><td>Maple Green</td><td>$5-10M</td><td><a href="https://fsmaplegreen.en.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>5</td><td>Timesong</td><td>$1-2.5M</td><td><a href="https://timesongfurnishing.en.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>6</td><td>Define</td><td>$2.5-5M</td><td><a href="https://define361.en.alibaba.com" target="_blank">Profile</a></td></tr>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <h3 style="margin-bottom:12px; color:var(--primary);">
+            <span class="vi">Quốc Gia Khác (7 nhà cung cấp)</span>
+            <span class="cn">其他国家 (7家供应商)</span>
+            <span class="en">Others (7 Suppliers)</span>
+        </h3>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th><span class="vi">Tên Công Ty</span><span class="cn">公司名称</span><span class="en">Company</span></th>
+                    <th><span class="vi">Quốc Gia</span><span class="cn">国家</span><span class="en">Country</span></th>
+                    <th><span class="vi">Doanh Thu*</span><span class="cn">营收*</span><span class="en">Revenue*</span></th>
+                    <th><span class="vi">Liên Kết</span><span class="cn">链接</span><span class="en">Link</span></th>
+                </tr>
+                <tr><td>1</td><td>BERFA</td><td><span class="vi">Thổ Nhĩ Kỳ</span><span class="cn">土耳其</span><span class="en">Turkey</span></td><td>$5-10M</td><td><a href="https://tr1059508768.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>2</td><td>PANYAS</td><td><span class="vi">Thổ Nhĩ Kỳ</span><span class="cn">土耳其</span><span class="en">Turkey</span></td><td>$2.5-5M</td><td><a href="https://panyas.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>3</td><td>AMIN</td><td><span class="vi">Thổ Nhĩ Kỳ</span><span class="cn">土耳其</span><span class="en">Turkey</span></td><td>$1-2.5M</td><td><a href="https://tr1568646537pdys.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>4</td><td>Dekor Asia</td><td>Indonesia</td><td>$5-10M</td><td><a href="https://dekorasiacraft.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>5</td><td>Hin Lim</td><td>Malaysia</td><td>$10-20M</td><td><a href="https://hinlim.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>6</td><td>Furnizone</td><td>Malaysia</td><td>$5-10M</td><td><a href="https://furnizone.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+                <tr><td>7</td><td>Shiva</td><td><span class="vi">Ấn Độ</span><span class="cn">印度</span><span class="en">India</span></td><td>$2.5-5M</td><td><a href="https://shivacreationsindia.trustpass.alibaba.com" target="_blank">Profile</a></td></tr>
+            </table>
+        </div>
+        <p class="footnote">
+            <span class="vi">* Doanh thu tự khai báo trên hồ sơ Alibaba.com. Số liệu mang tính tham khảo, chưa được kiểm toán độc lập.</span>
+            <span class="cn">* 营收为Alibaba.com商家自行申报,仅供参考,未经独立审计验证。</span>
+            <span class="en">* Revenue is self-declared on Alibaba.com profiles. Figures are for reference only and have not been independently audited.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="chart07"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 08: Sản Phẩm Tiêu Biểu -->
+<section class="section" id="s08">
+    <div class="section-header">
+        <div class="section-number">08</div>
+        <h2 class="section-title">
+            <span class="vi">Sản Phẩm Tiêu Biểu</span>
+            <span class="cn">代表性产品</span>
+            <span class="en">Featured Products</span>
+        </h2>
+    </div>
+    <div class="card">
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th><span class="vi">Danh Mục</span><span class="cn">品类</span><span class="en">Category</span></th>
+                    <th><span class="vi">Mô Tả</span><span class="cn">描述</span><span class="en">Description</span></th>
+                    <th><span class="vi">Giá Tham Khảo</span><span class="cn">参考价</span><span class="en">Ref. Price</span></th>
+                    <th>MOQ</th>
+                </tr>
+                <tr><td>1</td><td><span class="vi">Phòng Ngủ Khách Sạn</span><span class="cn">酒店卧室</span><span class="en">Hotel Bedroom</span></td><td>MDF Melamine Hotel Bedroom Set (headboard, wardrobe, desk, nightstand)</td><td>$280-650/set</td><td>50 sets</td></tr>
+                <tr><td>2</td><td><span class="vi">Tủ Phòng Tắm</span><span class="cn">浴室柜</span><span class="en">Bathroom Vanity</span></td><td>Waterproof MDF Bathroom Vanity Cabinet with Mirror</td><td>$85-250/unit</td><td>100 pcs</td></tr>
+                <tr><td>3</td><td><span class="vi">Tủ Bếp</span><span class="cn">厨柜</span><span class="en">Kitchen Cabinet</span></td><td>MDF Melamine Kitchen Cabinet Set for Apartment Project</td><td>$120-380/m</td><td>30 sets</td></tr>
+                <tr><td>4</td><td><span class="vi">Bàn Làm Việc</span><span class="cn">办公桌</span><span class="en">Office Workstation</span></td><td>Modern MDF Office Partition Desk Workstation</td><td>$150-450/unit</td><td>50 pcs</td></tr>
+                <tr><td>5</td><td><span class="vi">Tủ Quần Áo</span><span class="cn">衣柜</span><span class="en">Wardrobe</span></td><td>MDF Walk-in Closet / Wardrobe for Hotel &amp; Apartment</td><td>$200-550/unit</td><td>30 pcs</td></tr>
+                <tr><td>6</td><td><span class="vi">Tủ Y Tế</span><span class="cn">医疗柜</span><span class="en">Medical Cabinet</span></td><td>Hospital Medical Cabinet MDF Laminate Antimicrobial</td><td>$180-500/unit</td><td>20 pcs</td></tr>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart08"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 09: Chân Dung Người Mua -->
+<section class="section" id="s09">
+    <div class="section-header">
+        <div class="section-number">09</div>
+        <h2 class="section-title">
+            <span class="vi">Chân Dung Người Mua</span>
+            <span class="cn">买家画像</span>
+            <span class="en">Buyer Persona</span>
+        </h2>
+    </div>
+    <div class="card-grid">
+        <div class="card">
+            <h4 style="color:var(--primary); margin-bottom:8px;">
+                <span class="vi">Nhà Thầu Khách Sạn</span><span class="cn">酒店承包商</span><span class="en">Hotel Contractor</span>
+            </h4>
+            <p style="font-size:14px;">
+                <span class="vi">Doanh nghiệp FF&amp;E mua sắm nội thất trọn gói cho dự án 100-500 phòng. Ưu tiên: giá cạnh tranh, giao hàng đúng hạn, chứng nhận chất lượng.</span>
+                <span class="cn">FF&E企业为100-500间客房项目采购全套家具。优先考虑:有竞争力的价格、准时交货、质量认证。</span>
+                <span class="en">FF&amp;E firms procuring full furniture packages for 100-500 room projects. Priorities: competitive pricing, on-time delivery, quality certifications.</span>
+            </p>
+        </div>
+        <div class="card">
+            <h4 style="color:var(--primary); margin-bottom:8px;">
+                <span class="vi">Chủ Đầu Tư Bất Động Sản</span><span class="cn">房地产开发商</span><span class="en">Real Estate Developer</span>
+            </h4>
+            <p style="font-size:14px;">
+                <span class="vi">Nhà phát triển căn hộ/chung cư cần nội thất tiêu chuẩn cho hàng trăm đến hàng ngàn đơn vị. Ưu tiên: đồng bộ, bền, giá tối ưu.</span>
+                <span class="cn">公寓开发商需要为数百至数千个单元提供标准化家具。优先考虑:统一性、耐用性、最优价格。</span>
+                <span class="en">Apartment/condo developers needing standardized furniture for hundreds to thousands of units. Priorities: uniformity, durability, optimal pricing.</span>
+            </p>
+        </div>
+        <div class="card">
+            <h4 style="color:var(--primary); margin-bottom:8px;">
+                <span class="vi">Nhà Phân Phối/Thương Mại</span><span class="cn">分销商/贸易商</span><span class="en">Distributor/Trader</span>
+            </h4>
+            <p style="font-size:14px;">
+                <span class="vi">Công ty thương mại nhập khẩu nội thất để phân phối tại thị trường nội địa (Trung Đông, châu Phi). Ưu tiên: biên lợi nhuận, OEM/ODM linh hoạt.</span>
+                <span class="cn">贸易公司进口家具在国内市场(中东、非洲)分销。优先考虑:利润率、灵活的OEM/ODM。</span>
+                <span class="en">Trading companies importing furniture for domestic market distribution (Middle East, Africa). Priorities: profit margins, flexible OEM/ODM.</span>
+            </p>
+        </div>
+        <div class="card">
+            <h4 style="color:var(--primary); margin-bottom:8px;">
+                <span class="vi">Cơ Quan Chính Phủ</span><span class="cn">政府机构</span><span class="en">Government Agency</span>
+            </h4>
+            <p style="font-size:14px;">
+                <span class="vi">Cơ quan mua sắm công cho trường học, bệnh viện, cơ sở hành chính. Ưu tiên: tuân thủ quy chuẩn, đấu thầu minh bạch, bảo hành dài hạn.</span>
+                <span class="cn">为学校、医院、行政设施进行公共采购的机构。优先考虑:合规、透明招标、长期保修。</span>
+                <span class="en">Public procurement for schools, hospitals, admin facilities. Priorities: compliance, transparent bidding, long-term warranty.</span>
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="chart09"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 10: Phân Tích Giá -->
+<section class="section" id="s10">
+    <div class="section-header">
+        <div class="section-number">10</div>
+        <h2 class="section-title">
+            <span class="vi">Phân Tích Giá</span>
+            <span class="cn">价格分析</span>
+            <span class="en">Price Analysis</span>
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Giá nội thất MDF dự án phụ thuộc vào nguồn gốc, chất lượng vật liệu và quy mô đơn hàng. Nhà sản xuất Việt Nam thường có giá thấp hơn 15-25% so với Trung Quốc (cùng chất lượng) nhờ lợi thế chi phí nhân công và thuế quan. Thổ Nhĩ Kỳ có giá cao hơn 10-20% nhưng giao hàng nhanh hơn tới Trung Đông/châu Âu.</span>
+            <span class="cn">MDF项目家具价格取决于产地、材料质量和订单规模。越南制造商通常比中国(同等质量)低15-25%,得益于劳动力成本和关税优势。土耳其价格高10-20%,但到中东/欧洲的交货更快。</span>
+            <span class="en">MDF project furniture pricing depends on origin, material quality, and order volume. Vietnamese manufacturers typically offer 15-25% lower prices vs. China (same quality) due to labor cost and tariff advantages. Turkey is 10-20% higher but delivers faster to the Middle East/Europe.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart10"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 11: Chiến Lược Cạnh Tranh -->
+<section class="section" id="s11">
+    <div class="section-header">
+        <div class="section-number">11</div>
+        <h2 class="section-title">
+            <span class="vi">Chiến Lược Cạnh Tranh</span>
+            <span class="cn">竞争策略</span>
+            <span class="en">Competitive Strategy</span>
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Để cạnh tranh hiệu quả trên Alibaba.com trong phân khúc nội thất MDF dự án, nhà cung cấp cần tập trung vào: (1) Tối ưu hồ sơ với video nhà máy và chứng nhận quốc tế, (2) Định giá cạnh tranh với chiến lược MOQ linh hoạt, (3) Phản hồi RFQ trong vòng 2-4 giờ, (4) Xây dựng portfolio dự án đã hoàn thành, (5) Đầu tư vào Verified Supplier hoặc gói quảng cáo Premium.</span>
+            <span class="cn">要在Alibaba.com的MDF项目家具领域有效竞争,供应商需要专注于:(1)用工厂视频和国际认证优化档案,(2)灵活MOQ的竞争性定价,(3)2-4小时内响应RFQ,(4)建立已完成项目组合,(5)投资认证供应商或高级广告套餐。</span>
+            <span class="en">To compete effectively on Alibaba.com in the MDF project furniture segment, suppliers should focus on: (1) Optimizing profiles with factory videos and international certifications, (2) Competitive pricing with flexible MOQ strategies, (3) Responding to RFQs within 2-4 hours, (4) Building a portfolio of completed projects, (5) Investing in Verified Supplier or Premium advertising packages.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart11"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 12: SWOT -->
+<section class="section" id="s12">
+    <div class="section-header">
+        <div class="section-number">12</div>
+        <h2 class="section-title">
+            <span class="vi">Phân Tích SWOT</span>
+            <span class="cn">SWOT分析</span>
+            <span class="en">SWOT Analysis</span>
+        </h2>
+    </div>
+    <div class="swot-grid">
+        <div class="swot-card swot-s">
+            <h4><span class="vi">Điểm Mạnh (S)</span><span class="cn">优势 (S)</span><span class="en">Strengths (S)</span></h4>
+            <ul>
+                <li><span class="vi">Chi phí sản xuất thấp 15-25% so với đối thủ</span><span class="cn">生产成本比竞争对手低15-25%</span><span class="en">Production costs 15-25% lower than competitors</span></li>
+                <li><span class="vi">Nguồn cung MDF nội địa dồi dào, ổn định</span><span class="cn">国内MDF供应充足稳定</span><span class="en">Abundant, stable domestic MDF supply</span></li>
+                <li><span class="vi">Thuế quan ưu đãi (EVFTA, CPTPP, RCEP)</span><span class="cn">FTA优惠关税(EVFTA、CPTPP、RCEP)</span><span class="en">Preferential FTA tariffs (EVFTA, CPTPP, RCEP)</span></li>
+                <li><span class="vi">Năng lực sản xuất quy mô lớn đã được kiểm chứng</span><span class="cn">大规模生产能力已验证</span><span class="en">Proven large-scale manufacturing capabilities</span></li>
+            </ul>
+        </div>
+        <div class="swot-card swot-w">
+            <h4><span class="vi">Điểm Yếu (W)</span><span class="cn">劣势 (W)</span><span class="en">Weaknesses (W)</span></h4>
+            <ul>
+                <li><span class="vi">Hạn chế về năng lực thiết kế so với châu Âu/Thổ Nhĩ Kỳ</span><span class="cn">设计能力相比欧洲/土耳其有限</span><span class="en">Limited design capabilities vs. Europe/Turkey</span></li>
+                <li><span class="vi">Nhận diện thương hiệu quốc tế còn yếu</span><span class="cn">国际品牌认知度较弱</span><span class="en">Weak international brand recognition</span></li>
+                <li><span class="vi">Thời gian giao hàng dài hơn đến châu Âu/Trung Đông</span><span class="cn">到欧洲/中东交货时间较长</span><span class="en">Longer delivery times to Europe/Middle East</span></li>
+                <li><span class="vi">Phụ thuộc vào nguyên liệu keo và phụ kiện nhập khẩu</span><span class="cn">依赖进口胶水和配件</span><span class="en">Dependency on imported adhesives and hardware</span></li>
+            </ul>
+        </div>
+        <div class="swot-card swot-o">
+            <h4><span class="vi">Cơ Hội (O)</span><span class="cn">机会 (O)</span><span class="en">Opportunities (O)</span></h4>
+            <ul>
+                <li><span class="vi">Saudi Vision 2030: 300.000 phòng khách sạn mới</span><span class="cn">沙特2030愿景:30万间新酒店客房</span><span class="en">Saudi Vision 2030: 300,000 new hotel rooms</span></li>
+                <li><span class="vi">Thuế quan Mỹ đối với Trung Quốc tạo lợi thế cạnh tranh</span><span class="cn">美国对华关税创造竞争优势</span><span class="en">US tariffs on China create competitive advantage</span></li>
+                <li><span class="vi">Thị trường MDF dự báo đạt $95-101B vào 2034</span><span class="cn">MDF市场预计2034年达950-1010亿美元</span><span class="en">MDF market projected to reach $95-101B by 2034</span></li>
+                <li><span class="vi">Tăng trưởng xây dựng tại châu Phi và Đông Nam Á</span><span class="cn">非洲和东南亚建设增长</span><span class="en">Construction growth in Africa and Southeast Asia</span></li>
+            </ul>
+        </div>
+        <div class="swot-card swot-t">
+            <h4><span class="vi">Thách Thức (T)</span><span class="cn">威胁 (T)</span><span class="en">Threats (T)</span></h4>
+            <ul>
+                <li><span class="vi">Biến động chi phí vận chuyển quốc tế</span><span class="cn">国际运输成本波动</span><span class="en">International shipping cost volatility</span></li>
+                <li><span class="vi">Cạnh tranh giá từ Trung Quốc và Indonesia</span><span class="cn">来自中国和印尼的价格竞争</span><span class="en">Price competition from China and Indonesia</span></li>
+                <li><span class="vi">Rủi ro thay đổi chính sách thuế quan</span><span class="cn">关税政策变化风险</span><span class="en">Tariff policy change risks</span></li>
+                <li><span class="vi">Yêu cầu chứng nhận môi trường ngày càng cao</span><span class="cn">日益提高的环境认证要求</span><span class="en">Increasing environmental certification requirements</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="card" style="margin-top:20px;">
+        <div class="chart-container">
+            <canvas id="chart12"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 13: Đề Xuất Đầu Tư -->
+<section class="section" id="s13">
+    <div class="section-header">
+        <div class="section-number">13</div>
+        <h2 class="section-title">
+            <span class="vi">Đề Xuất Đầu Tư</span>
+            <span class="cn">投资建议</span>
+            <span class="en">Investment Recommendations</span>
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Dựa trên phân tích thị trường, dưới đây là 3 gói đầu tư trên Alibaba.com phù hợp cho nhà cung cấp nội thất MDF dự án tại Việt Nam, với ROI ước tính dựa trên dữ liệu thực tế từ ngành hàng tương tự.</span>
+            <span class="cn">基于市场分析,以下是适合越南MDF项目家具供应商的3个Alibaba.com投资方案,ROI估算基于类似品类的实际数据。</span>
+            <span class="en">Based on market analysis, below are 3 Alibaba.com investment packages suitable for Vietnamese MDF project furniture suppliers, with ROI estimates based on actual data from similar categories.</span>
+        </p>
+    </div>
+    <div class="tier-grid">
+        <div class="tier-card">
+            <div class="tier-name">
+                <span class="vi">Gói Cơ Bản</span><span class="cn">基础套餐</span><span class="en">Basic Package</span>
+            </div>
+            <div class="tier-price">76M VND</div>
+            <div class="tier-period">
+                <span class="vi">~$3,000 USD/năm</span><span class="cn">~$3,000 USD/年</span><span class="en">~$3,000 USD/year</span>
+            </div>
+            <ul class="tier-features">
+                <li><span class="vi">200-400 RFQ/năm</span><span class="cn">200-400 RFQ/年</span><span class="en">200-400 RFQs/year</span></li>
+                <li><span class="vi">ROI dự kiến: 2-8x</span><span class="cn">预期ROI: 2-8倍</span><span class="en">Expected ROI: 2-8x</span></li>
+                <li><span class="vi">Gian hàng cơ bản</span><span class="cn">基本店铺</span><span class="en">Basic storefront</span></li>
+                <li><span class="vi">Phù hợp: doanh nghiệp mới bắt đầu</span><span class="cn">适合:初创企业</span><span class="en">Suitable for: new starters</span></li>
+            </ul>
+        </div>
+        <div class="tier-card recommended">
+            <div class="tier-name">
+                <span class="vi">Gói Verified</span><span class="cn">认证套餐</span><span class="en">Verified Package</span>
+            </div>
+            <div class="tier-price">254M VND</div>
+            <div class="tier-period">
+                <span class="vi">~$10,000 USD/năm</span><span class="cn">~$10,000 USD/年</span><span class="en">~$10,000 USD/year</span>
+            </div>
+            <ul class="tier-features">
+                <li><span class="vi">600-1,000 RFQ/năm</span><span class="cn">600-1,000 RFQ/年</span><span class="en">600-1,000 RFQs/year</span></li>
+                <li><span class="vi">ROI dự kiến: 5-15x</span><span class="cn">预期ROI: 5-15倍</span><span class="en">Expected ROI: 5-15x</span></li>
+                <li><span class="vi">Huy hiệu Verified Supplier</span><span class="cn">认证供应商徽章</span><span class="en">Verified Supplier badge</span></li>
+                <li><span class="vi">Ưu tiên hiển thị trong kết quả tìm kiếm</span><span class="cn">搜索结果优先展示</span><span class="en">Priority in search results</span></li>
+                <li><span class="vi">Phù hợp: doanh nghiệp muốn tăng trưởng nhanh</span><span class="cn">适合:快速增长企业</span><span class="en">Suitable for: fast-growth companies</span></li>
+            </ul>
+        </div>
+        <div class="tier-card">
+            <div class="tier-name">
+                <span class="vi">Gói 5 Sao</span><span class="cn">五星套餐</span><span class="en">5-Star Package</span>
+            </div>
+            <div class="tier-price">637M VND</div>
+            <div class="tier-period">
+                <span class="vi">~$25,000 USD/2 năm</span><span class="cn">~$25,000 USD/2年</span><span class="en">~$25,000 USD/2 years</span>
+            </div>
+            <ul class="tier-features">
+                <li><span class="vi">1,200-2,000 RFQ/năm</span><span class="cn">1,200-2,000 RFQ/年</span><span class="en">1,200-2,000 RFQs/year</span></li>
+                <li><span class="vi">ROI dự kiến: 10-30x</span><span class="cn">预期ROI: 10-30倍</span><span class="en">Expected ROI: 10-30x</span></li>
+                <li><span class="vi">Tất cả tính năng Verified + Quảng cáo Premium</span><span class="cn">所有认证功能 + 高级广告</span><span class="en">All Verified features + Premium advertising</span></li>
+                <li><span class="vi">Account Manager chuyên trách</span><span class="cn">专属客户经理</span><span class="en">Dedicated Account Manager</span></li>
+                <li><span class="vi">Phù hợp: doanh nghiệp lớn, mục tiêu dẫn đầu</span><span class="cn">适合:目标领先的大型企业</span><span class="en">Suitable for: large enterprises, market leaders</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="card" style="margin-top:20px;">
+        <div class="chart-container wide">
+            <canvas id="chart13"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Section 14: Kết Luận -->
+<section class="section" id="s14">
+    <div class="section-header">
+        <div class="section-number">14</div>
+        <h2 class="section-title">
+            <span class="vi">Kết Luận</span>
+            <span class="cn">结论</span>
+            <span class="en">Conclusion</span>
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            <span class="vi">Thị trường nội thất MDF dự án đang ở giai đoạn tăng trưởng vàng với CAGR ~6.5% trong 10 năm tới. Việt Nam với vị thế xuất khẩu gỗ #2 toàn cầu, lợi thế chi phí rõ ràng, và hệ thống FTA rộng lớn, đang ở vị trí tuyệt vời để nắm bắt cơ hội này. Đầu tư vào Alibaba.com là bước đi chiến lược để tiếp cận người mua B2B toàn cầu, đặc biệt trong bối cảnh thị trường Trung Đông và Đông Nam Á đang bùng nổ xây dựng.</span>
+            <span class="cn">MDF项目家具市场正处于黄金增长期,未来10年CAGR约6.5%。越南作为全球第二大木材出口国,拥有明显的成本优势和广泛的FTA体系,正处于抓住这一机遇的绝佳位置。投资Alibaba.com是触达全球B2B买家的战略举措,特别是在中东和东南亚建设热潮的背景下。</span>
+            <span class="en">The MDF project furniture market is in a golden growth phase with ~6.5% CAGR over the next decade. Vietnam, as the #2 global wood exporter with clear cost advantages and an extensive FTA network, is perfectly positioned to seize this opportunity. Investing in Alibaba.com is a strategic move to reach global B2B buyers, especially given the Middle East and Southeast Asia construction boom.</span>
+        </p>
+    </div>
+    <div class="card">
+        <div class="chart-container wide">
+            <canvas id="chart14"></canvas>
+        </div>
+    </div>
+    <div class="card" style="background: linear-gradient(135deg, var(--primary), #0d2240); color: #fff; text-align: center; padding: 40px;">
+        <h3 style="margin-bottom:12px; font-size: 20px;">
+            <span class="vi">Sẵn Sàng Bắt Đầu?</span>
+            <span class="cn">准备开始了吗？</span>
+            <span class="en">Ready to Get Started?</span>
+        </h3>
+        <p style="opacity:0.9; font-size:15px;">
+            <span class="vi">Liên hệ đội ngũ Alibaba.com Vietnam để nhận tư vấn gói đầu tư phù hợp nhất cho doanh nghiệp của bạn.</span>
+            <span class="cn">联系Alibaba.com越南团队,获取最适合您企业的投资方案建议。</span>
+            <span class="en">Contact the Alibaba.com Vietnam team for personalized investment package consultation for your business.</span>
+        </p>
+    </div>
+</section>
+
+</div><!-- end container -->
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-top"></div>
+    <div class="footer-main">
+        <div class="footer-col">
+            <h4><span class="vi">Về Báo Cáo</span><span class="cn">关于报告</span><span class="en">About This Report</span></h4>
+            <p>
+                <span class="vi">Báo cáo được biên soạn dựa trên dữ liệu thị trường từ các nguồn công khai và nền tảng Alibaba.com.</span>
+                <span class="cn">本报告基于公开市场数据和Alibaba.com平台数据编制。</span>
+                <span class="en">Report compiled from public market data and the Alibaba.com platform.</span>
+            </p>
+        </div>
+        <div class="footer-col">
+            <h4><span class="vi">Phân Khúc</span><span class="cn">细分市场</span><span class="en">Segments</span></h4>
+            <p>MDF Furniture<br>Hotel & Hospitality<br>Office Projects<br>Kitchen & Bathroom<br>Healthcare Furniture</p>
+        </div>
+        <div class="footer-col">
+            <h4><span class="vi">Thị Trường Mục Tiêu</span><span class="cn">目标市场</span><span class="en">Target Markets</span></h4>
+            <p>United States<br>Saudi Arabia & UAE<br>Europe (EU)<br>Southeast Asia<br>Africa</p>
+        </div>
+        <div class="footer-col">
+            <h4><span class="vi">Liên Kết</span><span class="cn">链接</span><span class="en">Links</span></h4>
+            <p><a href="https://www.alibaba.com" target="_blank">Alibaba.com</a><br>
+            <a href="https://seller.alibaba.com" target="_blank">Seller Center</a><br>
+            <a href="https://www.alibaba.com/trade/search?SearchText=MDF+furniture+project" target="_blank">MDF Furniture Search</a></p>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <span class="vi">&copy; 2025 Alibaba.com. Báo cáo phân tích ngành &mdash; Nội thất MDF Dự Án. Mọi quyền được bảo lưu.</span>
+        <span class="cn">&copy; 2025 Alibaba.com. 行业分析报告 &mdash; MDF项目家具。保留所有权利。</span>
+        <span class="en">&copy; 2025 Alibaba.com. Industry Analysis Report &mdash; MDF Project Furniture. All rights reserved.</span>
+    </div>
+</footer>
+
+<script>
+// Language Switcher
+function switchLang(lang) {
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-switcher button').forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+    document.getElementById('btn-' + lang).classList.add('active');
+}
+
+// Chart Colors
+const PRIMARY = '#1B365D';
+const SECONDARY = '#E8740C';
+const ACCENT = '#2E8B57';
+const COLORS = ['#1B365D','#E8740C','#2E8B57','#8B5CF6','#EC4899','#06B6D4','#F59E0B','#10B981','#6366F1','#EF4444'];
+
+// Chart 01: MDF Market Growth
+new Chart(document.getElementById('chart01'), {
+    type: 'bar',
+    data: {
+        labels: ['2020','2021','2022','2023','2024','2025','2028F','2030F','2034F'],
+        datasets: [{
+            label: 'Global MDF Market ($B)',
+            data: [38.5, 41.2, 44.8, 48.1, 51.5, 55.2, 68.0, 76.5, 98.0],
+            backgroundColor: PRIMARY,
+            borderRadius: 4
+        },{
+            label: 'Contract Furniture Market ($B)',
+            data: [98.5, 108.2, 118.5, 131.0, 151.9, 162.0, 195.0, 220.0, 259.5],
+            backgroundColor: SECONDARY,
+            borderRadius: 4
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Global MDF & Contract Furniture Market Growth' }}}
+});
+
+// Chart 02: Buying Trends (Monthly RFQ Volume)
+new Chart(document.getElementById('chart02'), {
+    type: 'line',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets: [{
+            label: 'MDF Furniture RFQ Volume Index',
+            data: [92, 78, 95, 88, 82, 75, 90, 96, 98, 85, 80, 70],
+            borderColor: SECONDARY,
+            backgroundColor: 'rgba(232,116,12,0.1)',
+            fill: true,
+            tension: 0.4
+        },{
+            label: 'Hotel Furniture RFQ Index',
+            data: [88, 72, 98, 92, 85, 78, 95, 100, 102, 90, 82, 68],
+            borderColor: PRIMARY,
+            backgroundColor: 'rgba(27,54,93,0.1)',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Monthly RFQ Volume Index (2024-2025)' }}}
+});
+
+// Chart 03: Supplier Countries (Pie)
+new Chart(document.getElementById('chart03'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Vietnam','China','Turkey','Indonesia','Malaysia','India','Others'],
+        datasets: [{
+            data: [35, 28, 12, 10, 8, 4, 3],
+            backgroundColor: COLORS.slice(0,7)
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'MDF Project Furniture Supplier Distribution (%)' }}}
+});
+
+// Chart 04: Import Countries (Horizontal Bar)
+new Chart(document.getElementById('chart04'), {
+    type: 'bar',
+    data: {
+        labels: ['United States','Saudi Arabia','UAE','Germany','Japan','South Korea','UK','Australia','Nigeria','South Africa'],
+        datasets: [{
+            label: 'Import Volume Share (%)',
+            data: [28, 15, 12, 9, 8, 7, 6, 5, 5, 5],
+            backgroundColor: COLORS
+        }]
+    },
+    options: { indexAxis: 'y', responsive: true, plugins: { title: { display: true, text: 'Top Importing Countries for MDF Project Furniture' }}}
+});
+
+// Chart 05: Vietnam Competitive Advantages (Radar)
+new Chart(document.getElementById('chart05'), {
+    type: 'radar',
+    data: {
+        labels: ['Cost','Capacity','Quality','Delivery','FTA Access','Raw Material'],
+        datasets: [{
+            label: 'Vietnam',
+            data: [95, 85, 78, 72, 92, 88],
+            borderColor: ACCENT,
+            backgroundColor: 'rgba(46,139,87,0.2)'
+        },{
+            label: 'China',
+            data: [70, 95, 82, 80, 60, 75],
+            borderColor: SECONDARY,
+            backgroundColor: 'rgba(232,116,12,0.2)'
+        },{
+            label: 'Turkey',
+            data: [65, 70, 85, 88, 75, 60],
+            borderColor: PRIMARY,
+            backgroundColor: 'rgba(27,54,93,0.2)'
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Competitive Positioning: Vietnam vs China vs Turkey' }}}
+});
+
+// Chart 06: Competitive Landscape (Bubble)
+new Chart(document.getElementById('chart06'), {
+    type: 'bubble',
+    data: {
+        datasets: [{
+            label: 'Vietnam',
+            data: [{x: 85, y: 78, r: 18}],
+            backgroundColor: 'rgba(46,139,87,0.6)'
+        },{
+            label: 'China',
+            data: [{x: 70, y: 88, r: 22}],
+            backgroundColor: 'rgba(232,116,12,0.6)'
+        },{
+            label: 'Turkey',
+            data: [{x: 60, y: 82, r: 12}],
+            backgroundColor: 'rgba(27,54,93,0.6)'
+        },{
+            label: 'Indonesia',
+            data: [{x: 80, y: 68, r: 10}],
+            backgroundColor: 'rgba(139,92,246,0.6)'
+        },{
+            label: 'Malaysia',
+            data: [{x: 72, y: 75, r: 9}],
+            backgroundColor: 'rgba(236,72,153,0.6)'
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: { x: { title: { display: true, text: 'Price Competitiveness' }}, y: { title: { display: true, text: 'Quality Score' }}},
+        plugins: { title: { display: true, text: 'Competitive Landscape (Price vs Quality vs Market Share)' }}
+    }
+});
+
+// Chart 07: Supplier Revenue Distribution
+new Chart(document.getElementById('chart07'), {
+    type: 'bar',
+    data: {
+        labels: ['$1-2.5M','$2.5-5M','$5-10M','$10-20M','$20M+'],
+        datasets: [{
+            label: 'Vietnam Suppliers',
+            data: [6, 3, 2, 0, 1],
+            backgroundColor: ACCENT
+        },{
+            label: 'China Suppliers',
+            data: [2, 1, 2, 0, 1],
+            backgroundColor: SECONDARY
+        },{
+            label: 'Other Countries',
+            data: [1, 2, 3, 1, 0],
+            backgroundColor: PRIMARY
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Supplier Revenue Distribution by Country' }}}
+});
+
+// Chart 08: Product Category Demand
+new Chart(document.getElementById('chart08'), {
+    type: 'polarArea',
+    data: {
+        labels: ['Hotel Bedroom','Bathroom Vanity','Kitchen Cabinet','Office Workstation','Wardrobe','Medical Cabinet'],
+        datasets: [{
+            data: [30, 18, 22, 15, 10, 5],
+            backgroundColor: ['rgba(27,54,93,0.7)','rgba(232,116,12,0.7)','rgba(46,139,87,0.7)','rgba(139,92,246,0.7)','rgba(236,72,153,0.7)','rgba(6,182,212,0.7)']
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Product Category Demand Share (%)' }}}
+});
+
+// Chart 09: Buyer Persona Distribution
+new Chart(document.getElementById('chart09'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Hotel Contractors','Real Estate Developers','Distributors/Traders','Government Agencies','Others'],
+        datasets: [{
+            data: [35, 25, 22, 12, 6],
+            backgroundColor: [PRIMARY, SECONDARY, ACCENT, '#8B5CF6', '#EC4899']
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Buyer Segments for MDF Project Furniture' }}}
+});
+
+// Chart 10: Price Comparison by Country
+new Chart(document.getElementById('chart10'), {
+    type: 'bar',
+    data: {
+        labels: ['Hotel Bedroom Set','Bathroom Vanity','Kitchen Cabinet/m','Office Desk','Wardrobe','Medical Cabinet'],
+        datasets: [{
+            label: 'Vietnam (USD)',
+            data: [350, 120, 180, 220, 280, 250],
+            backgroundColor: ACCENT
+        },{
+            label: 'China (USD)',
+            data: [420, 150, 220, 280, 340, 310],
+            backgroundColor: SECONDARY
+        },{
+            label: 'Turkey (USD)',
+            data: [480, 180, 260, 320, 380, 360],
+            backgroundColor: PRIMARY
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Average FOB Price Comparison by Origin Country (USD)' }}}
+});
+
+// Chart 11: Strategy Effectiveness
+new Chart(document.getElementById('chart11'), {
+    type: 'bar',
+    data: {
+        labels: ['Factory Video','Certifications (ISO/FSC)','RFQ <4hr Response','Project Portfolio','Verified Badge','Premium Ads','Trade Shows'],
+        datasets: [{
+            label: 'Impact on Conversion (%)',
+            data: [45, 38, 52, 35, 60, 48, 25],
+            backgroundColor: [PRIMARY, SECONDARY, ACCENT, '#8B5CF6', '#EC4899', '#06B6D4', '#F59E0B']
+        }]
+    },
+    options: { indexAxis: 'y', responsive: true, plugins: { title: { display: true, text: 'Competitive Strategy Impact on Buyer Conversion' }}}
+});
+
+// Chart 12: SWOT Score
+new Chart(document.getElementById('chart12'), {
+    type: 'radar',
+    data: {
+        labels: ['Cost Advantage','Production Scale','FTA Network','Market Growth','Brand Recognition','Design Capability','Delivery Speed','Certification'],
+        datasets: [{
+            label: 'Current Position',
+            data: [92, 85, 90, 88, 55, 62, 70, 75],
+            borderColor: PRIMARY,
+            backgroundColor: 'rgba(27,54,93,0.2)'
+        },{
+            label: 'Target (2026)',
+            data: [90, 92, 92, 92, 78, 80, 82, 88],
+            borderColor: ACCENT,
+            backgroundColor: 'rgba(46,139,87,0.2)'
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: 'SWOT Position Scoring: Current vs Target' }}}
+});
+
+// Chart 13: Investment ROI
+new Chart(document.getElementById('chart13'), {
+    type: 'bar',
+    data: {
+        labels: ['Basic (76M VND)','Verified (254M VND)','5-Star (637M VND)'],
+        datasets: [{
+            label: 'RFQ/Year (Mid)',
+            data: [300, 800, 1600],
+            backgroundColor: PRIMARY,
+            yAxisID: 'y'
+        },{
+            label: 'ROI (Mid, x)',
+            data: [5, 10, 20],
+            backgroundColor: SECONDARY,
+            yAxisID: 'y1'
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: { type: 'linear', position: 'left', title: { display: true, text: 'RFQs/Year' }},
+            y1: { type: 'linear', position: 'right', title: { display: true, text: 'ROI (x)' }, grid: { drawOnChartArea: false }}
+        },
+        plugins: { title: { display: true, text: 'Investment Package Comparison: RFQs & ROI' }}
+    }
+});
+
+// Chart 14: Market Forecast Summary
+new Chart(document.getElementById('chart14'), {
+    type: 'line',
+    data: {
+        labels: ['2024','2025','2026','2027','2028','2029','2030','2031','2032','2033','2034'],
+        datasets: [{
+            label: 'MDF Market ($B)',
+            data: [51.5, 55.2, 59.2, 63.5, 68.0, 72.8, 76.5, 81.0, 86.0, 91.5, 98.0],
+            borderColor: PRIMARY,
+            backgroundColor: 'rgba(27,54,93,0.1)',
+            fill: true,
+            tension: 0.3
+        },{
+            label: 'VN Wood Exports ($B)',
+            data: [16.0, 17.2, 18.5, 20.0, 21.8, 23.5, 25.5, 27.5, 30.0, 32.5, 35.0],
+            borderColor: ACCENT,
+            backgroundColor: 'rgba(46,139,87,0.1)',
+            fill: true,
+            tension: 0.3
+        }]
+    },
+    options: { responsive: true, plugins: { title: { display: true, text: '10-Year Market Forecast: MDF Global & Vietnam Exports' }}}
+});
+</script>
+
+</body>
+</html>
