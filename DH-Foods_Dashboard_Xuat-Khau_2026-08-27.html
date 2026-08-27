@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dh Foods — Cơ hội tăng trưởng xuất khẩu 2026</title>
+<style>
+:root{
+  --ink:#221A12; --ink-2:#4A3F33; --muted:#6E6255; --faint:#9A8E7E;
+  --cream:#FAF6F0; --paper:#FFFFFF; --line:#EDE4D8; --line-2:#F1EAE0;
+  --red:#C1121F; --red-d:#8F0B18; --red-soft:#FBEBED;
+  --gold:#E2A23B; --gold-d:#B97F1E; --gold-soft:#FBF3E4;
+  --green:#3E6B50; --green-soft:#EAF2EC;
+  --shadow:0 1px 2px rgba(34,26,18,.05),0 10px 30px rgba(34,26,18,.07);
+  --r:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1024px;margin:0 auto;padding:0 22px;}
+a{color:inherit;}
+
+/* ---------- NAV ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(34,26,18,.97);backdrop-filter:blur(8px);color:#fff;}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:13px;padding-bottom:13px;flex-wrap:wrap;gap:10px;}
+.nav-brand{font-size:.9rem;font-weight:700;letter-spacing:.5px;display:flex;align-items:center;gap:9px;}
+.nav-brand::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);}
+.nav-links{display:flex;gap:6px;}
+.nav-links a{font-size:.8rem;color:#E8DCCB;text-decoration:none;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.14);transition:.2s;}
+.nav-links a:hover{background:var(--red);border-color:var(--red);color:#fff;}
+
+/* ---------- HERO ---------- */
+.hero{background:linear-gradient(150deg,#221A12 0%,#3D2C1C 60%,#5A3520 100%);color:#fff;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 12%,rgba(226,162,59,.22),transparent 42%),radial-gradient(circle at 8% 90%,rgba(193,18,31,.28),transparent 46%);}
+.hero .wrap{position:relative;z-index:1;padding-top:58px;padding-bottom:56px;text-align:center;}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(226,162,59,.45);background:rgba(226,162,59,.1);padding:6px 16px;border-radius:999px;margin-bottom:22px;}
+.hero h1{font-size:2.35rem;font-weight:800;line-height:1.22;margin-bottom:14px;}
+.hero h1 em{font-style:normal;color:var(--gold);}
+.hero .sub{font-size:1rem;color:#E8DCCB;max-width:700px;margin:0 auto 10px;}
+.hero .meta{font-size:.78rem;color:#B8A890;letter-spacing:.4px;}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border:1px solid rgba(255,255,255,.12);border-radius:var(--r);overflow:hidden;background:rgba(255,255,255,.04);}
+.kpi{padding:22px 18px;text-align:left;border-right:1px solid rgba(255,255,255,.1);}
+.kpi:last-child{border-right:none;}
+.kpi .v{font-size:1.65rem;font-weight:800;color:var(--gold);line-height:1.15;letter-spacing:-.2px;}
+.kpi .l{font-size:.76rem;color:#E4D5C2;margin-top:7px;line-height:1.45;}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr);}.kpi:nth-child(2){border-right:none;}.kpi:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1);}}
+@media(max-width:520px){.kpis{grid-template-columns:1fr;}.kpi{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);}.kpi:last-child{border-bottom:none;}}
+
+/* ---------- SECTIONS ---------- */
+section{padding:62px 0 6px;}
+.sec-head{max-width:760px;margin:0 auto 36px;text-align:center;}
+.kicker{font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);}
+.sec-head h2{font-size:1.6rem;font-weight:800;margin:10px 0 10px;line-height:1.3;}
+.sec-head p{font-size:.93rem;color:var(--muted);}
+h3.sec-sub{font-size:1.02rem;font-weight:700;margin:34px 0 16px;display:flex;align-items:center;gap:10px;}
+h3.sec-sub::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--red);}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);}
+.grid{display:grid;gap:18px;}
+.g2{grid-template-columns:repeat(auto-fit,minmax(330px,1fr));}
+.g3{grid-template-columns:repeat(auto-fit,minmax(270px,1fr));}
+.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}
+
+/* ---------- CHARTS ---------- */
+.chart-card{padding:26px 26px 22px;}
+.chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+.chart-head h4{font-size:.98rem;font-weight:700;}
+.chart-head .src{font-size:.72rem;color:var(--faint);}
+.chart-card svg{width:100%;height:auto;display:block;}
+.chip{display:inline-block;font-size:.72rem;font-weight:700;color:var(--red);background:var(--red-soft);border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:2px;}
+
+/* ---------- INSIGHT PANEL ---------- */
+.panel{padding:26px;}
+.panel h4{font-size:.98rem;font-weight:700;margin-bottom:18px;}
+.ins{display:flex;flex-direction:column;gap:16px;}
+.ins .row{display:grid;grid-template-columns:1fr auto;gap:2px 14px;align-items:baseline;}
+.ins .row .lab{font-size:.84rem;color:var(--ink-2);}
+.ins .row .val{font-size:1.12rem;font-weight:800;color:var(--ink);white-space:nowrap;}
+.bar{grid-column:1/-1;height:5px;border-radius:3px;background:var(--line-2);overflow:hidden;margin-top:2px;}
+.bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--red),var(--gold));}
+.seg{display:flex;height:10px;border-radius:6px;overflow:hidden;margin-top:4px;}
+.seg i{display:block;height:100%;}
+.seg-legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:10px;font-size:.76rem;color:var(--muted);}
+.seg-legend b{color:var(--ink);}
+
+/* ---------- FACTS ---------- */
+.fact{display:flex;gap:16px;align-items:flex-start;padding:15px 16px;border-radius:12px;background:var(--cream);border:1px solid var(--line-2);}
+.fact .n{font-size:1.2rem;font-weight:800;color:var(--red);min-width:70px;line-height:1.3;}
+.fact p{font-size:.86rem;color:var(--muted);}
+.fact p b{color:var(--ink);}
+
+/* ---------- TRENDS ---------- */
+.trend{padding:22px 22px 20px;border-top:3px solid var(--red);}
+.trend:nth-child(2){border-color:var(--gold);}
+.trend:nth-child(3){border-color:var(--green);}
+.trend:nth-child(4){border-color:#7A5AA0;}
+.trend:nth-child(5){border-color:#C77B2E;}
+.trend .tag{font-size:.68rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--red);}
+.trend:nth-child(2) .tag{color:var(--gold-d);}
+.trend:nth-child(3) .tag{color:var(--green);}
+.trend:nth-child(4) .tag{color:#6B4FA0;}
+.trend:nth-child(5) .tag{color:#B96A24;}
+.trend h5{font-size:.96rem;font-weight:700;margin:7px 0 8px;}
+.trend p{font-size:.85rem;color:var(--muted);}
+.trend.note{background:var(--gold-soft);border-color:var(--gold);border-top-color:var(--gold);}
+
+/* ---------- ADVANTAGE ---------- */
+.adv{padding:24px;}
+.adv .ic{width:38px;height:38px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;background:var(--red-soft);color:var(--red);margin-bottom:14px;}
+.adv:nth-child(2) .ic{background:var(--gold-soft);color:var(--gold-d);}
+.adv:nth-child(3) .ic{background:var(--green-soft);color:var(--green);}
+.adv:nth-child(4) .ic{background:#F0E9FB;color:#6B4FA0;}
+.adv:nth-child(5) .ic{background:#E9F1F7;color:#2B6A94;}
+.adv:nth-child(6) .ic{background:#FCEBE2;color:#C05A1E;}
+.adv h4{font-size:.98rem;font-weight:700;margin-bottom:9px;}
+.adv p{font-size:.86rem;color:var(--muted);}
+.adv p b{color:var(--ink);}
+.adv:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(34,26,18,.12);transition:.25s;}
+
+/* ---------- STAT BAND ---------- */
+.band{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(6,1fr);margin:30px 0 34px;}
+.band .c{padding:24px 16px;text-align:center;border-right:1px solid var(--line);}
+.band .c:last-child{border-right:none;}
+.band .v{font-size:1.5rem;font-weight:800;color:var(--red);line-height:1.2;}
+.band .k{font-size:.74rem;color:var(--muted);margin-top:6px;line-height:1.4;}
+@media(max-width:860px){.band{grid-template-columns:repeat(3,1fr);}.band .c:nth-child(3){border-right:none;}.band .c:nth-child(-n+3){border-bottom:1px solid var(--line);}}
+@media(max-width:520px){.band{grid-template-columns:repeat(2,1fr);}.band .c{border-right:none;border-bottom:1px solid var(--line);}}
+
+/* ---------- MAP ---------- */
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:4px;}
+.map .step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);position:relative;}
+.map .from{font-size:.8rem;color:var(--gold-d);font-weight:600;}
+.map .arrow{color:var(--red);font-weight:800;margin:8px 0;font-size:1rem;}
+.map .to{font-size:.9rem;font-weight:600;color:var(--ink);}
+
+/* ---------- AGENDA ---------- */
+.agenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
+.agenda .item{display:flex;gap:14px;padding:18px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);}
+.agenda .no{width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.agenda .item:nth-child(2) .no{background:var(--gold-d);}
+.agenda .item:nth-child(3) .no{background:var(--green);}
+.agenda .item:nth-child(4) .no{background:#6B4FA0;}
+.agenda h5{font-size:.92rem;margin-bottom:5px;}
+.agenda p{font-size:.82rem;color:var(--muted);}
+
+/* ---------- CTA ---------- */
+.cta{background:linear-gradient(150deg,#221A12 0%,#3D2C1C 70%);border-radius:20px;padding:44px 36px;margin-top:34px;color:#fff;text-align:center;position:relative;overflow:hidden;box-shadow:0 16px 40px rgba(34,26,18,.25);}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 15%,rgba(193,18,31,.35),transparent 55%);}
+.cta .in{position:relative;z-index:1;}
+.cta h3{font-size:1.5rem;font-weight:800;margin-bottom:10px;}
+.cta h3 span{color:var(--gold);}
+.cta p{color:#E4D5C2;font-size:.9rem;max-width:620px;margin:0 auto 24px;}
+.cta .actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-weight:700;font-size:.95rem;padding:12px 28px;border-radius:999px;text-decoration:none;transition:.2s;box-shadow:0 8px 20px rgba(193,18,31,.35);}
+.btn:hover{background:#D62230;transform:translateY(-2px);}
+.btn.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.45);box-shadow:none;}
+.btn.ghost:hover{background:rgba(255,255,255,.08);}
+.contact{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:26px;font-size:.84rem;color:#E4D5C2;}
+.contact .chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 16px;}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:#B8A890;padding:42px 0 30px;margin-top:64px;font-size:.82rem;}
+footer h4{color:#fff;font-size:.9rem;margin-bottom:14px;letter-spacing:.4px;}
+footer .srcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:9px 28px;margin-bottom:20px;}
+footer .src{display:flex;gap:9px;align-items:baseline;}
+footer .src .idx{color:var(--gold);font-weight:700;flex-shrink:0;}
+footer a{color:var(--gold);text-decoration:none;}
+footer a:hover{text-decoration:underline;}
+footer .note{border-top:1px solid rgba(255,255,255,.12);padding-top:16px;font-size:.74rem;color:#8B7E6E;}
+footer .copy{margin-top:12px;font-size:.72rem;color:#74675A;}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.7rem;}
+  .sec-head h2{font-size:1.35rem;}
+  section{padding:44px 0 4px;}
+  .kpi .v{font-size:1.3rem;}
+  .cta{padding:34px 22px;}
+}
+@media print{
+  .nav{display:none;}
+  body{background:#fff;}
+  .hero{background:var(--ink);}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav-brand">CƠ HỘI XUẤT KHẨU — DH FOODS</div>
+    <div class="nav-links">
+      <a href="#thi-truong">Tổng quan thị trường</a>
+      <a href="#loi-the">Lợi thế cạnh tranh</a>
+      <a href="#lich-gap">Đề xuất lịch gặp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">Tài liệu trao đổi chiến lược · 27/08/2026</span>
+    <h1>Cơ hội tăng trưởng xuất khẩu cho <em>Dh Foods</em> năm 2026</h1>
+    <p class="sub">Tổng quan thị trường gia vị toàn cầu · Lợi thế cạnh tranh của Dh Foods · Đề xuất buổi trao đổi chiến lược mở rộng thị trường và khách hàng xuất khẩu</p>
+    <p class="meta">Tài liệu dành riêng cho Công ty Cổ phần Dh Foods</p>
+    <div class="kpis">
+      <div class="kpi"><div class="v">29,5–31,7 tỷ USD</div><div class="l">Thị trường gia vị &amp; nêm nếm toàn cầu 2025</div></div>
+      <div class="kpi"><div class="v">1,5 tỷ USD</div><div class="l">Kỷ lục xuất khẩu hồ tiêu Việt Nam 2025</div></div>
+      <div class="kpi"><div class="v">5,6–5,9%</div><div class="l">CAGR dự báo ngành gia vị 2026–2035</div></div>
+      <div class="kpi"><div class="v">70,09 tỷ USD</div><div class="l">Xuất khẩu nông lâm thủy sản VN 2025 (+12%)</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= SECTION 1: THỊ TRƯỜNG ================= -->
+<section id="thi-truong">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Phần 01 · Tổng quan thị trường</div>
+      <h2>Ngành hàng gia vị &amp; nêm nếm — động lực tăng trưởng toàn cầu</h2>
+      <p>Bối cảnh xuất khẩu nông sản Việt Nam 2025 với nhiều kỷ lục là nền tảng thuận lợi cho chiến lược mở rộng xuất khẩu.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="chart-card">
+        <div class="chart-head">
+          <h4>Quy mô thị trường gia vị &amp; nêm nếm toàn cầu <span class="chip">CAGR 5,6–5,9%/năm</span></h4>
+          <span class="src">Nguồn: Precedence Research · EMR</span>
+        </div>
+        <svg viewBox="0 0 520 280" role="img" aria-label="Biểu đồ tăng trưởng thị trường gia vị toàn cầu 2025-2035">
+          <line x1="70" y1="18" x2="70" y2="218" stroke="#EFE7DB" stroke-width="2"/>
+          <line x1="70" y1="218" x2="500" y2="218" stroke="#EFE7DB" stroke-width="2"/>
+          <g font-family="Segoe UI, Arial" font-size="12" fill="#6E6255" text-anchor="middle">
+            <text x="150" y="240">2025</text>
+            <text x="290" y="240">2026</text>
+            <text x="430" y="240">2035</text>
+          </g>
+          <g font-family="Segoe UI, Arial" font-size="11" fill="#9A8E7E" text-anchor="end">
+            <text x="62" y="216">60</text>
+            <text x="62" y="162">45</text>
+            <text x="62" y="108">30</text>
+            <text x="62" y="54">15</text>
+            <text x="62" y="24">0</text>
+          </g>
+          <rect x="115" y="122" width="70" height="96" rx="7" fill="#C1121F"/>
+          <rect x="255" y="116" width="70" height="102" rx="7" fill="#E2A23B"/>
+          <rect x="395" y="38" width="70" height="180" rx="7" fill="#221A12"/>
+          <g font-family="Segoe UI, Arial" font-size="13" font-weight="700" text-anchor="middle" fill="#221A12">
+            <text x="150" y="114">31,7</text>
+            <text x="290" y="108">33,7</text>
+            <text x="430" y="30">56,2</text>
+          </g>
+          <g font-family="Segoe UI, Arial" font-size="11" fill="#8B7E6E" text-anchor="middle">
+            <text x="150" y="260">tỷ USD</text>
+            <text x="290" y="260">tỷ USD</text>
+            <text x="430" y="260">tỷ USD · dự báo</text>
+          </g>
+        </svg>
+        <p style="font-size:.78rem;color:var(--faint);margin-top:10px;">Hai nguồn độc lập: Precedence Research (31,7 → 56,2 tỷ USD) và Expert Market Research (29,5 → 50,9 tỷ USD, CAGR 5,6%).</p>
+      </div>
+
+      <div class="panel">
+        <h4>Điểm nhấn ngành hàng</h4>
+        <div class="ins">
+          <div class="row">
+            <span class="lab">Thị phần châu Á – Thái Bình Dương (2025)</span>
+            <span class="val">~39%</span>
+            <div class="bar"><i style="width:78%;"></i></div>
+          </div>
+          <div class="row">
+            <span class="lab">CAGR khu vực APAC (2026–2035) — nhanh nhất toàn cầu</span>
+            <span class="val">~7%/năm</span>
+            <div class="bar"><i style="width:72%;"></i></div>
+          </div>
+          <div class="row">
+            <span class="lab">Việt Nam — nước xuất khẩu hồ tiêu lớn nhất thế giới</span>
+            <span class="val">#1 · 250.000+ tấn/năm</span>
+            <div class="bar"><i style="width:100%;"></i></div>
+          </div>
+          <div class="row">
+            <span class="lab">Kênh online ngành gia vị tại Ấn Độ &amp; Mỹ (2024)</span>
+            <span class="val">+25%</span>
+            <div class="bar"><i style="width:46%;"></i></div>
+          </div>
+          <div class="row">
+            <span class="lab">Cơ cấu thị trường hồ tiêu Việt Nam 2025</span>
+            <span class="val">Mỹ · Đức · Ấn Độ</span>
+            <div class="seg">
+              <i style="width:24.7%;background:#C1121F;"></i>
+              <i style="width:8.1%;background:#E2A23B;"></i>
+              <i style="width:6.1%;background:#3E6B50;"></i>
+              <i style="width:61.1%;background:#E9E0D3;"></i>
+            </div>
+            <div class="seg-legend"><span><b>Mỹ</b> 24,7%</span><span><b>Đức</b> 8,1%</span><span><b>Ấn Độ</b> 6,1%</span><span><b>Khác</b> 61,1%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:18px;">
+      <div class="chart-card">
+        <div class="chart-head">
+          <h4>Bối cảnh chung: Xuất khẩu nông lâm thủy sản Việt Nam <span class="chip">+12% YoY</span></h4>
+          <span class="src">Nguồn: Tuoi Tre News · Viet Nam News</span>
+        </div>
+        <svg viewBox="0 0 520 280" role="img" aria-label="Biểu đồ xuất khẩu nông lâm thủy sản Việt Nam 2025 và mục tiêu 2026">
+          <line x1="70" y1="18" x2="70" y2="218" stroke="#EFE7DB" stroke-width="2"/>
+          <line x1="70" y1="218" x2="500" y2="218" stroke="#EFE7DB" stroke-width="2"/>
+          <g font-family="Segoe UI, Arial" font-size="12" fill="#6E6255" text-anchor="middle">
+            <text x="175" y="240">2025 · thực hiện</text>
+            <text x="385" y="240">2026 · mục tiêu</text>
+          </g>
+          <g font-family="Segoe UI, Arial" font-size="11" fill="#9A8E7E" text-anchor="end">
+            <text x="62" y="216">80</text>
+            <text x="62" y="162">60</text>
+            <text x="62" y="108">40</text>
+            <text x="62" y="54">20</text>
+            <text x="62" y="24">0</text>
+          </g>
+          <rect x="140" y="46" width="70" height="172" rx="7" fill="#C1121F"/>
+          <rect x="350" y="37" width="70" height="181" rx="7" fill="#3E6B50"/>
+          <g font-family="Segoe UI, Arial" font-size="13" font-weight="700" text-anchor="middle" fill="#221A12">
+            <text x="175" y="38">70,09</text>
+            <text x="385" y="29">74</text>
+          </g>
+          <g font-family="Segoe UI, Arial" font-size="11" fill="#8B7E6E" text-anchor="middle">
+            <text x="175" y="260">tỷ USD</text>
+            <text x="385" y="260">tỷ USD</text>
+          </g>
+        </svg>
+        <div style="display:grid;gap:9px;margin-top:12px;">
+          <div class="fact"><div class="n">+12%</div><p><b>Cơ cấu 2025:</b> nông sản 37,25 tỷ USD (+13,7%) · thủy sản 11,32 tỷ USD (+12,7%) · lâm sản &amp; gỗ 18,5 tỷ USD (+6,6%).</p></div>
+          <div class="fact"><div class="n">22,3%</div><p><b>Thị trường chính:</b> Trung Quốc 22,3% · Mỹ 20,6% · Nhật Bản 7,1%. Xuất khẩu sang châu Âu &amp; châu Phi tăng 34–68%.</p></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h4>Hồ tiêu — kỷ lục của ngành gia vị</h4>
+        <div class="ins">
+          <div class="row">
+            <span class="lab">Kim ngạch xuất khẩu hồ tiêu dự kiến 2025 (VPSA)</span>
+            <span class="val">~1,5 tỷ USD</span>
+            <div class="bar"><i style="width:100%;"></i></div>
+          </div>
+          <div class="row">
+            <span class="lab">Xuất khẩu 01/01 – 15/10/2025</span>
+            <span class="val">197.100 tấn · 1,33 tỷ USD</span>
+            <div class="bar"><i style="width:89%;"></i></div>
+          </div>
+          <div class="row">
+            <span class="lab">Tăng trưởng giá trị xuất khẩu sang Đức (2025)</span>
+            <span class="val">+43,4%</span>
+            <div class="bar"><i style="width:60%;"></i></div>
+          </div>
+          <div class="row">
+            <span class="lab">Tăng trưởng giá trị xuất khẩu sang Ấn Độ (2025)</span>
+            <span class="val">+64,3%</span>
+            <div class="bar"><i style="width:74%;"></i></div>
+          </div>
+          <p style="font-size:.82rem;color:var(--muted);">Giá trị xuất khẩu tăng mạnh nhờ <b>chế biến sâu</b>, chất lượng sản phẩm được nâng cao và thị trường mở rộng — đúng hướng đi DH Foods đang theo đuổi với dòng gia vị hoàn chỉnh.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-sub">Xu hướng định hình ngành</h3>
+    <div class="grid g3">
+      <div class="card trend"><span class="tag">Xu hướng 01</span><h5>Clean label &amp; nguyên liệu tự nhiên</h5><p>Người tiêu dùng toàn cầu ưu tiên sản phẩm không phụ gia nhân tạo, hữu cơ, minh bạch nguồn gốc — phân khúc tăng trưởng nhanh nhất.</p></div>
+      <div class="card trend"><span class="tag">Xu hướng 02</span><h5>Ẩm thực toàn cầu &amp; hương vị ethnic</h5><p>Nhu cầu gia vị châu Á tại Mỹ, EU tăng mạnh theo làn sóng ẩm thực quốc tế — động lực trực tiếp cho gia vị đặc sản Việt Nam.</p></div>
+      <div class="card trend"><span class="tag">Xu hướng 03</span><h5>Thương mại điện tử B2B</h5><p>Kênh online và sàn B2B xuyên biên giới giúp nhà sản xuất tiếp cận trực tiếp nhà nhập khẩu, chuỗi bán lẻ toàn cầu với chi phí thấp hơn.</p></div>
+      <div class="card trend"><span class="tag">Xu hướng 04</span><h5>Foodservice &amp; HORECA</h5><p>Phân khúc dịch vụ ăn uống tăng trưởng nhanh nhất — nhà hàng, chuỗi F&amp;B cần gia vị chất lượng ổn định, đồng nhất về vị.</p></div>
+      <div class="card trend"><span class="tag">Xu hướng 05</span><h5>Chế biến sâu, giá trị gia tăng</h5><p>Chuyển từ xuất nguyên liệu thô sang sản phẩm hoàn chỉnh, tiện lợi — định hướng trọng tâm của Bộ NN&amp;PTNT cho mục tiêu 74 tỷ USD 2026.</p></div>
+      <div class="card trend note"><span class="tag">Ý nghĩa với Dh Foods</span><h5>Ba xu hướng trùng khớp năng lực hiện có</h5><p>Clean label, hương vị ethnic và kênh B2B khớp trực tiếp với định vị sản phẩm và năng lực của Dh Foods — thời điểm thuận lợi để gia tăng thị phần xuất khẩu.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 2: LỢI THẾ CẠNH TRANH ================= -->
+<section id="loi-the">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Phần 02 · Lợi thế cạnh tranh</div>
+      <h2>Nền tảng vững chắc của Dh Foods</h2>
+      <p>Những con số từ chính hành trình 13 năm của Dh Foods — minh chứng cho năng lực sản xuất, mạng lưới phân phối và độ tin cậy của thương hiệu trên thị trường quốc tế.</p>
+    </div>
+
+    <div class="band">
+      <div class="c"><div class="v">13 năm</div><div class="k">Hoạt động từ 2012</div></div>
+      <div class="c"><div class="v">6 dòng</div><div class="k">100+ mặt hàng · 149 SKU</div></div>
+      <div class="c"><div class="v">1 triệu+</div><div class="k">Sản phẩm bán ra mỗi tháng</div></div>
+      <div class="c"><div class="v">62.000+</div><div class="k">Cửa hàng tạp hóa</div></div>
+      <div class="c"><div class="v">8.700+</div><div class="k">Siêu thị &amp; cửa hàng tiện lợi</div></div>
+      <div class="c"><div class="v">15+ quốc gia</div><div class="k">Hiện diện xuất khẩu</div></div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card adv">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l5-3v16M14 21V5l5-2v18"/></svg></span>
+        <h4>Năng lực sản xuất chuẩn quốc tế</h4>
+        <p>Nhà máy tại KCN Kizuna (Long An, 03/2024) chuyên dòng Xốt Chấm &amp; Gia Vị Hoàn Chỉnh. Chứng nhận <b>BRCGS 9.0 · FDA · HALAL · ISO 22000 · HACCP · GACC</b> — sẵn sàng cho các thị trường khó tính.</p>
+      </div>
+      <div class="card adv">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4-4 8-9 8-14a8 8 0 0 0-16 0c0 5 4 10 8 14z"/><path d="M12 22V8"/></svg></span>
+        <h4>Triết lý clean-label nhất quán</h4>
+        <p>Không màu tổng hợp, không chất bảo quản nhân tạo; ưu tiên nguyên liệu tươi, nguồn gốc rõ ràng. Định vị trùng khớp xu hướng tiêu dùng toàn cầu đang tăng tốc.</p>
+      </div>
+      <div class="card adv">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span>
+        <h4>Danh mục đa dạng 6 dòng sản phẩm</h4>
+        <p>Muối Chấm Tây Ninh · Xốt Chấm · Gia Vị Hoàn Chỉnh · Gia Vị Tự Nhiên · Gia Vị Nấu &amp; Ướp · Hộp Quà — phục vụ cả kênh bán lẻ lẫn khách hàng công nghiệp, OEM.</p>
+      </div>
+      <div class="card adv">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V10l8-6 8 6v11M10 21v-6h4v6"/></svg></span>
+        <h4>Hệ thống phân phối rộng khắp</h4>
+        <p>62.000+ cửa hàng tạp hóa, 8.700+ siêu thị &amp; tiện lợi; kênh HORECA, nhà máy sản xuất và OEM — năng lực cung ứng ổn định, quy mô lớn trong nước.</p>
+      </div>
+      <div class="card adv">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg></span>
+        <h4>Hành trình xuất khẩu đã được chứng minh</h4>
+        <p>Từ 8 quốc gia đầu tiên (Anh, Mỹ, Hà Lan, Nga, Nhật, Úc, Hàn Quốc...) đến <b>15+ quốc gia và vùng lãnh thổ</b>; nhà máy mới 2024 đẩy mạnh xuất khẩu sang 14+ quốc gia.</p>
+      </div>
+      <div class="card adv">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></span>
+        <h4>Thương hiệu được thị trường ghi nhận</h4>
+        <p>4 lần đạt Hàng Việt Nam Chất Lượng Cao (2026) · Top 5 "Super FMCG Brand" WeYoung 2025 · FHA Singapore 2026 · Future Menus 2026 (Unilever) — uy tín với nhà nhập khẩu quốc tế.</p>
+      </div>
+    </div>
+
+    <h3 class="sec-sub">Từ lợi thế đến cơ hội xuất khẩu</h3>
+    <div class="map">
+      <div class="step"><div class="from">Chứng nhận quốc tế + nhà máy chuẩn BRCGS/FDA/HALAL</div><div class="arrow">&#10148;</div><div class="to">Thâm nhập chuỗi bán lẻ &amp; nhà nhập khẩu lớn tại EU, Mỹ, Trung Đông</div></div>
+      <div class="step"><div class="from">Gia vị đặc sản bản địa, clean-label</div><div class="arrow">&#10148;</div><div class="to">Khai thác xu hướng ẩm thực ethnic &amp; phân khúc sản phẩm cao cấp toàn cầu</div></div>
+      <div class="step"><div class="from">Kinh nghiệm 15+ quốc gia + năng lực OEM/HORECA</div><div class="arrow">&#10148;</div><div class="to">Mở rộng kênh B2B quốc tế, khách hàng công nghiệp &amp; chuỗi F&amp;B xuyên biên giới</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 3: ĐỀ XUẤT LỊCH GẶP ================= -->
+<section id="lich-gap">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Phần 03 · Đề xuất lịch gặp</div>
+      <h2>Buổi trao đổi chiến lược 45 phút</h2>
+      <p>Cùng thảo luận chiến lược và kế hoạch hành động mở rộng thị trường, gia tăng khách hàng xuất khẩu dựa trên nền tảng sẵn có của Dh Foods.</p>
+    </div>
+
+    <h3 class="sec-sub">Nội dung dự kiến</h3>
+    <div class="agenda">
+      <div class="item"><div class="no">1</div><div><h5>Bức tranh thị trường &amp; cơ hội ngành gia vị</h5><p>Cập nhật số liệu 2025–2030, phân tích nhu cầu tại các thị trường mục tiêu.</p></div></div>
+      <div class="item"><div class="no">2</div><div><h5>Kênh tiếp cận khách hàng xuất khẩu mới</h5><p>Đánh giá kênh B2B quốc tế, kết nối nhà nhập khẩu, chuỗi bán lẻ, khách hàng công nghiệp.</p></div></div>
+      <div class="item"><div class="no">3</div><div><h5>Lộ trình, nguồn lực &amp; ngân sách</h5><p>Kế hoạch theo giai đoạn, phân bổ nguồn lực và chi phí triển khai hợp lý.</p></div></div>
+      <div class="item"><div class="no">4</div><div><h5>Kế hoạch hành động 90 ngày</h5><p>Cam kết hành động cụ thể, chỉ số đo lường kết quả theo từng cột mốc.</p></div></div>
+    </div>
+
+    <div class="grid g3" style="margin-top:20px;">
+      <div class="card" style="padding:20px;"><h5 style="font-size:.95rem;margin-bottom:6px;">Dữ liệu thị trường cập nhật</h5><p style="font-size:.85rem;color:var(--muted);">Số liệu ngành mới nhất 2025–2026, tổng hợp và phân tích riêng cho ngành gia vị, nêm nếm Việt Nam.</p></div>
+      <div class="card" style="padding:20px;"><h5 style="font-size:.95rem;margin-bottom:6px;">Kết nối người mua quốc tế</h5><p style="font-size:.85rem;color:var(--muted);">Tiếp cận trực tiếp nhà nhập khẩu, chuỗi bán lẻ, khách hàng công nghiệp tại các thị trường trọng điểm.</p></div>
+      <div class="card" style="padding:20px;"><h5 style="font-size:.95rem;margin-bottom:6px;">Lộ trình rõ ràng, đo lường được</h5><p style="font-size:.85rem;color:var(--muted);">Kế hoạch triển khai theo giai đoạn, gắn với năng lực và mục tiêu hiện tại của Dh Foods.</p></div>
+    </div>
+
+    <div class="cta">
+      <div class="in">
+        <h3>Sẵn sàng trao đổi? <span>Hãy chọn thời điểm phù hợp.</span></h3>
+        <p>Chúng tôi rất mong được dành 45 phút trao đổi chi tiết về chiến lược mở rộng thị trường và khách hàng xuất khẩu cho Dh Foods — trực tiếp tại văn phòng hoặc online (Zoom / Teams), tùy thuận tiện của anh/chị.</p>
+        <div class="actions">
+          <a class="btn" href="mailto:duong.viet-hai@alibaba-inc.com?subject=Đặt lịch trao đổi chiến lược xuất khẩu — Dh Foods">Đặt lịch gặp</a>
+          <a class="btn ghost" href="tel:+84372811507">Gọi điện trao đổi</a>
+        </div>
+        <div class="contact">
+          <span class="chip">Dương Viết Hải · Account Manager</span>
+          <span class="chip">037 2811 507</span>
+          <span class="chip">duong.viet-hai@alibaba-inc.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <h4>Nguồn dữ liệu</h4>
+    <div class="srcs">
+      <div class="src"><span class="idx">1</span><span>Expert Market Research — <i>Spices and Seasonings Market</i> (2025–2035): USD 29,49 tỷ (2025), CAGR 5,60%, USD 50,85 tỷ (2035). <a href="https://www.expertmarketresearch.com/reports/spices-and-seasonings-market">expertmarketresearch.com</a></span></div>
+      <div class="src"><span class="idx">2</span><span>Precedence Research — <i>Spices and Seasonings Market</i>: USD 31,74 tỷ (2025), CAGR 5,87%, USD 56,16 tỷ (2035); APAC ~39%. <a href="https://www.precedenceresearch.com/spices-and-seasonings-market">precedenceresearch.com</a></span></div>
+      <div class="src"><span class="idx">3</span><span>Tuoi Tre News (04/01/2026) — <i>Vietnam's agro-forestry-fishery exports turn tables, hit $70bn in 2025</i>. <a href="https://news.tuoitre.vn/vietnams-agro-forestry-fishery-exports-turn-tables-hit-70bn-in-2025-103260104155210793.htm">news.tuoitre.vn</a></span></div>
+      <div class="src"><span class="idx">4</span><span>Viet Nam News (05/02/2026) — <i>Ministry lists solutions to reach $74 billion in agricultural exports this year</i>: 70,09 tỷ USD (+12%) năm 2025, mục tiêu 74 tỷ USD 2026; Trung Quốc 22,3% · Mỹ 20,6% · Nhật 7,1%. <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxQQlB2Zm13bk44RFdnRXkybDhtT0ladGZteGloN2NpVG9XV29Ga2NlT0hVeVZpTU52a09lNE9GSkdzYWF5M2RNUEVRQUJsOGwyMWF5V0dBZmk5RF80N2FwR2dkYzhlaGpyQUxERzZUX3ZsRk5FeHJvYThDZWRMdkt5cmlTRDRjVXkzRm5ORERJODFsbDNSLUJwWGNfTkVxUEZWd3VfanRXb0VlclhBSkdrbEZtUDhwSkVFMDdTYmstaw">vietnamnews.vn</a></span></div>
+      <div class="src"><span class="idx">5</span><span>Tuoi Tre News (03/11/2025) — <i>Vietnamese pepper on track for $1.5bn export record in 2025</i> (VPSA). <a href="https://news.tuoitre.vn/vietnamese-pepper-on-track-for-15bn-export-record-in-2025-103251103173427495.htm">news.tuoitre.vn</a></span></div>
+      <div class="src"><span class="idx">6</span><span>Công ty Cổ phần Dh Foods — thông tin công ty, sản phẩm, thành tựu, chứng nhận: <a href="https://dhfoods.com.vn/vi">dhfoods.com.vn</a></span></div>
+    </div>
+    <div class="note">Số liệu thị trường tổng hợp từ các nguồn công khai nêu trên (thu thập ngày 27/08/2026); số liệu Dh Foods lấy từ website chính thức của công ty. Tài liệu phục vụ mục đích trao đổi chiến lược, không phải tư vấn đầu tư.</div>
+    <div class="copy">© 2026 · Tài liệu dành riêng cho Công ty Cổ phần Dh Foods · Mọi thông tin cá nhân và dữ liệu kinh doanh được bảo mật.</div>
+  </div>
+</footer>
+
+</body>
+</html>
