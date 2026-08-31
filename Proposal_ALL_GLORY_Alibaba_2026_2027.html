@@ -282,6 +282,22 @@ tr.tot td{font-weight:800;background:rgba(255,106,0,.07);border-top:2px solid rg
 
 /* strategy ✅❌ */
 .strat{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+/* verified package comparison */
+.vtbl{overflow-x:auto;margin-top:26px;border-radius:18px;border:1px solid var(--line-d);background:rgba(255,255,255,.03)}
+table.vcmp{width:100%;border-collapse:collapse;min-width:780px}
+.vcmp th,.vcmp td{padding:9px 13px;text-align:center;border-bottom:1px solid var(--line-d);font-size:12.5px;vertical-align:middle;color:var(--txt-d)}
+.vcmp th.vfeat,.vcmp td.vfeat{text-align:left;width:34%;color:var(--mut-d)}
+.vcmp thead th{font-size:13.5px;font-weight:800;letter-spacing:.4px;padding:15px 13px}
+.vcmp thead .vfeat{color:var(--mut-d);font-weight:600}
+.vcmp .pcol-basic{color:#D9A441;background:rgba(217,164,65,.1)}
+.vcmp .pcol-ver{color:#fff;background:linear-gradient(180deg,rgba(255,106,0,.28),rgba(255,106,0,.08));box-shadow:inset 0 0 0 1px rgba(255,106,0,.4)}
+.vcmp tbody tr:nth-child(even){background:rgba(255,255,255,.025)}
+.vcmp .catrow td{background:rgba(11,18,32,.65);font-weight:700;text-align:left;padding:8px 13px;font-size:12px;letter-spacing:.3px}
+.vcmp .catrow .cnum{display:inline-flex;width:22px;height:22px;border-radius:50%;background:#0B1220;color:#fff;font-size:11px;align-items:center;justify-content:center;margin-right:8px;border:1px solid var(--orange);vertical-align:middle}
+.vcmp .chk{color:var(--green);font-weight:800}
+.vcmp .dash{color:rgba(147,163,188,.4);font-weight:600}
+.vcmp .badge{display:inline-block;background:#0B1220;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:1px 9px;font-size:10px;font-weight:800;letter-spacing:.5px;margin-left:5px;vertical-align:middle}
+.vcmp .stars{color:var(--orange);font-size:13px;letter-spacing:1px}
 .strat .no .sitem{background:rgba(255,92,92,.05);border:1px solid rgba(255,92,92,.28);border-radius:12px;padding:14px 18px;margin-bottom:12px;font-weight:600;color:#FF9E9E}
 .strat .yes .sitem{background:linear-gradient(135deg,rgba(43,213,118,.1),rgba(43,213,118,.02));border:1px solid rgba(43,213,118,.35);border-radius:12px;padding:14px 18px;margin-bottom:12px;font-weight:800;color:#7BE8AE;font-size:15px;letter-spacing:.5px}
 .strat .h{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;color:var(--mut-d)}
@@ -812,47 +828,58 @@ tr.tot td{font-weight:800;background:rgba(255,106,0,.07);border-top:2px solid rg
     </div>
 
     <div class="sec-head reveal" style="margin-bottom:14px">
-      <div class="sec-kicker" style="margin-bottom:4px" data-i18n data-vi="Website doanh nghiệp thông thường" data-cn="普通企业网站" data-en="Typical corporate website">普通企业网站</div>
+      <div class="sec-kicker" style="margin-bottom:4px" data-i18n data-vi="PHẦN 1 · CHI PHÍ XÂY DỰNG (một lần)" data-cn="第一部分 · 建站成本（一次性）" data-en="PART 1 · BUILD COST (one-time)">第一部分 · 建站成本（一次性）</div>
     </div>
     <div class="tbl-wrap reveal">
       <table style="min-width:520px">
-        <thead><tr><th data-i18n data-vi="Hạng mục" data-cn="项目" data-en="Item">项目</th><th class="num" data-i18n data-vi="Ước tính" data-cn="估算" data-en="Estimate">估算</th></tr></thead>
+        <thead><tr><th data-i18n data-vi="Hạng mục xây dựng" data-cn="建站项目" data-en="Build item">建站项目</th><th class="num" data-i18n data-vi="Ước tính" data-cn="估算" data-en="Estimate">估算</th></tr></thead>
         <tbody>
-          <tr><td data-i18n data-vi="Thiết kế website" data-cn="网站设计" data-en="Website design">网站设计</td><td class="num"><span data-i18n data-vi="50–150 triệu" data-cn="5000万–1.5亿越南盾" data-en="50–150M VND">5000万–1.5亿越南盾</span></td></tr>
-          <tr><td data-i18n data-vi="Nội dung & hình ảnh" data-cn="内容与图片" data-en="Content & images">内容与图片</td><td class="num"><span data-i18n data-vi="30–100 triệu" data-cn="3000万–1亿越南盾" data-en="30–100M VND">3000万–1亿越南盾</span></td></tr>
-          <tr><td data-i18n data-vi="SEO" data-cn="SEO" data-en="SEO">SEO</td><td class="num"><span data-i18n data-vi="50–150 triệu/năm" data-cn="5000万–1.5亿越南盾/年" data-en="50–150M VND/yr">5000万–1.5亿越南盾/年</span></td></tr>
-          <tr><td data-i18n data-vi="Vận hành" data-cn="运营" data-en="Operation">运营</td><td class="num"><span data-i18n data-vi="20–50 triệu/năm" data-cn="2000万–5000万越南盾/年" data-en="20–50M VND/yr">2000万–5000万越南盾/年</span></td></tr>
-          <tr class="tot"><td data-i18n data-vi="Tổng" data-cn="合计" data-en="Total">合计</td><td class="num hl"><span data-i18n data-vi="150–450 triệu" data-cn="1.5亿–4.5亿越南盾" data-en="150–450M VND">1.5亿–4.5亿越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Tên miền + SSL" data-cn="域名 + SSL" data-en="Domain + SSL">域名 + SSL</td><td class="num"><span data-i18n data-vi="1–3 triệu" data-cn="100万–300万越南盾" data-en="1–3M VND">100万–300万越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Hosting/Cloud + CDN + backup (năm đầu)" data-cn="主机/云 + CDN + 备份（首年）" data-en="Hosting/Cloud + CDN + backup (year 1)">主机/云 + CDN + 备份（首年）</td><td class="num"><span data-i18n data-vi="10–25 triệu" data-cn="1000万–2500万越南盾" data-en="10–25M VND">1000万–2500万越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Thiết kế UI/UX & nhận diện" data-cn="UI/UX 设计与品牌识别" data-en="UI/UX design & branding">UI/UX 设计与品牌识别</td><td class="num"><span data-i18n data-vi="30–100 triệu" data-cn="3000万–1亿越南盾" data-en="30–100M VND">3000万–1亿越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Phát triển hệ thống & CMS (catalog, RFQ, đa ngôn ngữ)" data-cn="系统与 CMS 开发（产品目录、询价、多语言）" data-en="System & CMS development (catalog, RFQ, multi-language)">系统与 CMS 开发（产品目录、询价、多语言）</td><td class="num"><span data-i18n data-vi="80–250 triệu" data-cn="8000万–2.5亿越南盾" data-en="80–250M VND">8000万–2.5亿越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Module đa ngôn ngữ (VI/CN/EN)" data-cn="多语言模块 (VI/CN/EN)" data-en="Multi-language module (VI/CN/EN)">多语言模块 (VI/CN/EN)</td><td class="num"><span data-i18n data-vi="20–60 triệu" data-cn="2000万–6000万越南盾" data-en="20–60M VND">2000万–6000万越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="SEO kỹ thuật ban đầu" data-cn="初期技术 SEO" data-en="Initial technical SEO">初期技术 SEO</td><td class="num"><span data-i18n data-vi="15–40 triệu" data-cn="1500万–4000万越南盾" data-en="15–40M VND">1500万–4000万越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Tích hợp (GA4/GTM, chat, email, CRM)" data-cn="集成（GA4/GTM、聊天、邮件、CRM）" data-en="Integrations (GA4/GTM, chat, email, CRM)">集成（GA4/GTM、聊天、邮件、CRM）</td><td class="num"><span data-i18n data-vi="10–30 triệu" data-cn="1000万–3000万越南盾" data-en="10–30M VND">1000万–3000万越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Nội dung ban đầu (viết, dịch, ảnh/video sản phẩm)" data-cn="初期内容（撰写、翻译、产品图片/视频）" data-en="Initial content (writing, translation, product media)">初期内容（撰写、翻译、产品图片/视频）</td><td class="num"><span data-i18n data-vi="20–60 triệu" data-cn="2000万–6000万越南盾" data-en="20–60M VND">2000万–6000万越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Kiểm thử, bảo mật, đào tạo" data-cn="测试、安全、培训" data-en="Testing, security, training">测试、安全、培训</td><td class="num"><span data-i18n data-vi="10–25 triệu" data-cn="1000万–2500万越南盾" data-en="10–25M VND">1000万–2500万越南盾</span></td></tr>
+          <tr class="tot"><td data-i18n data-vi="Tổng chi phí xây dựng" data-cn="建站总成本" data-en="Total build cost">建站总成本</td><td class="num hl"><span data-i18n data-vi="~200–600 triệu" data-cn="~2亿–6亿越南盾" data-en="~200–600M VND">~2亿–6亿越南盾</span></td></tr>
         </tbody>
       </table>
-    </div>
-    <div class="callout red" style="border-color:rgba(255,92,92,.45);background:linear-gradient(135deg,rgba(255,92,92,.12),rgba(255,92,92,.03))">
-      <div class="ci">⚠️</div>
-      <p data-i18n data-vi="Nhưng website này không có sẵn buyer." data-cn="但这个网站没有现成的买家。" data-en="But this website has no ready buyers.">但这个网站没有现成的买家。</p>
     </div>
 
     <div class="sec-head reveal" style="margin:40px 0 14px">
-      <div class="sec-kicker" style="margin-bottom:4px" data-i18n data-vi="Hệ thống tiếp cận buyer quốc tế quy mô lớn" data-cn="规模化国际买家触达体系" data-en="Full international buyer acquisition system">规模化国际买家触达体系</div>
+      <div class="sec-kicker" style="margin-bottom:4px" data-i18n data-vi="PHẦN 2 · CHI PHÍ VẬN HÀNH / NĂM — để kéo traffic quốc tế" data-cn="第二部分 · 年度运营成本 — 获取国际流量" data-en="PART 2 · OPERATING COST / YEAR — to drive international traffic">第二部分 · 年度运营成本 — 获取国际流量</div>
     </div>
     <div class="tbl-wrap reveal">
-      <table>
-        <thead><tr><th data-i18n data-vi="Hạng mục" data-cn="项目" data-en="Item">项目</th><th class="num" data-i18n data-vi="Ước tính" data-cn="估算" data-en="Estimate">估算</th></tr></thead>
+      <table style="min-width:560px">
+        <thead><tr><th data-i18n data-vi="Hạng mục vận hành" data-cn="运营项目" data-en="Operating item">运营项目</th><th class="num" data-i18n data-vi="Ước tính / năm" data-cn="估算 / 年" data-en="Estimate / year">估算 / 年</th></tr></thead>
         <tbody>
-          <tr><td data-i18n data-vi="Website & hệ thống quản trị" data-cn="网站与管理系统" data-en="Website & management system">网站与管理系统</td><td class="num"><span data-i18n data-vi="300–700 triệu" data-cn="3亿–7亿越南盾" data-en="300–700M VND">3亿–7亿越南盾</span></td></tr>
-          <tr><td data-i18n data-vi="Hệ thống tìm kiếm sản phẩm" data-cn="产品搜索系统" data-en="Product search system">产品搜索系统</td><td class="num"><span data-i18n data-vi="200–500 triệu" data-cn="2亿–5亿越南盾" data-en="200–500M VND">2亿–5亿越南盾</span></td></tr>
-          <tr><td data-i18n data-vi="Quản lý khách hàng (CRM)" data-cn="客户管理 (CRM)" data-en="Customer management (CRM)">客户管理 (CRM)</td><td class="num"><span data-i18n data-vi="150–400 triệu" data-cn="1.5亿–4亿越南盾" data-en="150–400M VND">1.5亿–4亿越南盾</span></td></tr>
-          <tr><td data-i18n data-vi="Đa ngôn ngữ" data-cn="多语言" data-en="Multi-language">多语言</td><td class="num"><span data-i18n data-vi="100–300 triệu" data-cn="1亿–3亿越南盾" data-en="100–300M VND">1亿–3亿越南盾</span></td></tr>
-          <tr><td data-i18n data-vi="SEO quốc tế" data-cn="国际 SEO" data-en="International SEO">国际 SEO</td><td class="num"><span data-i18n data-vi="300–800 triệu/năm" data-cn="3亿–8亿越南盾/年" data-en="300–800M VND/yr">3亿–8亿越南盾/年</span></td></tr>
-          <tr><td data-i18n data-vi="Nội dung sản phẩm" data-cn="产品内容" data-en="Product content">产品内容</td><td class="num"><span data-i18n data-vi="200–500 triệu/năm" data-cn="2亿–5亿越南盾/年" data-en="200–500M VND/yr">2亿–5亿越南盾/年</span></td></tr>
-          <tr><td data-i18n data-vi="Quảng cáo đa kênh" data-cn="多渠道广告" data-en="Multi-channel advertising">多渠道广告</td><td class="num"><span data-i18n data-vi="500 triệu–1,5 tỷ/năm" data-cn="5亿–15亿越南盾/年" data-en="500M–1.5B VND/yr">5亿–15亿越南盾/年</span></td></tr>
-          <tr><td data-i18n data-vi="Email / chăm sóc buyer" data-cn="邮件 / 买家维护" data-en="Email / buyer care">邮件 / 买家维护</td><td class="num"><span data-i18n data-vi="100–300 triệu/năm" data-cn="1亿–3亿越南盾/年" data-en="100–300M VND/yr">1亿–3亿越南盾/年</span></td></tr>
-          <tr><td data-i18n data-vi="Server / bảo mật / kỹ thuật" data-cn="服务器 / 安全 / 技术" data-en="Server / security / tech">服务器 / 安全 / 技术</td><td class="num"><span data-i18n data-vi="100–300 triệu/năm" data-cn="1亿–3亿越南盾/年" data-en="100–300M VND/yr">1亿–3亿越南盾/年</span></td></tr>
-          <tr><td data-i18n data-vi="Nhân sự vận hành" data-cn="运营团队" data-en="Operations team">运营团队</td><td class="num"><span data-i18n data-vi="500 triệu–1 tỷ/năm" data-cn="5亿–10亿越南盾/年" data-en="500M–1B VND/yr">5亿–10亿越南盾/年</span></td></tr>
-          <tr class="tot"><td data-i18n data-vi="Tổng năm đầu" data-cn="首年合计" data-en="First-year total">首年合计</td><td class="num hl"><span data-i18n data-vi="~2,45–6,3 tỷ" data-cn="~24.5亿–63亿越南盾" data-en="~2.45–6.3B VND">~24.5亿–63亿越南盾</span></td></tr>
+          <tr><td data-i18n data-vi="Nhân sự — Content + SEO (12–18 triệu/tháng)" data-cn="人员 — 内容 + SEO（1200万–1800万/月）" data-en="Staff — Content + SEO (12–18M/mo)">人员 — 内容 + SEO（1200万–1800万/月）</td><td class="num"><span data-i18n data-vi="144–216 triệu/năm" data-cn="1.44亿–2.16亿越南盾/年" data-en="144–216M VND/yr">1.44亿–2.16亿越南盾/年</span></td></tr>
+          <tr><td data-i18n data-vi="Nhân sự — Digital Ads Google/Meta/LinkedIn (12–18 triệu/tháng)" data-cn="人员 — Google/Meta/LinkedIn 广告（1200万–1800万/月）" data-en="Staff — Digital ads Google/Meta/LinkedIn (12–18M/mo)">人员 — Google/Meta/LinkedIn 广告（1200万–1800万/月）</td><td class="num"><span data-i18n data-vi="144–216 triệu/năm" data-cn="1.44亿–2.16亿越南盾/年" data-en="144–216M VND/yr">1.44亿–2.16亿越南盾/年</span></td></tr>
+          <tr><td data-i18n data-vi="Nhân sự — Vận hành web & chăm sóc inquiry (8–12 triệu/tháng)" data-cn="人员 — 网站运营与询盘跟进（800万–1200万/月）" data-en="Staff — Web operations & inquiry handling (8–12M/mo)">人员 — 网站运营与询盘跟进（800万–1200万/月）</td><td class="num"><span data-i18n data-vi="96–144 triệu/năm" data-cn="9600万–1.44亿越南盾/年" data-en="96–144M VND/yr">9600万–1.44亿越南盾/年</span></td></tr>
+          <tr><td data-i18n data-vi="Google Ads quốc tế — CPC ~10–40kđ, 3–8k click/tháng (50–200 triệu/tháng)" data-cn="国际 Google Ads — CPC 约 1万–4万越盾，每月 3000–8000 次点击（5000万–2亿/月）" data-en="International Google Ads — CPC ~10–40k VND, 3–8k clicks/mo (50–200M/mo)">国际 Google Ads — CPC 约 1万–4万越盾，每月 3000–8000 次点击（5000万–2亿/月）</td><td class="num"><span data-i18n data-vi="600 triệu–2,4 tỷ/năm" data-cn="6亿–24亿越南盾/年" data-en="600M–2.4B VND/yr">6亿–24亿越南盾/年</span></td></tr>
+          <tr><td data-i18n data-vi="Meta/LinkedIn + remarketing (20–50 triệu/tháng)" data-cn="Meta/LinkedIn + 再营销（2000万–5000万/月）" data-en="Meta/LinkedIn + remarketing (20–50M/mo)">Meta/LinkedIn + 再营销（2000万–5000万/月）</td><td class="num"><span data-i18n data-vi="240–600 triệu/năm" data-cn="2.4亿–6亿越南盾/年" data-en="240–600M VND/yr">2.4亿–6亿越南盾/年</span></td></tr>
+          <tr><td data-i18n data-vi="SEO liên tục — agency/công cụ + link building (15–40 triệu/tháng)" data-cn="持续 SEO — 代理/工具 + 外链（1500万–4000万/月）" data-en="Ongoing SEO — agency/tools + link building (15–40M/mo)">持续 SEO — 代理/工具 + 外链（1500万–4000万/月）</td><td class="num"><span data-i18n data-vi="180–480 triệu/năm" data-cn="1.8亿–4.8亿越南盾/年" data-en="180–480M VND/yr">1.8亿–4.8亿越南盾/年</span></td></tr>
+          <tr><td data-i18n data-vi="Công cụ (Ahrefs, email, CRM) + hosting/security (8–20 triệu/tháng)" data-cn="工具（Ahrefs、邮件、CRM）+ 主机/安全（800万–2000万/月）" data-en="Tools (Ahrefs, email, CRM) + hosting/security (8–20M/mo)">工具（Ahrefs、邮件、CRM）+ 主机/安全（800万–2000万/月）</td><td class="num"><span data-i18n data-vi="96–240 triệu/năm" data-cn="9600万–2.4亿越南盾/年" data-en="96–240M VND/yr">9600万–2.4亿越南盾/年</span></td></tr>
+          <tr><td data-i18n data-vi="Nội dung định kỳ — blog, dịch, ảnh/video (10–25 triệu/tháng)" data-cn="持续内容 — 博客、翻译、图片/视频（1000万–2500万/月）" data-en="Ongoing content — blog, translation, media (10–25M/mo)">持续内容 — 博客、翻译、图片/视频（1000万–2500万/月）</td><td class="num"><span data-i18n data-vi="120–300 triệu/năm" data-cn="1.2亿–3亿越南盾/年" data-en="120–300M VND/yr">1.2亿–3亿越南盾/年</span></td></tr>
+          <tr class="tot"><td data-i18n data-vi="Tổng chi phí vận hành" data-cn="运营总成本" data-en="Total operating cost">运营总成本</td><td class="num hl"><span data-i18n data-vi="~1,6–4,6 tỷ/năm" data-cn="~16亿–46亿越南盾/年" data-en="~1.6–4.6B VND/yr">~16亿–46亿越南盾/年</span></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="tbl-note reveal" data-i18n data-vi="Lưu ý: Đây là mức dự toán để so sánh mô hình đầu tư, không phải báo giá cố định của một đơn vị." data-cn="说明：此为投资模型对比的估算，并非任何机构的固定报价。" data-en="Note: These are estimates for investment-model comparison, not fixed quotes from any vendor.">说明：此为投资模型对比的估算，并非任何机构的固定报价。</div>
+
+    <div class="callout red" style="border-color:rgba(255,92,92,.45);background:linear-gradient(135deg,rgba(255,92,92,.12),rgba(255,92,92,.03))">
+      <div class="ci">⚠️</div>
+      <p data-i18n data-vi="Nhưng website này không có sẵn buyer — và mức traffic trên là mục tiêu phải đạt, không phải cam kết." data-cn="但这个网站没有现成的买家——而且上述流量是需要努力达成的目标，并非承诺。" data-en="But this website has no ready buyers — and the traffic above is a target to achieve, not a guarantee.">但这个网站没有现成的买家——而且上述流量是需要努力达成的目标，并非承诺。</p>
+    </div>
+
+    <div class="statement reveal" style="margin-top:34px">
+      <div class="st2" style="text-align:center" data-i18n data-vi="Tổng năm đầu (xây dựng + vận hành):" data-cn="首年总成本（建站 + 运营）：" data-en="First-year total (build + operate):">首年总成本（建站 + 运营）：</div>
+      <div class="st" style="text-align:center" data-i18n data-vi="~1,8–5,2 TỶ — gấp 8–22 lần chi phí Alibaba.com (~235 triệu/năm)" data-cn="~18亿–52亿越南盾 — 是阿里巴巴费用（约 2.35 亿/年）的 8–22 倍" data-en="~1.8–5.2B VND — 8–22× the cost of Alibaba.com (~235M/yr)">~18亿–52亿越南盾 — 是阿里巴巴费用（约 2.35 亿/年）的 8–22 倍</div>
+      <div class="st2" style="text-align:center;font-size:13px;margin-top:10px" data-i18n data-vi="Lưu ý traffic: 617.296 impressions & 20.257 visitors/tháng là quy mô của cả marketplace (200+ quốc gia); website đơn lẻ khó tái tạo — ngân sách trên giúp đạt ~10–25k lượt truy cập/tháng sau 12–24 tháng SEO liên tục." data-cn="流量提示：每月 617,296 次曝光与 20,257 次访客是整个平台（200多个国家）的规模；独立网站很难复现——上述预算可在持续 SEO 12–24 个月后达到约 1万–2.5万访客/月。" data-en="Traffic note: 617,296 impressions & 20,257 visitors/month is marketplace-scale (200+ countries); a standalone site can hardly replicate it — this budget targets ~10–25k visitors/month after 12–24 months of ongoing SEO.">流量提示：每月 617,296 次曝光与 20,257 次访客是整个平台（200多个国家）的规模；独立网站很难复现——上述预算可在持续 SEO 12–24 个月后达到约 1万–2.5万访客/月。</div>
+    </div>
+
+    <div class="tbl-note reveal" data-i18n data-vi="Lưu ý: Ước tính tham khảo theo dải thị trường phổ biến 2025–2026 (khảo sát thị trường), cần xác nhận báo giá với nhà cung cấp cụ thể; không phải báo giá cố định của bất kỳ đơn vị nào." data-cn="说明：估算参考 2025–2026 市场常见区间（市场调研），需向具体供应商确认报价；并非任何机构的固定报价。" data-en="Note: Estimates are reference ranges based on common 2025–2026 market rates (market research); confirm actual quotes with specific vendors; not fixed quotes from any vendor.">说明：估算参考 2025–2026 市场常见区间（市场调研），需向具体供应商确认报价；并非任何机构的固定报价。</div>
   </div>
 </section>
 
@@ -861,7 +888,7 @@ tr.tot td{font-weight:800;background:rgba(255,106,0,.07);border-top:2px solid rg
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-kicker" data-i18n data-vi="10 · SO SÁNH ĐẦU TƯ" data-cn="10 · 投资对比" data-en="10 · INVESTMENT COMPARISON">10 · 投资对比</div>
-      <h2 class="sec-title" data-i18n data-vi="235 triệu đồng/năm — so với 2,45–6,3 tỷ?" data-cn="每年 2.35 亿越南盾 — 对比 24.5–63 亿？" data-en="235M VND/year — vs. 2.45–6.3B VND?">每年 2.35 亿越南盾 — 对比 24.5–63 亿？</h2>
+      <h2 class="sec-title" data-i18n data-vi="235 triệu đồng/năm — so với 1,8–5,2 tỷ?" data-cn="每年 2.35 亿越南盾 — 对比 18–52 亿？" data-en="235M VND/year — vs. 1.8–5.2B VND?">每年 2.35 亿越南盾 — 对比 18–52 亿？</h2>
       <p class="sec-sub" data-i18n data-vi="Giả sử chi phí duy trì Alibaba.com của ALL GLORY là ~235 triệu đồng/năm:" data-cn="假设 ALL GLORY 维持阿里巴巴店铺的费用约为每年 2.35 亿越南盾：" data-en="Assuming ALL GLORY's Alibaba.com maintenance cost is ~235M VND/year:">假设 ALL GLORY 维持阿里巴巴店铺的费用约为每年 2.35 亿越南盾：</p>
     </div>
     <div class="tbl-wrap reveal">
@@ -885,7 +912,7 @@ tr.tot td{font-weight:800;background:rgba(255,106,0,.07);border-top:2px solid rg
           <tr><td data-i18n data-vi="Dữ liệu buyer" data-cn="买家数据" data-en="Buyer data">买家数据</td><td class="good" data-i18n data-vi="✅ Công cụ hỗ trợ" data-cn="✅ 有工具支持" data-en="✅ Tools provided">✅ 有工具支持</td><td style="color:var(--red)" data-i18n data-vi="Phải tự thu thập" data-cn="需自行收集" data-en="Collect yourself">需自行收集</td></tr>
           <tr><td data-i18n data-vi="Global exposure" data-cn="全球曝光" data-en="Global exposure">全球曝光</td><td class="good">✅</td><td style="color:var(--red)" data-i18n data-vi="Phải đầu tư" data-cn="需投入" data-en="Must invest">需投入</td></tr>
           <tr><td data-i18n data-vi="Thời gian triển khai" data-cn="上线时间" data-en="Time to launch">上线时间</td><td class="good" data-i18n data-vi="✅ Ngay" data-cn="✅ 即刻" data-en="✅ Immediate">✅ 即刻</td><td style="color:var(--red)" data-i18n data-vi="Dài" data-cn="较长" data-en="Long">较长</td></tr>
-          <tr class="tot"><td data-i18n data-vi="Chi phí năm đầu" data-cn="首年成本" data-en="First-year cost">首年成本</td><td class="num hl" style="font-size:15px"><span data-i18n data-vi="~235 triệu" data-cn="~2.35亿越南盾" data-en="~235M VND">~2.35亿越南盾</span></td><td class="num" style="color:var(--red);font-size:15px"><span data-i18n data-vi="~2,45–6,3 tỷ" data-cn="~24.5亿–63亿越南盾" data-en="~2.45–6.3B VND">~24.5亿–63亿越南盾</span></td></tr>
+          <tr class="tot"><td data-i18n data-vi="Chi phí năm đầu" data-cn="首年成本" data-en="First-year cost">首年成本</td><td class="num hl" style="font-size:15px"><span data-i18n data-vi="~235 triệu" data-cn="~2.35亿越南盾" data-en="~235M VND">~2.35亿越南盾</span></td><td class="num" style="color:var(--red);font-size:15px"><span data-i18n data-vi="~1,8–5,2 tỷ" data-cn="~18亿–52亿越南盾" data-en="~1.8–5.2B VND">~18亿–52亿越南盾</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1322,7 +1349,7 @@ tr.tot td{font-weight:800;background:rgba(255,106,0,.07);border-top:2px solid rg
       <div class="inv-card inv-a reveal">
         <div class="tag" data-i18n data-vi="PHƯƠNG ÁN A" data-cn="方案 A" data-en="OPTION A">方案 A</div>
         <h4 data-i18n data-vi="Không tiếp tục Alibaba.com" data-cn="不再继续阿里巴巴" data-en="Stop Alibaba.com">不再继续阿里巴巴</h4>
-        <div class="price"><span class="pv" data-i18n data-vi="~2,45–6,3" data-cn="~24.5–63" data-en="~2.45–6.3">~24.5–63</span> <small data-i18n data-vi="tỷ đồng / năm đầu" data-cn="亿越南盾 / 首年" data-en="B VND / first year">亿越南盾 / 首年</small></div>
+        <div class="price"><span class="pv" data-i18n data-vi="~1,8–5,2" data-cn="~18–52" data-en="~1.8–5.2">~18–52</span> <small data-i18n data-vi="tỷ đồng / năm đầu" data-cn="亿越南盾 / 首年" data-en="B VND / first year">亿越南盾 / 首年</small></div>
         <div class="per" data-i18n data-vi="ALL GLORY phải tự đầu tư toàn bộ:" data-cn="ALL GLORY 需自行投入全部：" data-en="ALL GLORY must build everything itself:">ALL GLORY 需自行投入全部：</div>
         <ul>
           <li data-i18n data-vi="Website" data-cn="网站" data-en="Website">网站</li>
@@ -1352,6 +1379,98 @@ tr.tot td{font-weight:800;background:rgba(255,106,0,.07);border-top:2px solid rg
         <span class="inv-mult">✓ <span data-i18n data-vi="Hạ tầng đã có sẵn" data-cn="基础设施现成" data-en="Infrastructure ready">基础设施现成</span></span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ==================== 20B GÓI VERIFIED ==================== -->
+<section class="sec dark2" id="verified">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-kicker" data-i18n data-vi="ĐỀ XUẤT PHƯƠNG ÁN · GÓI DỊCH VỤ ALIBABA.COM" data-cn="方案提案 · 阿里巴巴服务套餐" data-en="OPTION PROPOSAL · ALIBABA.COM PACKAGES">方案提案 · 阿里巴巴服务套餐</div>
+      <h2 class="sec-title" data-i18n data-vi="Tiếp tục với gói ★ VERIFIED — đặc quyền nhà cung cấp đã xác minh" data-cn="继续使用 ★ VERIFIED 套餐 — 已认证供应商特权" data-en="Continue with ★ VERIFIED — verified-supplier privileges">继续使用 ★ VERIFIED 套餐 — 已认证供应商特权</h2>
+      <p class="sec-sub" data-i18n data-vi="Bảng so sánh quyền lợi 2 gói theo cấu trúc tham chiếu của Alibaba.com — gói VERIFIED giúp ALL GLORY tiếp cận đúng Global Brand mục tiêu." data-cn="按阿里巴巴参考结构对比 2 个套餐权益——VERIFIED 套餐帮助 ALL GLORY 触达目标大型全球品牌。" data-en="Side-by-side benefits of 2 packages (Alibaba.com reference structure) — VERIFIED helps ALL GLORY reach its target global brands.">按阿里巴巴参考结构对比 2 个套餐权益——VERIFIED 套餐帮助 ALL GLORY 触达目标大型全球品牌。</p>
+    </div>
+
+    <div class="vtbl reveal">
+      <table class="vcmp">
+        <thead>
+          <tr>
+            <th class="vfeat" data-i18n data-vi="Tính năng" data-cn="功能" data-en="Features">功能</th>
+            <th class="pcol-basic" data-i18n data-vi="CƠ BẢN" data-cn="基础版" data-en="BASIC">基础版</th>
+            
+            <th class="pcol-ver">★ VERIFIED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="catrow"><td colspan="3"><span class="cnum">01</span><span data-i18n data-vi="QUYỀN LỢI TÀI KHOẢN" data-cn="账户权益" data-en="ACCOUNT BENEFITS">账户权益</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Sao trực tiếp (đánh giá xếp hạng)" data-cn="直接评分（店铺评级）" data-en="Direct rating (store score)">直接评分（店铺评级）</td>
+            <td>
+              <span class="diamond-icon">
+                  <svg class="icbu-icon-svg card-icon" width="16" height="16" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M63.7388424,17.6647012 L53.6960572,0.92772814 C53.3556236,0.35973132 52.7314956,6.82121028e-13 52.069542,6.82121028e-13 L12.617093,6.82121028e-13 C11.9551392,6.82121028e-13 11.3310113,0.340798093 10.9905779,0.92772814 L0.947792456,17.6647012 C0.493881248,18.403097 0.626272016,19.3686916 1.23148696,19.9745549 L31.0004968,49.7754548 C31.7381026,50.5138508 32.9296194,50.5138508 33.6672252,49.7754548 L63.4362352,19.9745549 C64.0603628,19.3686916 64.1738408,18.403097 63.7388424,17.6647012 Z M48.8165116,24.064132 L33.6861381,39.2107139 C33.3078788,39.5704452 32.8350546,39.7597775 32.3433175,39.7597775 C31.8515804,39.7597775 31.3787562,39.5704452 31.0004968,39.2107139 L15.8701233,24.064132 C15.1325176,23.3257362 15.1325176,22.1329428 15.8701233,21.394547 C16.607729,20.6561511 17.799246,20.6561511 18.5368516,21.394547 L32.3433175,35.1968697 L46.1308704,21.394547 C46.868476,20.6561511 48.0599928,20.6561511 48.7975988,21.394547 C49.5352044,22.1329428 49.5541172,23.3257362 48.8165116,24.064132 Z" fill="#FF6600"></path>
+                    </svg>
+                    <svg class="icbu-icon-svg card-icon" width="16" height="16" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M63.7388424,17.6647012 L53.6960572,0.92772814 C53.3556236,0.35973132 52.7314956,6.82121028e-13 52.069542,6.82121028e-13 L12.617093,6.82121028e-13 C11.9551392,6.82121028e-13 11.3310113,0.340798093 10.9905779,0.92772814 L0.947792456,17.6647012 C0.493881248,18.403097 0.626272016,19.3686916 1.23148696,19.9745549 L31.0004968,49.7754548 C31.7381026,50.5138508 32.9296194,50.5138508 33.6672252,49.7754548 L63.4362352,19.9745549 C64.0603628,19.3686916 64.1738408,18.403097 63.7388424,17.6647012 Z M48.8165116,24.064132 L33.6861381,39.2107139 C33.3078788,39.5704452 32.8350546,39.7597775 32.3433175,39.7597775 C31.8515804,39.7597775 31.3787562,39.5704452 31.0004968,39.2107139 L15.8701233,24.064132 C15.1325176,23.3257362 15.1325176,22.1329428 15.8701233,21.394547 C16.607729,20.6561511 17.799246,20.6561511 18.5368516,21.394547 L32.3433175,35.1968697 L46.1308704,21.394547 C46.868476,20.6561511 48.0599928,20.6561511 48.7975988,21.394547 C49.5352044,22.1329428 49.5541172,23.3257362 48.8165116,24.064132 Z" fill="#FF6600"></path>
+                    </svg>
+                  </span>
+            </td>
+            <td>
+              <span class="diamond-icon">
+                  <svg class="icbu-icon-svg card-icon" width="16" height="16" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M63.7388424,17.6647012 L53.6960572,0.92772814 C53.3556236,0.35973132 52.7314956,6.82121028e-13 52.069542,6.82121028e-13 L12.617093,6.82121028e-13 C11.9551392,6.82121028e-13 11.3310113,0.340798093 10.9905779,0.92772814 L0.947792456,17.6647012 C0.493881248,18.403097 0.626272016,19.3686916 1.23148696,19.9745549 L31.0004968,49.7754548 C31.7381026,50.5138508 32.9296194,50.5138508 33.6672252,49.7754548 L63.4362352,19.9745549 C64.0603628,19.3686916 64.1738408,18.403097 63.7388424,17.6647012 Z M48.8165116,24.064132 L33.6861381,39.2107139 C33.3078788,39.5704452 32.8350546,39.7597775 32.3433175,39.7597775 C31.8515804,39.7597775 31.3787562,39.5704452 31.0004968,39.2107139 L15.8701233,24.064132 C15.1325176,23.3257362 15.1325176,22.1329428 15.8701233,21.394547 C16.607729,20.6561511 17.799246,20.6561511 18.5368516,21.394547 L32.3433175,35.1968697 L46.1308704,21.394547 C46.868476,20.6561511 48.0599928,20.6561511 48.7975988,21.394547 C49.5352044,22.1329428 49.5541172,23.3257362 48.8165116,24.064132 Z" fill="#FF6600"></path>
+                    </svg>
+                    <svg class="icbu-icon-svg card-icon" width="16" height="16" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M63.7388424,17.6647012 L53.6960572,0.92772814 C53.3556236,0.35973132 52.7314956,6.82121028e-13 52.069542,6.82121028e-13 L12.617093,6.82121028e-13 C11.9551392,6.82121028e-13 11.3310113,0.340798093 10.9905779,0.92772814 L0.947792456,17.6647012 C0.493881248,18.403097 0.626272016,19.3686916 1.23148696,19.9745549 L31.0004968,49.7754548 C31.7381026,50.5138508 32.9296194,50.5138508 33.6672252,49.7754548 L63.4362352,19.9745549 C64.0603628,19.3686916 64.1738408,18.403097 63.7388424,17.6647012 Z M48.8165116,24.064132 L33.6861381,39.2107139 C33.3078788,39.5704452 32.8350546,39.7597775 32.3433175,39.7597775 C31.8515804,39.7597775 31.3787562,39.5704452 31.0004968,39.2107139 L15.8701233,24.064132 C15.1325176,23.3257362 15.1325176,22.1329428 15.8701233,21.394547 C16.607729,20.6561511 17.799246,20.6561511 18.5368516,21.394547 L32.3433175,35.1968697 L46.1308704,21.394547 C46.868476,20.6561511 48.0599928,20.6561511 48.7975988,21.394547 C49.5352044,22.1329428 49.5541172,23.3257362 48.8165116,24.064132 Z" fill="#FF6600"></path>
+                    </svg>
+                    <svg class="icbu-icon-svg card-icon" width="16" height="16" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M63.7388424,17.6647012 L53.6960572,0.92772814 C53.3556236,0.35973132 52.7314956,6.82121028e-13 52.069542,6.82121028e-13 L12.617093,6.82121028e-13 C11.9551392,6.82121028e-13 11.3310113,0.340798093 10.9905779,0.92772814 L0.947792456,17.6647012 C0.493881248,18.403097 0.626272016,19.3686916 1.23148696,19.9745549 L31.0004968,49.7754548 C31.7381026,50.5138508 32.9296194,50.5138508 33.6672252,49.7754548 L63.4362352,19.9745549 C64.0603628,19.3686916 64.1738408,18.403097 63.7388424,17.6647012 Z M48.8165116,24.064132 L33.6861381,39.2107139 C33.3078788,39.5704452 32.8350546,39.7597775 32.3433175,39.7597775 C31.8515804,39.7597775 31.3787562,39.5704452 31.0004968,39.2107139 L15.8701233,24.064132 C15.1325176,23.3257362 15.1325176,22.1329428 15.8701233,21.394547 C16.607729,20.6561511 17.799246,20.6561511 18.5368516,21.394547 L32.3433175,35.1968697 L46.1308704,21.394547 C46.868476,20.6561511 48.0599928,20.6561511 48.7975988,21.394547 C49.5352044,22.1329428 49.5541172,23.3257362 48.8165116,24.064132 Z" fill="#FF6600"></path>
+                    </svg>
+                    <svg class="icbu-icon-svg card-icon" width="16" height="16" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M63.7388424,17.6647012 L53.6960572,0.92772814 C53.3556236,0.35973132 52.7314956,6.82121028e-13 52.069542,6.82121028e-13 L12.617093,6.82121028e-13 C11.9551392,6.82121028e-13 11.3310113,0.340798093 10.9905779,0.92772814 L0.947792456,17.6647012 C0.493881248,18.403097 0.626272016,19.3686916 1.23148696,19.9745549 L31.0004968,49.7754548 C31.7381026,50.5138508 32.9296194,50.5138508 33.6672252,49.7754548 L63.4362352,19.9745549 C64.0603628,19.3686916 64.1738408,18.403097 63.7388424,17.6647012 Z M48.8165116,24.064132 L33.6861381,39.2107139 C33.3078788,39.5704452 32.8350546,39.7597775 32.3433175,39.7597775 C31.8515804,39.7597775 31.3787562,39.5704452 31.0004968,39.2107139 L15.8701233,24.064132 C15.1325176,23.3257362 15.1325176,22.1329428 15.8701233,21.394547 C16.607729,20.6561511 17.799246,20.6561511 18.5368516,21.394547 L32.3433175,35.1968697 L46.1308704,21.394547 C46.868476,20.6561511 48.0599928,20.6561511 48.7975988,21.394547 C49.5352044,22.1329428 49.5541172,23.3257362 48.8165116,24.064132 Z" fill="#FF6600"></path>
+                    </svg>
+                  </span>
+            </td>
+          </tr>
+          <tr><td class="vfeat" data-i18n data-vi="Giới hạn danh mục đăng tải" data-cn="可发布类目数量" data-en="Category limit">可发布类目数量</td><td>3</td><td><span class="chk" data-i18n data-vi="Không hạn chế" data-cn="不限" data-en="Unlimited">不限</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Đăng sản phẩm (Product Postings)" data-cn="产品发布（Product Postings）" data-en="Product postings">产品发布（Product Postings）</td><td>100</td><td><span class="chk" data-i18n data-vi="Không hạn chế" data-cn="不限" data-en="Unlimited">不限</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Phản hồi RFQ" data-cn="询价单回复（RFQ）" data-en="RFQ replies">询价单回复（RFQ）</td><td><span data-i18n data-vi="20/tháng" data-cn="20/月" data-en="20/mo">20/月</span></td><td><span data-i18n data-vi="60/tháng" data-cn="60/月" data-en="60/mo">60/月</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Sản phẩm trưng bày (Showcase)" data-cn="橱窗产品（Showcase）" data-en="Showcase products">橱窗产品（Showcase）</td><td>10</td><td>60</td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Ngân sách quảng cáo (KWA)" data-cn="广告预算（KWA）" data-en="Ad budget (KWA)">广告预算（KWA）</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Product Advisor" data-cn="产品顾问（Product Advisor）" data-en="Product Advisor">产品顾问（Product Advisor）</td><td><span class="dash">—</span></td><td><span data-i18n data-vi="12 tháng" data-cn="12个月" data-en="12 months">12个月</span></td></tr>
+
+          <tr class="catrow"><td colspan="3"><span class="cnum">02</span><span data-i18n data-vi="CÔNG CỤ MARKETING" data-cn="营销工具" data-en="MARKETING TOOLS">营销工具</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Hệ thống quản lý khách hàng (CRM)" data-cn="客户管理系统（CRM）" data-en="Customer management (CRM)">客户管理系统（CRM）</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Khóa học vận hành (cơ bản → nâng cao)" data-cn="运营课程（基础到进阶）" data-en="Operation courses (basic → advanced)">运营课程（基础到进阶）</td><td><span data-i18n data-vi="Cơ bản" data-cn="基础" data-en="Basic">基础</span></td><td><span class="chk" data-i18n data-vi="Đào tạo 1:1" data-cn="1对1培训" data-en="1:1 training">1对1培训</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Công cụ tin nhắn tức thời" data-cn="即时消息工具" data-en="Instant messaging tools">即时消息工具</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Tham gia chiến dịch & sự kiện Alibaba" data-cn="参与阿里巴巴活动与营销活动" data-en="Alibaba campaigns & events">参与阿里巴巴活动与营销活动</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Xuất hiện trên tab “Nguồn cung cấp khu vực”" data-cn="出现在“本地供应商”标签页" data-en="“Local suppliers” tab listing">出现在“本地供应商”标签页</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Điểm Smart Assistant" data-cn="智能助手积分" data-en="Smart Assistant points">智能助手积分</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Công cụ phân tích gian hàng" data-cn="店铺分析工具" data-en="Store analytics tools">店铺分析工具</td><td><span data-i18n data-vi="Cơ bản" data-cn="基础" data-en="Basic">基础</span></td><td><span class="chk">✓</span><span class="badge">PRO</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Tài khoản phụ" data-cn="子账号" data-en="Sub-accounts">子账号</td><td>1</td><td><span class="chk" data-i18n data-vi="Không hạn chế" data-cn="不限" data-en="Unlimited">不限</span></td></tr>
+
+          <tr class="catrow"><td colspan="3"><span class="cnum">03</span><span data-i18n data-vi="HỖ TRỢ CHUYÊN GIA" data-cn="专家支持" data-en="EXPERT SUPPORT">专家支持</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Hỗ trợ trực tuyến" data-cn="在线支持" data-en="Online support">在线支持</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Dịch vụ khách hàng VIP" data-cn="VIP 客户服务" data-en="VIP customer service">VIP 客户服务</td><td><span class="dash">—</span></td><td><span class="chk">✓</span><span class="badge">VIP</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Tư vấn chiến lược phát triển" data-cn="发展战略咨询" data-en="Growth strategy consulting">发展战略咨询</td><td><span class="dash">—</span></td><td><span class="chk" data-i18n data-vi="Hàng tháng (theo yêu cầu)" data-cn="每月（按需）" data-en="Monthly (on request)">每月（按需）</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Chăm sóc gian hàng" data-cn="店铺维护" data-en="Store care">店铺维护</td><td><span data-i18n data-vi="Tiêu chuẩn" data-cn="标准" data-en="Standard">标准</span></td><td><span class="chk" data-i18n data-vi="Chuyên sâu" data-cn="深度" data-en="In-depth">深度</span></td></tr>
+
+          <tr class="catrow"><td colspan="3"><span class="cnum">04</span><span data-i18n data-vi="ĐẶC QUYỀN VERIFIED SUPPLIER" data-cn="VERIFIED 供应商特权" data-en="VERIFIED SUPPLIER PRIVILEGES">VERIFIED 供应商特权</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Xác minh tại chỗ bởi SGS" data-cn="SGS 实地认证" data-en="On-site verification by SGS">SGS 实地认证</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Dịch vụ quay video Verified" data-cn="Verified 专属视频服务" data-en="Verified video service">Verified 专属视频服务</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Nhãn xác minh — Verified" data-cn="Verified 认证标识" data-en="Verified label">Verified 认证标识</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Hình ảnh toàn cảnh 360°" data-cn="360° 全景展示" data-en="360° panorama">360° 全景展示</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Xuất hiện trên tab “Nhà sản xuất”" data-cn="出现在“生产厂家”标签页" data-en="“Manufacturers” tab listing">出现在“生产厂家”标签页</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td class="vfeat" data-i18n data-vi="Bảng hiệu độc quyền từ Alibaba.com" data-cn="阿里巴巴独家招牌" data-en="Exclusive Alibaba.com signage">阿里巴巴独家招牌</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:22px;border-color:rgba(255,106,0,.5);background:linear-gradient(135deg,rgba(255,106,0,.16),rgba(255,106,0,.04))">
+      <div class="ci">✅</div>
+      <p data-i18n data-vi="Gói VERIFIED khớp trực tiếp với mục tiêu “đúng Buyer – đúng Brand”: nhãn xác minh + SGS + tab Nhà sản xuất + bảng hiệu độc quyền giúp các Global Brand tin tưởng và ưu tiên ALL GLORY. Đề xuất tiếp tục duy trì gói VERIFIED khi tái ký." data-cn="VERIFIED 套餐直接匹配“对的买家 – 对的品牌”目标：认证标识 + SGS + 生产厂家标签页 + 独家招牌，帮助全球品牌信任并优先选择 ALL GLORY。建议续费时继续使用该套餐。" data-en="VERIFIED directly matches the “right buyer – right brand” goal: verified label + SGS + Manufacturers tab + exclusive signage make global brands trust and prioritize ALL GLORY. Recommend continuing with the VERIFIED package at renewal.">VERIFIED 套餐直接匹配“对的买家 – 对的品牌”目标：认证标识 + SGS + 生产厂家标签页 + 独家招牌，帮助全球品牌信任并优先选择 ALL GLORY。建议续费时继续使用该套餐。</p>
+    </div>
+
+    <div class="tbl-note reveal" data-i18n data-vi="Lưu ý: Thông số gói là cấu trúc tham chiếu (mô phỏng theo bảng so sánh gói của Alibaba.com); số liệu và mức phí cụ thể cần xác nhận với đại diện Alibaba.com tại thời điểm tái ký." data-cn="说明：套餐参数为参考结构（参照阿里巴巴套餐对比表模拟）；具体数据与费用需在续费时向阿里巴巴确认。" data-en="Note: Package details follow the reference structure (modeled on Alibaba.com's package comparison); confirm exact figures and fees with Alibaba.com at renewal.">说明：套餐参数为参考结构（参照阿里巴巴套餐对比表模拟）；具体数据与费用需在续费时向阿里巴巴确认。</div>
   </div>
 </section>
 
