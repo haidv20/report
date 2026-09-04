@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dầu Nhớt &amp; Chất Bôi Trơn - Cơ Hội Thị Trường Châu Phi - MiennamPetro x Alibaba.com 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary-orange:#FF6A00; --secondary-orange:#FF8C42; --dark-blue:#1A1F36;
+  --light-gray:#F5F7FA; --success-green:#10B981; --warning-yellow:#F59E0B;
+  --error-red:#EF4444; --africa-green:#0E9F6E;
+  --gradient-primary:linear-gradient(135deg,#FF6A00 0%,#FF8C42 100%);
+  --gradient-dark:linear-gradient(135deg,#1A1F36 0%,#2D3561 100%);
+  --shadow-sm:0 2px 8px rgba(0,0,0,.08); --shadow-md:0 4px 16px rgba(0,0,0,.12); --shadow-lg:0 8px 32px rgba(0,0,0,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--light-gray);color:var(--dark-blue);line-height:1.6;overflow-x:hidden}
+.hero{background:var(--gradient-dark);color:#fff;padding:70px 20px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,106,0,.12) 0%,transparent 70%);animation:pulse 8s ease-in-out infinite}
+.hero::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path d='M100 0 L200 100 L100 200 L0 100 Z' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='2'/></svg>");background-size:120px;opacity:.5}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:.9}}
+.hero h1{font-size:2.9rem;font-weight:800;margin-bottom:14px;position:relative;z-index:1}
+.hero .subtitle{font-size:1.2rem;opacity:.92;position:relative;z-index:1}
+.hero .company-tag{display:inline-block;margin-top:16px;padding:8px 22px;border-radius:30px;background:rgba(255,106,0,.18);border:1px solid rgba(255,106,0,.5);font-size:.9rem;font-weight:600;position:relative;z-index:1}
+.hero .company-tag i{color:var(--primary-orange);margin-right:6px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:44px;position:relative;z-index:1}
+.stat-card{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:26px 18px}
+.stat-value{font-size:2.2rem;font-weight:800;color:var(--primary-orange);margin-bottom:6px}
+.stat-value small{font-size:1rem;font-weight:600}
+.stat-label{font-size:.88rem;opacity:.9}
+.container{max-width:1380px;margin:0 auto;padding:50px 20px}
+.section{background:#fff;border-radius:20px;padding:46px;margin-bottom:36px;box-shadow:var(--shadow-md);opacity:0;transform:translateY(28px);transition:all .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.section-title{font-size:1.75rem;font-weight:700;margin-bottom:26px;color:var(--dark-blue);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.section-title i{color:var(--primary-orange);font-size:1.9rem}
+.section-title .badge{margin-left:auto;font-size:.75rem;background:#eef2ff;color:#4f46e5;padding:6px 14px;border-radius:20px;font-weight:600}
+.section-title .badge.africa{background:#ecfdf5;color:var(--africa-green)}
+.chart-container{position:relative;height:380px;margin:26px 0 10px}
+.chart-container.h200{height:280px}
+.chart-note{font-size:.8rem;color:#8a94a6;margin:4px 0 8px;font-style:italic}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:26px}
+.info-card{background:linear-gradient(135deg,#f8f9fa 0%,#fff 100%);border-radius:16px;padding:24px;border-left:4px solid var(--primary-orange);transition:all .3s ease}
+.info-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.info-card h3{font-size:1.05rem;margin-bottom:10px;color:var(--dark-blue)}
+.info-card h3 i{color:var(--primary-orange);margin-right:8px}
+.info-card p{color:#5b6472;font-size:.92rem}
+.info-card.africa-card{border-left-color:var(--africa-green)}
+.info-card.africa-card h3 i{color:var(--africa-green)}
+.quote-box{background:#FFF7ED;border-left:4px solid var(--primary-orange);padding:16px 20px;border-radius:10px;margin:18px 0;font-size:.95rem}
+.quote-box strong{color:var(--primary-orange)}
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}
+.data-table th{background:var(--dark-blue);color:#fff;padding:12px 14px;text-align:left;font-weight:600}
+.data-table td{padding:11px 14px;border-bottom:1px solid #eef0f4;color:#3c4453}
+.data-table tr:nth-child(even) td{background:#fafbfc}
+.data-table .rank{color:var(--primary-orange);font-weight:700}
+.data-table .hl{color:var(--success-green);font-weight:700}
+.data-missing-warning{background:#FEF3C7;border-left:4px solid var(--warning-yellow);padding:16px 20px;border-radius:8px;margin:18px 0;font-size:.9rem}
+.swot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:26px}
+.swot-card{padding:24px;border-radius:16px;color:#fff}
+.swot-card h3{font-size:1.1rem;margin-bottom:12px}
+.swot-card ul{list-style:none}
+.swot-card li{padding:5px 0 5px 22px;position:relative;font-size:.92rem}
+.swot-card li::before{content:'\f058';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;left:0;opacity:.85}
+.swot-card.swot-weak li::before{content:'\f057'}
+.swot-card.swot-opp li::before{content:'\f0eb'}
+.swot-card.swot-thr li::before{content:'\f071'}
+.swot-strengths{background:linear-gradient(135deg,#10B981 0%,#059669 100%)}
+.swot-weaknesses{background:linear-gradient(135deg,#EF4444 0%,#DC2626 100%)}
+.swot-opportunities{background:linear-gradient(135deg,#3B82F6 0%,#2563EB 100%)}
+.swot-threats{background:linear-gradient(135deg,#F59E0B 0%,#D97706 100%)}
+.timeline{position:relative;padding:20px 0;margin-top:10px}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:var(--gradient-primary);transform:translateX(-50%)}
+.timeline-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;position:relative}
+.timeline-item:nth-child(odd){flex-direction:row-reverse}
+.timeline-content{width:45%;background:#fff;padding:24px;border-radius:16px;box-shadow:var(--shadow-md);border-top:3px solid var(--primary-orange)}
+.timeline-content h3{font-size:1.05rem;margin-bottom:8px;color:var(--dark-blue)}
+.timeline-content .phase{display:inline-block;background:var(--gradient-primary);color:#fff;font-size:.7rem;font-weight:700;padding:3px 12px;border-radius:12px;margin-bottom:8px}
+.timeline-content ul{padding-left:18px;font-size:.9rem;color:#3c4453}
+.timeline-content li{margin:4px 0}
+.timeline-dot{width:20px;height:20px;background:var(--primary-orange);border-radius:50%;position:absolute;left:50%;transform:translateX(-50%);border:4px solid #fff;box-shadow:var(--shadow-sm);z-index:2}
+.sources-list{background:#f8f9fa;border-radius:12px;padding:22px 26px;max-height:420px;overflow-y:auto}
+.source-item{padding:9px 0;border-bottom:1px solid #e6e9ee;font-size:.85rem;color:#4a5261}
+.source-item:last-child{border-bottom:none}
+.source-item a{color:var(--primary-orange);text-decoration:none;word-break:break-all}
+.source-item a:hover{text-decoration:underline}
+.disclaimer{background:#eef2ff;border-left:4px solid #6366f1;padding:16px 20px;border-radius:8px;margin:18px 0;font-size:.85rem;color:#3730a3}
+.footer{background:var(--gradient-dark);color:#fff;text-align:center;padding:36px 20px;margin-top:40px}
+.footer p{opacity:.85;font-size:.85rem;margin:4px 0}
+.budget-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:10px}
+.budget-item{background:#fff;border:1.5px solid #e8ebf1;border-radius:14px;padding:18px;text-align:center}
+.budget-item .amt{font-size:1.35rem;font-weight:800;color:var(--dark-blue)}
+.budget-item .amt.orange{color:var(--primary-orange)}
+.budget-item .amt.green{color:var(--success-green)}
+.budget-item .lbl{font-size:.8rem;color:#8a94a6;margin-top:4px}
+.budget-item .src{font-size:.68rem;color:#aab2c0;margin-top:6px}
+.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.pill{background:#fff;border:1.5px solid #e2e8f0;border-radius:30px;padding:8px 18px;font-size:.85rem;font-weight:600;color:#334155}
+.pill i{color:var(--primary-orange);margin-right:6px}
+.pill.green i{color:var(--africa-green)}
+.center-txt{text-align:center}
+.note-flag{font-size:.78rem;color:#b45309;background:#FEF3C7;border-radius:6px;padding:2px 10px;display:inline-block;margin-left:6px}
+.table-wrap{overflow-x:auto;border:1px solid #e8ebf1;border-radius:14px;margin:14px 0}
+.table-wrap table{margin:0;min-width:980px}
+.rec-row td{background:#FFF4E6 !important;font-weight:600;color:var(--dark-blue);border-top:2px solid var(--primary-orange);border-bottom:2px solid var(--primary-orange)}
+.rec-flag{display:inline-block;background:var(--gradient-primary);color:#fff;font-size:.64rem;font-weight:800;padding:2px 9px;border-radius:12px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+.vs-card{border:1.5px solid #e8ebf1;border-radius:14px;padding:20px}
+.vs-card.primary{border-color:var(--primary-orange);background:#FFFBF6}
+.vs-card h4{font-size:1rem;margin-bottom:8px;color:var(--dark-blue)}
+.vs-card ul{padding-left:18px;font-size:.88rem;color:#3c4453}
+.vs-card li{margin:4px 0}
+.vs-price{font-size:1.25rem;font-weight:800;color:var(--dark-blue);margin:6px 0}
+.vs-price small{font-weight:600;color:#8a94a6;font-size:.75rem}
+@media (max-width:768px){.vs-grid{grid-template-columns:1fr}}
+@media (max-width:768px){
+  .hero h1{font-size:1.7rem}
+  .section{padding:28px 18px}
+  .swot-grid{grid-template-columns:1fr}
+  .timeline::before{left:20px}
+  .timeline-item{flex-direction:column !important;align-items:flex-start}
+  .timeline-content{width:100%;margin-left:44px}
+  .timeline-dot{left:20px}
+  .section-title{font-size:1.35rem}
+  .chart-container{height:300px}
+}
+@media print{.hero{page-break-after:always}.section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <h1><i class="fas fa-oil-can"></i> Dầu Nhớt &amp; Chất Bôi Trơn</h1>
+  <p class="subtitle">Phân Tích Ngành Hàng &amp; Cơ Hội Thị Trường Châu Phi trên Alibaba.com — 2026</p>
+  <div class="company-tag"><i class="fas fa-industry"></i>CTCP Dầu Nhớt &amp; Hóa Chất Miền Nam (MiennamPetro)</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-value" data-target="178.14">$0</div><div class="stat-label">Thị trường dầu nhớt toàn cầu 2025 (tỷ USD)</div></div>
+    <div class="stat-card"><div class="stat-value" data-target="3.36">0%</div><div class="stat-label">CAGR thị trường Châu Phi 2026–2031</div></div>
+    <div class="stat-card"><div class="stat-value" data-target="17">$0<small>tr</small></div><div class="stat-label">Xuất khẩu chế phẩm bôi trơn của VN 2023 — dư địa tăng trưởng lớn</div></div>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- COMPANY PROFILE -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-building"></i> Hồ Sơ Doanh Nghiệp — MiennamPetro</h2>
+  <div class="quote-box"><strong>Nhà sản xuất dầu nhớt &amp; hóa chất Việt Nam</strong> — tiền thân là đơn vị nhập khẩu &amp; phân phối dầu nhớt; năm 2009 khởi công nhà máy pha chế tại KCN Thịnh Phát và chính thức vận hành từ đầu năm 2011 [Nguồn: miennampetro.com.vn/lich-su-hinh-thanh].</div>
+  <div class="cards-grid">
+    <div class="info-card"><h3><i class="fas fa-industry"></i>Năng Lực Sản Xuất</h3><p>Nhà máy trên diện tích <strong>&gt;10.000 m²</strong>, công suất thiết kế <strong>&gt;25.000 tấn/năm</strong>, hệ thống pha chế – chiết rót hoàn chỉnh, đáp ứng tiêu chuẩn <strong>API (Viện Dầu khí Hoa Kỳ)</strong> — có thể phục vụ đơn hàng khu vực [Nguồn: miennampetro.com.vn/nha-may-san-xuat].</p></div>
+    <div class="info-card"><h3><i class="fas fa-boxes"></i>Danh Mục Sản Phẩm</h3><p>11 nhóm: dầu nhớt xe máy, xe ô tô, bánh răng, <strong>hàng hải</strong>, thủy lực, công nghiệp, nông nghiệp, dầu phanh, dầu trợ lực lái, nước làm mát, mỡ bò &amp; sản phẩm bảo dưỡng [Nguồn: miennampetro.com.vn/san-pham].</p></div>
+    <div class="info-card"><h3><i class="fas fa-flask"></i>Chất Lượng &amp; Kỹ Thuật</h3><p>Phòng thí nghiệm hiện đại kiểm tra nguyên liệu đầu vào &amp; thành phẩm theo tiêu chuẩn quốc tế; cung cấp dịch vụ phân tích dầu nhờn; đội ngũ chuyên gia từng cộng tác với Shell, BP, Mobil [Nguồn: website công ty].</p></div>
+    <div class="info-card africa-card"><h3><i class="fas fa-bullseye"></i>Mục Tiêu Chiến Lược</h3><p><strong>Xâm nhập thị trường Châu Phi</strong> — tận dụng năng lực sản xuất thừa (&gt;25.000 tấn/năm), tìm kiếm khách hàng nhập khẩu, nhà pha chế (blender) và đối tác private-label qua nền tảng Alibaba.com.</p></div>
+  </div>
+</section>
+
+<!-- SECTION 1: GLOBAL MARKET -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-globe"></i> Tổng Quan Thị Trường Dầu Nhớt Toàn Cầu <span class="badge">Giai đoạn 2024–2030</span></h2>
+  <div class="chart-container"><canvas id="marketSizeChart"></canvas></div>
+  <p class="chart-note">Biểu đồ: Quy mô thị trường dầu nhớt toàn cầu theo giá trị — 2024: 173,5 tỷ USD; 2025: 178,14 tỷ USD; dự báo 2030: 204,1 tỷ USD. [Nguồn: MarketsandMarkets – Lubricants Market – 04/2025]</p>
+  <div class="chart-container h200"><canvas id="cagrChart"></canvas></div>
+  <p class="chart-note">Biểu đồ: Tăng trưởng khối lượng giai đoạn 2026–2031 — <strong>Trung Đông &amp; Châu Phi là khu vực tăng nhanh nhất toàn cầu</strong>. [Nguồn: Mordor Intelligence – Lubricants Market – 2026]</p>
+  <div class="cards-grid">
+    <div class="info-card"><h3><i class="fas fa-ruler-combined"></i>Quy Mô</h3><p>178,14 tỷ USD (2025) → 204,10 tỷ USD (2030), CAGR 2,8% theo giá trị [MarketsandMarkets, 04/2025]. Theo khối lượng: 39,02 tỷ lít (2025) → 44,33 tỷ lít (2031), CAGR 2,15% [Mordor, 2026].</p></div>
+    <div class="info-card"><h3><i class="fas fa-car"></i>Cơ Cấu</h3><p>Ô tô chiếm 55,95% thị phần 2025; dầu động cơ chiếm 51,10% doanh thu; dầu khoáng chiếm 65,85% khối lượng; bio-based tăng nhanh nhất 3,21% CAGR [Mordor, 2026].</p></div>
+    <div class="info-card"><h3><i class="fas fa-chart-line"></i>Xu Hướng Cốt Lõi</h3><p>Dịch chuyển từ dầu khoáng sang tổng hợp do quy định khí thải &amp; hạ độ nhớt; xe điện tạo phân khúc chất lỏng làm mát/điện môi mới [Mordor, 2026].</p></div>
+    <div class="info-card africa-card"><h3><i class="fas fa-map-marker-alt"></i>Điểm Nóng Tăng Trưởng</h3><p><strong>Trung Đông &amp; Châu Phi: CAGR 3,19%</strong> — nhanh nhất toàn cầu tới 2031, vượt xa mức bình quân 2,15%. Đây là vùng trọng tâm chiến lược của báo cáo này [Mordor, 2026].</p></div>
+  </div>
+</section>
+
+<!-- SECTION 2: AFRICA MARKET -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-africa"></i> Thị Trường Mục Tiêu: Châu Phi <span class="badge africa">Trọng tâm chiến lược</span></h2>
+  <div class="quote-box"><strong>2,68 tỷ lít (2025) → 3,27 tỷ lít (2031), CAGR 3,36%</strong> — thị trường dầu nhớt Châu Phi, giá trị tham chiếu ~2,77 tỷ USD (2026, theo Mordor; các ước khác 2,10–3,35 tỷ USD tùy phạm vi). [Nguồn: Mordor Intelligence – Africa Lubricants Market – 2026]</div>
+  <div class="chart-container"><canvas id="africaCountryChart"></canvas></div>
+  <p class="chart-note">Biểu đồ: Lượng tiêu thụ dầu nhớt năm 2025 theo quốc gia (triệu lít). Ai Cập là thị trường lớn nhất châu lục — 22,95% thị phần; Kenya tăng trưởng nhanh nhất 4,98% CAGR; Morocco nhanh nhất châu lục 3,86% CAGR. ⚠️ Số liệu tuyệt đối của Morocco/Algeria/Tanzania không được công bố mở. [Nguồn: Mordor Intelligence – báo cáo từng nước – 2026]</p>
+  <div class="data-missing-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Lưu ý định cỡ thị trường:</strong> phần lớn báo cáo Mordor định cỡ theo <strong>khối lượng lít tiêu thụ</strong> (gồm pha chế nội địa + nhập khẩu thành phẩm); ước giá trị USD của các nhà xuất bản lệch nhau đáng kể do khác phạm vi — số liệu trình bày nguyên xi theo nguồn.</div>
+  <table class="data-table">
+    <tr><th>#</th><th>Quốc gia</th><th>Tiêu thụ 2025</th><th>CAGR 2026–2031</th><th>Đặc điểm cơ hội</th></tr>
+    <tr><td class="rank">1</td><td><strong>Ai Cập</strong></td><td>623,24 triệu lít (22,95% châu Phi)</td><td>2,22%</td><td>Thị trường lớn nhất; gói hạ tầng 169 tỷ USD; nhà máy xe máy TVS (100.000 xe/năm) khởi động 2025</td></tr>
+    <tr><td class="rank">2</td><td><strong>Nigeria</strong></td><td>563,93 triệu lít (~0,56 tỷ USD)</td><td>2,95%</td><td>Dân số lớn nhất; <span class="hl">nhập ~100% dầu gốc</span>; thiếu cung nội địa thừa nhận 07/2026; dự báo 11,8 triệu xe đăng ký 2030</td></tr>
+    <tr><td class="rank">3</td><td><strong>Nam Phi</strong></td><td>431,03 triệu lít (~447 triệu USD)</td><td>3,77%</td><td>Thị trường trưởng thành; lọc dầu nội địa &lt;50% công suất → nhập khẩu; khai khoáng &amp; cảng Durban (dầu hàng hải)</td></tr>
+    <tr><td class="rank">4</td><td><strong>Kenya</strong></td><td>90,12 triệu lít</td><td><span class="hl">4,98%</span></td><td><span class="hl">Trung tâm phân phối Đông Phi</span> (xuất sang 6 nước lân cận); xe máy boda-boda tăng mạnh; nhà máy TotalEnergies Mombasa ISO 9001</td></tr>
+    <tr><td class="rank">5</td><td><strong>Ghana</strong></td><td>48,89 triệu lít</td><td>4,04%</td><td>Đội xe 3,5 triệu xe, tuổi xe 14–16 năm; blender nội địa Tema Lube Oil nhập 46,91 triệu USD dầu gốc/phụ gia (2025)</td></tr>
+    <tr><td class="rank">6</td><td><strong>Morocco</strong></td><td>⚠️ Data Not Available</td><td><span class="hl">3,86% (nhanh nhất châu Phi)</span></td><td>Ô tô xuất khẩu, phosphate, năng lượng tái tạo</td></tr>
+    <tr><td class="rank">7</td><td><strong>Algeria / Tanzania</strong></td><td>⚠️ Data Not Available</td><td>–</td><td>Algeria nâng cấp lọc dầu; Tanzania thuộc khối EAC (nông nghiệp &amp; dầu động cơ dung tích nhỏ)</td></tr>
+  </table>
+  <p class="chart-note">Nguồn bảng: Mordor Intelligence – Africa/Nigeria/South Africa/Kenya/Ghana/Egypt Lubricants Market – 2026 (truy cập 03/09/2026).</p>
+
+  <h3 style="margin-top:30px;font-size:1.25rem"><i class="fas fa-layer-group" style="color:var(--primary-orange)"></i> Cơ Cấu Nhu Cầu 2025 — Định Vị Sản Phẩm MiennamPetro</h3>
+  <div class="chart-container h200"><canvas id="engineOilShareChart"></canvas></div>
+  <p class="chart-note">Biểu đồ: Tỷ trọng <strong>dầu động cơ ô tô</strong> trong tổng thị trường dầu nhớt từng nước, năm 2025 (%). Đây là phân khúc lớn nhất mọi thị trường — khớp trực tiếp với dòng sản phẩm dầu động cơ xe máy/ô tô của MiennamPetro. [Nguồn: Mordor Intelligence – 2026]</p>
+  <div class="cards-grid">
+    <div class="info-card"><h3><i class="fas fa-motorcycle"></i>Xe Máy &amp; Xe Cũ — Khối Lượng Lớn</h3><p>Xe cũ 7–16 năm tuổi (Kenya 7–8 năm, Ghana 14–16 năm) giữ nhu cầu thay dầu ổn định; xe máy taxi boda-boda (Kenya), okada (Nigeria), TVS Egypt đẩy nhu cầu dầu 4 thì/2 thì dung tích nhỏ. Dầu khoáng chiếm 79,60% khối lượng Châu Phi.</p></div>
+    <div class="info-card"><h3><i class="fas fa-hard-hat"></i>Dầu Công Nghiệp — Tăng Nhanh Nhất, Biên Lợi Nhuận Tốt</h3><p>Ngành công nghiệp tăng nhanh nhất: Châu Phi 3,92%, Nigeria 5,09%, Kenya 5,55% CAGR. Mỡ bôi trơn (5,68% Kenya), metalworking fluids (4,61% Ghana), process oils (4,25% châu Phi) — <strong>khoảng trống white-space</strong> mà các hãng lớn chưa phục vụ tốt tại Ghana/Kenya/Nam Phi.</p></div>
+    <div class="info-card"><h3><i class="fas fa-ship"></i>Dầu Hàng Hải — Ngách Chiến Lược</h3><p>Cảng Durban &amp; Cape Town (Nam Phi) trên tuyến Á–Âu; Nigeria phục vụ tàu cung ứng ngoài khơi Lagos/Port Harcourt (TotalEnergies nâng cấp Lubmarine 12 triệu USD tại ONNE 2024); Ghana cảng Tema 1,1 triệu TEU (2025). Rủi ro: khủng hoảng Biển Đỏ làm sụt giảm lưu thông Suez.</p></div>
+    <div class="info-card africa-card"><h3><i class="fas fa-gem"></i>Gap Thị Trường Cho Nhà Xuất Khẩu Mới</h3><p>(1) Hầu hết nước phụ thuộc nhập khẩu dầu gốc &amp; thành phẩm; (2) Nigeria chính thức thừa nhận thiếu cung nội địa (07/2026); (3) Khoảng trống giữa hàng giả giá rẻ và synthetic cao cấp: <strong>mineral/semi-synthetic có chứng nhận API/ACEA + truy xuất nguồn gốc rõ ràng</strong> — đúng phân khúc MiennamPetro đang sản xuất.</p></div>
+  </div>
+</section>
+<!-- SECTION 3: SUPPLY & DEMAND -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-balance-scale"></i> Phân Tích Cung – Cầu Thương Mại Quốc Tế</h2>
+  <div class="chart-container"><canvas id="topExportChart"></canvas></div>
+  <p class="chart-note">Biểu đồ: Top nước <strong>xuất khẩu chế phẩm bôi trơn</strong> (HS 3403) toàn cầu, triệu USD. 2024 là số liệu sơ bộ (127 nước báo cáo). [Nguồn: UN Comtrade – comtradeplus.un.org – truy cập 03/09/2026]</p>
+  <div class="chart-container"><canvas id="africaImportChart"></canvas></div>
+  <p class="chart-note">Biểu đồ: Top nước <strong>nhập khẩu chế phẩm bôi trơn</strong> (HS 3403) tại Châu Phi, triệu USD. Tổng nhập khẩu châu lục: ~334 triệu USD (2023, 41 nước) → ~401 triệu USD (2024 sơ bộ, 29 nước). Đáng chú ý: <strong>Nigeria tăng vọt 7,1 → 31,9 triệu USD</strong> (2023→2024). [Nguồn: UN Comtrade – 03/09/2026]</p>
+  <div class="quote-box"><i class="fas fa-info-circle" style="margin-right:8px"></i><strong>Hệ quả chiến lược:</strong> Dòng nhập khẩu Châu Phi tập trung ở Bắc Phi (Morocco, Ai Cập) và Nam Phi — nhưng <strong>Nigeria là thị trường đang "bùng nổ nhập khẩu"</strong> (+350% 2024) và Kenya là cửa ngõ trung chuyển Đông Phi. MiennamPetro nên ưu tiên 2 đầu cầu này trên Alibaba.com.</div>
+  <div class="cards-grid">
+    <div class="info-card"><h3><i class="fas fa-chart-bar"></i>Vị Thế Việt Nam Trên Bản Đồ Xuất Khẩu</h3><p>Xuất khẩu chế phẩm bôi trơn (HS 3403) của VN: <strong>15,15 triệu USD (2022) → 16,91 triệu USD (2023)</strong> — rất nhỏ so với Đức (2,34 tỷ USD) hay Trung Quốc (0,41 tỷ USD). <strong>Dư địa tăng trưởng khổng lồ</strong> nhưng năng lực xuất khẩu hiện còn khiêm tốn [UN Comtrade, 03/09/2026].</p></div>
+    <div class="info-card"><h3><i class="fas fa-file-contract"></i>Không FTA — Thuế MFN</h3><p>Việt Nam <strong>không có FTA nào với nước Châu Phi</strong>; AfCFTA chỉ ưu đãi nội khối; AGOA (ưu đãi của Mỹ) không áp dụng cho VN. Hàng VN chịu thuế MFN/nội địa — cần tra thuế suất theo nước tại <strong>ITC Market Access Map (macmap.org)</strong> [Trung tâm WTO VCCI; USTR/AGOA].</p></div>
+    <div class="info-card"><h3><i class="fas fa-shipping-fast"></i>Logistics VN → Châu Phi</h3><p>⚠️ Data Not Available: chưa xác minh được nguồn công khai về thời gian/cước tuyến cảng VN → Châu Phi trong phiên nghiên cứu. Tuyến thực tế thường transshipment qua Singapore/Port Klang (Tây Phi qua Tanger Med) với Maersk/MSC/CMA CGM — tra SeaRates/Freightos để dự toán.</p></div>
+    <div class="info-card"><h3><i class="fas fa-tags"></i>Mã HS Liên Quan</h3><p><strong>HS 3403</strong> (chế phẩm bôi trơn — proxy dầu nhớt thành phẩm) và <strong>HS 2710.19</strong> (phân nhóm dầu bôi trơn gốc dầu mỏ — lưu ý HS 2710 cấp 6 số gộp cả nhiên liệu nên giá trị rất lớn, không phản ánh riêng dầu nhớt) [UN Comtrade; cần xác nhận phân loại của nước nhập khẩu].</p></div>
+  </div>
+</section>
+
+<!-- SECTION 4: ALIBABA COMPETITIVE LANDSCAPE -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-trophy"></i> Bối Cảnh Cạnh Tranh Trên Alibaba.com</h2>
+  <div class="chart-container h200"><canvas id="priceChart"></canvas></div>
+  <p class="chart-note">Biểu đồ: Dải giá niêm yết (USD/lít-kg) engine oil trên Alibaba.com — Trung Quốc 0,98–1,99; Nhà máy dầu nhớt Việt Nam (K-Oil) 1,27–1,94. Giá "từ", chưa gồm vận chuyển, thay đổi theo MOQ/cấp API/bao bì. [Nguồn: alibaba.com – listing "Engine oil from Vietnam factory" &amp; trang wholesale engine oil – fetch 03/09/2026]</p>
+  <div class="cards-grid">
+    <div class="info-card"><h3><i class="fas fa-boxes-stacked"></i>Nguồn Cung Trên Sàn</h3><p>Tìm kiếm "engine oil" cho <strong>20.000+ sản phẩm</strong> từ supplier toàn cầu (fetch 03/09/2026); <strong>Trung Quốc áp đảo</strong> (Quảng Đông, Hà Bắc, Sơn Đông...) với doanh thu online niêm yết tới 1,6 triệu USD+. ⚠️ Số lượng nhà cung cấp riêng cho ngành: Data Not Available (bị chặn CAPTCHA) [Alibaba.com, 03/09/2026].</p></div>
+    <div class="info-card"><h3><i class="fas fa-check-double"></i>Bằng Chứng Việt Nam Bán Được Hàng</h3><p>Nhà máy dầu nhớt Hà Nội (thương hiệu <strong>K-Oil</strong>, hoạt động từ 2016) bán trên Alibaba.com với cơ cấu xuất khẩu: <strong>Châu Phi 29%</strong>, Nam Á 18%, Trung Đông 11%, nội địa 42% — bằng chứng trực tiếp <strong>người mua Châu Phi đã mua dầu nhớt Việt Nam qua Alibaba</strong>. NPOIL Corp (VN) cũng có gian hàng trustpass [Alibaba.com product listing, 03/09/2026].</p></div>
+    <div class="info-card"><h3><i class="fas fa-users"></i>Người Mua Châu Phi Trên Sàn</h3><p>Alibaba.com kết nối <strong>40 triệu+ buyer đã đăng ký</strong>, 200.000+ verified supplier tại 200+ quốc gia (2026). Nhóm ngành apparel ghi nhận buyer Châu Phi tăng &gt;240% YoY với <strong>5 nước châu Phi trong top buyer</strong> (Nam Phi, Ghana, DRC, Bờ Biển Ngà, Somalia); <strong>Kwik (Nigeria) là Authorised Channel Partner đầu tiên của Alibaba tại châu Phi hạ Sahara</strong> (04/2025) [seller.alibaba.com blog 2026; AllAfrica 04/2025].</p></div>
+    <div class="info-card africa-card"><h3><i class="fas fa-lightbulb"></i>Khoảng Trống Cho MiennamPetro</h3><p>Supplier dầu nhớt VN trên sàn còn rất ít (mới ghi nhận K-Oil, NPOIL) trong khi nhu cầu nhập khẩu Châu Phi tăng — <strong>first-mover advantage cho nhà sản xuất có nhà máy thật, chứng nhận API</strong>, kể chuyện "Made in Vietnam" với năng lực OEM/private-label &amp; MOQ linh hoạt.</p></div>
+  </div>
+</section>
+
+<!-- SECTION 5: VIETNAM POSITION SWOT -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-flag"></i> Vị Thế Việt Nam &amp; MiennamPetro Khi Vào Châu Phi</h2>
+  <div class="swot-grid">
+    <div class="swot-card swot-strengths"><h3><i class="fas fa-check-circle"></i> Điểm Mạnh</h3><ul>
+      <li>Nhà máy &gt;10.000 m², công suất &gt;25.000 tấn/năm, tiêu chuẩn API, vận hành từ 2011</li>
+      <li>Danh mục 11 nhóm sản phẩm phủ đúng cơ cấu nhu cầu Châu Phi (động cơ, công nghiệp, nông nghiệp, hàng hải)</li>
+      <li>Chi phí sản xuất VN cạnh tranh; giá XK tham chiếu 1,27–1,94 USD/lít — ngang/chưa bằng giá rẻ TQ nhưng có câu chuyện chất lượng</li>
+      <li>Kinh nghiệm nhập khẩu-phân phối → hiểu tâm lý khách hàng nhập khẩu; phòng lab + dịch vụ kỹ thuật</li>
+    </ul></div>
+    <div class="swot-card swot-weaknesses"><h3><i class="fas fa-times-circle"></i> Điểm Yếu</h3><ul>
+      <li>Quy mô xuất khẩu dầu nhớt VN còn rất nhỏ (~17 triệu USD/năm 2023)</li>
+      <li>Chưa có kinh nghiệm thị trường Châu Phi, chưa có chứng nhận địa phương (SONCAP/PVoC...)</li>
+      <li>Thương hiệu chưa được biết đến quốc tế — phải cạnh tranh với Shell/TotalEnergies + hàng giá rẻ TQ/UAE</li>
+      <li>Không FTA với Châu Phi → chịu thuế MFN; hồ sơ xuất khẩu hóa chất cần chuẩn bị kỹ (MSDS, CoA)</li>
+    </ul></div>
+    <div class="swot-card swot-opportunities"><h3><i class="fas fa-lightbulb"></i> Cơ Hội</h3><ul>
+      <li>Châu Phi CAGR 3,36% — vùng tăng nhanh nhất toàn cầu; Nigeria thiếu cung thừa nhận chính thức (07/2026)</li>
+      <li>Nhu cầu nhập khẩu dầu gốc/thành phẩm &amp; private-label cho blender địa phương (Tema Lube Oil Ghana, Ammasco Kano Nigeria...)</li>
+      <li>Ngách dầu công nghiệp/hydraulic/mỡ bôi trơn ít cạnh tranh, biên lợi nhuận tốt</li>
+      <li>Quy định chất lượng thắt chặt (KEBS/EPRA Kenya 2025, NMDPRA Nigeria) loại bỏ hàng kém chất lượng → có lợi cho nhà sản xuất chứng nhận đầy đủ</li>
+      <li>Alibaba.com: buyer Châu Phi tăng 3 chữ số; Nigeria có channel partner chính thức của Alibaba</li>
+    </ul></div>
+    <div class="swot-card swot-threats"><h3><i class="fas fa-exclamation-triangle"></i> Thách Thức</h3><ul>
+      <li>Cạnh tranh giá từ dầu Trung Quốc (Sinopec), UAE (ADNOC, Aramco mua Valvoline Kenya), Ấn Độ (Veedol)</li>
+      <li>Xu hướng nội địa hóa pha chế + thuế tiêu thụ đặc biệt hàng thành phẩm nhập khẩu tăng (Kenya Finance Act 2025)</li>
+      <li>Rào cản chứng nhận từng nước: SONCAP (Nigeria), PVoC/KEBS (Kenya), EOS/GOEIC (Ai Cập)... — chi phí &amp; thời gian</li>
+      <li>Rủi ro thanh toán/tỷ giá, hàng giả cạnh tranh không lành mạnh, biến động địa chính trị (Biển Đỏ)</li>
+    </ul></div>
+  </div>
+  <div class="data-missing-warning"><i class="fas fa-exclamation-triangle"></i> <strong>Dữ liệu cần bổ sung trước khi chốt kế hoạch:</strong> kim ngạch XK riêng VN→từng nước Châu Phi (Niên giám Thống kê Hải quan 2024 — files.customs.gov.vn); thuế nhập khẩu theo nước (macmap.org); thời gian/cước vận tải tuyến VN→Châu Phi (SeaRates/hãng tàu); số liệu thị trường nội địa dầu nhớt VN (⚠️ Data Not Available trong phiên nghiên cứu 03/09/2026).</div>
+</section>
+<!-- SECTION 6: FINANCIAL & ROI -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-calculator"></i> Chi Phí Đầu Tư — Đề Xuất Gói Verified Guarantee <span class="badge">Bảng giá FY27Q1 chính thức</span></h2>
+  <div class="quote-box"><strong>Căn cứ: Bảng giá gói hội viên Alibaba.com FY27Q1 (VN) — 2026</strong> (tài liệu chính thức do bộ phận kinh doanh cung cấp). Đề xuất cho MiennamPetro: gói <strong>Verified Supplier Guarantee</strong> — dòng gói "Verified Guarantee" kết hợp <strong>Xác minh doanh nghiệp (SGS/TUV on-site)</strong> + <strong>Đảm bảo cơ hội kinh doanh</strong>, phù hợp nhà sản xuất muốn tạo tín nhiệm với nhà nhập khẩu Châu Phi ngay từ đầu. <em>*Giá niêm yết chưa bao gồm VAT; tên gói theo đúng bảng giá.</em></div>
+
+  <h3 style="font-size:1.2rem;margin-top:8px"><i class="fas fa-table" style="color:var(--primary-orange)"></i> Toàn Bộ 8 Gói Hội Viên FY27Q1 (Giá USD / VND niêm yết)</h3>
+  <div class="table-wrap">
+  <table class="data-table">
+    <tr><th>Gói hội viên</th><th>Giá USD</th><th>Giá VND (chưa VAT)</th><th>Sao trực tiếp</th><th>Cam kết cơ hội kinh doanh</th><th>KWA kèm gói</th><th>Sản phẩm trưng bày</th><th>RFQ / tháng</th><th>Product Advisor</th><th>Xác minh SGS/TUV</th><th>OBS lên sàn</th></tr>
+    <tr><td>Basic</td><td>$1,999</td><td>46,800,000 ₫</td><td>—</td><td>—</td><td>—</td><td>20</td><td>40</td><td>3 tháng</td><td>—</td><td>60–100 SP</td></tr>
+    <tr><td>Guarantee Basic</td><td>$2,999</td><td>70,400,000 ₫</td><td>2 SAO (6 tháng)</td><td>≥25 cơ hội / 30 ngày</td><td>$1,000 (23,6 tr ₫)</td><td>20</td><td>40</td><td>6 tháng</td><td>—</td><td>60–100 SP</td></tr>
+    <tr><td>Guarantee L3+</td><td>$4,999</td><td>117,600,000 ₫</td><td>3 SAO (6 tháng)</td><td>≥35 cơ hội L3+ / 90 ngày</td><td>$3,000 (70,8 tr ₫)</td><td>20</td><td>40</td><td>6 tháng</td><td>—</td><td>60–100 SP</td></tr>
+    <tr><td>Guarantee 160</td><td>$4,999</td><td>117,600,000 ₫</td><td>3 SAO (9 tháng)</td><td>≥160 cơ hội / 180 ngày</td><td>—</td><td>20</td><td>40</td><td>6 tháng</td><td>—</td><td>60–100 SP</td></tr>
+    <tr><td>Verified Supplier Basic</td><td>$8,999</td><td>212,400,000 ₫</td><td>4 SAO (6 tháng)</td><td>—</td><td>—</td><td>60</td><td>60</td><td>12 tháng</td><td>Có</td><td>130–200 SP</td></tr>
+    <tr class="rec-row"><td>Verified Supplier Guarantee L3+ <span class="rec-flag">★ ĐỀ XUẤT</span></td><td>$11,999</td><td>280,880,000 ₫</td><td>4 SAO (6 tháng)</td><td>≥35 cơ hội <strong>L3+</strong> / 90 ngày</td><td><strong>$3,000 (70,8 tr ₫)</strong></td><td>60</td><td>60</td><td>12 tháng</td><td>Có</td><td>130–200 SP</td></tr>
+    <tr><td>Verified Supplier Guarantee 320</td><td>$11,999</td><td>280,880,000 ₫</td><td>4 SAO (9 tháng)</td><td>≥320 cơ hội / 180 ngày</td><td>—</td><td>60</td><td>60</td><td>12 tháng</td><td>Có</td><td>130–200 SP</td></tr>
+    <tr><td>Verified Supplier Pro 2 năm</td><td>$17,999</td><td>424,800,000 ₫</td><td>5 SAO (6 tháng × 2)</td><td>≥35 cơ hội L3+ / 90 ngày (+$1,000 KWA)</td><td>$4,000 (94,4 tr ₫)</td><td>60</td><td>60</td><td>24 tháng</td><td>Có</td><td>130–200 SP</td></tr>
+  </table>
+  </div>
+  <p class="chart-note">Nguồn: Bảng giá gói hội viên Alibaba.com FY27Q1 (VN) 2026 — trích nguyên giá niêm yết USD &amp; VND; tỷ giá quy đổi ngầm của bảng giá ~23.600 ₫/USD. Toàn bộ gói: danh mục sản phẩm &amp; product postings không hạn chế. Nhóm Verified Supplier (5–8) được cộng thêm: thiết kế gian hàng "Verified" độc quyền, bảng xác minh từ Alibaba.com, video verified + ảnh 360°, xuất hiện tab "Nguồn cung khu vực" (khu vực độc quyền), công cụ phân tích gian hàng PRO, Smart Assistant không hạn chế, 10 tài khoản phụ, Trade Assurance ưu đãi thêm.</p>
+
+  <h3 style="font-size:1.2rem;margin-top:26px"><i class="fas fa-star" style="color:var(--primary-orange)"></i> Bảng Đề Xuất Hợp Lý Cho MiennamPetro</h3>
+  <div class="vs-grid">
+    <div class="vs-card primary">
+      <h4><i class="fas fa-check-circle" style="color:var(--primary-orange)"></i> Phương án khuyến nghị — Verified Supplier Guarantee L3+</h4>
+      <div class="vs-price">280,880,000 ₫ / năm <small>(~$11,999 · chưa VAT)</small></div>
+      <ul>
+        <li><strong>4 SAO trực tiếp</strong> (6 tháng) + xác minh on-site <strong>SGS/TUV</strong> kèm báo cáo đánh giá</li>
+        <li><strong>Đảm bảo ≥35 cơ hội kinh doanh L3+</strong> trong 90 ngày — inquiry chất lượng cao, đã lọc</li>
+        <li><strong>Kèm KWA $3,000 (70,8 triệu ₫)</strong> ngân sách quảng cáo từ khóa ngay năm đầu</li>
+        <li>Product Advisor 12 tháng; OBS đăng 130–200 sản phẩm; quay video verified + ảnh 360°</li>
+      </ul>
+    </div>
+    <div class="vs-card">
+      <h4><i class="fas fa-arrows-rotate" style="color:var(--africa-green)"></i> Phương án thay thế cùng giá — Verified Supplier Guarantee 320</h4>
+      <div class="vs-price">280,880,000 ₫ / năm <small>(~$11,999 · chưa VAT)</small></div>
+      <ul>
+        <li><strong>4 SAO kéo dài 9 tháng</strong> (dài hơn 3 tháng so với bản L3+)</li>
+        <li><strong>Đảm bảo ≥320 cơ hội kinh doanh</strong> trong 180 ngày — hướng số lượng lớn</li>
+        <li>Không thể hiện KWA kèm trong bảng giá (khác bản L3+)</li>
+        <li>Phù hợp khi gian hàng đã vận hành ổn định, cần đẩy mạnh lượng inquiry</li>
+      </ul>
+    </div>
+  </div>
+  <div class="quote-box" style="margin-top:18px"><i class="fas fa-lightbulb" style="margin-right:8px"></i><strong>Vì sao chọn Verified Guarantee cho mục tiêu Châu Phi?</strong> (1) Nhà nhập khẩu Nigeria/Kenya/Ghana vốn e ngại hàng trôi nổi &amp; hàng giả — bộ nhận diện <strong>Verified + báo cáo SGS/TUV</strong> là "giấy thông hành" tín nhiệm; (2) Cam kết cơ hội kinh doanh giảm rủi ro "có sàn không khách" khi mới xâm nhập thị trường mới; (3) Kèm <strong>KWA $3,000</strong> giúp chủ động tiếp cận buyer tìm kiếm "engine oil / hydraulic oil" từ Châu Phi ngay tháng đầu. Nếu ưu tiên kiểm soát ngân sách, có thể khởi động bằng gói <strong>Guarantee L3+ (117,6 triệu ₫, kèm KWA $3,000)</strong> rồi nâng cấp Verified sau 1 chu kỳ.</div>
+  <div class="budget-grid" style="margin-top:18px">
+    <div class="budget-item"><div class="amt orange">280,880,000 ₫</div><div class="lbl">Gói Verified Supplier Guarantee L3+ / năm (~$11,999 · chưa VAT)</div><div class="src">Bảng giá FY27Q1 (VN) 2026</div></div>
+    <div class="budget-item"><div class="amt">$3,000</div><div class="lbl">KWA kèm gói (70,800,000 ₫) — ngân sách quảng cáo từ khóa</div><div class="src">Bảng giá FY27Q1 (VN) 2026</div></div>
+    <div class="budget-item"><div class="amt green">≥35 L3+ / 90 ngày</div><div class="lbl">Cam kết cơ hội kinh doanh chất lượng cao theo hợp đồng</div><div class="src">Điều khoản gói — xác nhận với sales</div></div>
+    <div class="budget-item"><div class="amt">6 – 12 tháng</div><div class="lbl">Kỳ hoàn vốn tham chiếu khi doanh thu XK mục tiêu 50.000–200.000 USD/năm (benchmark ngành F&amp;B)</div><div class="src">seller.alibaba.com blog 2026 — tham chiếu, không phải cam kết</div></div>
+  </div>
+  <div class="chart-container"><canvas id="roiChart"></canvas></div>
+  <p class="chart-note">Biểu đồ: <strong>3 kịch bản minh họa doanh thu xuất khẩu lũy kế</strong> (nghìn USD) theo thời gian qua kênh Alibaba.com — Tháng 1/3/6/12/18/24, mô hình hóa trên mức đầu tư gói đề xuất <strong>Verified Supplier Guarantee L3+ (280,88 triệu ₫/năm, ~$11,999, chưa VAT, kèm KWA $3,000)</strong>. Tham chiếu: giá XK dầu nhớt 1,27–1,94 USD/lít, MOQ 1.000 lít, case study VN trên sàn (Viet Argo 12 triệu USD năm 1; Sukavina đơn 1 triệu USD sau 5 tháng).</p>
+  <div class="disclaimer"><i class="fas fa-exclamation-circle" style="margin-right:8px"></i><strong>Cam kết minh bạch dữ liệu:</strong> Giá gói theo <strong>Bảng giá gói hội viên Alibaba.com FY27Q1 (VN) 2026</strong>, chưa bao gồm VAT; cơ chế KWA kèm gói, điều kiện giải ngân &amp; cam kết cơ hội kinh doanh phải xác nhận trong hợp đồng với bộ phận kinh doanh Alibaba.com Việt Nam (giá có thể có khuyến mãi theo từng thời điểm). Các con số doanh thu trong biểu đồ là <strong>kịch bản giả định phục vụ lập kế hoạch</strong>, KHÔNG phải cam kết hay số liệu đã kiểm chứng — kết quả thực tế phụ thuộc chất lượng gian hàng, năng lực chào giá, vận hành quảng cáo và tình hình thị trường.</div>
+  <div class="pill-row">
+    <span class="pill"><i class="fas fa-star"></i>4 SAO trực tiếp + Verified SGS/TUV on-site</span>
+    <span class="pill"><i class="fas fa-handshake"></i>Đảm bảo ≥35 cơ hội kinh doanh L3+ / 90 ngày</span>
+    <span class="pill green"><i class="fas fa-bullhorn"></i>Kèm KWA $3,000 (70,8 triệu ₫) quảng cáo từ khóa</span>
+    <span class="pill green"><i class="fas fa-africa"></i>KWA hướng thị trường: engine oil / hydraulic oil + tên nước Châu Phi</span>
+    <span class="pill green"><i class="fas fa-camera"></i>OBS đăng 130–200 sản phẩm + video verified 360°</span>
+  </div>
+</section>
+
+<!-- SECTION 7: ROADMAP -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-road"></i> Lộ Trình Xâm Nhập Châu Phi (24 Tháng)</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content"><span class="phase">Tháng 0 – 3 · Chuẩn bị &amp; Mở Gian Hàng</span>
+        <ul>
+          <li>Chốt gói <strong>Verified Supplier Guarantee L3+</strong> (280,88 tr ₫, xác minh SGS/TUV) — xin báo giá chính thức kèm VAT</li>
+          <li>Listing ưu tiên: dầu động cơ xe máy/ô tô (phân khúc 36–48% nhu cầu Châu Phi) + dầu thủy lực/công nghiệp (tăng nhanh nhất)</li>
+          <li>Bộ hồ sơ XK: chứng nhận API, CoA, MSDS, catalog song ngữ Anh–Pháp–Ả Rập</li>
+          <li>Ảnh/video nhà máy 10.000 m², dây chuyền pha chế – chiết rót</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content"><span class="phase">Tháng 3 – 6 · Tối Ưu &amp; Tiếp Cận Người Mua</span>
+        <ul>
+          <li>Chạy KWA (ngân sách 500–2.500 USD): từ khóa "engine oil Nigeria", "hydraulic oil Kenya", "motorcycle oil Ghana"...</li>
+          <li>Bật Trade Assurance; nghiên cứu buyer qua Data Insights</li>
+          <li>Chuẩn bị chứng nhận thị trường mục tiêu: SONCAP (Nigeria), PVoC/KEBS (Kenya)</li>
+          <li>Xây dựng kịch bản giá FOB theo từng quốc gia (tham chiếu 1,27–1,94 USD/lít)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content"><span class="phase">Tháng 6 – 12 · Đơn Hàng Đầu Tiên</span>
+        <ul>
+          <li>Nhắm 2 nhóm khách: (1) blender/nhà pha chế địa phương — chào dầu gốc, private-label; (2) nhà phân phối xe máy (boda-boda Kenya, okada Nigeria)</li>
+          <li>Gửi mẫu thử 200L drum + báo giá FOB/CIF; thương lượng MOQ linh hoạt</li>
+          <li>Ưu tiên khách Nigeria (nhập khẩu +350% 2024) &amp; Kenya (hub Đông Phi)</li>
+          <li>Mục tiêu kịch bản trung bình: đơn đầu tiên trong 6–9 tháng</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content"><span class="phase">Tháng 12 – 24 · Mở Rộng &amp; Củng Cố</span>
+        <ul>
+          <li>Mở rộng sang Ghana (Tema Lube Oil nhập 46,91 triệu USD 2025) &amp; Ai Cập (thị trường lớn nhất 22,95%)</li>
+          <li>Hợp tác đối tác hiện trường: Kwik Nigeria (channel partner Alibaba), đại lý độc quyền tại Kenya</li>
+          <li>Tăng ngân sách KWA theo ROI thực tế; đẩy mạnh dầu công nghiệp/hydraulic biên lợi nhuận cao</li>
+          <li>Mục tiêu: 2–3 thị trường trọng điểm ổn định, doanh thu XK 100–350 nghìn USD/năm (kịch bản trung bình)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: CASE STUDIES -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-star"></i> Case Studies Doanh Nghiệp Việt Thành Công Trên Alibaba.com</h2>
+  <div class="data-missing-warning"><i class="fas fa-exclamation-triangle"></i> ⚠️ Chưa có case study công bố chính thức riêng cho ngành dầu nhớt trên Alibaba.com (Data Not Available). Các case dưới đây là doanh nghiệp VN ngành khác — dùng làm tham chiếu tiềm năng kênh; 2 case đầu do Alibaba.com công bố (có tính marketing).</div>
+  <div class="cards-grid">
+    <div class="info-card"><h3><i class="fas fa-fire"></i>Viet Argo — Than Củi BBQ</h3><p><strong>12 triệu USD doanh thu năm đầu</strong>; Top 10 supplier tăng trưởng nhanh nhất Alibaba.com; đơn đầu tiên 65.000 USD trong 3 tháng; 70% khách đặt lặp lại; 20–35 container/tháng tới 8 thị trường. Công cụ: Data Insights, KWA, Trade Assurance [Nguồn: seller.alibaba.com – 07/2026].</p></div>
+    <div class="info-card"><h3><i class="fas fa-tools"></i>Sukavina — Bàn Ghế Kim Loại (Bình Dương)</h3><p>8 năm không xuất khẩu được; mở gian hàng Alibaba.com 2024 → <strong>đơn quốc tế đầu tiên sau 5 tháng</strong>; giữa 2025 ký hợp đồng <strong>&gt;1 triệu USD</strong> với khách Ấn Độ; cuối 2024 XK &gt;40% doanh thu [Nguồn: theinvestor.vn – 30/05/2025].</p></div>
+    <div class="info-card"><h3><i class="fas fa-glass-water"></i>Karofi — Máy Lọc Nước</h3><p>Xuất khẩu sang <strong>40 quốc gia</strong> (2023), trong đó <strong>20% qua Alibaba.com</strong>; đạt giải "Nhà lãnh đạo TMĐT xuất sắc Alibaba.com tại VN 2024" (KEL Award, phối hợp Cục Xúc tiến Thương mại – Bộ Công Thương) [Nguồn: Báo Đầu tư/vietnam.vn – 30/08/2024].</p></div>
+  </div>
+</section>
+
+<!-- SECTION 9: BARRIERS -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-shield-halved"></i> Rào Cản Nhập Khẩu &amp; Chứng Nhận Tại Các Thị Trường Trọng Điểm</h2>
+  <table class="data-table">
+    <tr><th>Thị trường</th><th>Chương trình / Quy định</th><th>Yêu cầu chính với nhà xuất khẩu</th></tr>
+    <tr><td><strong>Nigeria</strong></td><td>SONCAP (SON Conformity Assessment Programme); NMDPRA "Lubricant Importation Module" (06/2025)</td><td>Product Certificate (PC) từ đơn vị được SON chỉ định → SONCAP CoC cho từng lô hàng; ⚠️ kiểm tra danh mục dầu nhớt có thuộc diện quản lý không [son.gov.ng; Mordor Nigeria 2026]</td></tr>
+    <tr><td><strong>Kenya</strong></td><td>KEBS PVoC + Petroleum (Products Quality Management) Regulations 2025; Petroleum (Lubricants Facility...) Regulations 2025 (EPRA/KEBS)</td><td>Kiểm tra trước khi xếp hàng (SGS/BV/Intertek/CCIC) → CoC; dầu nhớt phải đạt chuẩn Kenya/quốc tế, kiểm định bắt buộc, dán nhãn truy xuất [kebs.org; Mordor 2026]</td></tr>
+    <tr><td><strong>Ai Cập</strong></td><td>EOS 1391/2024 (metalworking); GOEIC Policy 6535/2024</td><td>Siết hồ sơ nhập khẩu; tiêu chuẩn chất lượng EOS [Mordor Egypt 2026]</td></tr>
+    <tr><td><strong>Ghana / Đông Phi</strong></td><td>NPA Bill (chờ ban hành); chuẩn EAC DEAS 1334 (2026); PVoC Tanzania/Uganda/Zambia/DRC</td><td>Chuẩn Euro IV/V nhiên liệu từ 01/2024; kiểm tra trước xếp hàng qua đơn vị giám định quốc tế [Mordor Ghana/Africa 2026]</td></tr>
+    <tr><td><strong>Nam Phi</strong></td><td>EPR (trách nhiệm mở rộng nhà sản xuất) từ 05/2021</td><td>Bắt buộc thu hồi dầu thải; chi phí tuân thủ +2–3% giá kệ [Mordor South Africa 2026]</td></tr>
+  </table>
+  <div class="disclaimer"><i class="fas fa-circle-info" style="margin-right:8px"></i><strong>Lưu ý:</strong> Việt Nam không hưởng ưu đãi AfCFTA (nội khối) và không có FTA với nước Châu Phi nào — hàng dầu nhớt VN chịu thuế MFN + VAT/thuế tiêu thụ đặc biệt theo từng nước. Tra cứu thuế suất chính xác theo mã HS tại ITC Market Access Map (macmap.org).</div>
+</section>
+
+<!-- SECTION 10: SOURCES -->
+<section class="section">
+  <h2 class="section-title"><i class="fas fa-book"></i> Nguồn Dữ Liệu &amp; Phương Pháp</h2>
+  <p style="font-size:.9rem;color:#5b6472;margin-bottom:12px">Ngày thu thập: <strong>03/09/2026</strong>. Nguyên tắc: mọi số liệu trích từ nguồn công bố kèm URL; mục không tìm được ghi ⚠️ Data Not Available — không ước lượng/bịa. Các nguồn dưới đây đã được truy cập trực tiếp tại thời điểm thu thập.</p>
+  <div class="sources-list" id="sourceList">
+    <!-- sources injected by script -->
+  </div>
+</section>
+</div>
+
+<footer class="footer">
+  <p><i class="fas fa-oil-can"></i> Báo cáo phân tích ngành hàng — Dầu Nhớt &amp; Chất Bôi Trơn · Cơ hội thị trường Châu Phi trên Alibaba.com</p>
+  <p>Đơn vị đề xuất: CTCP Dầu Nhớt &amp; Hóa Chất Miền Nam (MiennamPetro) — miennampetro.com.vn</p>
+  <p>© 2026 · Ngày tạo: 2026-09-03 · Phiên bản: 2.0</p>
+</footer>
+<script>
+// ---------- Animated Counter ----------
+function animateCounter(el,target,duration){
+  if(isNaN(target)){el.textContent=target;return}
+  const isFloat = target % 1 !== 0;
+  const start = performance.now();
+  function tick(now){
+    const p = Math.min((now-start)/duration,1);
+    const val = target * (1 - Math.pow(1-p,3));
+    el.textContent = isFloat ? val.toFixed(2) : Math.floor(val).toLocaleString('en-US');
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+// ---------- Scroll Reveal ----------
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+// ---------- Chart Helpers ----------
+const FONT = 'Inter, sans-serif';
+Chart.defaults.font.family = FONT;
+Chart.defaults.color = '#5b6472';
+const gridOpts = {responsive:true,maintainAspectRatio:false};
+function lineChart(id,labels,datasets,extra){
+  new Chart(document.getElementById(id),Object.assign({type:'line',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true,labels:{usePointStyle:true,boxWidth:8,font:{weight:600}}},tooltip:{callbacks:{label:(c)=>' '+c.dataset.label+': '+Number(c.parsed.y).toLocaleString('en-US')+(extra&&extra.suffix?extra.suffix:'')}}},scales:{y:{beginAtZero:extra&&extra.zero!==false,ticks:{callback:(v)=>v.toLocaleString('en-US')}}}}},extra||{}));
+}
+function barChart(id,labels,datasets,horiz){
+  const cfg={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{usePointStyle:true,boxWidth:8,font:{weight:600}}}},scales:horiz?{x:{beginAtZero:true},y:{}}:{y:{beginAtZero:true}}};
+  new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets},options:cfg});
+}
+const ORANGE='#FF6A00',ORANGE2='#FF8C42',NAVY='#1A1F36',NAVY2='#2D3561',GREEN='#10B981',RED='#EF4444',YELLOW='#F59E0B',BLUE='#3B82F6',PURPLE='#8B5CF6';
+// ---------- 1. Global market size (USD bn) ----------
+lineChart('marketSizeChart',
+  ['2024','2025','2030 (Dự báo)'],
+  [{label:'Quy mô toàn cầu (tỷ USD)',data:[173.5,178.14,204.1],borderColor:ORANGE,backgroundColor:'rgba(255,106,0,.12)',tension:.4,fill:true,pointRadius:6,pointBackgroundColor:ORANGE}],
+  {suffix:' tỷ USD'});
+// ---------- 2. CAGR comparison ----------
+barChart('cagrChart',
+  ['Toàn cầu','Trung Đông & Châu Phi','Châu Phi'],
+  [{label:'CAGR khối lượng 2026–2031 (%)',data:[2.15,3.19,3.36],backgroundColor:[NAVY,ORANGE2,ORANGE],borderRadius:8}]);
+// ---------- 3. Africa countries volume 2025 ----------
+barChart('africaCountryChart',
+  ['Ai Cập','Nigeria','Nam Phi','Kenya','Ghana'],
+  [{label:'Tiêu thụ 2025 (triệu lít)',data:[623.24,563.93,431.03,90.12,48.89],backgroundColor:['#FF6A00','#FF8C42','#2D3561','#10B981','#8B5CF6'],borderRadius:8}]);
+// ---------- 4. Engine oil share per country ----------
+barChart('engineOilShareChart',
+  ['Châu Phi','Nigeria','Kenya','Ghana','Nam Phi','Ai Cập'],
+  [{label:'Tỷ trọng dầu động cơ ô tô 2025 (%)',data:[36.05,38.45,41.22,42.84,44.26,47.89],backgroundColor:ORANGE,borderRadius:8}],
+  true);
+// ---------- 5. Top global exporters HS3403 ----------
+barChart('topExportChart',
+  ['Đức','Mỹ','Nhật','Pháp','Hà Lan','Bỉ','Trung Quốc','Singapore'],
+  [{label:'Xuất khẩu 2023 (triệu USD)',data:[2343,2004,1158,853,645,642,415,362],backgroundColor:NAVY,borderRadius:6},
+   {label:'Xuất khẩu 2024 sơ bộ (triệu USD)',data:[2272,2012,1207,809,662,638,497,348],backgroundColor:ORANGE,borderRadius:6}]);
+// ---------- 6. Africa importers HS3403 ----------
+barChart('africaImportChart',
+  ['Morocco','Nam Phi','Ai Cập','Nigeria','Tunisia','Angola'],
+  [{label:'Nhập khẩu 2023 (triệu USD)',data:[83.1,71.1,57.1,7.1,24.9,10.7],backgroundColor:NAVY,borderRadius:6},
+   {label:'Nhập khẩu 2024 sơ bộ (triệu USD)',data:[91.5,79.8,58.1,31.9,30.9,11.1],backgroundColor:ORANGE,borderRadius:6}]);
+// ---------- 7. Alibaba price range (floating bars) ----------
+new Chart(document.getElementById('priceChart'),{type:'bar',data:{labels:['Trung Quốc (10W-30/40)','Việt Nam — K-Oil (động cơ/ATF/hydraulic)'],datasets:[{label:'Dải giá niêm yết (USD/lít)',data:[[0.98,1.99],[1.27,1.94]],backgroundColor:['#2D3561','#FF6A00'],borderRadius:8,barPercentage:.5}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:(c)=>{const v=c.raw;return ' '+v[0]+' – '+v[1]+' USD/lít'}}}},scales:{x:{beginAtZero:true,title:{display:true,text:'USD / lít (kg)'}}}}});
+// ---------- 8. ROI scenarios ----------
+lineChart('roiChart',
+  ['Tháng 1','Tháng 3','Tháng 6','Tháng 12','Tháng 18','Tháng 24'],
+  [{label:'Kịch bản bảo thủ (nghìn USD)',data:[0,0,5,25,60,120],borderColor:RED,tension:.4,borderWidth:2.5,pointRadius:4},
+   {label:'Kịch bản trung bình (nghìn USD)',data:[0,3,25,90,200,350],borderColor:YELLOW,tension:.4,borderWidth:2.5,pointRadius:4},
+   {label:'Kịch bản lạc quan (nghìn USD)',data:[0,10,60,220,450,750],borderColor:GREEN,tension:.4,borderWidth:2.5,pointRadius:4}],
+  {suffix:' nghìn USD'});
+// ---------- Stat counters ----------
+document.querySelectorAll('.stat-value').forEach(s=>{const t=parseFloat(s.getAttribute('data-target'));if(!isNaN(t))animateCounter(s,t,2200);});
+// ---------- Sources ----------
+const SOURCES=[
+ ['Alibaba.com VN — Bảng giá gói hội viên FY27Q1 (2026): USD/VND, chưa gồm VAT (tài liệu "2026 Price.pdf")','https://seller.alibaba.com/vn/pricing'],
+ ['Mordor Intelligence — Africa Lubricants Market (2026)','https://www.mordorintelligence.com/industry-reports/africa-lubricants-market-industry'],
+ ['Mordor Intelligence — Nigeria Lubricants Market (2026)','https://www.mordorintelligence.com/industry-reports/nigeria-lubricants-market-industry'],
+ ['Mordor Intelligence — South Africa Lubricants Market (2026)','https://www.mordorintelligence.com/industry-reports/south-africa-lubricants-market-industry'],
+ ['Mordor Intelligence — Kenya Lubricants Market (2026)','https://www.mordorintelligence.com/industry-reports/kenya-lubricants-market'],
+ ['Mordor Intelligence — Egypt Lubricants Market (2026)','https://www.mordorintelligence.com/industry-reports/egypt-lubricants-market'],
+ ['Mordor Intelligence — Ghana Lubricants Market (2026)','https://www.mordorintelligence.com/industry-reports/ghana-lubricants-market'],
+ ['Mordor Intelligence — Lubricants Market toàn cầu (2026)','https://www.mordorintelligence.com/industry-reports/lubricants-market'],
+ ['MarketsandMarkets — Lubricants Market (04/2025)','https://www.marketsandmarkets.com/Market-Reports/lubricants-market-182046896.html'],
+ ['UN Comtrade — HS 3403 & 2710, truy cập 03/09/2026','https://comtradeplus.un.org/'],
+ ['Tổng cục Thống kê — XNK hàng hóa VN 2024 (01/2025)','https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2025/01/buc-tranh-xuat-nhap-khau-hang-hoa-cua-viet-nam-nam-2024-phuc-hoi-phat-trien-va-nhung-ky-luc-moi/'],
+ ['Niên giám Thống kê Hải quan 2024 (tra kim ngạch VN→Châu Phi)','https://files.customs.gov.vn/CustomsCMS/TONG_CUC/2026/1/12/NGCT2024%20final.pdf'],
+ ['Trung tâm WTO VCCI — Danh sách FTA của VN','https://trungtamwto.vn'],
+ ['USTR — AGOA (xác minh không áp dụng cho VN)','https://ustr.gov/issue-areas/preference-programs/african-growth-and-opportunity-act-agoa'],
+ ['ITC Market Access Map (tra thuế nhập khẩu theo mã HS & nước)','https://www.macmap.org'],
+ ['Standards Organisation of Nigeria (SONCAP)','https://son.gov.ng'],
+ ['Kenya Bureau of Standards (KEBS / PVoC)','https://www.kebs.org'],
+ ['Alibaba.com — tìm kiếm "engine oil" (20,000+ sản phẩm, 03/09/2026)','https://www.alibaba.com/trade/search?SearchText=engine+oil'],
+ ['Alibaba.com — listing Engine oil từ nhà máy VN (K-Oil: 29% XK sang Châu Phi)','https://www.alibaba.com/product-detail/Engine-oil-from-Vietnam-factory-Fully_10000043846884.html'],
+ ['seller.alibaba.com/vn/pricing — gói thành viên VN (03/09/2026)','https://seller.alibaba.com/vn/pricing'],
+ ['seller.alibaba.com — Global B2B Influence Guide 2026','https://seller.alibaba.com/blogs/2026/global/b2b-ecommerce/alibaba-com-global-influence-guide-2026'],
+ ['seller.alibaba.com — Viet Argo: $12M doanh thu năm đầu (07/2026)','https://seller.alibaba.com/vn/startup-to-12-million-first-year-export-revenue-alibaba'],
+ ['smartbuy.alibaba.com — Chi phí mở gian hàng B2B (02/2026)','https://smartbuy.alibaba.com/b2b/how-much-does-it-cost-to-open-alibaba-shop-b2b'],
+ ['sellonalibaba.com (Alibaba.com VN) — Minh bạch chi phí (06/2026)','https://sellonalibaba.com/vi/news/minh-bach-chi-phi-mo-gian-hang-alibaba-cho-doanh-nghiep'],
+ ['seller.alibaba.com — Selling to Africa: buyer +240% YoY (2026)','https://seller.alibaba.com/blogs/2026/southeast-asia/apparel/africa-market-product-adaptation-guide-alibaba-b2b'],
+ ['The Investor — Sukavina: đơn $1 triệu sau 5 tháng (30/05/2025)','https://theinvestor.vn/vietnamese-firm-lands-first-1-mln-order-on-alibaba-after-8-year-struggle-to-export-d15831.html'],
+ ['Báo Đầu tư / vietnam.vn — Karofi & KEL Award 2024 (30/08/2024)','https://www.vietnam.vn/doanh-nghiep-viet-tang-toc-xuat-khau-nho-len-san-alibaba-com'],
+ ['AllAfrica/Daba Finance — Kwik là channel partner Alibaba đầu tiên tại châu Phi hạ Sahara (04/2025)','https://allafrica.com/stories/202504070702.html'],
+ ['MiennamPetro — website chính thức (lịch sử, nhà máy, sản phẩm)','https://miennampetro.com.vn/']
+];
+document.getElementById('sourceList').innerHTML = SOURCES.map(s=>'<div class="source-item"><i class="fas fa-file-alt" style="color:#FF6A00;margin-right:8px"></i>'+s[0]+'<br><a href="'+s[1]+'" target="_blank" rel="noopener">'+s[1]+'</a></div>').join('');
+</script>
+</body>
+</html>
