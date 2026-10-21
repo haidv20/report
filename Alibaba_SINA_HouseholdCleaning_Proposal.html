@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="vi" class="lang-vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alibaba.com GGS Vietnam — Đề xuất phát triển xuất khẩu: SINA (Chất tẩy rửa gia dụng)</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --primary:#1B365D; --secondary:#E8740C; --accent:#2E8B57; --bg-light:#F8F9FA;
+  --text-dark:#1A1A2E; --text-muted:#5A6072; --border:#E2E8F0;
+  --gradient-header:linear-gradient(135deg,#1B365D 0%,#2D5AA0 100%);
+  --soft-orange:#FFF4E8; --soft-yellow:#FFFBE6; --soft-green:#EAF6EF;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg-light);color:var(--text-dark);font-size:14.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+html.lang-vi body{font-family:'Be Vietnam Pro',system-ui,sans-serif}
+html.lang-en body{font-family:'Inter',system-ui,sans-serif}
+html.lang-cn body{font-family:'Noto Sans SC',system-ui,sans-serif}
+h1,h2,h3,h4{font-family:inherit;color:var(--primary);margin:0}
+a{color:#2D5AA0}
+/* ===== language ===== */
+html.lang-vi .cn,html.lang-vi .en,html.lang-vi .blk-cn,html.lang-vi .blk-en{display:none!important}
+html.lang-cn .vi,html.lang-cn .en,html.lang-cn .blk-vi,html.lang-cn .blk-en{display:none!important}
+html.lang-en .vi,html.lang-en .cn,html.lang-en .blk-vi,html.lang-en .blk-cn{display:none!important}
+html.lang-vi .vi{display:inline!important}
+html.lang-cn .cn{display:inline!important}
+html.lang-en .en{display:inline!important}
+html.lang-vi .blk-vi{display:block!important}
+html.lang-cn .blk-cn{display:block!important}
+html.lang-en .blk-en{display:block!important}
+/* ===== topbar ===== */
+.topbar{position:fixed;top:0;right:0;z-index:90;display:flex;gap:6px;padding:8px 12px;align-items:center}
+.lang-switcher,.ui-switch{display:flex;gap:0;background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 2px 10px rgba(27,54,93,.10)}
+.lang-switcher button,.ui-switch button{border:0;background:transparent;padding:7px 11px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;font-family:inherit}
+.lang-switcher button.active{background:var(--primary);color:#fff}
+.ui-switch button.active{background:var(--secondary);color:#fff}
+/* ===== header ===== */
+.doc-header{background:var(--gradient-header);color:#fff;padding:0}
+.edition{background:rgba(255,255,255,.13);padding:7px 26px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#FFD08A;font-weight:600}
+.hdr-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;padding:26px 26px 20px;align-items:start}
+.hdr-left img{height:30px;display:block;margin-bottom:16px}
+.hdr-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#FFD08A;font-weight:700;margin-bottom:6px}
+.hdr-title{font-size:25px;line-height:1.28;color:#fff;font-weight:800;margin-bottom:8px}
+.hdr-sub{font-size:16px;color:#D6E2F5;font-weight:600}
+.hdr-right{border-left:1px solid rgba(255,255,255,.22);padding-left:26px;font-size:12.8px;color:#D6E2F5}
+.hdr-right dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px}
+.hdr-right dt{color:#9FB6D8}
+.hdr-right dd{margin:0;color:#fff;font-weight:600}
+.hdr-tags{display:flex;flex-wrap:wrap;gap:7px;padding:0 26px 14px}
+.hdr-tags span{font-size:11.5px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.14);color:#fff;font-weight:600;border:1px solid rgba(255,255,255,.22)}
+/* ===== layout ===== */
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:26px;max-width:1500px;margin:0 auto;padding:24px 22px 60px}
+.toc{position:sticky;top:56px;align-self:start;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 12px;max-height:calc(100vh - 80px);overflow:auto;font-size:12.6px}
+.toc h4{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:12px 4px 6px}
+.toc h4:first-child{margin-top:0}
+.toc a{display:block;padding:4px 7px;border-radius:6px;text-decoration:none;color:#3A4459;line-height:1.35}
+.toc a:hover{background:var(--soft-orange);color:var(--primary)}
+.toc a b{color:var(--secondary);font-weight:700;margin-right:5px;font-variant-numeric:tabular-nums}
+/* ===== panel ===== */
+.panel{background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px 28px 22px;margin-bottom:24px;box-shadow:0 1px 3px rgba(27,54,93,.05)}
+.phead{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;border-bottom:2px solid var(--border);padding-bottom:12px}
+.pnum{flex:0 0 auto;width:42px;height:42px;border-radius:10px;background:var(--primary);color:#FFD08A;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
+.phead h2{font-size:20px;font-weight:700;line-height:1.35;margin-bottom:2px}
+.psub{font-size:14px;font-weight:600;color:var(--secondary);margin:0}
+.takeaway{background:var(--soft-yellow);border-left:4px solid var(--secondary);padding:11px 15px;font-weight:700;font-size:15px;color:#3A2A10;border-radius:0 8px 8px 0;margin:14px 0 18px}
+.insight{background:linear-gradient(180deg,#FFF8EF,#FFFFFF);border-left:4px solid var(--secondary);border-radius:0 8px 8px 0;padding:11px 15px;margin:16px 0;font-size:13.8px}
+.hl{background:var(--soft-yellow);border:1px solid #F3DFA0;border-radius:8px;padding:11px 15px;margin:16px 0;font-size:13.8px}
+.ok{color:var(--accent);font-weight:700}
+.warn{color:#C2410C;font-weight:700}
+h3.sub{font-size:15px;font-weight:700;margin:20px 0 9px;color:var(--primary);border-left:3px solid var(--secondary);padding-left:9px}
+p{margin:9px 0}
+ul,ol{margin:9px 0;padding-left:20px}
+li{margin:4px 0}
+.src{font-size:11.5px;color:var(--text-muted);border-top:1px dashed var(--border);padding-top:8px;margin-top:16px;line-height:1.55}
+/* ===== tables ===== */
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--border);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:12.8px;min-width:560px}
+thead th{background:var(--primary);color:#fff;text-align:left;padding:9px 11px;font-weight:600;font-size:12.2px;white-space:nowrap}
+tbody td{padding:8px 11px;border-top:1px solid var(--border);vertical-align:top}
+tbody tr:nth-child(even){background:#FBFCFE}
+tbody tr:hover{background:var(--soft-orange)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pick{background:var(--soft-orange)!important;font-weight:600}
+tfoot td{padding:9px 11px;border-top:2px solid var(--primary);font-weight:700;background:#F3F6FB}
+/* ===== stat cards ===== */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:13px;margin:16px 0}
+.stat{background:#fff;border:1px solid var(--border);border-top:3px solid var(--secondary);border-radius:10px;padding:13px 15px}
+.stat .v{font-size:23px;font-weight:800;color:var(--primary);line-height:1.15;font-variant-numeric:tabular-nums}
+.stat .l{font-size:12.2px;color:var(--text-muted);margin-top:4px;line-height:1.45}
+.stat .d{font-size:11.5px;font-weight:700;color:var(--accent);margin-top:5px}
+/* ===== charts ===== */
+.chart-box{border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 8px rgba(27,54,93,.06);padding:24px;margin:18px 0;background:#fff}
+.chart-box h4{font-size:13.5px;margin-bottom:12px;color:var(--primary)}
+.cwrap{position:relative;height:300px}
+.cwrap.tall{height:340px}
+/* ===== notes ===== */
+.notes{display:none;background:#F1F3F7;border:1px dashed #B9C2D2;border-radius:8px;padding:12px 15px;margin-top:16px;font-size:13px;color:#3A4459}
+body.show-notes .notes{display:block}
+.notes b.lbl{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8792A8;margin-bottom:5px}
+/* ===== tags ===== */
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.tag.vn{background:#FDE8E8;color:#B42318}
+.tag.cn{background:#FFF1CC;color:#8A5B00}
+.tag.ot{background:#E4EEFB;color:#1B4F9C}
+.tag.up{background:#E2F4E8;color:#1B6B3A}
+.tag.hot{background:#FFF3C4;color:#7A5200}
+/* ===== SWOT ===== */
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.swot div{border-radius:10px;padding:12px 14px;font-size:13px}
+.swot .s{background:#EAF6EF;border-left:4px solid #2E8B57}
+.swot .w{background:#FDEDEC;border-left:4px solid #C0392B}
+.swot .o{background:#E8F0FB;border-left:4px solid #2D5AA0}
+.swot .t{background:#FFF8E1;border-left:4px solid #E8A317}
+.swot b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+/* ===== persona ===== */
+.persona{border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:9px 0;background:#fff}
+.persona b{color:var(--primary)}
+/* ===== footer ===== */
+.doc-footer{background:var(--primary);color:#D6E2F5;font-size:12.4px}
+.f-top{display:flex;justify-content:space-between;align-items:center;padding:16px 26px;border-bottom:1px solid rgba(255,255,255,.18)}
+.f-top img{height:22px}
+.f-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;padding:20px 26px}
+.f-cols h5{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#FFD08A;margin:0 0 7px;font-weight:700}
+.f-cols p{margin:0;font-size:12px;line-height:1.6}
+.f-bottom{display:flex;justify-content:space-between;padding:12px 26px;border-top:1px solid rgba(255,255,255,.18);font-size:11.5px;color:#9FB6D8}
+/* ===== presentation ===== */
+body.present .layout{display:block;padding:0;max-width:none}
+body.present .toc,body.present .doc-header,body.present .doc-footer{display:none}
+body.present .panel{display:none;position:fixed;inset:0;margin:0;border-radius:0;border:0;overflow-y:auto;z-index:70;padding:56px 6vw 70px}
+body.present .panel.active{display:block}
+body.present .panel h2{font-size:30px}
+body.present .phead h2{font-size:32px}
+body.present .takeaway{font-size:19px;line-height:1.5}
+body.present .panel p,body.present .panel li{font-size:17px;line-height:1.75}
+body.present .panel table{font-size:14.5px}
+body.present .cwrap{height:360px}
+.present-bar{display:none;position:fixed;top:0;left:0;right:0;height:5px;background:#DDE3EC;z-index:95}
+body.present .present-bar{display:block}
+.present-bar i{display:block;height:5px;background:var(--secondary);width:0;transition:width .25s}
+.present-label{display:none;position:fixed;bottom:0;left:0;right:0;padding:9px 20px;background:rgba(27,54,93,.95);color:#fff;font-size:12.5px;z-index:95;justify-content:space-between;align-items:center}
+body.present .present-label{display:flex}
+.present-label .hint{color:#FFD08A}
+/* ===== responsive ===== */
+@media (max-width:1080px){
+  .layout{grid-template-columns:1fr;padding:16px 14px 50px}
+  .toc{position:static;max-height:none}
+  .hdr-grid{grid-template-columns:1fr;gap:16px}
+  .hdr-right{border-left:0;padding-left:0;border-top:1px solid rgba(255,255,255,.22);padding-top:14px}
+  .f-cols{grid-template-columns:1fr 1fr}
+  .swot{grid-template-columns:1fr}
+}
+/* ===== print ===== */
+@media print{
+  .topbar,.present-bar,.present-label,.notes,.toc{display:none!important}
+  body{background:#fff;font-size:10.5pt}
+  .layout{display:block;padding:0;max-width:none}
+  .panel{display:block!important;page-break-after:always;border:0;box-shadow:none;padding:0 0 12pt;margin:0}
+  .doc-header{background:#1B365D!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  thead th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cwrap{height:230px}
+}
+
+/* ===== mobile reading mode ===== */
+@media (max-width: 640px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  body{font-size:13px;line-height:1.58}
+  .topbar{left:0;right:0;top:0;min-height:48px;padding:5px 7px;gap:4px;justify-content:space-between;background:rgba(255,255,255,.97);box-shadow:0 2px 10px rgba(27,54,93,.14);flex-wrap:nowrap}
+  .ui-switch,.lang-switcher{flex:0 0 auto}
+  .lang-switcher button,.ui-switch button{padding:6px 7px;font-size:10px;white-space:nowrap}
+  .doc-header{padding-top:50px}
+  .edition{padding:6px 13px;font-size:9px;letter-spacing:.08em}
+  .hdr-grid{display:block;padding:18px 14px 14px}
+  .hdr-left img{height:23px;margin-bottom:11px}
+  .hdr-kicker{font-size:10px;letter-spacing:.08em}
+  .hdr-title{font-size:21px;line-height:1.25;margin-bottom:6px}
+  .hdr-sub{font-size:13px;line-height:1.45}
+  .hdr-right{border-left:0;border-top:1px solid rgba(255,255,255,.25);padding:12px 0 0;margin-top:14px;font-size:11px}
+  .hdr-right dl{grid-template-columns:88px minmax(0,1fr);gap:4px 8px;overflow-wrap:anywhere}
+  .hdr-tags{gap:5px;padding:0 14px 11px}
+  .hdr-tags span{font-size:9.5px;padding:3px 7px}
+  .layout{display:block;width:100%;max-width:none;padding:10px 9px 35px}
+  .toc{position:static;margin-bottom:12px;padding:10px 9px;font-size:11px;max-height:none}
+  .toc h4{font-size:9px;margin:8px 3px 4px}
+  .toc a{display:inline-block;padding:4px 6px;margin:2px 1px;background:#f8fafc;border:1px solid var(--border);font-size:10.5px}
+  .toc a b{margin-right:3px}
+  .panel{width:100%;padding:17px 13px 16px;margin-bottom:14px;border-radius:10px}
+  .phead{gap:9px;margin-bottom:9px;padding-bottom:9px}
+  .pnum{width:34px;height:34px;border-radius:8px;font-size:12px}
+  .phead h2{font-size:17px;line-height:1.32}
+  .psub{font-size:11.5px;line-height:1.45}
+  .takeaway{font-size:13px;line-height:1.55;padding:9px 11px;margin:10px 0 13px}
+  .insight,.hl{font-size:12px;line-height:1.55;padding:9px 11px;margin:11px 0}
+  h3.sub{font-size:13px;margin:14px 0 7px}
+  p,li{font-size:12.5px;line-height:1.58}
+  .stat-grid,.kpis{grid-template-columns:1fr 1fr;gap:7px;margin:11px 0}
+  .stat,.kpi{padding:9px 9px;border-radius:8px}
+  .stat .v,.kpi b{font-size:17px}
+  .stat .l,.kpi small{font-size:10.5px;line-height:1.38}
+  .stat .d{font-size:10px;margin-top:3px}
+  .chart-box{padding:11px 9px;margin:11px 0;border-radius:8px}
+  .chart-box h4{font-size:11.5px;line-height:1.45;margin-bottom:7px}
+  .cwrap{height:220px!important;width:100%;position:relative}
+  .cwrap.tall{height:260px!important}
+  .tw{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;border-radius:8px}
+  table{min-width:620px;font-size:11px;line-height:1.45}
+  thead th,table th{padding:7px 8px;font-size:10.5px}
+  tbody td,table td{padding:7px 8px}
+  .persona{padding:9px 10px;margin:7px 0;font-size:11.5px}
+  .swot,.grid2,.grid3{grid-template-columns:1fr;gap:8px}
+  .card{padding:9px 10px}
+  .card h5{font-size:12.5px}
+  .card p{font-size:11.5px}
+  .src{font-size:9.5px;line-height:1.45;margin-top:11px;padding-top:6px}
+  .notes{font-size:11px;line-height:1.55;padding:9px 10px;margin-top:11px}
+  .f-top{display:block;padding:13px 14px;font-size:11px;line-height:1.45}
+  .f-top img{height:18px;margin-bottom:6px}
+  .f-cols{grid-template-columns:1fr;gap:13px;padding:15px 14px}
+  .f-cols h5{font-size:10px;margin-bottom:4px}
+  .f-cols p{font-size:10.5px}
+  .f-bottom{display:block;padding:10px 14px;font-size:9.5px;line-height:1.5}
+  .f-bottom span{display:block}
+  body.present .panel{padding:64px 15px 64px}
+  body.present .panel h2,body.present .phead h2{font-size:21px}
+  body.present .takeaway{font-size:14px}
+  body.present .panel p,body.present .panel li{font-size:13px;line-height:1.6}
+  body.present .panel table{font-size:11px}
+  body.present .cwrap{height:250px!important}
+  .present-label{font-size:10px;padding:7px 12px}
+  .present-count{font-size:10px;padding:6px 10px;bottom:9px;left:9px}
+}
+@media (max-width:360px){
+  .topbar{gap:2px;padding-left:4px;padding-right:4px}
+  .lang-switcher button,.ui-switch button{padding:5px 5px;font-size:9px}
+  .hdr-title{font-size:19px}
+  .stat-grid,.kpis{grid-template-columns:1fr}
+  .layout{padding-left:6px;padding-right:6px}
+  .panel{padding-left:10px;padding-right:10px}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="ui-switch">
+    <button id="btnPresent" onclick="togglePresent()">Trình bày / 演示 / Present</button>
+    <button id="btnNotes" onclick="toggleNotes()">Ghi chú / 备注 / Notes</button>
+  </div>
+  <div class="lang-switcher">
+    <button class="active" data-lang="vi" onclick="switchLang('vi')">VI</button>
+    <button data-lang="cn" onclick="switchLang('cn')">CN</button>
+    <button data-lang="en" onclick="switchLang('en')">EN</button>
+  </div>
+</div>
+<div class="present-bar"><i id="pbar"></i></div>
+
+<header class="doc-header">
+  <div class="edition">
+    <span class="vi">Báo cáo ngành hàng · Không bao gồm báo giá</span>
+    <span class="cn">行业报告 · 不含报价</span>
+    <span class="en">Industry report · No quotation included</span>
+  </div>
+  <div class="hdr-grid">
+    <div class="hdr-left">
+      <img src="https://s.alicdn.com/@logo/logo_en_light_horizontal_default_full.png" alt="Alibaba.com">
+      <div class="hdr-kicker">Alibaba.com · GGS Vietnam</div>
+      <h1 class="hdr-title">
+        <span class="vi">Báo cáo ngành hàng</span>
+        <span class="cn">行业调研报告</span>
+        <span class="en">Industry Report</span>
+      </h1>
+      <div class="hdr-sub">
+        <span class="vi">Ngành hàng: Chất tẩy rửa &amp; chăm sóc gia dụng — Thương hiệu SINA</span>
+        <span class="cn">行业：家用清洁与洗涤剂 — SINA 品牌</span>
+        <span class="en">Industry: Household cleaning &amp; detergent — SINA brand</span>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <dl>
+        <dt>Document ID</dt><dd>DOC-IND-HOMECARE-2026-002</dd>
+        <dt><span class="vi">Loại tài liệu</span><span class="cn">文件类型</span><span class="en">Document type</span></dt><dd><span class="vi">Khảo sát ngành — không báo giá</span><span class="cn">行业调研 — 不含报价</span><span class="en">Industry survey — no quotation</span></dd>
+        <dt><span class="vi">Phiên bản</span><span class="cn">版本</span><span class="en">Version</span></dt><dd>v2.0</dd>
+        <dt><span class="vi">Ngày phát hành</span><span class="cn">发布日期</span><span class="en">Issue date</span></dt><dd>21/10/2026</dd>
+        <dt><span class="vi">Người chuẩn bị</span><span class="cn">编制人</span><span class="en">Prepared by</span></dt><dd>Dương Viết Hải — Senior Account Manager</dd>
+        <dt>Email</dt><dd>duong.viet-hai@alibaba-inc.com</dd>
+        <dt>HS Code</dt><dd>3402 / 3402.50 (chính)</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="hdr-tags">
+    <span>9 <span class="vi">dòng sản phẩm</span><span class="cn">产品线</span><span class="en">product lines</span></span>
+    <span>4 <span class="vi">phân khúc</span><span class="cn">板块</span><span class="en">segments</span></span>
+    <span>HS 3402</span>
+    <span>VI / CN / EN</span>
+    <span>12 <span class="vi">mục báo cáo</span><span class="cn">个报告模块</span><span class="en">report sections</span></span>
+  </div>
+</header>
+<main class="layout">
+<nav class="toc">
+    <h4>A · <span class="vi">Khảo sát ngành</span><span class="cn">行业调研</span><span class="en">Industry survey</span></h4>
+    <a href="#p01"><b>01</b><span class="vi">Tóm tắt &amp; kết luận chính</span><span class="cn">摘要与主要结论</span><span class="en">Summary &amp; findings</span></a>
+    <a href="#p02"><b>02</b><span class="vi">Tổng quan thị trường toàn cầu</span><span class="cn">全球市场概览</span><span class="en">Global market overview</span></a>
+    <a href="#p03"><b>03</b><span class="vi">Việt Nam trong bức tranh xuất khẩu</span><span class="cn">越南出口格局</span><span class="en">Vietnam in export map</span></a>
+    <a href="#p04"><b>04</b><span class="vi">Cung – cầu &amp; cấu trúc thương mại</span><span class="cn">供需与贸易结构</span><span class="en">Supply, demand &amp; trade</span></a>
+    <a href="#p05"><b>05</b><span class="vi">Quốc gia cung cấp &amp; nhập khẩu</span><span class="cn">供应国与进口国</span><span class="en">Suppliers &amp; importers</span></a>
+    <a href="#p06"><b>06</b><span class="vi">Đối thủ trên Alibaba.com</span><span class="cn">平台竞争对手</span><span class="en">Competitors on Alibaba.com</span></a>
+    <a href="#p07"><b>07</b><span class="vi">Sản phẩm tiêu biểu &amp; dải giá</span><span class="cn">代表产品与价格带</span><span class="en">Products &amp; price bands</span></a>
+    <a href="#p08"><b>08</b><span class="vi">Chân dung người mua</span><span class="cn">买家画像</span><span class="en">Buyer personas</span></a>
+    <h4>B · <span class="vi">Đọc ngành &amp; điều kiện vào</span><span class="cn">行业解读与进入条件</span><span class="en">Reading &amp; entry</span></h4>
+    <a href="#p09"><b>09</b><span class="vi">Cấu trúc cạnh tranh &amp; khoảng trống</span><span class="cn">竞争结构与空档</span><span class="en">Competitive structure</span></a>
+    <a href="#p10"><b>10</b><span class="vi">Điều kiện thâm nhập thị trường</span><span class="cn">市场进入条件</span><span class="en">Market entry conditions</span></a>
+    <a href="#p11"><b>11</b><span class="vi">Lộ trình thâm nhập 12 tháng</span><span class="cn">12 个月进入路线</span><span class="en">12-month entry route</span></a>
+    <h4>C · <span class="vi">Kết luận</span><span class="cn">结论</span><span class="en">Conclusion</span></h4>
+    <a href="#p12"><b>12</b><span class="vi">Kết luận &amp; mức độ phù hợp</span><span class="cn">结论与适配度</span><span class="en">Conclusion &amp; fit assessment</span></a>
+  </nav>
+<div id="panels">
+<!-- ================= 01 ================= -->
+<section class="panel" id="p01" data-n="01">
+  <div class="phead">
+    <div class="pnum">01</div>
+    <div>
+      <h2><span class="vi">Tóm tắt điều hành &amp; luận điểm đầu tư</span><span class="cn">执行摘要与投资论点</span><span class="en">Executive summary &amp; investment thesis</span></h2>
+      <p class="psub"><span class="vi">SINA có đủ danh mục để lên sàn ngay — thiếu hồ sơ tin cậy và kênh B2B quốc tế</span><span class="cn">SINA 产品线已具备上线条件 — 缺的是可信资质与国际B2B渠道</span><span class="en">SINA has the catalogue to launch now — what is missing is verified credibility and a B2B channel</span></p>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="vi">Việt Nam đang <b>nhập siêu 347 triệu USD</b> mặt hàng HS 34.02 trong khi SINA đã có 9 dòng sản phẩm phủ đúng nhóm nhập khẩu lớn nhất — khoảng trống nằm ở hồ sơ năng lực, không nằm ở sản phẩm.</span>
+    <span class="cn">越南 HS 34.02 类目<b>贸易逆差 3.47 亿美元</b>，而 SINA 的 9 条产品线恰好覆盖最大进口品类 — 缺口在能力资质，不在产品。</span>
+    <span class="en">Vietnam runs a <b>US$347M trade deficit</b> in HS 34.02 while SINA already covers the largest import sub-segments with 9 product lines — the gap is credibility, not product.</span>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="v">208,9 <span style="font-size:13px">tỷ USD</span></div><div class="l"><span class="vi">Quy mô sản phẩm tẩy rửa toàn cầu, 2025 (ước tính)</span><span class="cn">2025年全球清洁产品市场规模（估算）</span><span class="en">Global cleaning products market, 2025 (est.)</span></div><div class="d">CAGR 4,3% (2025–2032)</div></div>
+    <div class="stat"><div class="v">39,7 <span style="font-size:13px">tỷ USD</span></div><div class="l"><span class="vi">Thương mại toàn cầu HS 34.02, năm 2024</span><span class="cn">2024年 HS 34.02 全球贸易额</span><span class="en">Global trade of HS 34.02, 2024</span></div><div class="d">+1,93% YoY</div></div>
+    <div class="stat"><div class="v">221 <span style="font-size:13px">triệu USD</span></div><div class="l"><span class="vi">Kim ngạch xuất khẩu HS 34.02 của Việt Nam, 2024 — hạng 34/203</span><span class="cn">2024年越南 HS 34.02 出口额 — 全球第34位</span><span class="en">Vietnam HS 34.02 exports, 2024 — rank 34/203</span></div><div class="d">0,56% thị phần thế giới</div></div>
+    <div class="stat"><div class="v">569 <span style="font-size:13px">triệu USD</span></div><div class="l"><span class="vi">Kim ngạch nhập khẩu HS 34.02 của Việt Nam, 2024 — hạng 17/225</span><span class="cn">2024年越南 HS 34.02 进口额 — 全球第17位</span><span class="en">Vietnam HS 34.02 imports, 2024 — rank 17/225</span></div><div class="d">Nhập &gt; xuất 2,6 lần</div></div>
+    <div class="stat"><div class="v">9 <span style="font-size:13px">dòng</span></div><div class="l"><span class="vi">Dòng sản phẩm SINA trong catalogue: giặt–xả, lau sàn, rửa chén, xịt đa năng, tẩy, vệ sinh lồng máy giặt, vệ sinh toilet</span><span class="cn">SINA 目录中的产品线：洗衣、柔顺、地板、洗碗、多用喷雾、漂白、洗衣机槽、马桶</span><span class="en">SINA catalogue: laundry, softener, floor, dish, spray, bleach, drum, toilet</span></div><div class="d">Phủ 3 nhóm chức năng</div></div>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">Cơ cấu danh mục SINA theo nhóm chức năng (số dòng sản phẩm)</span><span class="cn">SINA 产品结构（按功能组，产品线数量）</span><span class="en">SINA portfolio structure by function group (number of lines)</span></h4>
+    <div class="cwrap"><canvas id="c01"></canvas></div>
+  </div>
+
+  <h3 class="sub"><span class="vi">Kết luận chính của báo cáo</span><span class="cn">报告主要结论</span><span class="en">Main findings</span></h3>
+   <div class="tw"><table>
+     <thead><tr>
+       <th><span class="vi">Phát hiện</span><span class="cn">发现</span><span class="en">Finding</span></th>
+       <th><span class="vi">Bằng chứng</span><span class="cn">证据</span><span class="en">Evidence</span></th>
+       <th><span class="vi">Hàm ý cho doanh nghiệp</span><span class="cn">对企业含义</span><span class="en">Implication</span></th>
+     </tr></thead>
+     <tbody>
+       <tr class="pick"><td><span class="vi">Cầu ổn định, không co theo chu kỳ</span><span class="cn">需求稳定，不随周期收缩</span><span class="en">Stable demand, non-cyclical</span></td><td><span class="vi">201,2 → 280,7 tỷ USD giai đoạn 2024–2032, CAGR 4,3%</span><span class="cn">2024–2032 年 2012 亿 → 2807 亿美元，CAGR 4.3%</span><span class="en">US$201.2bn → 280.7bn over 2024–2032, 4.3% CAGR</span></td><td><span class="vi">Không cần đón sóng công nghệ; cạnh tranh bằng phân phối và chi phí</span><span class="cn">无需追逐技术风口；靠渠道与成本竞争</span><span class="en">No tech wave to catch; compete on distribution and cost</span></td></tr>
+       <tr><td><span class="vi">Việt Nam nhập nhiều hơn xuất</span><span class="cn">越南进口大于出口</span><span class="en">Vietnam imports more than it exports</span></td><td><span class="vi">Nhập 569 triệu USD, xuất 221 triệu USD (HS 34.02, 2024)</span><span class="cn">2024 年 HS 34.02 进口 5.69 亿、出口 2.21 亿美元</span><span class="en">US$569M imported vs US$221M exported (HS 34.02, 2024)</span></td><td><span class="vi">Cầu nội địa đã được chứng minh; dư địa nằm ở phần đang trả cho hàng nhập</span><span class="cn">内需已被验证；空间在正在付给进口货的部分</span><span class="en">Domestic demand is proven; the opening is the value paid to imports</span></td></tr>
+       <tr><td><span class="vi">Cạnh tranh tập trung ở giá thấp</span><span class="cn">竞争集中在低价</span><span class="en">Competition clusters at low price</span></td><td><span class="vi">Nhà cung cấp Việt trên sàn bán OEM 0,65–1,07 USD/chai</span><span class="cn">平台越南供应商以 0.65–1.07 美元/瓶做 OEM</span><span class="en">Vietnamese sellers on-platform do OEM at US$0.65–1.07/bottle</span></td><td><span class="vi">Định vị bằng chứng nhận, mùi hương và nhãn riêng thay vì giảm giá</span><span class="cn">以认证、香型与贴牌定位，而非降价</span><span class="en">Differentiate on certification, fragrance and private label, not price</span></td></tr>
+     </tbody>
+   </table></div>
+
+  <div class="src"><span class="vi">Nguồn: Meticulous Research MR-1439 (quy mô &amp; CAGR, 2024–2032); OEC/BACI (thương mại HS 34.02, năm 2024); catalogue sản phẩm SINA (ảnh đính kèm).</span><span class="cn">来源：Meticulous Research MR-1439；OEC/BACI（2024年 HS 34.02 贸易）；SINA 产品目录（附件图片）。</span><span class="en">Sources: Meticulous Research MR-1439; OEC/BACI (HS 34.02 trade, 2024); SINA catalogue (attached images).</span></div>
+
+  <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b>
+     <div class="blk-vi">Mở bằng nghịch lý: cùng một mã hàng, Việt Nam nhập 569 triệu USD nhưng chỉ xuất 221 triệu USD. Đó là toàn bộ lý do báo cáo này tồn tại. Sau đó chỉ vào danh mục 9 dòng sản phẩm: doanh nghiệp không thiếu hàng, thiếu dữ liệu để người mua nước ngoài nhìn thấy. Lưu ý với khách: hôm nay chúng ta chỉ khảo sát ngành, chưa bàn đến gói hay chi phí.</div>
+     <div class="blk-cn">用悖论开场：同一税号下越南进口 5.69 亿美元，却只出口 2.21 亿美元 — 这就是本报告存在的全部理由。然后指向 9 条产品线：企业不缺产品，缺的是让海外买家看到的数据。向客户说明：今天只做行业调研，不谈套餐或费用。</div>
+     <div class="blk-en">Open with the paradox: in the same HS code Vietnam imports US$569M but exports only US$221M — that is the entire reason for this report. Then point to the 9 product lines: the company does not lack products, it lacks the data that lets foreign buyers see them. Tell the client plainly: today is industry research only, no package and no cost discussion.</div>
+   </div>
+ </section>
+
+<!-- ================= 02 ================= -->
+<section class="panel" id="p02" data-n="02">
+  <div class="phead">
+    <div class="pnum">02</div>
+    <div>
+      <h2><span class="vi">Tổng quan thị trường toàn cầu</span><span class="cn">全球市场概览</span><span class="en">Global market overview</span></h2>
+      <p class="psub"><span class="vi">Ngành có cầu ổn định, tăng trưởng đều, không phụ thuộc chu kỳ công nghệ</span><span class="cn">需求稳定、增长平稳、不受技术周期影响</span><span class="en">Stable demand, steady growth, no tech-cycle dependency</span></p>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="vi">Thị trường sản phẩm tẩy rửa toàn cầu đi từ <b>201,2 tỷ USD (2024)</b> lên <b>280,7 tỷ USD (2032)</b>, CAGR 4,3% — tăng trưởng chậm nhưng chắc, và không co lại trong suy thoái vì đây là hàng tiêu dùng thiết yếu.</span>
+    <span class="cn">全球清洁产品市场从 <b>2012亿美元（2024）</b> 增至 <b>2807亿美元（2032）</b>，CAGR 4.3% — 增速不快但稳定，且因属刚需消费品而不易萎缩。</span>
+    <span class="en">The global cleaning products market grows from <b>US$201.2bn (2024)</b> to <b>US$280.7bn (2032)</b>, CAGR 4.3% — slow but reliable, and resilient in downturns because these are essential consumer goods.</span>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">Quy mô thị trường sản phẩm tẩy rửa toàn cầu (tỷ USD) và CAGR</span><span class="cn">全球清洁产品市场规模（十亿美元）与 CAGR</span><span class="en">Global cleaning products market size (US$ bn) and CAGR</span></h4>
+    <div class="cwrap tall"><canvas id="c02"></canvas></div>
+  </div>
+
+  <h3 class="sub"><span class="vi">Bốn phân khúc cấu thành cầu</span><span class="cn">需求的四个构成板块</span><span class="en">Four demand segments</span></h3>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="vi">Phân khúc</span><span class="cn">板块</span><span class="en">Segment</span></th>
+      <th><span class="vi">Đặc điểm cầu</span><span class="cn">需求特征</span><span class="en">Demand profile</span></th>
+      <th><span class="vi">Liên quan tới SINA</span><span class="cn">与SINA的关系</span><span class="en">Relevance to SINA</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="vi">Giặt &amp; xả (laundry care)</span><span class="cn">洗衣与柔顺</span><span class="en">Laundry care</span></td><td><span class="vi">Khối lượng lớn nhất, cạnh tranh giá khốc liệt, đổi mùi hương liên tục</span><span class="cn">体量最大，价格竞争激烈，香型迭代快</span><span class="en">Largest volume, fierce price competition, fast scent rotation</span></td><td><span class="vi">SINA có 4 dòng: 7-in-1, PRO 9-in-1, Baby, 6-in-1 fabric</span><span class="cn">SINA 有4条线：7-in-1、PRO 9-in-1、Baby、6-in-1</span><span class="en">SINA has 4 lines: 7-in-1, PRO 9-in-1, Baby, 6-in-1</span></td></tr>
+      <tr><td><span class="vi">Làm sạch bề mặt (surface &amp; floor)</span><span class="cn">表面与地板清洁</span><span class="en">Surface &amp; floor</span></td><td><span class="vi">Tăng nhanh ở đô thị hoá, gắn với mùi hương và diệt khuẩn</span><span class="cn">随城镇化增长，与香型、抗菌绑定</span><span class="en">Grows with urbanisation, tied to fragrance and hygiene claims</span></td><td><span class="vi">Lau sàn 1kg/3,6kg (6 mùi), xịt đa năng 4-in-1</span><span class="cn">地板清洁 1kg/3.6kg（6种香型）、4-in-1 多用喷雾</span><span class="en">Floor 1kg/3.6kg (6 scents), 4-in-1 spray</span></td></tr>
+      <tr><td><span class="vi">Rửa chén &amp; nhà bếp</span><span class="cn">洗碗与厨房</span><span class="en">Dish &amp; kitchen</span></td><td><span class="vi">Tần suất mua cao, quyết định theo giá và cảm giác tay</span><span class="cn">购买频次高，按价格与手感决策</span><span class="en">High purchase frequency, decided by price and hand feel</span></td><td><span class="vi">400g / 780g / 3,6kg — 3 mùi</span><span class="cn">400g / 780g / 3.6kg — 3种香型</span><span class="en">400g / 780g / 3.6kg — 3 scents</span></td></tr>
+      <tr><td><span class="vi">Chăm sóc thiết bị &amp; vệ sinh chuyên biệt</span><span class="cn">设备养护与专项清洁</span><span class="en">Appliance care &amp; specialty</span></td><td><span class="vi">Ngách nhỏ nhưng biên cao, ít đối thủ, dễ tạo khác biệt</span><span class="cn">小众但毛利高、对手少、易差异化</span><span class="en">Small niche, higher margin, few rivals, easy differentiation</span></td><td><span class="vi">Vệ sinh lồng máy giặt, vệ sinh toilet, tẩy gia dụng</span><span class="cn">洗衣机槽清洁、马桶清洁、家用漂白</span><span class="en">Drum cleaner, toilet cleaner, household bleach</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="insight">
+    <span class="vi"><b>Đọc số thế nào:</b> CAGR 4,3% không phải con số gây sốc, nhưng nhân trên nền 200 tỷ USD thì mỗi năm thị trường sinh thêm khoảng 9 tỷ USD cầu mới. Với một doanh nghiệp có danh mục đầy đủ, vấn đề không phải "thị trường có lớn không" mà là "có đang nhìn thấy mình không".</span>
+    <span class="cn"><b>如何解读：</b>CAGR 4.3% 并不惊人，但基数 2000 亿美元意味着每年新增约 90 亿美元需求。对于产品线完整的企业，问题不是"市场够不够大"，而是"有没有被看见"。</span>
+    <span class="en"><b>How to read it:</b> 4.3% CAGR is unspectacular, but on a US$200bn base the market adds roughly US$9bn of new demand each year. For a company with a full catalogue, the question is not "is the market big enough" but "are we visible in it".</span>
+  </div>
+
+  <div class="src"><span class="vi">Nguồn: Meticulous Research, báo cáo MR-1439 — cleaning products toàn cầu 201,20 (2024) / 208,90 (2025) / 280,67 (2032) tỷ USD, CAGR 4,3% giai đoạn 2025–2032. Số 2032 là dự báo (F).</span><span class="cn">来源：Meticulous Research MR-1439 — 全球清洁产品 2012.0（2024）/ 2089.0（2025）/ 2806.7（2032）亿美元，2025–2032 CAGR 4.3%。2032 为预测值（F）。</span><span class="en">Source: Meticulous Research MR-1439 — global cleaning products US$201.20bn (2024) / 208.90 (2025) / 280.67 (2032), CAGR 4.3% for 2025–2032. The 2032 figure is a forecast (F).</span></div>
+
+  <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b>
+    <div class="blk-vi">Đừng dành nhiều thời gian ở mục này — chỉ cần khách nhớ một câu: đây là ngành cầu ổn định, mỗi năm sinh thêm khoảng 9 tỷ USD. Điểm cần nói là "tăng trưởng chậm nhưng chắc" lại là tin tốt cho nhà sản xuất: không có công nghệ nào làm sản phẩm của anh/chị lỗi thời trong 5 năm tới. Sau đó chuyển nhanh sang mục 03 để nói về vị thế Việt Nam.</div>
+    <div class="blk-cn">此节不要花太多时间 — 只需客户记住一句：这是需求稳定的行业，每年新增约 90 亿美元。要强调的是"增速慢但稳"对制造商是好消息：未来5年没有技术能让您的产品过时。然后快速转到第3节谈越南地位。</div>
+    <div class="blk-en">Do not spend long here — the client only needs one sentence: stable demand, roughly US$9bn added each year. Frame "slow but steady" as good news for a manufacturer: no technology will make their product obsolete within five years. Then move quickly to section 03 on Vietnam's position.</div>
+  </div>
+</section>
+
+<!-- ================= 03 ================= -->
+<section class="panel" id="p03" data-n="03">
+  <div class="phead">
+    <div class="pnum">03</div>
+    <div>
+      <h2><span class="vi">Việt Nam trong bức tranh xuất khẩu</span><span class="cn">越南在出口格局中的位置</span><span class="en">Vietnam in the export picture</span></h2>
+      <p class="psub"><span class="vi">Nền tảng xuất khẩu mạnh, nhưng ngành tẩy rửa chưa được khai thác tương xứng</span><span class="cn">出口基础强，但清洁品类尚未被充分开发</span><span class="en">Strong export base, yet the cleaning category is under-exploited</span></p>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="vi">Xuất khẩu Việt Nam đạt <b>475,06 tỷ USD năm 2025 (+17,0%)</b>, nhưng riêng HS 34.02 chỉ chiếm 221 triệu USD — tức <b>0,05%</b> tổng kim ngạch, trong khi đây là nhóm hàng Việt Nam đang nhập tới 569 triệu USD.</span>
+    <span class="cn">2025年越南出口 <b>4750.6亿美元（+17.0%）</b>，但 HS 34.02 仅 2.21 亿美元 — 占总出口 <b>0.05%</b>，而该品类进口高达 5.69 亿美元。</span>
+    <span class="en">Vietnam exported <b>US$475.06bn in 2025 (+17.0%)</b>, yet HS 34.02 accounted for only US$221M — about <b>0.05%</b> of total exports, while the same category imports run at US$569M.</span>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">Kim ngạch xuất khẩu hàng hoá Việt Nam 2019–2025 (tỷ USD)</span><span class="cn">2019–2025年越南商品出口额（十亿美元）</span><span class="en">Vietnam merchandise exports 2019–2025 (US$ bn)</span></h4>
+    <div class="cwrap tall"><canvas id="c03"></canvas></div>
+  </div>
+
+  <h3 class="sub"><span class="vi">Nền tảng thuận lợi cho SINA</span><span class="cn">对 SINA 有利的基础条件</span><span class="en">Foundations that favour SINA</span></h3>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="vi">Yếu tố</span><span class="cn">要素</span><span class="en">Factor</span></th>
+      <th><span class="vi">Số liệu</span><span class="cn">数据</span><span class="en">Figure</span></th>
+      <th><span class="vi">Ý nghĩa với SINA</span><span class="cn">对SINA的意义</span><span class="en">Meaning for SINA</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="vi">FTA đang có hiệu lực</span><span class="cn">生效中的自贸协定</span><span class="en">FTAs in force</span></td><td>17 FTA → 60+ <span class="vi">quốc gia</span><span class="cn">个国家</span><span class="en">countries</span></td><td><span class="vi">Ưu đãi thuế quan khi xuất sang EU, UK, ASEAN, Nhật</span><span class="cn">出口欧盟、英国、东盟、日本享关税优惠</span><span class="en">Tariff preferences into EU, UK, ASEAN, Japan</span></td></tr>
+      <tr><td>EVFTA</td><td><span class="vi">Hiệu lực 01/08/2020</span><span class="cn">2020年8月1日生效</span><span class="en">In force 01/08/2020</span></td><td><span class="vi">Thương mại EU–VN đạt 76 tỷ EUR năm 2025 — kênh lớn đã mở</span><span class="cn">2025年欧越贸易额 760 亿欧元 — 通道已开</span><span class="en">EU–Vietnam trade reached EUR76bn in 2025</span></td></tr>
+      <tr><td>CPTPP</td><td><span class="vi">Hiệu lực tại VN 14/01/2019</span><span class="cn">2019年1月14日对越生效</span><span class="en">In force for VN 14/01/2019</span></td><td><span class="vi">Mở Nhật, Canada, Australia, Mexico, New Zealand</span><span class="cn">打开日本、加拿大、澳大利亚、墨西哥、新西兰</span><span class="en">Opens Japan, Canada, Australia, Mexico, New Zealand</span></td></tr>
+      <tr><td>FDI 2025</td><td>38,42 <span class="vi">tỷ USD, +20,1%, hạng 3 ASEAN</span><span class="cn">亿美元，+20.1%，东盟第3</span><span class="en">bn USD, +20.1%, #3 in ASEAN</span></td><td><span class="vi">Chuỗi cung ứng hoá chất và bao bì đã hình thành trong nước</span><span class="cn">国内化工与包装供应链已形成</span><span class="en">Chemical and packaging supply chains already local</span></td></tr>
+      <tr><td><span class="vi">Ngành tăng mạnh trên Alibaba.com</span><span class="cn">平台高速增长行业</span><span class="en">Fastest-growing categories</span></td><td>Home &amp; Garden +139%</td><td><span class="vi">Nhóm chứa sản phẩm vệ sinh nhà cửa — đúng nhóm SINA mạnh</span><span class="cn">含家用清洁 — 正是SINA强项</span><span class="en">Includes household cleaning — SINA's strength</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="hl">
+    <span class="vi"><b>Điểm cần khách thấy:</b> Việt Nam đã xuất 475 tỷ USD, tức hệ thống logistics, chứng từ, hải quan, thanh toán quốc tế đều đã chạy trơn. SINA không phải mở đường mới — chỉ cần bước vào con đường đã có.</span>
+    <span class="cn"><b>要让客户看到：</b>越南出口已达 4750 亿美元，物流、单证、海关、国际结算体系都已成熟运转。SINA 不是要开路，而是走上已有的路。</span>
+    <span class="en"><b>What the client should see:</b> Vietnam already exports US$475bn, so logistics, documentation, customs and international payments all work. SINA does not need to build a road — only to step onto one that exists.</span>
+  </div>
+
+  <div class="src"><span class="vi">Nguồn: Tổng cục Thống kê — xuất khẩu 2019–2025: 284,74 / 292,48 / 343,94 / 384,93 / 355,50 / 403,35 / 475,06 tỷ USD; U.S. Department of State 2024 (17 FTA); European Commission DG TRADE (EVFTA, thương mại 76 tỷ EUR 2025); WTO Center VCCI (CPTPP 14/01/2019); VnEconomy (FDI 38,42 tỷ USD 2025); Alibaba.com Data 16/02/2026 (tăng trưởng ngành, 300 ngày gần nhất).</span><span class="cn">来源：越南统计总局（2019–2025 出口额）；美国国务院 2024（17个FTA）；欧盟委员会 DG TRADE（EVFTA，2025年贸易额760亿欧元）；VCCI（CPTPP 2019/1/14）；VnEconomy（2025年FDI 384.2亿美元）；Alibaba.com 数据 2026/2/16。</span><span class="en">Sources: Vietnam GSO (2019–2025 exports); U.S. Department of State 2024 (17 FTAs); European Commission DG TRADE (EVFTA, EUR76bn trade 2025); VCCI WTO Center (CPTPP 14/01/2019); VnEconomy (FDI US$38.42bn 2025); Alibaba.com Data 16/02/2026 (category growth, last 300 days).</span></div>
+
+  <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b>
+    <div class="blk-vi">Nói thẳng: "Việt Nam xuất 475 tỷ USD, nhưng ngành của anh/chị chỉ chiếm 221 triệu — tức 0,05%. Không phải vì hàng Việt kém, mà vì nhóm ngành này chưa được đưa lên sàn đúng cách." Rồi chỉ vào Home &amp; Garden +139%: nhóm chứa sản phẩm vệ sinh nhà cửa đang là nhóm tăng nhanh thứ tư trên Alibaba.com. Câu dẫn: "Cầu đang có, cửa đang mở, vấn đề là ai bước vào trước."</div>
+    <div class="blk-cn">直说：“越南出口 4750 亿美元，但您这个行业只占 2.21 亿 — 0.05%。不是越南货不行，而是这个品类没以正确方式上线。”再指向 Home & Garden +139%：含家用清洁的品类在平台上增速第四。承接：“需求在、门开着，问题是先进去的是谁。”</div>
+    <div class="blk-en">Say it plainly: "Vietnam exports US$475bn, but your category accounts for only US$221M — 0.05%. Not because Vietnamese goods are weak, but because this category has not been taken online properly." Then point to Home &amp; Garden +139%: the segment containing household cleaning is the fourth fastest-growing on Alibaba.com. Lead-in: "Demand exists, the door is open — the question is who walks in first."</div>
+  </div>
+</section>
+
+<!-- ================= 04 ================= -->
+<section class="panel" id="p04" data-n="04">
+  <div class="phead">
+    <div class="pnum">04</div>
+    <div>
+      <h2><span class="vi">Cung – cầu &amp; cấu trúc thương mại ngành</span><span class="cn">供需与贸易结构</span><span class="en">Supply, demand and trade structure</span></h2>
+      <p class="psub"><span class="vi">Việt Nam nhập gấp 2,6 lần giá trị xuất — đây là khoảng trống lớn nhất trong toàn bộ proposal</span><span class="cn">越南进口为出口的 2.6 倍 — 本方案中最大的缺口</span><span class="en">Vietnam imports 2.6× what it exports — the single biggest gap in this proposal</span></p>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="vi">Cùng một mã HS 34.02, Việt Nam <b>nhập 569 triệu USD</b> và <b>chỉ xuất 221 triệu USD</b> trong 2024 — thị trường trong nước đang được phục vụ bằng hàng ngoại, trong khi doanh nghiệp nội có nhà máy.</span>
+    <span class="cn">同一 HS 34.02 下，2024年越南<b>进口 5.69 亿美元</b>、<b>仅出口 2.21 亿美元</b> — 国内市场由进口货服务，而本地企业有工厂。</span>
+    <span class="en">In the same HS 34.02 code, Vietnam <b>imported US$569M</b> and <b>exported only US$221M</b> in 2024 — domestic demand is served by imports while local firms own the factories.</span>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">Việt Nam — xuất khẩu, nhập khẩu và thâm hụt HS 34.02, năm 2024 (triệu USD)</span><span class="cn">越南 HS 34.02 出口、进口与逆差（2024，百万美元）</span><span class="en">Vietnam HS 34.02 exports, imports and deficit, 2024 (US$ M)</span></h4>
+    <div class="cwrap"><canvas id="c04"></canvas></div>
+  </div>
+
+  <h3 class="sub"><span class="vi">Phân rã mã HS — sản phẩm nào vào mã nào</span><span class="cn">HS 编码拆解 — 产品归类</span><span class="en">HS breakdown — which product goes where</span></h3>
+  <div class="tw"><table>
+    <thead><tr>
+      <th>HS</th>
+      <th><span class="vi">Mô tả</span><span class="cn">描述</span><span class="en">Description</span></th>
+      <th><span class="vi">Sản phẩm SINA tương ứng</span><span class="cn">对应 SINA 产品</span><span class="en">Matching SINA products</span></th>
+      <th><span class="vi">Lưu ý khai báo</span><span class="cn">申报注意</span><span class="en">Declaration note</span></th>
+    </tr></thead>
+    <tbody>
+      <tr class="pick"><td><b>3402</b></td><td><span class="vi">Chất hoạt động bề mặt hữu cơ; chế phẩm giặt rửa và làm sạch</span><span class="cn">有机表面活性剂；洗涤与清洁制剂</span><span class="en">Organic surface-active agents; washing and cleaning preparations</span></td><td><span class="vi">Nước lau sàn, nước rửa chén, xịt đa năng, nước giặt, nước xả</span><span class="cn">地板清洁、洗碗液、多用喷雾、洗衣液、柔顺剂</span><span class="en">Floor cleaner, dish liquid, spray, laundry liquid, softener</span></td><td><span class="vi">Mã chính của toàn bộ danh mục</span><span class="cn">全目录主编码</span><span class="en">Primary code for the catalogue</span></td></tr>
+      <tr><td>3402.50</td><td><span class="vi">Chế phẩm làm sạch đóng gói bán lẻ</span><span class="cn">零售包装清洁制剂</span><span class="en">Cleaning preparations put up for retail sale</span></td><td><span class="vi">Chai 400g–3,6kg bán lẻ / xuất khẩu nguyên thùng</span><span class="cn">400g–3.6kg 零售/整箱出口</span><span class="en">400g–3.6kg bottles, export cartons</span></td><td><span class="vi">Dùng khi khai báo hàng đóng gói bán lẻ</span><span class="cn">零售包装申报时使用</span><span class="en">Use for retail-packed goods</span></td></tr>
+      <tr><td>3401</td><td><span class="vi">Xà phòng; sản phẩm hoạt động bề mặt dùng như xà phòng</span><span class="cn">肥皂；作肥皂用的表面活性制品</span><span class="en">Soap; surface-active products for use as soap</span></td><td><span class="vi">Nếu mở rộng sang nước rửa tay</span><span class="cn">若扩展至洗手液</span><span class="en">If extending into hand wash</span></td><td><span class="vi">Hiện chưa có trong catalogue</span><span class="cn">目前目录未含</span><span class="en">Not currently in catalogue</span></td></tr>
+      <tr><td>3405</td><td><span class="vi">Xi, kem đánh bóng, bột cọ rửa</span><span class="cn">抛光剂、去污粉</span><span class="en">Polishes, scouring powders</span></td><td><span class="vi">Chưa có</span><span class="cn">暂无</span><span class="en">None yet</span></td><td><span class="vi">Cơ hội mở rộng dòng sản phẩm</span><span class="cn">扩展机会</span><span class="en">Expansion opportunity</span></td></tr>
+      <tr><td>3808</td><td><span class="vi">Chất diệt khuẩn, khử trùng</span><span class="cn">消毒杀菌剂</span><span class="en">Disinfectants</span></td><td><span class="vi">Nếu sản phẩm mang claim diệt khuẩn (xịt đa năng, tẩy)</span><span class="cn">若产品带杀菌宣称（多用喷雾、漂白）</span><span class="en">If the product carries a disinfecting claim (spray, bleach)</span></td><td><span class="vi"><b>Cảnh báo:</b> claim diệt khuẩn kéo theo yêu cầu đăng ký riêng ở nhiều thị trường (Mỹ: FIFRA/EPA)</span><span class="cn"><b>警示：</b>杀菌宣称在多个市场触发单独注册（美国：FIFRA/EPA）</span><span class="en"><b>Warning:</b> disinfecting claims trigger separate registration in many markets (US: FIFRA/EPA)</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="insight">
+    <span class="vi"><b>Vì sao thâm hụt này lại là cơ hội:</b> một thị trường nhập 569 triệu USD nghĩa là đã có sẵn hệ thống phân phối, thói quen tiêu dùng và tiêu chuẩn chất lượng cho sản phẩm tẩy rửa. Doanh nghiệp nội không cần tạo cầu mới — chỉ cần giành lại phần cầu đang trả tiền cho hàng nhập, rồi từ đó xuất khẩu sang chính những thị trường đang bán vào Việt Nam.</span>
+    <span class="cn"><b>为什么逆差是机会：</b>一个进口 5.69 亿美元的市场，意味着清洁产品的分销体系、消费习惯与质量标准都已存在。本地企业无需创造新需求 — 只需夺回正在付给进口货的那部分需求，再从这些市场反向出口。</span>
+    <span class="en"><b>Why the deficit is an opportunity:</b> a market importing US$569M already has distribution, consumer habits and quality standards for cleaning products. Local firms do not need to create demand — only to win back the demand currently paid to imports, then export into those same markets.</span>
+  </div>
+
+  <div class="src"><span class="vi">Nguồn: OEC (dữ liệu BACI/HS17), HS 34.02, năm 2024 — xuất khẩu 221 triệu USD (hạng 34/203, 0,56% thị phần), nhập khẩu 569 triệu USD (hạng 17/225), thâm hụt 347 triệu USD. Phân nhóm HS theo OEC/WCO. Ghi chú: số liệu HS 34.02 năm 2025 chưa có trong nguồn công khai — không nội suy.</span><span class="cn">来源：OEC（BACI/HS17），HS 34.02，2024年 — 出口 2.21 亿美元（第34/203位，全球份额0.56%），进口 5.69 亿美元（第17/225位），逆差 3.47 亿美元。HS 细分依据 OEC/WCO。注：2025年 HS 34.02 数据未公开 — 未作插值。</span><span class="en">Source: OEC (BACI/HS17), HS 34.02, 2024 — exports US$221M (rank 34/203, 0.56% share), imports US$569M (rank 17/225), deficit US$347M. HS sub-headings per OEC/WCO. Note: 2025 HS 34.02 data is not publicly available — no interpolation used.</span></div>
+
+  <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b>
+    <div class="blk-vi">Đây là mục mạnh nhất của Chương A. Đặt câu hỏi: "Anh/chị có biết mỗi năm Việt Nam bỏ ra 569 triệu USD để mua đúng loại hàng mình đang sản xuất không?" Dừng 3 giây. Sau đó: "Con số xuất khẩu của chúng ta chỉ 221 triệu. Khoảng cách 347 triệu USD đó chính là lý do chúng ta ngồi đây hôm nay." Kết luận: không phải cần tạo thị trường mới, mà cần giữ lại phần giá trị đang chảy ra ngoài.</div>
+    <div class="blk-cn">这是第一章最强的一节。先问：“您知道越南每年花 5.69 亿美元进口自己正在生产的产品吗？”停3秒。然后：“我们的出口只有 2.21 亿。那 3.47 亿美元的差距，就是我们今天坐在这里的原因。”结论：不需要造新市场，而是留住正在外流的价值。</div>
+    <div class="blk-en">This is the strongest panel in Chapter A. Ask: "Did you know Vietnam spends US$569M a year importing exactly what you already make?" Pause three seconds. Then: "Our exports are only US$221M. That US$347M gap is why we are sitting here today." Conclude: the need is not to create a market, but to retain value currently flowing out.</div>
+  </div>
+</section>
+
+<!-- ================= 05 ================= -->
+<section class="panel" id="p05" data-n="05">
+  <div class="phead">
+    <div class="pnum">05</div>
+    <div>
+      <h2><span class="vi">Quốc gia cung cấp &amp; quốc gia nhập khẩu</span><span class="cn">供应国与进口国</span><span class="en">Supplier countries and importing markets</span></h2>
+      <p class="psub"><span class="vi">Dòng chảy thương mại đang đi vào đâu, và Việt Nam đang đứng ở đâu</span><span class="cn">贸易流向哪里，越南站在什么位置</span><span class="en">Where trade flows, and where Vietnam stands</span></p>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="vi">Ba thị trường nhập khẩu lớn nhất thế giới là <b>Đức 2,95 tỷ USD</b>, <b>Mỹ 2,10 tỷ USD</b> và <b>Pháp 2,05 tỷ USD</b> — Việt Nam <b>chưa có mặt trong top xuất khẩu sang cả ba</b>. Toàn bộ kim ngạch 221 triệu USD hiện tập trung ở ASEAN và châu Đại Dương.</span>
+    <span class="cn">全球三大进口市场为<b>德国 29.5 亿</b>、<b>美国 21.0 亿</b>、<b>法国 20.5 亿</b>美元 — 越南<b>尚未进入这三国的供应来源前列</b>。现有 2.21 亿美元出口集中在东盟与大洋洲。</span>
+    <span class="en">The three largest import markets are <b>Germany US$2.95bn</b>, <b>US US$2.10bn</b> and <b>France US$2.05bn</b> — Vietnam <b>is absent from all three supply rankings</b>. The entire US$221M sits in ASEAN and Oceania.</span>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">Cơ cấu nhập khẩu HS 34.02 toàn cầu, 2024 (tỷ USD)</span><span class="cn">2024年 HS 34.02 全球进口结构（十亿美元）</span><span class="en">Global HS 34.02 import structure, 2024 (US$ bn)</span></h4>
+    <div class="cwrap"><canvas id="c05a"></canvas></div>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">Thị trường xuất khẩu HS 34.02 của Việt Nam, 2024 (triệu USD)</span><span class="cn">2024年越南 HS 34.02 出口市场（百万美元）</span><span class="en">Vietnam HS 34.02 export markets, 2024 (US$ M)</span></h4>
+    <div class="cwrap"><canvas id="c05b"></canvas></div>
+  </div>
+
+  <h3 class="sub"><span class="vi">Đối chiếu hai chiều</span><span class="cn">双向对比</span><span class="en">Two-way comparison</span></h3>
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="vi">Quốc gia</span><span class="cn">国家</span><span class="en">Country</span></th>
+      <th class="num"><span class="vi">Nhập khẩu HS 34.02 (tỷ USD, 2024)</span><span class="cn">进口（十亿，2024）</span><span class="en">Imports (US$ bn, 2024)</span></th>
+      <th class="num"><span class="vi">Việt Nam xuất sang (triệu USD)</span><span class="cn">越南对其出口（百万美元）</span><span class="en">Vietnam exports there (US$ M)</span></th>
+      <th><span class="vi">Đọc gì từ số này</span><span class="cn">解读</span><span class="en">Reading</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><b>Germany</b></td><td class="num">2.950</td><td class="num">—</td><td><span class="vi">Thị trường lớn nhất, đồng thời là nhà xuất khẩu lớn nhất (4,48 tỷ) — cạnh tranh nội khối EU rất cao</span><span class="cn">最大进口国，也是最大出口国（44.8亿）— 欧盟内部竞争极高</span><span class="en">Largest importer and largest exporter (US$4.48bn) — intense intra-EU competition</span></td></tr>
+      <tr><td><b>United States</b></td><td class="num">2.100</td><td class="num">—</td><td><span class="vi">Cầu lớn, chuộng private label; rào cản chính là claim diệt khuẩn (FIFRA)</span><span class="cn">需求大、偏好自有品牌；主要门槛是杀菌宣称（FIFRA）</span><span class="en">Large demand, private-label friendly; main barrier is disinfecting claims (FIFRA)</span></td></tr>
+      <tr><td><b>France</b></td><td class="num">2.050</td><td class="num">—</td><td><span class="vi">Cửa vào EU qua Pháp, hưởng ưu đãi EVFTA</span><span class="cn">经法国进入欧盟，享 EVFTA 优惠</span><span class="en">Gateway into the EU with EVFTA preferences</span></td></tr>
+      <tr class="pick"><td><b>Philippines</b></td><td class="num">—</td><td class="num">44,6</td><td><span class="vi">Thị trường số 1 hiện tại — đã chứng minh hàng Việt bán được</span><span class="cn">当前第一大市场 — 已证明越南货可卖</span><span class="en">Current #1 market — proves Vietnamese goods sell</span></td></tr>
+      <tr><td><b>Australia</b></td><td class="num">—</td><td class="num">32,0</td><td><span class="vi">Tăng +5,32 triệu USD so với 2023, có CPTPP</span><span class="cn">较2023年增长532万，享 CPTPP</span><span class="en">+US$5.32M vs 2023, CPTPP coverage</span></td></tr>
+      <tr><td><b>Thailand</b></td><td class="num">—</td><td class="num">24,9</td><td><span class="vi">Đối thủ trực tiếp trong ASEAN, đồng thời là thị trường</span><span class="cn">东盟内直接竞争对手，同时也是市场</span><span class="en">Direct ASEAN rival and a market at once</span></td></tr>
+      <tr><td><b>New Zealand</b></td><td class="num">—</td><td class="num">20,7</td><td><span class="vi">Thị trường nhỏ nhưng thâm nhập tốt — mẫu tham chiếu cho thị trường phát triển</span><span class="cn">小众但渗透好 — 发达市场参考样本</span><span class="en">Small but well penetrated — a reference for developed markets</span></td></tr>
+      <tr><td><b>Cambodia</b></td><td class="num">—</td><td class="num">18,3</td><td><span class="vi">Biên giới, chi phí logistics thấp nhất</span><span class="cn">陆路边境，物流成本最低</span><span class="en">Land border, lowest logistics cost</span></td></tr>
+      <tr><td><b>South Korea</b></td><td class="num">—</td><td class="num">+14,5 <span class="vi">(tăng thêm)</span><span class="cn">（增量）</span><span class="en">(increase)</span></td><td><span class="vi">Thị trường tăng nhanh nhất 2023→2024</span><span class="cn">2023→2024 增长最快</span><span class="en">Fastest-growing market 2023→2024</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="tw"><table>
+    <thead><tr>
+      <th><span class="vi">Việt Nam nhập từ</span><span class="cn">越南进口来源</span><span class="en">Vietnam imports from</span></th>
+      <th class="num"><span class="vi">Giá trị 2024 (triệu USD)</span><span class="cn">2024年金额（百万美元）</span><span class="en">Value 2024 (US$ M)</span></th>
+      <th><span class="vi">Hàm ý cạnh tranh cho SINA</span><span class="cn">对 SINA 的竞争含义</span><span class="en">Competitive implication</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td>China</td><td class="num">246,0</td><td><span class="vi">43% giá trị nhập khẩu — đối thủ giá thấp nhất, cần cạnh tranh bằng chứng nhận và mùi hương, không bằng giá</span><span class="cn">占进口额43% — 最低价对手，须以认证与香型而非价格竞争</span><span class="en">43% of import value — cheapest rival; compete on certification and fragrance, not price</span></td></tr>
+      <tr><td>Thailand</td><td class="num">75,6</td><td><span class="vi">Mạnh về mùi hương và bao bì — đối thủ trực tiếp nhất về định vị</span><span class="cn">香型与包装强 — 定位上最直接的对手</span><span class="en">Strong on scent and packaging — the closest positional rival</span></td></tr>
+      <tr><td>Malaysia</td><td class="num">46,1</td><td><span class="vi">Halal là lợi thế — SINA có thể học để mở thị trường Hồi giáo</span><span class="cn">清真认证是优势 — SINA 可借鉴以开拓穆斯林市场</span><span class="en">Halal is the edge — SINA can learn to open Muslim markets</span></td></tr>
+      <tr><td>South Korea</td><td class="num">40,8</td><td><span class="vi">Định vị cao cấp, giá cao — khoảng trống phổ thông còn lại</span><span class="cn">高端定位、高价格 — 大众价位仍有空缺</span><span class="en">Premium positioning, high price — mass tier left open</span></td></tr>
+      <tr><td>Japan</td><td class="num">28,4</td><td><span class="vi">Chuẩn chất lượng cao nhất — dùng làm chuẩn để nâng cấp hồ sơ</span><span class="cn">质量标准最高 — 可作为提升资质的标杆</span><span class="en">Highest quality bar — use as the benchmark to upgrade credentials</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="src"><span class="vi">Nguồn: OEC (BACI/HS17), HS 34.02, năm 2024 — top nhập khẩu toàn cầu (Germany 2,95 / US 2,10 / France 2,05 tỷ USD); xuất khẩu VN theo thị trường; nhập khẩu VN theo nguồn. Ký hiệu "—" = không nằm trong nhóm dữ liệu OEC công bố, không phải bằng 0.</span><span class="cn">来源：OEC（BACI/HS17），HS 34.02，2024 — 全球进口前列（德 29.5 / 美 21.0 / 法 20.5 亿美元）；越南出口市场与进口来源。"—"表示未在 OEC 公布数据组内，并非为零。</span><span class="en">Source: OEC (BACI/HS17), HS 34.02, 2024 — global top importers (Germany US$2.95bn / US US$2.10bn / France US$2.05bn); Vietnam exports by market; Vietnam imports by origin. "—" means not in the published OEC set, not zero.</span></div>
+
+  <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b>
+    <div class="blk-vi">Cho khách thấy nghịch lý: ba thị trường trả tiền nhiều nhất cho loại hàng này thì Việt Nam chưa có mặt, còn ba thị trường Việt Nam bán tốt nhất thì lại nhỏ hơn nhiều. Đó là "đang bán đúng hàng cho sai khách". Sau đó nói về Trung Quốc 246 triệu USD: đối thủ lớn nhất ngay trong nước — và cách duy nhất để thắng Trung Quốc không phải là giảm giá, mà là bằng chứng xác minh và câu chuyện xuất xứ.</div>
+    <div class="blk-cn">点出矛盾：愿意为这类产品付钱最多的三个市场，越南都还没进去；越南卖得最好的三个市场却小得多。这就是"把对的产品卖给了错的客户"。再谈中国 246 亿美元：最大的对手就在国内 — 赢中国的唯一方式不是降价，而是验厂证明与原产地故事。</div>
+    <div class="blk-en">Show the paradox: the three markets that pay most for this category have no Vietnamese presence, while the three where Vietnam sells best are far smaller. That is "selling the right product to the wrong buyer". Then China at US$246M: the biggest competitor is already inside the country — and the way to beat China is not price, but verification and origin story.</div>
+  </div>
+</section>
+
+<!-- ================= 06 ================= -->
+<section class="panel" id="p06" data-n="06">
+  <div class="phead">
+    <div class="pnum">06</div>
+    <div>
+      <h2><span class="vi">Đối thủ trên Alibaba.com</span><span class="cn">Alibaba.com 上的竞争对手</span><span class="en">Competitors on Alibaba.com</span></h2>
+      <p class="psub"><span class="vi">20 nhà cung cấp thực tế đã khảo sát trực tiếp — 12 Việt Nam, 4 Trung Quốc, 4 Ấn Độ</span><span class="cn">已实地调研 20 家供应商 — 越南12、中国4、印度4</span><span class="en">20 suppliers surveyed directly — 12 Vietnam, 4 China, 4 India</span></p>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="vi">Nhà cung cấp Việt Nam trên sàn phần lớn là <b>nhà buôn và nhà đóng gói</b>, chỉ một số ít là nhà sản xuất thật (LIX 16 năm, doanh thu trên 100 triệu USD). SINA có nhà máy và 9 dòng sản phẩm — nhưng <b>chưa có gian hàng</b>, nên đang đứng ngoài cuộc chơi.</span>
+    <span class="cn">平台上的越南供应商多为<b>贸易商与包装商</b>，真正制造商很少（LIX 16年、年营收超1亿美元）。SINA 有工厂和9条产品线 — 但<b>尚无店铺</b>，仍在场外。</span>
+    <span class="en">Most Vietnamese suppliers on the platform are <b>traders and packagers</b>; genuine manufacturers are few (LIX, 16 years, revenue above US$100M). SINA has a factory and 9 product lines — but <b>no storefront</b>, so it is not yet in the game.</span>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">Phân bố nhà cung cấp theo quốc gia (mẫu khảo sát 20)</span><span class="cn">供应商国别分布（样本20家）</span><span class="en">Supplier distribution by country (sample of 20)</span></h4>
+    <div class="cwrap"><canvas id="c06"></canvas></div>
+  </div>
+
+  <h3 class="sub"><span class="vi">Bảng nhà cung cấp đã xác minh</span><span class="cn">已核实供应商清单</span><span class="en">Verified supplier list</span></h3>
+  <div class="tw"><table id="tblSuppliers">
+    <thead><tr>
+      <th>#</th>
+      <th><span class="vi">Nhà cung cấp</span><span class="cn">供应商</span><span class="en">Supplier</span></th>
+      <th><span class="vi">Nước</span><span class="cn">国家</span><span class="en">Country</span></th>
+      <th class="num"><span class="vi">Năm trên sàn</span><span class="cn">平台年限</span><span class="en">Years on platform</span></th>
+      <th><span class="vi">Doanh thu / quy mô công bố</span><span class="cn">公布营收/规模</span><span class="en">Published revenue / scale</span></th>
+      <th><span class="vi">Trọng tâm sản phẩm</span><span class="cn">产品重点</span><span class="en">Product focus</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td>1</td><td><a href="https://vn104146017.trustpass.alibaba.com/">VNT TRADIMEX.,JSC</a></td><td>VN</td><td class="num">8</td><td>Không công bố</td><td>Laundry detergent OEM/ODM</td></tr>
+      <tr><td>2</td><td><a href="https://lixco.trustpass.alibaba.com/">LIX DETERGENT JOINT STOCK COMPANY</a></td><td>VN</td><td class="num">16</td><td>Above US$100M; &gt;1.000 nhân sự; 30.000–50.000 m²</td><td>Giặt, xả, rửa chén, lau sàn, toilet, bleach, đa năng</td></tr>
+      <tr><td>3</td><td><a href="https://vn19075845400tbzc.trustpass.alibaba.com/">MY HAO CHEMICAL COSMETICS JSC</a></td><td>VN</td><td class="num">1</td><td>Không công bố</td><td>Giặt, lau sàn, toilet, xả vải</td></tr>
+      <tr><td>4</td><td><a href="https://asiagrocerywholesale.trustpass.alibaba.com/">ASIA GROCERY COMPANY LIMITED</a></td><td>VN</td><td class="num">2</td><td>Không công bố</td><td>Laundry detergent xuất khẩu</td></tr>
+      <tr><td>5</td><td><a href="https://hongphat.trustpass.alibaba.com/">HONG PHAT IMPORT EXPORT CO.,LTD</a></td><td>VN</td><td class="num">8</td><td>Không công bố</td><td>Detergent, floor cleaner, toilet cleaner</td></tr>
+      <tr><td>6</td><td><a href="https://thqvietnam.trustpass.alibaba.com/">EXPORT VINA LTD</a></td><td>VN</td><td class="num">11</td><td>Không công bố</td><td>Floor cleaner, toilet cleaner</td></tr>
+      <tr><td>7</td><td><a href="https://unaliliavn.trustpass.alibaba.com/">UNALILIA PACKAGING COMPANY LIMITED</a></td><td>VN</td><td class="num">2</td><td>Không công bố</td><td>Dishwashing liquid/private label packaging</td></tr>
+      <tr><td>8</td><td><a href="https://seivina.trustpass.alibaba.com/">SEIVINA IMPORT EXPORT COMPANY LIMITED</a></td><td>VN</td><td class="num">8</td><td>Không công bố</td><td>Dishwashing liquid, green tea</td></tr>
+      <tr><td>9</td><td><a href="https://prolinevn.trustpass.alibaba.com/">PROLINE VIETNAM MANUFACTURE AND TRADING</a></td><td>VN</td><td class="num">11</td><td>Không công bố</td><td>Refill pouches, dish/laundry liquid</td></tr>
+      <tr><td>10</td><td><a href="https://fmcgvietltd.trustpass.alibaba.com/">FMCG VIET CO., LTD</a></td><td>VN</td><td class="num">7</td><td>Không công bố</td><td>Fabric softener, Downy OEM/export</td></tr>
+      <tr><td>11</td><td><a href="https://vn19083901555orhw.trustpass.alibaba.com/">HOYU VIETNAM INTERNATIONAL TRADING</a></td><td>VN</td><td class="num">1</td><td>Không công bố</td><td>Toilet cleaner tools/cleaning</td></tr>
+      <tr><td>12</td><td><a href="https://vntpharma.trustpass.alibaba.com/">VNT PHARMA</a></td><td>VN</td><td class="num">Không thấy</td><td>Không công bố</td><td>Household chemical search result; cần xác nhận sâu</td></tr>
+       <tr><td>13</td><td><a href="https://cnshkysy.en.alibaba.com/company_profile.html">Shanghai Kuiyuan Industrial Co., Ltd.</a></td><td>CN</td><td class="num">3</td><td>Không công bố</td><td>Commercial laundry liquid</td></tr>
+       <tr><td>14</td><td><a href="https://hbnana.en.alibaba.com/company_profile.html">Hebei Nana Trading Co., Ltd.</a></td><td>CN</td><td class="num">12</td><td>Không công bố</td><td>19L bulk laundry detergent</td></tr>
+       <tr><td>15</td><td><a href="https://kangjiefactory.en.alibaba.com/company_profile.html">Huizhou City Kangjie Detergent &amp; Cleaning Products</a></td><td>CN</td><td class="num">Không thấy</td><td>Không công bố</td><td>Dishwashing liquid</td></tr>
+       <tr><td>16</td><td><a href="https://zggdlile.en.alibaba.com/company_profile.html">Dongguan Zhongtang Lile Detergent Factory</a></td><td>CN</td><td class="num">12</td><td>Không công bố</td><td>Dishwashing liquid OEM</td></tr>
+       <tr><td>17</td><td><a href="https://alzaindustries.en.alibaba.com/company_profile.html">ALZA INDUSTRIES</a></td><td>IN</td><td class="num">Không thấy</td><td>Không công bố</td><td>Bulk laundry detergent powder</td></tr>
+       <tr><td>18</td><td><a href="https://alashwin.en.alibaba.com/company_profile.html">AL ASHWIN INDIA SOURCING LIMITED</a></td><td>IN</td><td class="num">Không thấy</td><td>Không công bố</td><td>3kg detergent powder</td></tr>
+       <tr><td>19</td><td><a href="https://sindhularines.en.alibaba.com/company_profile.html">SINDHU ULTRAMARINE CHEMICALS PRIVATE LIMITED</a></td><td>IN</td><td class="num">Không thấy</td><td>Không công bố</td><td>25kg laundry detergent powder</td></tr>
+       <tr><td>20</td><td><a href="https://bizcoverindia.en.alibaba.com/company_profile.html">BIZCOVERINDIA.COM LLP</a></td><td>IN</td><td class="num">5</td><td>Không công bố</td><td>Eco-friendly detergent powder</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src" style="border:0;margin-top:4px"><span class="vi">Cột doanh thu: chỉ ghi số công bố trên hồ sơ store; trường hợp không công bố ghi rõ "Không công bố" — không suy đoán, không để trống. Dấu * = số tự khai của nhà cung cấp.</span><span class="cn">营收列：仅填写店铺档案公布的数字；未公布者明确标注"未公布"，不猜测、不留空。* = 供应商自报数据。</span><span class="en">Revenue column: only figures published on the store profile; otherwise explicitly "Not disclosed" — never guessed, never blank. * = supplier self-reported.</span></p>
+
+  <div class="insight">
+    <span class="vi"><b>Ba khoảng trống cạnh tranh đọc được từ bảng này:</b> (1) phần lớn nhà cung cấp Việt chỉ 1–8 năm trên sàn, hồ sơ mỏng — SINA có bề dày sản xuất để kể câu chuyện khác; (2) nhà cung cấp Việt đang bán đơn giá rất thấp (0,65–1,07 USD/chai) ở dạng OEM, tức đang làm gia công cho thương hiệu khác; (3) chưa có nhà cung cấp Việt nào định vị theo <b>nhóm mùi hương có hệ thống</b> như SINA (4–6 mùi/dòng, đặt tên theo mùa và cảm xúc).</span>
+    <span class="cn"><b>三个竞争空档：</b>(1) 多数越南供应商仅 1–8 年、档案单薄 — SINA 有制造积淀可讲不同故事；(2) 越南供应商多以 0.65–1.07 美元/瓶做 OEM，等于替他人代工；(3) 尚无越南供应商像 SINA 那样按<b>系统性香型</b>定位（每条线4–6种，按季节与情绪命名）。</span>
+    <span class="en"><b>Three competitive gaps visible here:</b> (1) most Vietnamese suppliers have only 1–8 years and thin profiles — SINA has manufacturing depth for a different story; (2) Vietnamese suppliers sell very low unit prices (US$0.65–1.07/bottle) as OEM, i.e. they manufacture for other brands; (3) no Vietnamese supplier positions on a <b>systematic fragrance architecture</b> like SINA (4–6 scents per line, named by season and mood).</span>
+  </div>
+
+  <div class="src"><span class="vi">Nguồn: khảo sát trực tiếp Alibaba.com ngày 21/10/2026 — trang countrysearch VN/CN/IN cho laundry detergent, floor cleaner, dishwashing liquid, toilet cleaner, fabric softener, liquid detergent, detergent powder; hồ sơ store dạng {store}.trustpass.alibaba.com. Số năm và doanh thu đọc từ huy hiệu và mục Company Profile của store.</span><span class="cn">来源：2026年10月21日直接调研 Alibaba.com — VN/CN/IN 的 countrysearch 页（洗衣液、地板清洁、洗碗液、马桶清洁、柔顺剂、液体洗涤剂、洗衣粉）；store 档案 {store}.trustpass.alibaba.com。年限与营收取自店铺徽章与 Company Profile。</span><span class="en">Source: direct Alibaba.com survey on 21/10/2026 — countrysearch pages for VN/CN/IN across laundry detergent, floor cleaner, dishwashing liquid, toilet cleaner, fabric softener, liquid detergent and detergent powder; store profiles at {store}.trustpass.alibaba.com. Years and revenue read from store badges and the Company Profile section.</span></div>
+
+  <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b>
+    <div class="blk-vi">Đừng đọc cả bảng — nói ba điều. Một: đa số đối thủ Việt trên sàn là nhà buôn, hồ sơ 1–8 năm. Hai: họ đang bán OEM với giá 0,65–1,07 USD/chai, tức làm thuê cho thương hiệu khác. Ba: chỉ LIX là nhà sản xuất thật với doanh thu trên 100 triệu USD và 16 năm — và đó chính là hình mẫu SINA có thể vượt qua, vì SINA có kiến trúc mùi hương rộng hơn. Câu chốt: "Trên sàn chưa có ai làm đúng điều anh/chị đang có."</div>
+    <div class="blk-cn">不要念整张表 — 说三点。一：平台上多数越南对手是贸易商，档案 1–8 年。二：他们以 0.65–1.07 美元/瓶做 OEM，等于替别人代工。三：只有 LIX 是真正的制造商，年营收超 1 亿美元、16 年 — 而这正是 SINA 可以超越的样板，因为 SINA 的香型架构更宽。收尾：“平台上还没有人做到您手上这件事。”</div>
+    <div class="blk-en">Do not read the table — say three things. One: most Vietnamese rivals are traders with 1–8 year profiles. Two: they sell OEM at US$0.65–1.07 per bottle, effectively manufacturing for someone else's brand. Three: only LIX is a genuine manufacturer, above US$100M revenue and 16 years — and that is the benchmark SINA can surpass, because SINA's fragrance architecture is broader. Close with: "Nobody on the platform is doing what you already have."</div>
+  </div>
+</section>
+
+<!-- ================= 07 ================= -->
+<section class="panel" id="p07" data-n="07">
+  <div class="phead">
+    <div class="pnum">07</div>
+    <div>
+      <h2><span class="vi">Sản phẩm tiêu biểu &amp; dải giá</span><span class="cn">代表产品与价格带</span><span class="en">Representative products and price bands</span></h2>
+      <p class="psub"><span class="vi">Giá và MOQ thực tế trên sàn — đọc đúng đơn vị tiền tệ hiển thị</span><span class="cn">平台上的实际价格与起订量 — 注意显示币种</span><span class="en">Actual on-platform prices and MOQs — read the displayed currency</span></p>
+    </div>
+  </div>
+  <div class="takeaway">
+         <span class="vi">Dải MOQ trên sàn trải từ <b>100 sản phẩm</b> đến <b>10.000 sản phẩm</b> — chênh 100 lần. Nghĩa là người mua B2B không đồng nhất: có người thử lô nhỏ, có người mua theo container. SINA cần <b>hai bậc giá riêng</b> cho hai nhóm này.</span>
+         <span class="cn">平台起订量从 <b>100 件</b>到 <b>10,000 件</b> — 相差 100 倍。说明 B2B 买家并不统一：有人试小单，有人整柜采购。SINA 需要<b>两档价格</b>对应两类客户。</span>
+         <span class="en">MOQs on the platform run from <b>100 pieces</b> to <b>10,000 pieces</b> — a 100× spread. B2B buyers are not one group: some test small lots, some buy by the container. SINA needs <b>two price tiers</b> for these two groups.</span>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">MOQ theo nhóm sản phẩm (thang logarit, đơn vị sản phẩm)</span><span class="cn">各品类起订量（对数轴，件）</span><span class="en">MOQ by product category (log scale, pieces)</span></h4>
+    <div class="cwrap tall"><canvas id="c07"></canvas></div>
+  </div>
+
+  <h3 class="sub"><span class="vi">Sản phẩm đã khảo sát trên sàn</span><span class="cn">平台已调研产品</span><span class="en">Products surveyed on the platform</span></h3>
+  <div class="tw"><table id="tblProducts">
+    <thead><tr>
+      <th><span class="vi">Nhóm</span><span class="cn">品类</span><span class="en">Category</span></th>
+      <th><span class="vi">Sản phẩm</span><span class="cn">产品</span><span class="en">Product</span></th>
+      <th class="num"><span class="vi">Giá hiển thị</span><span class="cn">显示价格</span><span class="en">Displayed price</span></th>
+      <th class="num">MOQ</th>
+      <th><span class="vi">Nước</span><span class="cn">国家</span><span class="en">Country</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td>Laundry detergent</td><td><a href="https://www.alibaba.com/product-detail/Best-selling-eco-friendly-laundry-detergent_10000016350894.html">Best-selling eco-friendly laundry detergent, 500ml/1000ml</a></td><td class="num">INR 233,16–242,88</td><td class="num">1.000 pieces</td><td>VN</td></tr>
+      <tr><td>Laundry detergent</td><td><a href="https://www.alibaba.com/product-detail/Best-Selling-OEM-ODM-Private-Label_10000004193963.html">OEM/ODM lemon dishwashing &amp; laundry detergent</a></td><td class="num">INR 116,58</td><td class="num">100 pieces</td><td>VN</td></tr>
+      <tr><td>Laundry detergent</td><td><a href="https://www.alibaba.com/product-detail/Sunro-Washing-Powder-Laundry-Detergent-800G_10000046637330.html">Sunro washing powder 800g</a></td><td class="num">INR 799.540,39</td><td class="num">1 × 20ft container</td><td>VN</td></tr>
+      <tr><td>Floor cleaner</td><td><a href="https://www.alibaba.com/product-detail/Ring-Floor-Cleaner-Liquid-1KG-Lemongrass_1601953816877.html">Ring Floor Cleaner 1kg</a></td><td class="num">NOK 10,29</td><td class="num">1.000 pieces</td><td>VN</td></tr>
+      <tr><td>Floor cleaner</td><td><a href="https://www.alibaba.com/product-detail/CHEAPEST-FACTORY-PRICE-LILY-ROSE-FLOOR_10000001176055.html">Lily &amp; Rose Floor Cleaner 1L/2L/5L</a></td><td class="num">NOK 6,28–23,32</td><td class="num">4.000 pieces</td><td>VN</td></tr>
+      <tr><td>Floor cleaner</td><td><a href="https://www.alibaba.com/product-detail/Sunligh-t-natural-floor-Cleaning-Liquid_11000013048299.html">Sunlight natural floor cleaner 3.6kg</a></td><td class="num">NOK 75,92–120,13</td><td class="num">100 cartons</td><td>VN</td></tr>
+      <tr><td>Floor cleaner</td><td><a href="https://www.alibaba.com/product-detail/Floor-Cleaner-for-Household-Floor-Care_10000050550144.html">LIX Floor Cleaner</a></td><td class="num">USD 0,65–1,07</td><td class="num">1.000 pieces</td><td>VN</td></tr>
+      <tr><td>Dishwashing</td><td><a href="https://www.alibaba.com/product-detail/Unalilia-Brand-PET-Plastic-Squeeze-Flat_10000035113349.html">Unalilia custom dishwashing liquid</a></td><td class="num">DKK 1,09–1,23</td><td class="num">10.000 pieces</td><td>VN</td></tr>
+      <tr><td>Dishwashing</td><td><a href="https://www.alibaba.com/product-detail/ECO-FRIENDLY-INSPIRED-by-NATURE-ON1_11000003834682.html">ON1 eco-friendly dish soap</a></td><td class="num">DKK 2,38–3,73</td><td class="num">500 pieces</td><td>VN</td></tr>
+      <tr><td>Dishwashing</td><td><a href="https://www.alibaba.com/product-detail/Dishwashing-Liquid-with-Natural-Ingredients-From_10000001644060.html">Japanese green tea dishwashing liquid</a></td><td class="num">DKK 2,04</td><td class="num">10.000 pieces</td><td>VN</td></tr>
+      <tr><td>Fabric softener</td><td><a href="https://www.alibaba.com/product-detail/Orchird-Lavender-Eco-Friendly-Fabric-Softener_10000046954059.html">Orchird &amp; Lavender fabric softener 1440ml</a></td><td class="num">EUR 0,8908</td><td class="num">100 pieces</td><td>VN</td></tr>
+      <tr><td>Fabric softener</td><td><a href="https://www.alibaba.com/product-detail/For-Eco-Friendly-Lavender-Fabric-Softener_1700000591036.html">Lavender fabric softener 3L</a></td><td class="num">EUR 8,10–13,50</td><td class="num">421 cartons</td><td>VN</td></tr>
+      <tr><td>Fabric softener</td><td><a href="https://www.alibaba.com/product-detail/Downy-Eco-Friendly-Fabric-Softener-Conditioner_1600153244537.html">Downy fabric softener 1.8L</a></td><td class="num">EUR 22,50–31,49</td><td class="num">100 cartons</td><td>VN</td></tr>
+      <tr><td>Toilet cleaner</td><td><a href="https://www.alibaba.com/product-detail/HIGH-QUALITY-TOILET-CLEANER-500G-ON1_10000000601007.html">ON1 toilet cleaner 500g</a></td><td class="num">DKK 2,99</td><td class="num">2.000 pieces</td><td>VN</td></tr>
+      <tr><td>Toilet cleaner</td><td><a href="https://www.alibaba.com/product-detail/THQ-VIETNAM-Toilet-Duck-Thick-Liquid_50032587196.html">THQ Vietnam Toilet Duck 900ml</a></td><td class="num">DKK 54,23–67,79</td><td class="num">100 cartons</td><td>VN</td></tr>
+      <tr><td>Liquid detergent</td><td><a href="https://www.alibaba.com/countrysearch/CN/liquid-detergent.html">Shanghai Kuiyuan commercial laundry liquid</a></td><td class="num">SGD 413,76–435,88</td><td class="num">5 barrels</td><td>CN</td></tr>
+      <tr><td>Liquid detergent</td><td><a href="https://www.alibaba.com/countrysearch/CN/liquid-detergent.html">Hebei Nana 19L laundry detergent</a></td><td class="num">SGD 13,34–20,30</td><td class="num">630 pieces</td><td>CN</td></tr>
+      <tr><td>Detergent powder</td><td><a href="https://www.alibaba.com/countrysearch/IN/detergent-powder.html">ALZA bulk laundry detergent powder</a></td><td class="num">SGD 325,28–910,78</td><td class="num">14 metric tons</td><td>IN</td></tr>
+             <tr><td>Detergent powder</td><td><a href="https://www.alibaba.com/product-detail/DETERGENT-WASHING-POWDER-OEM-POWDER-DETERGENT_139313061.html">LIX high-foam detergent powder, 18% active matter</a></td><td class="num">USD 0,70–1,00</td><td class="num">5.000 kg</td><td>VN</td></tr>
+    </tbody>
+  </table></div>
+  <div class="hl">
+    <span class="vi"><b>Lưu ý đơn vị tiền tệ:</b> giá trên Alibaba.com hiển thị theo quốc gia giao hàng và ngôn ngữ của trình duyệt. Trong lần khảo sát này, cùng một phiên truy cập đã trả về <b>USD, EUR, DKK, NOK, INR và SGD</b> ở các trang khác nhau. Bảng trên ghi <b>nguyên văn đơn vị hiển thị</b>, không quy đổi — vì quy đổi sẽ tạo ra con số không kiểm chứng được. Khi làm việc với khách, luôn đặt chế độ USD trước khi đọc giá.</span>
+    <span class="cn"><b>币种说明：</b>Alibaba.com 价格按收货国与浏览器语言显示。本次调研同一会话在不同页面返回了 <b>USD、EUR、DKK、NOK、INR、SGD</b>。上表<b>照录显示币种</b>，不做换算 — 换算会产生无法核实的数字。与客户沟通前请先切换到 USD 显示。</span>
+    <span class="en"><b>Currency note:</b> Alibaba.com prices display by delivery country and browser language. In this survey the same session returned <b>USD, EUR, DKK, NOK, INR and SGD</b> across pages. The table records the <b>displayed currency verbatim</b> without conversion, because conversion would create unverifiable figures. Always switch to USD before reading prices with a client.</span>
+  </div>
+
+  <div class="src"><span class="vi">Nguồn: khảo sát Alibaba.com 21/10/2026 (countrysearch + store pages). Link sản phẩm dạng chính thức /product-detail/... đã mở được; trang /trade/search bị chặn captcha trong lần khảo sát này nên không dùng làm nguồn số.</span><span class="cn">来源：2026/10/21 Alibaba.com 调研（countrysearch + 店铺页）。产品链接为可打开的 /product-detail/... 正式链接；本次 /trade/search 被验证码拦截，未作数据来源。</span><span class="en">Source: Alibaba.com survey 21/10/2026 (countrysearch + store pages). Product links are working /product-detail/... URLs; /trade/search was captcha-blocked during this survey and was not used as a data source.</span></div>
+
+  <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b>
+    <div class="blk-vi">Chỉ vào biểu đồ logarit và nói: "Nhìn cái này — người mua trên sàn không cùng một cỡ. Có người mua 100 chai, có người mua 10.000 chai." Sau đó nói về hệ quả: nếu SINA chỉ có một bảng giá, sẽ mất một trong hai nhóm. Đề xuất hai bậc: lô thử 100–500 chai cho nhà phân phối mới, và giá container cho nhà nhập khẩu. Nhấn mạnh: "Đây là việc phải làm trước khi lên sàn, không phải sau."</div>
+    <div class="blk-cn">指向对数图说：“看这个 — 平台买家不是一个体量。有人买 100 瓶，有人买 10,000 瓶。”然后讲后果：如果 SINA 只有一张价格表，就会失去其中一类客户。建议两档：新分销商 100–500 瓶试单，进口商整柜价。强调：“这是上线前必须做的，而不是之后。”</div>
+    <div class="blk-en">Point at the log chart: "Look at this — platform buyers are not one size. Some buy 100 bottles, some buy 10,000.\" Then the consequence: with a single price list SINA loses one of the two groups. Propose two tiers: 100–500 bottle trial lots for new distributors, container pricing for importers. Emphasise: "This has to be done before going live, not after."</div>
+  </div>
+</section>
+
+<!-- ================= 08 ================= -->
+<section class="panel" id="p08" data-n="08">
+  <div class="phead">
+    <div class="pnum">08</div>
+    <div>
+      <h2><span class="vi">Chân dung người mua &amp; hành vi tìm nguồn</span><span class="cn">买家画像与采购行为</span><span class="en">Buyer personas and sourcing behaviour</span></h2>
+      <p class="psub"><span class="vi">Sáu kiểu người mua thực tế, xếp theo mức độ sẵn sàng đặt hàng</span><span class="cn">六类真实买家，按下单意愿排序</span><span class="en">Six real buyer types, ranked by readiness to order</span></p>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="vi">Người mua lớn <b>lọc nhà cung cấp ngay ở bộ lọc chứng nhận</b> — nghĩa là hồ sơ xác minh quyết định SINA có được nhìn thấy hay không, trước cả khi khách đọc tới bảng giá.</span>
+    <span class="cn">大买家<b>在认证筛选中就已过滤供应商</b> — 也就是说，验厂资质决定 SINA 是否被看见，早于客户看价格表。</span>
+    <span class="en">Large buyers <b>filter on certification before anything else</b> — the verification profile decides whether SINA is seen at all, before anyone reads a price list.</span>
+  </div>
+
+  <div class="chart-box">
+    <h4><span class="vi">Mức độ ưu tiên của sáu nhóm người mua (thang 0–10)</span><span class="cn">六类买家优先级（0–10）</span><span class="en">Priority of six buyer types (scale 0–10)</span></h4>
+    <div class="cwrap"><canvas id="c08"></canvas></div>
+  </div>
+  <div class="chart-box">
+    <h4><span class="vi">Quy trình tìm nguồn: sáu điểm chạm cần tối ưu</span><span class="cn">采购流程：六个需要优化的触点</span><span class="en">Sourcing journey: six touchpoints to optimise</span></h4>
+    <div class="cwrap"><canvas id="c08b"></canvas></div>
+  </div>
+
+  <h3 class="sub"><span class="vi">Sáu chân dung người mua</span><span class="cn">六类买家画像</span><span class="en">Six buyer personas</span></h3>
+  <div class="persona"><b>1. <span class="vi">Nhà nhập khẩu phân phối (L3)</span><span class="cn">进口分销商（L3）</span><span class="en">Import distributor (L3)</span></b>
+    <div class="blk-vi">Mua theo container, cần đủ bộ chứng từ, cần nhãn riêng. Quan tâm: giá FOB, thời gian giao, độ ổn định nguồn. Đây là nhóm mua nhiều nhất và cũng lọc chứng nhận sớm nhất.</div>
+    <div class="blk-cn">整柜采购，需完整单证与自有标签。关注：FOB 价、交期、供货稳定性。采购量最大，也最早按认证筛选。</div>
+    <div class="blk-en">Container buyers needing full documentation and private label. Cares about FOB price, lead time, supply stability. Largest volume and earliest certification filter.</div></div>
+  <div class="persona"><b>2. <span class="vi">Chuỗi bán lẻ &amp; siêu thị (L4)</span><span class="cn">零售连锁与超市（L4）</span><span class="en">Retail chain &amp; supermarket (L4)</span></b>
+    <div class="blk-vi">Cần chứng nhận, kiểm định nhà máy, hồ sơ an toàn. Quan tâm: khả năng kiểm toán nhà máy, truy xuất lô, tuân thủ nhãn. Đây là nhóm biên lợi nhuận tốt nhất nhưng rào cản cao nhất.</div>
+    <div class="blk-cn">需要认证、工厂审核与安全档案。关注：工厂可审核性、批次追溯、标签合规。利润最好但门槛最高。</div>
+    <div class="blk-en">Requires certification, factory audit and safety files. Cares about auditability, batch traceability, label compliance. Best margin, highest barrier.</div></div>
+  <div class="persona"><b>3. <span class="vi">Thương hiệu riêng / private label (L3)</span><span class="cn">自有品牌/贴牌（L3）</span><span class="en">Private label owner (L3)</span></b>
+    <div class="blk-vi">Cần OEM/ODM, công thức và mùi hương theo yêu cầu. Quan tâm: MOQ linh hoạt, khả năng đổi mùi nhanh. SINA có 4–6 mùi/dòng — đây là lợi thế trực tiếp cho nhóm này.</div>
+    <div class="blk-cn">需要 OEM/ODM、按需配方与香型。关注：起订量灵活、换香速度。SINA 每条线 4–6 种香型 — 对该群体是直接优势。</div>
+    <div class="blk-en">Needs OEM/ODM and custom formulas/scents. Cares about flexible MOQ and fast scent switching. SINA's 4–6 scents per line is a direct advantage here.</div></div>
+  <div class="persona"><b>4. <span class="vi">Nhà phân phối khu vực nhỏ (L2)</span><span class="cn">区域小型分销商（L2）</span><span class="en">Small regional distributor (L2)</span></b>
+    <div class="blk-vi">Mua lô thử 100–500 sản phẩm, quyết định nhanh, ít thủ tục. Quan tâm: giá thử nghiệm, mẫu, thời gian giao ngắn. Đây là nhóm tạo đơn hàng đầu tiên nhanh nhất.</div>
+    <div class="blk-cn">试单 100–500 件，决策快、手续少。关注：试单价、样品、短交期。是最快产生首单的群体。</div>
+    <div class="blk-en">Trial lots of 100–500 units, fast decisions, light paperwork. Cares about trial pricing, samples, short lead time. Fastest source of a first order.</div></div>
+  <div class="persona"><b>5. <span class="vi">Công ty vệ sinh &amp; facility management (L3)</span><span class="cn">清洁与设施管理公司（L3）</span><span class="en">Cleaning &amp; facility management firm (L3)</span></b>
+    <div class="blk-vi">Mua dung tích lớn (3,6kg / can 19L), dùng liên tục. Quan tâm: giá trên lít, độ pha loãng, giao định kỳ. SINA đã có 3,6kg cho lau sàn và rửa chén — khớp trực tiếp.</div>
+    <div class="blk-cn">采购大规格（3.6kg / 19L 桶），持续消耗。关注：每升价格、稀释比例、定期配送。SINA 已有 3.6kg 地板与洗碗 — 直接匹配。</div>
+    <div class="blk-en">Buys large formats (3.6kg / 19L), continuous consumption. Cares about cost per litre, dilution ratio, scheduled delivery. SINA's 3.6kg floor and dish lines match directly.</div></div>
+  <div class="persona"><b>6. <span class="vi">Người mua thử nghiệm (L1)</span><span class="cn">试单买家（L1）</span><span class="en">Trial buyer (L1)</span></b>
+    <div class="blk-vi">Mua mẫu hoặc 1 thùng để đánh giá. Quan tâm: giá mẫu, tốc độ phản hồi. Đây là nhóm cần phản hồi trong vài giờ, không phải vài ngày.</div>
+    <div class="blk-cn">购买样品或一箱评估。关注：样品价、响应速度。需要数小时内回复，而非数天。</div>
+    <div class="blk-en">Buys samples or a single carton to evaluate. Cares about sample pricing and response speed. Needs answers in hours, not days.</div></div>
+
+  <div class="insight">
+    <span class="vi"><b>Quy trình tìm nguồn của người mua L3/L4:</b> tìm bằng từ khoá → lọc theo chứng nhận và xác minh → xem năng lực nhà máy (video, 360°, báo cáo SGS) → so giá và MOQ → yêu cầu mẫu → đàm phán → đặt hàng. SINA hiện mất ở <b>bước 2</b>, trước cả khi có cơ hội trình bày ở bước 3–4.</span>
+    <span class="cn"><b>L3/L4 买家的采购流程：</b>关键词搜索 → 按认证与验厂筛选 → 看工厂能力（视频、360°、SGS 报告）→ 比价与起订量 → 索样 → 谈判 → 下单。SINA 现在卡在<b>第2步</b>，还轮不到第3–4步展示。</span>
+    <span class="en"><b>How L3/L4 buyers source:</b> keyword search → filter by certification and verification → inspect factory capability (video, 360°, SGS report) → compare price and MOQ → request samples → negotiate → order. SINA currently fails at <b>step 2</b>, before it can present anything at steps 3–4.</span>
+  </div>
+
+  <div class="src"><span class="vi">Nguồn: phân cấp người mua L0–L4 theo tài liệu Verified Supplier Training (Alibaba.com); hành vi lọc theo chứng nhận: "người mua tìm thấy qua tìm kiếm chứng nhận — chỉ Verified Supplier lọt bộ lọc chứng nhận"; 83% người mua B2B thích đặt hàng/thanh toán số và 74% người mua millennial đổi nhà cung cấp vì trải nghiệm (Alibaba.com US Buyer Survey 2024). Thang 0–10 ở biểu đồ là <b>đánh giá định tính của người chuẩn bị</b>, không phải số liệu khảo sát.</span><span class="cn">来源：买家分级 L0–L4 依据 Verified Supplier Training；认证筛选行为："通过认证搜索被找到 — 只有 Verified Supplier 通过认证筛选"；83% B2B 买家偏好线上下单/支付，74% 千禧代买家因体验更换供应商（Alibaba.com US Buyer Survey 2024）。图表 0–10 为<b>编制人定性评估</b>，非调研数据。</span><span class="en">Sources: L0–L4 buyer tiers per Verified Supplier Training; certification filtering behaviour ("buyers found via certification search — only Verified Suppliers pass the certification filter"); 83% of B2B buyers prefer digital ordering/payment and 74% of millennial buyers switch suppliers over experience (Alibaba.com US Buyer Survey 2024). The 0–10 scale in the chart is the <b>preparer's qualitative assessment</b>, not survey data.</span></div>
+
+  <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b>
+    <div class="blk-vi">Đây là mục nên dừng lại hỏi khách: "Trong sáu nhóm này, anh/chị muốn nhắm nhóm nào trước?" Vì câu trả lời quyết định phần đọc dữ liệu phía sau. Nếu khách chọn nhóm 1 hoặc 2, cần chuẩn bị hồ sơ xác minh nhà máy và chứng nhận. Nếu chọn nhóm 4, có thể khởi động nhanh bằng lô thử nhưng trần tăng trưởng thấp. Đừng tự chọn thay khách — nhưng nếu khách không chọn, mặc định đề xuất nhóm 1 vì đó là nhóm tạo đơn lớn và ổn định.</div>
+    <div class="blk-cn">此节应停下来问客户：“这六类里，您想先打哪一类？”因为答案决定后面全部内容。若选1或2，需准备工厂验证与认证资料；若选4，可用试单快速启动但增长天花板低。不要替客户选 — 但若客户不选，默认推荐第1类，因为订单大且稳定。</div>
+    <div class="blk-en">Pause and ask here: "Of these six, which do you want to target first?" The answer drives everything downstream. If they pick 1 or 2, factory verification and certification files are prerequisites. If they pick 4, a trial-lot launch is fast but the growth ceiling is low. Do not choose for them — but if they do not choose, default to group 1 as the largest and most stable order source.</div>
+  </div>
+</section>
+
+<!-- ================= 09 ================= -->
+<section class="panel" id="p09" data-n="09">
+   <div class="phead"><div class="pnum">09</div><div><h2><span class="vi">Cấu trúc cạnh tranh &amp; khoảng trống danh mục</span><span class="cn">竞争结构与品类空档</span><span class="en">Competitive structure and category gaps</span></h2><p class="psub"><span class="vi">Bốn phân khúc, bốn mức cạnh tranh khác nhau — không thể đọc chung một cách</span><span class="cn">四个板块、四种竞争强度 — 不能一概而论</span><span class="en">Four segments, four levels of intensity — they cannot be read the same way</span></p></div></div>
+   <div class="takeaway"><span class="vi">Giặt &amp; xả là chiến trường giá; <b>vệ sinh thiết bị và chuyên biệt</b> là nơi ít đối thủ Việt nhất và biên cao nhất — nhưng cũng là nơi dữ liệu thị trường mỏng nhất.</span><span class="cn">洗衣柔顺是价格战场；<b>设备养护与专项清洁</b>是越南对手最少、毛利最高的地方 — 但市场数据也最薄。</span><span class="en">Laundry is the price battlefield; <b>appliance care and specialty</b> has the fewest Vietnamese rivals and the highest margin — but also the thinnest market data.</span></div>
+   <div class="tw"><table><thead><tr><th><span class="vi">Phân khúc</span><span class="cn">板块</span><span class="en">Segment</span></th><th><span class="vi">Tín hiệu cầu</span><span class="cn">需求信号</span><span class="en">Demand signal</span></th><th class="num"><span class="vi">Cường độ cạnh tranh</span><span class="cn">竞争强度</span><span class="en">Intensity</span></th><th><span class="vi">Khoảng trống đọc được</span><span class="cn">可见空档</span><span class="en">Visible gap</span></th></tr></thead><tbody>
+     <tr><td><span class="vi">Giặt &amp; xả</span><span class="cn">洗衣与柔顺</span><span class="en">Laundry &amp; softener</span></td><td><span class="vi">Khối lượng lớn nhất, mua lặp lại</span><span class="cn">体量最大，重复购买</span><span class="en">Largest volume, repeat purchase</span></td><td class="num"><span class="vi">Rất cao</span><span class="cn">很高</span><span class="en">Very high</span></td><td><span class="vi">Giá đã bị ép; dư địa còn lại ở nhãn riêng và kiến trúc mùi hương</span><span class="cn">价格已被压；空间在贴牌与香型架构</span><span class="en">Price already compressed; room is in private label and fragrance architecture</span></td></tr>
+     <tr><td><span class="vi">Làm sạch bề mặt</span><span class="cn">表面清洁</span><span class="en">Surface &amp; floor</span></td><td><span class="vi">Tăng theo đô thị hoá và nhà ở</span><span class="cn">随城镇化与住宅增长</span><span class="en">Grows with urbanisation and housing</span></td><td class="num"><span class="vi">Trung bình – cao</span><span class="cn">中—高</span><span class="en">Medium–high</span></td><td><span class="vi">Dòng dung tích lớn cho chuỗi và facility management còn ít lựa chọn Việt</span><span class="cn">面向连锁与设施管理的大规格，越南选择少</span><span class="en">Large formats for chains and facility management lack Vietnamese options</span></td></tr>
+     <tr><td><span class="vi">Rửa chén</span><span class="cn">洗碗</span><span class="en">Dishwashing</span></td><td><span class="vi">Tần suất mua cao, quyết định nhanh</span><span class="cn">购买频次高，决策快</span><span class="en">High frequency, fast decision</span></td><td class="num"><span class="vi">Cao</span><span class="cn">高</span><span class="en">High</span></td><td><span class="vi">Cạnh tranh bằng cảm giác tay và giá; khó tạo khác biệt dài hạn</span><span class="cn">靠手感与价格竞争；难形成长期差异</span><span class="en">Fought on hand-feel and price; hard to sustain differentiation</span></td></tr>
+     <tr class="pick"><td><span class="vi">Vệ sinh thiết bị &amp; chuyên biệt</span><span class="cn">设备养护与专项清洁</span><span class="en">Appliance care &amp; specialty</span></td><td><span class="vi">Ngách nhỏ, tăng cùng tuổi thiết bị</span><span class="cn">小众，随设备老化增长</span><span class="en">Small niche, grows with appliance age</span></td><td class="num"><span class="vi">Thấp</span><span class="cn">低</span><span class="en">Low</span></td><td><span class="vi">Ít nhà cung cấp Việt trên sàn; biên cao; dữ liệu chuẩn ngành còn mỏng</span><span class="cn">平台越南供应商少；毛利高；行业标准数据薄</span><span class="en">Few Vietnamese sellers on-platform; higher margin; thin standard data</span></td></tr>
+   </tbody></table></div>
+   <div class="insight"><span class="vi"><b>Cách đọc bảng này:</b> mẫu 20 nhà cung cấp ở mục 06 cho thấy các nhà cung cấp Việt tập trung ở giặt xả và rửa chén — nơi giá đã bị ép xuống 0,65–1,07 USD/chai. Phân khúc chuyên biệt gần như trống, nhưng cũng chưa có số liệu quy mô đủ tin cậy để khẳng định đó là thị trường lớn. Đây là khoảng trống cần kiểm chứng, không phải kết luận sẵn.</span><span class="cn"><b>如何解读：</b>第06节的20家样本显示，越南供应商集中在洗衣与洗碗 — 价格已被压到 0.65–1.07 美元/瓶。专项清洁几乎空白，但也没有足够可靠的规模数据证明它是大市场。这是待验证的空档，不是既定结论。</span><span class="en"><b>How to read this:</b> the 20-supplier sample in section 06 shows Vietnamese suppliers cluster in laundry and dishwashing, where price is already compressed to US$0.65–1.07 per bottle. Specialty is nearly empty, but there is no reliable size data proving it is a large market. It is a gap to test, not a settled conclusion.</span></div>
+   <div class="src"><span class="vi">Nguồn: tổng hợp từ mục 02, 04, 06 và 07 của báo cáo này; xếp hạng cường độ cạnh tranh là đánh giá định tính của người chuẩn bị dựa trên mẫu khảo sát, không phải chỉ số thị trường.</span><span class="cn">来源：本报告第02、04、06、07节汇总；竞争强度为编制人基于样本的定性判断，非市场指数。</span><span class="en">Source: synthesis of sections 02, 04, 06 and 07 of this report; intensity ratings are the preparer's qualitative judgement from the sample, not a market index.</span></div>
+   <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b><div class="blk-vi">Đừng nói "ngách này lớn". Nói: "ngách này trống, và chúng ta chưa có số liệu đủ để khẳng định nó lớn". Sự trung thực này tạo lý do để bước tiếp là kiểm chứng dữ liệu, chứ không phải ký gói.</div><div class="blk-cn">不要说“这个细分很大”。要说：“这个细分是空的，但我们还没有足够数据证明它大。”这种诚实正是下一步做数据验证的理由。</div><div class="blk-en">Do not say "this niche is big". Say: "the niche is empty, and we do not yet have data to claim it is large." That honesty is the reason the next step is validation, not signing anything.</div></div>
+ </section>
+
+<!-- ================= 10 ================= -->
+<section class="panel" id="p10" data-n="10">
+   <div class="phead"><div class="pnum">10</div><div><h2><span class="vi">Điều kiện thâm nhập thị trường</span><span class="cn">市场进入条件</span><span class="en">Market entry conditions</span></h2><p class="psub"><span class="vi">Cùng một sản phẩm, khác thị trường là khác bộ hồ sơ</span><span class="cn">同一产品，不同市场需要不同资料</span><span class="en">Same product, different market, different file</span></p></div></div>
+   <div class="takeaway"><span class="vi">Rào cản lớn nhất của ngành này không phải thuế mà là <b>nhãn, claim và hồ sơ thành phần</b> — và chúng khác nhau theo từng thị trường.</span><span class="cn">这个行业最大的门槛不是关税，而是<b>标签、宣称与成分资料</b> — 且各市场不同。</span><span class="en">The biggest barrier in this category is not duty but <b>labels, claims and ingredient files</b> — and they differ by market.</span></div>
+   <div class="tw"><table><thead><tr><th>HS</th><th><span class="vi">Nhóm sản phẩm</span><span class="cn">产品类别</span><span class="en">Product group</span></th><th><span class="vi">Điều kiện thường gặp</span><span class="cn">常见条件</span><span class="en">Typical conditions</span></th></tr></thead><tbody>
+     <tr class="pick"><td><b>3402 / 3402.50</b></td><td><span class="vi">Chế phẩm giặt rửa, làm sạch đóng gói bán lẻ</span><span class="cn">洗涤与清洁制剂（零售包装）</span><span class="en">Washing and cleaning preparations, retail-packed</span></td><td><span class="vi">Bảng thành phần, hàm lượng hoạt chất, nhãn ngôn ngữ nước nhập, cảnh báo an toàn</span><span class="cn">成分表、活性物含量、进口国语言标签、安全警示</span><span class="en">Ingredient list, active matter, importing-language label, safety warnings</span></td></tr>
+     <tr><td>3401</td><td><span class="vi">Xà phòng và chế phẩm hoạt động bề mặt</span><span class="cn">肥皂与表面活性制品</span><span class="en">Soap and surface-active products</span></td><td><span class="vi">Thường nhẹ hơn 3402 nhưng vẫn cần nhãn và hồ sơ thành phần</span><span class="cn">通常比 3402 宽松，但仍需标签与成分资料</span><span class="en">Generally lighter than 3402 but still needs label and ingredient file</span></td></tr>
+     <tr><td>3808</td><td><span class="vi">Chế phẩm diệt khuẩn, khử trùng</span><span class="cn">消毒杀菌制剂</span><span class="en">Disinfectants</span></td><td><span class="vi"><b>Nặng nhất:</b> claim diệt khuẩn kéo theo đăng ký riêng ở nhiều thị trường (ví dụ Mỹ: FIFRA/EPA)</span><span class="cn"><b>最重：</b>杀菌宣称在多个市场触发单独注册（如美国 FIFRA/EPA）</span><span class="en"><b>Heaviest:</b> disinfecting claims trigger separate registration in many markets (e.g. US FIFRA/EPA)</span></td></tr>
+     <tr><td>3405</td><td><span class="vi">Chất đánh bóng, bột cọ rửa</span><span class="cn">抛光剂、去污粉</span><span class="en">Polishes, scouring powders</span></td><td><span class="vi">Ít rào cản hơn; phù hợp để mở rộng danh mục sau</span><span class="cn">门槛较低；适合后续扩品</span><span class="en">Lighter barriers; suitable for later range extension</span></td></tr>
+   </tbody></table></div>
+   <div class="tw"><table><thead><tr><th><span class="vi">Thị trường</span><span class="cn">市场</span><span class="en">Market</span></th><th><span class="vi">Điểm cần kiểm tra trước</span><span class="cn">进入前须核查</span><span class="en">Check before entry</span></th><th><span class="vi">Ảnh hưởng tới chi phí</span><span class="cn">对成本的影响</span><span class="en">Cost impact</span></th></tr></thead><tbody>
+     <tr><td>EU</td><td><span class="vi">Quy định chất tẩy rửa, dữ liệu thành phần, người chịu trách nhiệm trên lãnh thổ, nhãn ngôn ngữ địa phương</span><span class="cn">洗涤剂法规、成分数据、境内责任人、本地语言标签</span><span class="en">Detergents regulation, ingredient data, in-territory responsible person, local-language label</span></td><td><span class="vi">Cao: nhãn riêng theo nước + hồ sơ kỹ thuật</span><span class="cn">高：各国标签+技术档案</span><span class="en">High: country-specific labels plus technical file</span></td></tr>
+     <tr><td>US</td><td><span class="vi">Nhãn theo quy định liên bang; claim diệt khuẩn cần đăng ký riêng; private label phổ biến</span><span class="cn">联邦标签规定；杀菌宣称需单独注册；贴牌普遍</span><span class="en">Federal labelling; disinfecting claims need separate registration; private label common</span></td><td><span class="vi">Trung bình, tăng mạnh nếu có claim diệt khuẩn</span><span class="cn">中等；若有杀菌宣称则大幅上升</span><span class="en">Medium, rises sharply with disinfecting claims</span></td></tr>
+     <tr><td>Japan</td><td><span class="vi">Chuẩn chất lượng và nhãn khắt khe nhất trong nhóm; yêu cầu truy xuất lô</span><span class="cn">组内最严的质量与标签标准；需批次追溯</span><span class="en">Strictest quality and labelling in the set; batch traceability</span></td><td><span class="vi">Cao: kiểm định và tài liệu lô</span><span class="cn">高：检测与批次文件</span><span class="en">High: testing and batch documentation</span></td></tr>
+     <tr><td>ASEAN</td><td><span class="vi">Nhãn theo nước; một số nước yêu cầu đăng ký sản phẩm; Halal là lợi thế ở Malaysia/Indonesia</span><span class="cn">各国标签；部分国家需产品注册；马来西亚/印尼清真认证是优势</span><span class="en">Country labels; some require product registration; Halal is an edge in Malaysia/Indonesia</span></td><td><span class="vi">Thấp – trung bình; logistics ngắn</span><span class="cn">低—中；物流短</span><span class="en">Low–medium; short logistics</span></td></tr>
+   </tbody></table></div>
+   <div class="hl"><span class="vi"><b>Nguyên tắc:</b> mã HS và điều kiện nêu trên là tham chiếu kỹ thuật. Trước khi ký hợp đồng xuất khẩu, phải xác nhận với hải quan và cơ quan quản lý của nước nhập khẩu — không dùng bảng này thay cho tư vấn pháp lý.</span><span class="cn"><b>原则：</b>上述 HS 与条件为技术参考。签署出口合同前须与进口国海关及监管机构确认 — 本表不替代法律咨询。</span><span class="en"><b>Principle:</b> the HS codes and conditions above are technical reference. Before signing an export contract, confirm with the importing customs and regulator — this table is not legal advice.</span></div>
+   <div class="src"><span class="vi">Nguồn: phân nhóm HS theo OEC/WCO; điều kiện nhãn và claim tổng hợp từ quy định phổ biến của các thị trường, cần xác nhận lại theo phiên bản hiện hành tại thời điểm xuất khẩu.</span><span class="cn">来源：HS 分类依据 OEC/WCO；标签与宣称条件汇总自各市场通行规定，出口时须按现行版本再次确认。</span><span class="en">Source: HS structure per OEC/WCO; label and claim conditions summarised from common market rules, to be reconfirmed against the version in force at export time.</span></div>
+   <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b><div class="blk-vi">Mục này thường bị bỏ qua nhưng lại quyết định chi phí thật. Nói rõ: đổi thị trường là đổi nhãn, đổi hồ sơ, có khi đổi cả mã hàng. Và tuyệt đối không hứa "chúng tôi lo hết" — hải quan nước nhập là bên quyết định cuối.</div><div class="blk-cn">这一节常被跳过，却决定真实成本。说清楚：换市场就是换标签、换资料，有时换税号。绝不要承诺“我们全包” — 最终由进口国海关决定。</div><div class="blk-en">This section is usually skipped but decides real cost. Be clear: changing market means changing labels, files, sometimes the HS code itself. Never promise "we handle everything" — the importing customs decides.</div></div>
+ </section>
+
+<!-- ================= 11 ================= -->
+<section class="panel" id="p11" data-n="11">
+ <div class="phead"><div class="pnum">11</div><div><h2><span class="vi">Lộ trình thâm nhập 12 tháng</span><span class="cn">12 个月市场进入路线</span><span class="en">12-month market entry route</span></h2><p class="psub"><span class="vi">Trình tự công việc, không phải danh sách mua sắm</span><span class="cn">工作顺序，而非采购清单</span><span class="en">A sequence of work, not a shopping list</span></p></div></div>
+ <div class="takeaway"><span class="vi">90 ngày đầu đo bằng <b>hồ sơ hoàn chỉnh, 3 dòng chủ lực và dữ liệu người mua</b> — không đo bằng doanh thu, và không gắn với bất kỳ gói dịch vụ nào.</span><span class="cn">前 90 天以<b>完整资料、3 条主推线与买家数据</b>衡量 — 不以营收衡量，也不绑定任何服务套餐。</span><span class="en">The first 90 days are measured by <b>complete files, three lead lines and buyer data</b> — not revenue, and not tied to any service package.</span></div>
+ <div class="tw"><table><thead><tr><th><span class="vi">Giai đoạn</span><span class="cn">阶段</span><span class="en">Phase</span></th><th><span class="vi">Thời gian</span><span class="cn">时间</span><span class="en">Timing</span></th><th><span class="vi">Việc chính</span><span class="cn">主要工作</span><span class="en">Main work</span></th><th><span class="vi">Mốc đo</span><span class="cn">衡量节点</span><span class="en">Milestone</span></th></tr></thead><tbody>
+   <tr class="pick"><td><b><span class="vi">Chuẩn hoá hồ sơ</span><span class="cn">资料标准化</span><span class="en">File readiness</span></b></td><td>0–30 <span class="vi">ngày</span><span class="cn">天</span><span class="en">days</span></td><td><span class="vi">Pháp nhân, địa chỉ nhà máy, công suất, COA, chứng nhận hiện có; rà lại claim theo từng thị trường</span><span class="cn">法人、工厂地址、产能、COA、现有认证；按市场核查宣称</span><span class="en">Entity, factory address, capacity, COA, existing certifications; re-check claims per market</span></td><td><span class="vi">Bộ hồ sơ dùng được cho 3 thị trường</span><span class="cn">可用于 3 个市场的资料包</span><span class="en">A file usable for three markets</span></td></tr>
+   <tr><td><b><span class="vi">Chọn dòng chủ lực</span><span class="cn">选定主推线</span><span class="en">Lead-line selection</span></b></td><td>0–45</td><td><span class="vi">Chọn 3 dòng dựa trên biên gộp và mức độ phức tạp hồ sơ, không dựa trên cảm tính</span><span class="cn">依据毛利与资料复杂度选 3 条线，而非凭感觉</span><span class="en">Pick three lines on gross margin and file complexity, not intuition</span></td><td><span class="vi">3 dòng có bảng MOQ và giá FOB nội bộ</span><span class="cn">3 条线具备 MOQ 与内部 FOB 表</span><span class="en">Three lines with MOQ and internal FOB sheet</span></td></tr>
+   <tr><td><b><span class="vi">Kiểm chứng thị trường</span><span class="cn">市场验证</span><span class="en">Market validation</span></b></td><td>31–90</td><td><span class="vi">Đăng catalogue, chạy từ khoá, thu inquiry, gửi mẫu cho 3 thị trường ưu tiên</span><span class="cn">上线目录、跑关键词、收询盘、向 3 个优先市场寄样</span><span class="en">Publish catalogue, run keywords, collect inquiries, send samples to three priority markets</span></td><td><span class="vi">Inquiry hợp lệ theo thị trường + số mẫu gửi</span><span class="cn">分市场有效询盘 + 寄样数</span><span class="en">Valid inquiries by market plus samples sent</span></td></tr>
+   <tr><td><b><span class="vi">Chốt cấu hình bán</span><span class="cn">确定销售配置</span><span class="en">Sales configuration</span></b></td><td><span class="vi">Tháng 4–6</span><span class="cn">第 4–6 月</span><span class="en">Months 4–6</span></td><td><span class="vi">Chốt bậc MOQ 100/500/container; xác nhận đơn vị vận chuyển và điều kiện giao</span><span class="cn">确定 100/500/整柜 MOQ；确认货代与交货条件</span><span class="en">Lock 100/500/container MOQ; confirm forwarder and delivery terms</span></td><td><span class="vi">Tỷ lệ inquiry → báo giá → mẫu</span><span class="cn">询盘→报价→寄样转化率</span><span class="en">Inquiry → quote → sample conversion</span></td></tr>
+   <tr><td><b><span class="vi">Mở rộng có kiểm soát</span><span class="cn">受控扩展</span><span class="en">Controlled expansion</span></b></td><td><span class="vi">Tháng 7–12</span><span class="cn">第 7–12 月</span><span class="en">Months 7–12</span></td><td><span class="vi">Thêm dòng chuyên biệt; chuẩn bị hồ sơ cho thị trường khó; đóng gói case</span><span class="cn">增加专项线；准备高门槛市场资料；沉淀案例</span><span class="en">Add specialty lines; prepare files for harder markets; document cases</span></td><td><span class="vi">Pipeline ở ≥2 thị trường</span><span class="cn">≥2 个市场管道</span><span class="en">Pipeline in at least two markets</span></td></tr>
+ </tbody></table></div>
+ <div class="insight"><span class="vi"><b>Điều kiện nhân sự:</b> một người phụ trách trả lời tiếng Anh trong ngày, một người phụ trách chứng từ và chất lượng, và quy trình duyệt giá trong 24 giờ. Thiếu ba điều này thì mọi kế hoạch phía trên chỉ là giấy.</span><span class="cn"><b>人员条件：</b>一名英文负责人当日回复、一名单证与质量负责人、24 小时内价格审批流程。缺这三项，上面的计划只是纸面。</span><span class="en"><b>People condition:</b> one English-speaking owner replying the same day, one documents-and-quality owner, and 24-hour price approval. Without these three, the plan above is paper.</span></div>
+ <div class="src"><span class="vi">Nguồn: thiết kế vận hành của báo cáo; mốc thời gian là khuyến nghị, không phải cam kết sản lượng hay kết quả.</span><span class="cn">来源：本报告的运营设计；时间节点为建议，非产量或结果承诺。</span><span class="en">Source: this report's operating design; timings are recommendations, not volume or outcome commitments.</span></div>
+ <div class="notes"><b class="lbl">Kịch bản nói — không gửi khách</b><div class="blk-vi">Nói rõ: đây là trình tự công việc. 90 ngày đầu không có doanh thu là bình thường; cái phải có là hồ sơ và dữ liệu. Nếu khách hỏi chi phí, trả lời: báo cáo này không bao gồm báo giá — chi phí chỉ được nói sau khi chốt phạm vi.</div><div class="blk-cn">说清楚：这是工作顺序。前 90 天没有营收是正常的，必须有的是资料与数据。若客户问费用，回答：本报告不含报价 — 费用在确定范围后再谈。</div><div class="blk-en">Be explicit: this is a sequence of work. No revenue in the first 90 days is normal; what must exist is files and data. If the client asks about cost, say the report contains no quotation — cost is discussed only after scope is agreed.</div></div>
+</section>
+
+<!-- ================= 12 ================= -->
+<section class="panel" id="p12" data-n="12">
+ <div class="phead"><div class="pnum">12</div><div><h2><span class="vi">Kết luận: mức độ phù hợp với Alibaba.com</span><span class="cn">结论：与 Alibaba.com 的适配度</span><span class="en">Conclusion: fit for Alibaba.com</span></h2><p class="psub"><span class="vi">Đánh giá Alibaba.com như một kênh mở rộng thị trường xuất khẩu cho SINA</span><span class="cn">评估 Alibaba.com 作为 SINA 拓展出口市场的渠道</span><span class="en">Assessing Alibaba.com as SINA's export-market expansion channel</span></p></div></div>
+ <div class="takeaway"><span class="vi">Kết luận tổng thể: <b>SINA phù hợp có điều kiện với Alibaba.com</b>. Danh mục sản phẩm và khoảng trống thị trường là phù hợp; mức độ thành công sẽ phụ thuộc vào khả năng chuyển năng lực sản xuất thành hồ sơ B2B, nội dung tìm kiếm và quy trình phản hồi người mua.</span><span class="cn">总体结论：<b>SINA 有条件适配 Alibaba.com</b>。产品组合与市场空档匹配；成效取决于能否把制造能力转化为 B2B 资料、搜索内容与买家响应流程。</span><span class="en">Overall conclusion: <b>SINA is conditionally suitable for Alibaba.com</b>. The product range and market gap fit; success depends on translating manufacturing capability into a B2B file, search content and a buyer-response process.</span></div>
+ <div class="tw"><table><thead><tr><th><span class="vi">Tiêu chí đánh giá</span><span class="cn">评估维度</span><span class="en">Assessment criterion</span></th><th><span class="vi">Mức độ phù hợp</span><span class="cn">适配度</span><span class="en">Fit</span></th><th><span class="vi">Nhận định</span><span class="cn">判断</span><span class="en">Assessment</span></th></tr></thead><tbody>
+   <tr class="pick"><td><span class="vi">Phù hợp ngành hàng</span><span class="cn">品类适配</span><span class="en">Category fit</span></td><td><b><span class="vi">Cao</span><span class="cn">高</span><span class="en">High</span></b></td><td><span class="vi">Chất tẩy rửa là nhóm hàng tiêu dùng lặp lại, có nhiều SKU, dễ phân tách theo từ khoá, công dụng, dung tích và nhãn riêng.</span><span class="cn">清洁剂是重复消费品，SKU 多，可按关键词、功能、容量与贴牌拆分。</span><span class="en">Cleaning products are repeat-purchase goods with multiple SKUs that can be segmented by keyword, use, size and private label.</span></td></tr>
+   <tr><td><span class="vi">Dư địa thị trường xuất khẩu</span><span class="cn">出口市场空间</span><span class="en">Export-market opportunity</span></td><td><b><span class="vi">Cao</span><span class="cn">高</span><span class="en">High</span></b></td><td><span class="vi">Việt Nam nhập 569 triệu USD và xuất 221 triệu USD HS 34.02 trong 2024; các thị trường Philippines, Australia, Thailand và New Zealand đã có dòng hàng Việt.</span><span class="cn">2024 年越南 HS 34.02 进口 5.69 亿、出口 2.21 亿美元；菲律宾、澳大利亚、泰国、新西兰已有越南货流入。</span><span class="en">In 2024 Vietnam imported US$569M and exported US$221M of HS 34.02; Vietnamese products already reach the Philippines, Australia, Thailand and New Zealand.</span></td></tr>
+   <tr><td><span class="vi">Khả năng được tìm thấy trên sàn</span><span class="cn">平台可发现性</span><span class="en">Platform discoverability</span></td><td><b><span class="vi">Trung bình</span><span class="cn">中</span><span class="en">Medium</span></b></td><td><span class="vi">Sản phẩm có thể xây theo nhóm tìm kiếm rõ ràng, nhưng SINA cần storefront, tiêu đề, hình ảnh, video và cấu trúc catalogue B2B nhất quán.</span><span class="cn">产品可按清晰搜索组搭建，但 SINA 需要店铺、标题、图片、视频与一致的 B2B 目录结构。</span><span class="en">The products can map to clear search groups, but SINA needs a storefront, titles, images, video and a consistent B2B catalogue.</span></td></tr>
+   <tr><td><span class="vi">Khả năng tiếp cận người mua</span><span class="cn">买家触达能力</span><span class="en">Buyer access</span></td><td><b><span class="vi">Trung bình – cao</span><span class="cn">中—高</span><span class="en">Medium–high</span></b></td><td><span class="vi">Alibaba.com phù hợp để tiếp cận nhà nhập khẩu, distributor, private label và facility management; mỗi nhóm cần offer, MOQ và thông điệp khác nhau.</span><span class="cn">Alibaba.com 适合触达进口商、分销商、贴牌与设施管理买家；各群体需要不同报价、MOQ 与信息。</span><span class="en">Alibaba.com fits importers, distributors, private-label and facility-management buyers; each needs a different offer, MOQ and message.</span></td></tr>
+   <tr><td><span class="vi">Khả năng vận hành dài hạn</span><span class="cn">长期运营能力</span><span class="en">Long-term operating fit</span></td><td><b><span class="vi">Có điều kiện</span><span class="cn">有条件</span><span class="en">Conditional</span></b></td><td><span class="vi">Cần duy trì người phụ trách inquiry, cập nhật sản phẩm, gửi mẫu, báo giá và theo dõi pipeline; nếu chỉ đăng sản phẩm một lần thì mức độ phù hợp sẽ thấp.</span><span class="cn">需要持续负责询盘、产品更新、寄样、报价与管道跟进；若只发布一次产品，适配度会降低。</span><span class="en">It requires ongoing ownership of inquiries, product updates, samples, quotes and pipeline; one-time posting would reduce the fit.</span></td></tr>
+ </tbody></table></div>
+ <div class="insight"><span class="vi"><b>Đánh giá sử dụng:</b> Alibaba.com nên được xem là kênh kiểm chứng và mở rộng thị trường xuất khẩu, không phải kênh thay thế hoàn toàn cho đại lý, retail hay hoạt động tuân thủ tại nước nhập khẩu. Phù hợp nhất là bắt đầu bằng 3 dòng: giặt/xả có dung tích rõ, lau sàn hoặc rửa chén dung tích lớn, và một dòng chuyên biệt để kiểm tra khoảng trống.</span><span class="cn"><b>使用判断：</b>Alibaba.com 应作为验证与拓展出口市场的渠道，而不是完全替代经销商、零售或进口国合规工作。最适合先用 3 条线：规格清晰的洗衣/柔顺、大规格地板或洗碗、以及一条专项产品验证空档。</span><span class="en"><b>Use-case judgement:</b> Alibaba.com should be treated as a channel to test and expand export markets, not a full replacement for distributors, retail or importing-country compliance. The best starting set is three lines: clearly sized laundry/softener, large-format floor or dish care, and one specialty line to test the gap.</span></div>
+ <div class="grid3"><div class="card"><span class="tag up"><span class="vi">Phù hợp</span><span class="cn">适合</span><span class="en">Fit</span></span><h5><span class="vi">Dòng hàng lặp lại</span><span class="cn">重复消费品</span><span class="en">Repeat-purchase lines</span></h5><p><span class="vi">Nhiều SKU, nhiều dung tích, dễ thử mẫu.</span><span class="cn">SKU 与规格多，易寄样。</span><span class="en">Multiple SKUs and sizes, easy to sample.</span></p></div><div class="card"><span class="tag hot"><span class="vi">Ưu tiên</span><span class="cn">优先</span><span class="en">Priority</span></span><h5><span class="vi">Buyer B2B có nhu cầu rõ</span><span class="cn">需求清晰的 B2B 买家</span><span class="en">Clear B2B demand</span></h5><p><span class="vi">Nhập khẩu, private label, facility.</span><span class="cn">进口商、贴牌、设施管理。</span><span class="en">Importers, private label, facility.</span></p></div><div class="card"><span class="tag vn"><span class="vi">Điều kiện</span><span class="cn">条件</span><span class="en">Condition</span></span><h5><span class="vi">Phải vận hành liên tục</span><span class="cn">必须持续运营</span><span class="en">Continuous operation</span></h5><p><span class="vi">Inquiry, mẫu, catalogue, pipeline.</span><span class="cn">询盘、样品、目录、管道。</span><span class="en">Inquiries, samples, catalogue, pipeline.</span></p></div></div>
+ <div class="hl"><span class="vi"><b>Đề xuất bước tiếp theo:</b> Hẹn một buổi meeting trực tiếp tại văn phòng SINA để cùng trao đổi về danh mục sản phẩm, năng lực sản xuất, các thị trường xuất khẩu ưu tiên và cách Alibaba.com có thể hỗ trợ SINA mở rộng tệp người mua quốc tế.</span><span class="cn"><b>下一步建议：</b>建议在 SINA 办公室安排一次线下会议，共同讨论产品目录、生产能力、优先出口市场，以及 Alibaba.com 如何帮助 SINA 拓展国际买家。</span><span class="en"><b>Proposed next step:</b> Arrange an in-person meeting at SINA's office to discuss the product portfolio, production capability, priority export markets and how Alibaba.com could help SINA expand its international buyer base.</span></div>
+ <div class="src"><span class="vi">Nguồn: tổng hợp các mục 01–11 của báo cáo; OEC/BACI HS 34.02; Meticulous Research MR-1439; khảo sát nhà cung cấp và sản phẩm trên Alibaba.com; catalogue SINA.</span><span class="cn">来源：本报告第 01–11 节汇总；OEC/BACI HS 34.02；Meticulous Research MR-1439；Alibaba.com 供应商与产品调研；SINA 产品目录。</span><span class="en">Source: synthesis of sections 01–11; OEC/BACI HS 34.02; Meticulous Research MR-1439; Alibaba.com supplier and product survey; SINA catalogue.</span></div>
+</section>
+</div></main>
+<footer class="doc-footer"><div class="f-top"><img src="https://s.alicdn.com/@logo/logo_en_light_horizontal_default_full.png" alt="Alibaba.com"><span>GGS Vietnam · Household Cleaning Industry Report</span></div><div class="f-cols"><div><h5><span class="vi">Về tài liệu</span><span class="cn">关于文件</span><span class="en">About</span></h5><p><span class="vi">Báo cáo ngành phục vụ meeting khách hàng. Bản gốc single-file HTML.</span><span class="cn">用于客户会议的行业报告，单文件 HTML。</span><span class="en">Industry report for client meetings. Single-file HTML.</span></p></div><div><h5><span class="vi">Liên hệ</span><span class="cn">联系</span><span class="en">Contact</span></h5><p>Dương Viết Hải<br>Senior Account Manager<br>duong.viet-hai@alibaba-inc.com</p></div><div><h5><span class="vi">Phạm vi</span><span class="cn">范围</span><span class="en">Scope</span></h5><p><span class="vi">Chỉ báo cáo ngành. Không bao gồm báo giá, gói dịch vụ hay cam kết kết quả.</span><span class="cn">仅为行业报告。不含报价、服务套餐或结果承诺。</span><span class="en">Industry report only. No quotation, service package or outcome commitment.</span></p></div><div><h5><span class="vi">Nguồn dữ liệu</span><span class="cn">数据来源</span><span class="en">Data sources</span></h5><p>OEC · Meticulous Research · Alibaba.com · GSO · EU DG TRADE · SINA catalogue</p></div></div><div class="f-bottom"><span>DOC-IND-HOMECARE-2026-002 · v2.0 · 21/10/2026</span><span>© 2026 Alibaba.com</span></div></footer>
+<script>
+var CURRENT_LANG='vi';
+var T={vi:{priority:'Mức ưu tiên',month:'Tháng',margin:'Lũy kế contribution margin'},cn:{priority:'优先级',month:'月份',margin:'累计贡献利润'},en:{priority:'Priority',month:'Month',margin:'Cumulative contribution margin'}};
+function s(k){return (T[CURRENT_LANG]&&T[CURRENT_LANG][k])||k}
+var PAL=['#1B365D','#E8740C','#2E8B57','#2D5AA0','#8E5EA2','#D84A3A','#5A6072','#C6A15B'];var charts={};
+function kill(id){if(charts[id]){charts[id].destroy();delete charts[id]}}
+function make(id,type,data,opts){kill(id);var el=document.getElementById(id);if(!el)return;charts[id]=new Chart(el.getContext('2d'),{type:type,data:data,options:opts||{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{x:{ticks:{font:{size:10}}},y:{beginAtZero:true}}}});try{charts[id].update('none');charts[id].draw()}catch(e){}}
+function switchLang(lang){CURRENT_LANG=lang;document.documentElement.className='lang-'+lang;document.documentElement.lang=(lang==='cn'?'zh-Hans':lang);document.querySelectorAll('.lang-switcher button').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang)});buildCharts()}
+function toggleNotes(){document.body.classList.toggle('show-notes');document.getElementById('btnNotes').classList.toggle('active',document.body.classList.contains('show-notes'))}
+var currentPanel=1;
+function setPresent(n){var ps=[].slice.call(document.querySelectorAll('.panel'));currentPanel=Math.max(1,Math.min(n,ps.length));document.body.classList.add('present');ps.forEach(function(p,i){p.classList.toggle('active',i===currentPanel-1)});document.getElementById('pbar').style.width=(currentPanel/ps.length*100)+'%';var old=document.querySelector('.present-label');if(old)old.remove();var lab=document.createElement('div');lab.className='present-label';lab.innerHTML='<span>Panel '+String(currentPanel).padStart(2,'0')+' / '+ps.length+'</span><span class="hint">← → Space · Esc</span>';document.body.appendChild(lab);buildCharts()}
+function togglePresent(){if(document.body.classList.contains('present')){document.body.classList.remove('present');var x=document.querySelector('.present-label');if(x)x.remove();document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});document.getElementById('btnPresent').classList.remove('active')}else{document.getElementById('btnPresent').classList.add('active');setPresent(currentPanel)}}
+document.addEventListener('keydown',function(e){if(!document.body.classList.contains('present')){if(e.key.toLowerCase()==='p')setPresent(currentPanel);return}if(e.key==='Escape'){togglePresent();return}if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();setPresent(currentPanel+1)}if(e.key==='ArrowLeft'){e.preventDefault();setPresent(currentPanel-1)}});
+function buildCharts(){
+make('c01','doughnut',{labels:['Giặt & xả','Làm sạch bề mặt','Rửa chén & chuyên biệt'],datasets:[{data:[4,2,3],backgroundColor:[PAL[0],PAL[1],PAL[2]]}]},{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom'}}});
+make('c02','bar',{labels:['2024','2025','2032F'],datasets:[{label:'US$ bn',data:[201.2,208.9,280.67],backgroundColor:[PAL[0],PAL[1],PAL[2]]},{type:'line',label:'CAGR %',data:[4.3,4.3,4.3],yAxisID:'y1',borderColor:PAL[5]}]},{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true},y1:{position:'right',beginAtZero:true,max:6}}});
+make('c03','line',{labels:['2019','2020','2021','2022','2023','2024','2025'],datasets:[{label:'US$ bn',data:[284.74,292.48,343.94,384.93,355.50,403.35,475.06],borderColor:PAL[1],backgroundColor:'rgba(232,116,12,.16)',fill:true}]});
+make('c04','bar',{labels:['Xuất khẩu','Nhập khẩu','Thâm hụt'],datasets:[{label:'US$ M',data:[221,569,347],backgroundColor:[PAL[2],PAL[0],PAL[5]]}]});
+make('c05a','doughnut',{labels:['Germany','United States','France','Others'],datasets:[{data:[2.95,2.10,2.05,32.60],backgroundColor:[PAL[0],PAL[1],PAL[2],PAL[6]]}]},{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'bottom'}}});
+make('c05b','bar',{labels:['Philippines','Australia','Thailand','New Zealand','Cambodia'],datasets:[{label:'US$ M',data:[44.6,32,24.9,20.7,18.3],backgroundColor:PAL[1]}]},{responsive:true,maintainAspectRatio:false,indexAxis:'y'});
+make('c06','doughnut',{labels:['Vietnam','China','India'],datasets:[{data:[12,4,4],backgroundColor:[PAL[1],PAL[0],PAL[2]]}]},{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom'}}});
+make('c07','bar',{labels:['Fabric softener','Laundry liquid','Dishwashing','Floor cleaner','Toilet cleaner','Detergent powder (kg)'],datasets:[{label:'MOQ (pieces / kg)',data:[100,100,500,1000,2000,5000],backgroundColor:PAL[0]}]},{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{type:'logarithmic'}}});
+make('c08','polarArea',{labels:['Nhà nhập khẩu','Chuỗi bán lẻ','Private label','Đại lý khu vực','Facility','Người mua thử'],datasets:[{label:s('priority'),data:[10,9,8,7,7,5],backgroundColor:PAL}]},{responsive:true,maintainAspectRatio:false,scales:{r:{beginAtZero:true,max:10}}});
+make('c08b','bar',{labels:['Search','Certification','Factory proof','Price/MOQ','Sample','Order'],datasets:[{label:'SINA readiness',data:[2,1,2,4,3,1],backgroundColor:PAL[1]}]},{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{beginAtZero:true,max:10}}});
+}
+window.addEventListener('load',function(){buildCharts()});
+</script>
+</body>
+</html>
